@@ -29,6 +29,9 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "SRC Release!");
+		p.sendMessage(Data.cu + "Cloud Crash Fix");
+		p.sendMessage(Data.prefix + "Version » 4.2.1");
 		p.sendMessage(Data.cp + "Corporation with CrashedDevelopment");
 		p.sendMessage(Data.cu + "Cloud FireWall Update");
 		p.sendMessage(Data.cu + "Security Updates");
