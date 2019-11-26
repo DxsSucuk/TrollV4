@@ -30,7 +30,6 @@ public class Changelog {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
 		p.sendMessage(Data.cp + "SRC Release!");
-		p.sendMessage(Data.cu + "Cloud Security Update");
 		p.sendMessage(Data.cu + "Cloud Crash Fix");
 		p.sendMessage(Data.prefix + "Version » 4.2.1");
 		p.sendMessage(Data.cp + "Corporation with CrashedDevelopment");
