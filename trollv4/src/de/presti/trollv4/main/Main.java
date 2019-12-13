@@ -1,36 +1,20 @@
 package de.presti.trollv4.main;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.output.ThresholdingOutputStream;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import de.presti.trollv4.utils.*;
 import de.presti.trollv4.listener.*;
 import de.presti.trollv4.cmd.*;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
 /*
 *	Urheberrechtshinweis														*
@@ -49,9 +33,9 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 public class Main extends JavaPlugin {
 	public static Main plugin;
 	public static Main instance;
-	public HashMap<String, ItemStack[]> inventory;
-	public HashMap<String, ItemStack[]> armor;
-	public List<String> cd;
+	public static HashMap<String, ItemStack[]> inventory;
+	public static HashMap<String, ItemStack[]> armor;
+	public static List<String> cd;
 	public Logger logg = Logger.getLogger("Minecraft");
 	public UpdateChecker update;
 	public static String version;
@@ -102,6 +86,8 @@ public class Main extends JavaPlugin {
 			setEnabled(false);
 			}
 		}
+		
+		GithubDependDownloader.autoUpdate(getPlugin(), getFile(), "DxsSucuk", "TrollV4", "TrollV4.jar");
 	}
 	
 	public void onDisable() {
@@ -225,62 +211,15 @@ public class Main extends JavaPlugin {
    	 return plugin;
     }
 	
-	public void stopControlling(Player v, Player c){
-		//Call ONLY when both players are online
-		c.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 10, 1));
-		
-		v.removeMetadata("C_P", this);
-		v.setGameMode(GameMode.SURVIVAL);
-				
-		c.removeMetadata("C_H", this);
-		DisguiseAPI.undisguiseToAll(c);
-			
-		//Give victim their "new" inventory
-		v.getInventory().setContents(c.getInventory().getContents());
-		v.getInventory().setArmorContents(c.getInventory().getArmorContents());
-			
-		//Give controller the original inventory back
-		c.getInventory().setContents(inventory.get(c.getName()));
-		c.getInventory().setArmorContents(armor.get(c.getName()));
-		inventory.remove(c.getName());
-		armor.remove(c.getName());
-			
-		v.teleport(c);
-		if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-		c.sendMessage(Data.prefix + "Du kontrollierst nun §c"+v.getName() + " §2nicht mehr");
-		} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-		c.sendMessage(Data.prefix + "You §cdeactivated §2Control Mode with §c"+v.getName());	
-		} else {
-		c.sendMessage(Data.prefix + "You §cdeactivated §2Control Mode with §c"+v.getName());		
-		}
+	public static void startControlling(Player v, Player c){
+		Controls.startControlling(v, c);
 	}
 	
-	public void startControlling(Player v, Player c){
-		v.setMetadata("C_P", new FixedMetadataValue(this,c.getName()));
-		c.setMetadata("C_H", new FixedMetadataValue(this,v.getName()));
-		
-		this.inventory.put(c.getName(), c.getInventory().getContents());
-		this.armor.put(c.getName(), c.getInventory().getArmorContents());
-		c.getInventory().setContents(v.getInventory().getContents());
-		c.getInventory().setArmorContents(v.getInventory().getArmorContents());
-		
-		c.teleport(v);
-		v.setGameMode(GameMode.SPECTATOR);
-		
-		PlayerDisguise disV = new PlayerDisguise(v.getName());
-		DisguiseAPI.disguiseToAll(c, disV);
-
-		//Start a handling task
-		new CheckVictim(v, c).runTaskTimer(this, 100, 100);
-		if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-		c.sendMessage(Data.prefix + "Du Kontrollierst nun §c" +v.getName());
-		} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-		c.sendMessage(Data.prefix + "You §aactivated §2Control Mode with §c"+v.getName());	
-		} else {
-		c.sendMessage(Data.prefix + "You §aactivated §2Control Mode with §c"+v.getName());		
-		}
-		
+	public static void stopControlling(Player v, Player c){
+		Controls.stopControlling(v, c);
 	}
+	
+
 	
 
 }
