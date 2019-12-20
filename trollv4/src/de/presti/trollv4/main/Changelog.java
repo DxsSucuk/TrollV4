@@ -29,6 +29,8 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "TrollV4API");
+		p.sendMessage(Data.prefix + "Version » 4.2.3");
 		p.sendMessage(Data.cp + "AutoUpdater");
 		p.sendMessage(Data.cu + "Code Cleaning");
 		p.sendMessage(Data.cu + "Crash Fix");
