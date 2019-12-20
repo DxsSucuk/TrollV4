@@ -1,5 +1,5 @@
 name: TrollV4
-version: 4.2.3
+version: 4.2.4
 main: de.presti.trollv4.main.Main
 author: Presti
 depend: [ProtocolLib, LibsDisguises]
