@@ -360,29 +360,7 @@ public class GuiListener implements Listener {
 							} else {
 				         	p.sendMessage(Data.prefix + "The Player §c" + t.getName() + " §2is now seeing a Demo screen!");	
 							}
-							if(Main.version.equals("v1_8_R3")) {
-							Dsv1_8_R3.DemoScreen1_8(t);
-							} else if(Main.version.equals("v1_9_R2")) {
-							Dsv1_9_R2.DemoScreen(t);
-							} else {
-								if(Config.cfg.getBoolean("Unsupport")) {
-			              			   if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-			         						p.sendMessage(Data.prefix + "Dies geht hier leider nicht!");
-			         					} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-			         						p.sendMessage(Data.prefix + "Dont work on this Version!");
-			         					} else {
-			         						p.sendMessage(Data.prefix + "Dont work on this Version!");
-			         					}
-								} else {
-	              			   if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-	         						p.sendMessage(Data.prefix + "Bitte benutze v1_8_R3 oder v1_9_R2! ODER Aktiviere Unsupport!");
-	         					} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-	         						p.sendMessage(Data.prefix + "Pls use v1_8_R3 or v1_9_R2! OR Activat Unsupport!");
-	         					} else {
-	         						p.sendMessage(Data.prefix + "Pls use v1_8_R3 or v1_9_R2! OR Activat Unsupport!");
-	         					}  
-								}
-	              		   }
+							DemoScreen.DemoScreen(t);
 				  }else {
 						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
 						p.sendMessage(Data.noton);
