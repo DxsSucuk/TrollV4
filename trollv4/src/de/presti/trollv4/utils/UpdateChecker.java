@@ -1,14 +1,12 @@
 package de.presti.trollv4.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
+import net.md_5.bungee.api.ChatColor;
 
 import javax.net.ssl.HttpsURLConnection;
 

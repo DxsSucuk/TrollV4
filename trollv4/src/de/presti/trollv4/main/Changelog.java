@@ -29,6 +29,12 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "LSD");
+		p.sendMessage(Data.cp + "Guardian");
+		p.sendMessage(Data.cu + "API Update");
+		p.sendMessage(Data.cu + "Bug Fixes");
+		p.sendMessage(Data.cm + "AutoUpdater (Because of an StartLoop)");
+		p.sendMessage(Data.prefix + "Version » 4.2.4");
 		p.sendMessage(Data.cp + "TrollV4API");
 		p.sendMessage(Data.prefix + "Version » 4.2.3");
 		p.sendMessage(Data.cp + "AutoUpdater");

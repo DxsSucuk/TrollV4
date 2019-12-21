@@ -86,8 +86,6 @@ public class Main extends JavaPlugin {
 			setEnabled(false);
 			}
 		}
-		
-		GithubDependDownloader.autoUpdate(getPlugin(), getFile(), "DxsSucuk", "TrollV4", "TrollV4.jar");
 	}
 	
 	public void onDisable() {

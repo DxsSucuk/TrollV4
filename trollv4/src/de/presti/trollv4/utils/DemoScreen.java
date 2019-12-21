@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import org.bukkit.entity.Player;
 
+import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.main.Main;
 
 /*
@@ -24,22 +25,7 @@ import de.presti.trollv4.main.Main;
 public class DemoScreen {
 	
 	public static void DemoScreen(Player player) {
-		try {
-            Class<?> craftPlayerClass = Packets.getNMSClass("CraftPlayer");
-            Object craftPlayer = craftPlayerClass.cast(player);
-            Object packet;
-            Class<?> packetPlayGameStateChangeClass = Packets.getNMSClass("PacketPlayOutGameStateChange");
-            Class<?> packetClass = Packets.getNMSClass("Packet");
-            packet = packetPlayGameStateChangeClass.getConstructor(int.class, float.class).newInstance(5, 0);
-            Method craftPlayerHandleMethod = craftPlayerClass.getDeclaredMethod("getHandle");
-            Object craftPlayerHandle = craftPlayerHandleMethod.invoke(craftPlayer);
-            Field playerConnectionField = craftPlayerHandle.getClass().getDeclaredField("playerConnection");
-            Object playerConnection = playerConnectionField.get(craftPlayerHandle);
-            Method sendPacketMethod = playerConnection.getClass().getDeclaredMethod("sendPacket", packetClass);
-            sendPacketMethod.invoke(playerConnection, packet);
-		} catch (Exception ex) {
-			Main.instance.getLogger().warning(ex.getMessage());
-		}
+		TrollV4API.DemoScreen(player);
 	}
 
 }

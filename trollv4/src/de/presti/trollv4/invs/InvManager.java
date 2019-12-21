@@ -118,6 +118,9 @@ public class InvManager {
 						inv.setItem(31, SetItems.buildItem("§cTnT Trace", Material.DIAMOND_BOOTS));
 						inv.setItem(32, SetItems.buildItem("§fWeb §8Trap", Material.WEB));
 						inv.setItem(33, SetItems.buildItem("§cWTF", Material.RECORD_11));
+						inv.setItem(34, SetItems.buildItem("§cL§5S§bD", Material.RED_MUSHROOM));
+						inv.setItem(37, SetItems.buildItem("§1Guardian", Material.BLAZE_ROD));
+				//		inv.setItem(38, SetItems.buildItem("§7EndScreen", Material.DRAGON_EGG));
 						Bukkit.getScheduler().cancelTask(ArrayUtils.anim.get(p).getTaskId());
 						return;
 					}
@@ -259,6 +262,9 @@ public class InvManager {
 			inv.setItem(31, SetItems.buildItem("§cTnT Trace", Material.DIAMOND_BOOTS));
 			inv.setItem(32, SetItems.buildItem("§fWeb §8Trap", Material.WEB));
 			inv.setItem(33, SetItems.buildItem("§cWTF", Material.RECORD_11));
+			inv.setItem(34, SetItems.buildItem("§cL§5S§bD", Material.RED_MUSHROOM));
+			inv.setItem(37, SetItems.buildItem("§1Guardian", Material.BLAZE_ROD));
+	//		inv.setItem(38, SetItems.buildItem("§7EndScreen", Material.DRAGON_EGG));
 		}
 		
 		p.openInventory(inv);

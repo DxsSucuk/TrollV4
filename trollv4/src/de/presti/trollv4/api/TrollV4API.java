@@ -1,5 +1,9 @@
 package de.presti.trollv4.api;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +23,7 @@ import de.presti.trollv4.utils.Config;
 import de.presti.trollv4.utils.Controls;
 import de.presti.trollv4.utils.Hsv1_8_R3;
 import de.presti.trollv4.utils.Hsv1_9_R2;
+import de.presti.trollv4.utils.Packets;
 import de.presti.trollv4.utils.Titles;
 
 /*
@@ -48,7 +53,7 @@ public class TrollV4API {
 	}
 	
 	public static void DemoScreen(Player Victim) {
-		de.presti.trollv4.utils.DemoScreen.DemoScreen(Victim);
+		sendGameStateChange(Victim, 5, 0);
 	}
 	
 	public static void Hack(Player victim) {
@@ -616,6 +621,30 @@ public class TrollV4API {
 			System.out.println(mlg + " does not exist!");
 			System.out.println("Existing: Lava, Water, Cobweb, Slime");
 		}
+	}
+	
+	public static void LSD(Player Victim) {
+		sendGameStateChange(Victim, 8, 0 - Float.NEGATIVE_INFINITY);
+	}
+	
+	public static void GuardinShow(Player Victim) {
+		sendGameStateChange(Victim, 10, 0);
+	}
+	
+	public static void EndGame(Player Victim) {
+		sendGameStateChange(Victim, 4, 1);
+	}
+	
+	public static void sendGameStateChange(Player Victim, int type, float state) {
+		  try {
+			    Object entityPlayer = Victim.getClass().getMethod("getHandle").invoke(Victim);
+			    Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
+			    Object packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class).newInstance(type, state);
+
+			    playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection, packet);
+			  } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException | InstantiationException e) {
+			    e.printStackTrace();
+			  }
 	}
 
 }

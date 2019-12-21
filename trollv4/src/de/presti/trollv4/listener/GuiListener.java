@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.google.common.hash.HashingInputStream;
 
+import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.invs.*;
 import de.presti.trollv4.main.*;
@@ -1166,6 +1167,105 @@ public class GuiListener implements Listener {
 							t.getWorld().getBlockAt(new Location(t.getWorld(), t.getLocation().getX() + 1, t.getLocation().getY(), t.getLocation().getZ() - 1)).setType(Material.WEB);
 							t.getWorld().getBlockAt(new Location(t.getWorld(), t.getLocation().getX() - 1, t.getLocation().getY(), t.getLocation().getZ() - 1)).setType(Material.WEB);
 							
+					} else {
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+							p.sendMessage(Data.noton);
+						} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+							p.sendMessage(Data.notonus);
+						} else {
+							p.sendMessage(Data.notonus);
+						}
+						e.getView().close();
+					}
+				} else {
+					if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+						p.sendMessage(Data.noperm);
+					} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+						p.sendMessage(Data.nopermus);
+					} else {
+						p.sendMessage(Data.nopermus);
+					}
+					
+				}
+			} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cL§5S§bD")) {
+				if(p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
+					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+					if(t != null) {
+						TrollV4API.LSD(t);
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+			                p.sendMessage(Data.prefix + "Der Spieler §c" + t.getName() + " §2sieht nun die Welt anders!");
+			               } else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+				            p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2is now seeing the World in another Perspectiv!");   
+			               } else {
+					        p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2is now seeing the World in another Perspectiv!");         
+			               }
+						e.getView().close();
+					} else {
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+							p.sendMessage(Data.noton);
+						} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+							p.sendMessage(Data.notonus);
+						} else {
+							p.sendMessage(Data.notonus);
+						}
+						e.getView().close();
+					}
+				} else {
+					if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+						p.sendMessage(Data.noperm);
+					} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+						p.sendMessage(Data.nopermus);
+					} else {
+						p.sendMessage(Data.nopermus);
+					}
+					
+				}
+			} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§1Guardian")) {
+				if(p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
+					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+					if(t != null) {
+						TrollV4API.GuardinShow(t);
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+			                p.sendMessage(Data.prefix + "Der Spieler §c" + t.getName() + " §2hat nun den Guardian effekt!");
+			               } else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+				            p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2now has the Guardian effect!");   
+			               } else {
+					        p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2now has the Guardian effect!");         
+			               }
+						e.getView().close();
+					} else {
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+							p.sendMessage(Data.noton);
+						} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+							p.sendMessage(Data.notonus);
+						} else {
+							p.sendMessage(Data.notonus);
+						}
+						e.getView().close();
+					}
+				} else {
+					if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+						p.sendMessage(Data.noperm);
+					} else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+						p.sendMessage(Data.nopermus);
+					} else {
+						p.sendMessage(Data.nopermus);
+					}
+					
+				}
+			} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7EndScreen")) {
+				if(p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
+					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+					if(t != null) {
+						TrollV4API.EndGame(t);
+						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+			                p.sendMessage(Data.prefix + "Der Spieler §c" + t.getName() + " §2sieht nun den EndScreen!");
+			               } else if(Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
+				            p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2now sees the EndScreen!");   
+			               } else {
+					        p.sendMessage(Data.prefix + "The User §c" + t.getName() + " §2now sees the EndScreen!");         
+			               }
+						e.getView().close();
 					} else {
 						if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
 							p.sendMessage(Data.noton);
