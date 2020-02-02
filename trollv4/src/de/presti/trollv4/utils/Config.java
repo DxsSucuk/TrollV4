@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import de.presti.trollv4.main.Data;
+import de.presti.trollv4.main.Main;
 
 /*
 *	Urheberrechtshinweis														*
@@ -48,7 +49,7 @@ public class Config {
 			try {
                 cfg.save(getFile());
             } catch (IOException e) {
-                e.printStackTrace();
+			    e.printStackTrace();
             }
 			
 		}
@@ -101,7 +102,7 @@ public class Config {
 			try {
 				cfg2.save(getFile2());
             } catch (IOException e) {
-                e.printStackTrace();
+			    e.printStackTrace();
             }
 			
 		}

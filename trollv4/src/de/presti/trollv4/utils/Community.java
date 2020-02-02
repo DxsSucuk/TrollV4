@@ -22,7 +22,7 @@ public class Community {
 
 	  public static void run() throws UnknownHostException, IOException {
 	    client = new Socket(host, port);
-	    System.out.println("Verbindung zur Cloud erfolgreich!"); //Verbindung bei MC Start aufbauen ok
+	    System.out.println("Cloud Connection Succesful!"); //Verbindung bei MC Start aufbauen ok
 	    output = new PrintStream(client.getOutputStream());
 	    output.println("Server:" + Bukkit.getIp() + ":" + Bukkit.getPort() + ":" + Main.version + "-" + Data.version);
 	    output.close();

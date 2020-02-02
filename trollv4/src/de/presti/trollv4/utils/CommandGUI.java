@@ -32,13 +32,13 @@ public class CommandGUI implements Listener{
 		v=vict;
 		plugin=cl;
 		if(Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-		gui = Bukkit.createInventory(null, 9, "§8§ki §8Command Ausf§hren §ki");
+		gui = Bukkit.createInventory(null, 9, "§8§ki §8Command Ausführen §ki");
 		
 		ItemStack rat = new ItemStack(Material.BARRIER);
 		ItemMeta im = rat.getItemMeta();
-		im.setDisplayName("§c§lAls " + v.getName() + " ausf§hren");
+		im.setDisplayName("§c§lAls " + v.getName() + " ausführen");
 		List<String> lore = new ArrayList<String>();
-		lore.add("§7Als Kontrollierter Spieler ausf§hren");
+		lore.add("§7Als Kontrollierter Spieler ausführen");
 		lore.add("§7Command: §6"+cmd);
 		im.setLore(lore);
 		rat.setItemMeta(im);
@@ -50,7 +50,7 @@ public class CommandGUI implements Listener{
 		
 		ItemStack raa = new ItemStack(Material.ARROW);
 		ItemMeta im2 = raa.getItemMeta();
-		im2.setDisplayName("§c§lAls " + c.getName() + " ausf§hren");
+		im2.setDisplayName("§c§lAls " + c.getName() + " ausführen");
 		List<String> lore2 = new ArrayList<String>();
 		lore2.add("§7Als du selbst ausf§hren");
 		lore2.add("§7Command: §6"+cmd);

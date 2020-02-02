@@ -16,6 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import de.presti.trollv4.main.Main;
+
 public class GithubDependDownloader {
 
 
@@ -71,7 +73,7 @@ public class GithubDependDownloader {
 			}.runTaskLaterAsynchronously(main, 0);
 			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 		return false;
 	}

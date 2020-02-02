@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import org.bukkit.entity.Player;
 
+import de.presti.trollv4.main.Main;
+
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -42,9 +44,9 @@ public class Titles {
 	      Packets.sendPacket(player, titlePacket);
 	      Packets.sendPacket(player, subtitlePacket);
 	    }
-	    catch (Exception var11)
+	    catch (Exception e)
 	    {
-	      var11.printStackTrace();
+		    e.printStackTrace();
 	    }
 	  }
 }

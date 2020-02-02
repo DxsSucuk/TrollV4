@@ -64,7 +64,7 @@ public class UpdateChecker {
                         spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
                     } catch (final IOException e) {
                         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ERR_MSG));
-                        e.printStackTrace();
+        			    e.printStackTrace();
                         cancel();
                         return;
                     }

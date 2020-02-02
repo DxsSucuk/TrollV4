@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.presti.trollv4.main.Main;
+
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -42,6 +44,8 @@ public class Fireball_L implements Listener {
 	        p.playSound(p.getLocation(), Sound.EXPLODE, 1.0F, 1.0F);
 	      }
 	    }
-	    catch (Exception localException) {}
+	    catch (Exception e1) {
+	    	e1.printStackTrace();
+	    }
 	  }
 }

@@ -20,6 +20,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.presti.trollv4.main.Main;
+
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -211,7 +213,9 @@ public class Bows
         }
       }
     }
-    catch (Exception localException) {}
+    catch (Exception e1) {
+    	e1.printStackTrace();
+    }
   }
   
   @EventHandler
@@ -252,7 +256,9 @@ public class Bows
           }
       }
     }
-    catch (Exception localException) {}
+    catch (Exception e1) {
+    	e1.printStackTrace();
+    }
   }
 }
 

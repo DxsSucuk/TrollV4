@@ -49,11 +49,17 @@ public class Main extends JavaPlugin {
 	
 	public void onEnable() {
 		instance = this;
-		MetricsLite metrics = new MetricsLite(this);
 		version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		plugin = this;
 		new Config().init();
 		new Config().init2();
+		try {
+			Metrics metrics = new Metrics(this, 4690);
+			metrics.addCustomChart(new Metrics.SimplePie("used_language",
+	                () -> Config.cfg.getString("Language")));
+		} catch(Exception e) {
+			System.out.println("Error Main Metrics Custom Chart: " + e.getMessage());
+		}
 		
 		updateConfig();
 		
@@ -61,7 +67,6 @@ public class Main extends JavaPlugin {
 		new UpdateChecker(this).checkForUpdate();
 		}
 		if(Bukkit.getPluginManager().getPlugin("ProtocolLib") == null || Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
-			this.setEnabled(false);
 			logg.warning("--------------------");
 			logg.warning("PLS INSTALL!");
 			logg.warning("ProtocolLib");
