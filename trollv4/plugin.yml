@@ -7,4 +7,4 @@ website: http://dev-presti.tk
 api-version: 1.16
 commands:
    troll:
-      description: Troll Command
+      description: MainCommand
