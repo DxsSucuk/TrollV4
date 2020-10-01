@@ -1,0 +1,10 @@
+name: TrollV4
+version: 4.3.3
+main: de.presti.trollv4.main.Main
+author: Presti
+depend: [ProtocolLib, LibsDisguises]
+website: http://dev-presti.tk
+api-version: 1.13
+commands:
+   troll:
+      description: Troll Command
