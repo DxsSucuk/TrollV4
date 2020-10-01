@@ -4,7 +4,7 @@ main: de.presti.trollv4.main.Main
 author: Presti
 depend: [ProtocolLib, LibsDisguises]
 website: http://dev-presti.tk
-api-version: 1.13
+api-version: 1.16
 commands:
    troll:
       description: Troll Command
