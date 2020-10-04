@@ -7,6 +7,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import de.presti.trollv4.invs.InvSaver;
+
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -35,6 +37,8 @@ public class ArrayUtils {
 	public static ArrayList<Player> herobrine = new ArrayList<>();
 	public static ArrayList<Player> userbowspam = new ArrayList<>();
 	public static ArrayList<Player> tornado = new ArrayList<>();
+	public static ArrayList<Player> noinv = new ArrayList<>();
+	public static ArrayList<Player> noitem = new ArrayList<>();
 	
 	//HashMaps
     public static HashMap<String, String> trolling = new HashMap<>();
@@ -44,5 +48,6 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> hackuser = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> arrowspam = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> tornador = new HashMap<>();
+	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
 
 }

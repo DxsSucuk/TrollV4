@@ -41,9 +41,12 @@ public class Config {
 			cfg.addDefault("Plugin-Version", Data.version);
 			cfg.addDefault("Language", "US");
 			cfg.addDefault("AutoUpdate", true);
-			cfg.addDefault("Animations", true);
-			cfg.addDefault("Unsupport", false);
-			cfg.addDefault("Community-surprise", true);
+			cfg.addDefault("Animations", false);
+			cfg.addDefault("Unsupport", true);
+			cfg.addDefault("Community-surprise", false);
+			cfg.addDefault("trolls.hack.time", 15);
+			cfg.addDefault("trolls.fakeinv.time", 5);
+			cfg.addDefault("trolls.slipperyhands.time", 1);
 			
 			try {
                 cfg.save(getFile());
@@ -59,9 +62,10 @@ public class Config {
 		if(!getFile2().exists()) {
 			cfg2.options().copyDefaults(true);
 			cfg2.options().copyHeader(true);
-			cfg2.options().header("###############################\n" + 
+			cfg2.options().header(
+					"###############################\n" + 
 					"#                             #\n" + 
-					"# TrollV4 by Presti           #\n" + 
+					"# TrollV" + Data.version + " by Presti       #\n" + 
 					"# Custome Message File        #\n" + 
 					"#                             #\n" + 
 					"###############################");

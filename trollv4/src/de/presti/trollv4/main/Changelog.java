@@ -28,6 +28,12 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "No Inv");
+		p.sendMessage(Data.cp + "Slippery Hands");
+		p.sendMessage(Data.cu + "Gui Select Fixes");
+		p.sendMessage(Data.cu + "Gui Informations");
+		p.sendMessage(Data.cu + "Some Trolls got recoded");
+		p.sendMessage(Data.prefix + "Version » 4.3.3");
 		p.sendMessage(Data.cp + "1.16 Support");
 		p.sendMessage(Data.cp + "Almost every Troll works with 1.9+!");
 		p.sendMessage(Data.cu + "CrossVersion Errors");

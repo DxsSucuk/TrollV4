@@ -33,7 +33,7 @@ public class Language {
 	public static ArrayList<String> lang = new ArrayList<>();
 
 	public static String getMessage(String path) {
-		String m = "Couldnt find " + path + "!";
+		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path);
@@ -43,7 +43,7 @@ public class Language {
 	}
 
 	public static String getMessage(String path, Player t) {
-		String m = "Couldnt find " + path + "!";
+		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[PLAYER]", t.getName());
@@ -53,7 +53,7 @@ public class Language {
 	}
 
 	public static String getMessage2(String path) {
-		String m = "Couldnt find " + path + "!";
+		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[VERSION]", Data.version);
@@ -64,7 +64,7 @@ public class Language {
 
 
 	public static String getMessage3(String path) {
-		String m = "Couldnt find " + path + "!";
+		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(path)) {
 			m = messages.get(path);
@@ -163,6 +163,12 @@ public class Language {
 		addMessage("de", "gui.arrowspam.off", "Der Spieler §c[PLAYER] §2wird nun nicht mehr von Pfeilen gejagt!");
 		addMessage("de", "gui.tornado.on", "Der Spieler §c[PLAYER] §2wird nun von einem Tornado verfolgt!");
 		addMessage("de", "gui.tornado.off", "Der Spieler §c[PLAYER] §2wird nun nicht mehr von einem Tornado verfolgt!");
+		addMessage("de", "gui.fakeinv.default", "Der Spieler §c[PLAYER] §2hat nun für 5 Sekunden sein Inventar verloren!");
+		addMessage("de", "gui.fakeinv.cancel", "Der Spieler §c[PLAYER] §2hat nun sein Inventar wieder bekommen!");
+		addMessage("de", "gui.noinv.on", "Der Spieler §c[PLAYER] §2kann nun keine Inventare mehr öffnen!");
+		addMessage("de", "gui.noinv.off", "Der Spieler §c[PLAYER] §2kann nun wieder Inventare öffnen!");
+		addMessage("de", "gui.slipperyhands.on", "Der Spieler §c[PLAYER] §2hat seine Hände mit Butter vollgeschmiert!");
+		addMessage("de", "gui.slipperyhands.on", "Der Spieler §c[PLAYER] §2hat die Butter runter gewaschen!");
 		addMessage("de", "gui.tpall", "Alle Spieler wurden zu dir teleportiert");
 		addMessage("de", "gui.fakeleave.default", "Eine FakeLeave Message wurde in den Chat geschickt!");
 		addMessage("de", "gui.fakeleave.message", "§6[PLAYER] left the Game.");
@@ -247,6 +253,12 @@ public class Language {
 		addMessage("us", "gui.arrowspam.off", "The User §c[PLAYER] §2is now not getting spammend by Arrows anymore!");
 		addMessage("us", "gui.tornado.on", "The User §c[PLAYER] §2is now getting chased by a tornado!");
 		addMessage("us", "gui.tornado.off", "The User §c[PLAYER] §2is no longer pursued by a tornado!");
+		addMessage("us", "gui.fakeinv.default", "The User §c[PLAYER] §2lost his Inventory for 5 Seconds!");
+		addMessage("us", "gui.fakeinv.cancel", "The User §c[PLAYER] §2got his Inventory back!");
+		addMessage("us", "gui.noinv.on", "The User §c[PLAYER] §2cant open any Inventory anymore!");
+		addMessage("us", "gui.noinv.off", "The User §c[PLAYER] §2can open any Inventory again!");
+		addMessage("us", "gui.slipperyhands.on", "The User §c[PLAYER] §2played with some butter!");
+		addMessage("us", "gui.slipperyhands.on", "The User §c[PLAYER] §2cleaned his hands!");
 		addMessage("us", "gui.tpall", "All players were teleported to you!");
 		addMessage("us", "gui.fakeleave.default", "A Fake Message has been Posted in the Chat!");
 		addMessage("us", "gui.fakeleave.message", "§6[PLAYER] left the Game.");

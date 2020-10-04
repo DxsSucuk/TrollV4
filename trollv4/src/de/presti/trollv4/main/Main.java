@@ -123,25 +123,20 @@ public class Main extends JavaPlugin {
 			if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
 			} else {
+				
+				String oldl = Language.getLanguage();
+				
 				Config.getFile().delete();
 				new Config().init();
+				Config.cfg.set("language", oldl);
 			}
 		}
 	}
 
 	public static void Listener() {
-		Bukkit.getPluginManager().registerEvents(new Fakehacks(), instance);
-		Bukkit.getPluginManager().registerEvents(new Quit(), instance);
-		Bukkit.getPluginManager().registerEvents(new Bows(), instance);
-		Bukkit.getPluginManager().registerEvents(new Minigun(), instance);
-		Bukkit.getPluginManager().registerEvents(new Fireball_L(), instance);
-		Bukkit.getPluginManager().registerEvents(new Freeze(), instance);
 		Bukkit.getPluginManager().registerEvents(new iListener(instance), instance);
-		Bukkit.getPluginManager().registerEvents(new Join(), instance);
+		Bukkit.getPluginManager().registerEvents(new Event(), instance);
 		Bukkit.getPluginManager().registerEvents(new GuiListener(), instance);
-		Bukkit.getPluginManager().registerEvents(new LagL(), instance);
-		Bukkit.getPluginManager().registerEvents(new Herobrine(), instance);
-		Bukkit.getPluginManager().registerEvents(new Death(), instance);
 	}
 
 	public static void Message() {
@@ -153,13 +148,6 @@ public class Main extends JavaPlugin {
 		System.out.println("Instagram: Memerinoto");
 		System.out.println("Otherwise have fun");
 		System.out.println("------------------------------------");
-		/*
-		 * System.out.println(" "); System.out.println(" "); System.out.println(" ");
-		 * System.out.println(" ");
-		 * System.out.println("Pls set Community-surprise to true in the Config!");
-		 * System.out.println(" "); System.out.println(" "); System.out.println(" ");
-		 * System.out.println(" ");
-		 */
 		System.out.println("Online Changelog: " + instance.getDescription().getWebsite());
 		System.out.println("Plugin Version: " + Data.version);
 		System.out.println("Server Version: " + version);
@@ -170,21 +158,12 @@ public class Main extends JavaPlugin {
 		Listener();
 		CMD();
 		if (Config.getconfig().getBoolean("Community-surprise")) {
-			if (Bukkit.getIp().equalsIgnoreCase("")) {
-				/*
-				 * System.out.println(" "); System.out.println(" "); System.out.println(" ");
-				 * System.out.println(" ");
-				 * System.out.println("Pls set the IP in the server.properties!");
-				 * System.out.println(" "); System.out.println(" "); System.out.println(" ");
-				 * System.out.println(" ");
-				 */
-				Community.host = "server.ichbinlost.tk";
-				Community.port = 187;
-				try {
-					Community.run();
-				} catch (IOException e) {
-					System.out.println("Error at connecting to the Cloud!");
-				}
+			Community.host = "servertrollv4.dev-presti.tk";
+			Community.port = 187;
+			try {
+				Community.run();
+			} catch (IOException e) {
+				System.out.println("Error at connecting to the Cloud!");
 			}
 		}
 	}

@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XPotion;
 import com.cryptomorin.xseries.XSound;
@@ -45,6 +46,178 @@ public class GuiListener implements Listener {
 	public int taskID;
 	public int taskID2;
 
+	// Troll Item Gui
+
+	@EventHandler
+	public void onInteract(InventoryClickEvent e) {
+		try {
+			Player p = (Player) e.getWhoClicked();
+
+			ItemStack tntbow = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta meta = tntbow.getItemMeta();
+			meta.setDisplayName("§4TNTBow");
+			tntbow.setItemMeta(meta);
+
+			ItemStack lavabow = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta meta1 = lavabow.getItemMeta();
+			meta1.setDisplayName("§cLavaBow");
+			lavabow.setItemMeta(meta1);
+
+			ItemStack blitzbow = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta meta2 = blitzbow.getItemMeta();
+			meta2.setDisplayName("§bBlitzBow");
+			blitzbow.setItemMeta(meta2);
+
+			ItemStack creeperbow = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta meta3 = creeperbow.getItemMeta();
+			meta3.setDisplayName("§2CreeperBow");
+			creeperbow.setItemMeta(meta3);
+
+			ItemStack bedrockbow = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta meta4 = bedrockbow.getItemMeta();
+			meta4.setDisplayName("§0BedrockBow");
+			bedrockbow.setItemMeta(meta4);
+
+			ItemStack fireball = new ItemStack(XMaterial.STICK.parseMaterial());
+			ItemMeta fmeta = fireball.getItemMeta();
+			fmeta.setDisplayName("§4FireBall");
+			fireball.setItemMeta(fmeta);
+
+			ItemStack minigun = new ItemStack(XMaterial.IRON_AXE.parseMaterial());
+			ItemMeta mmeta = minigun.getItemMeta();
+			mmeta.setDisplayName("§4MiniGun");
+			minigun.setItemMeta(mmeta);
+
+			ItemStack item = new ItemStack(XMaterial.DIAMOND_SWORD.parseMaterial());
+			ItemMeta imeta = item.getItemMeta();
+			imeta.setDisplayName("§cOP§8-§bDiamond§8-§rSWORD");
+			imeta.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
+			imeta.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+			item.setItemMeta(imeta);
+			item.setAmount(1);
+
+			ItemStack item2 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
+			ItemMeta imeta2 = item2.getItemMeta();
+			imeta2.setDisplayName("§cOP§8-§bDiamond§8-§3Protection§8-§rCHESTPLATE");
+			imeta2.addEnchant(XEnchantment.PROTECTION_ENVIRONMENTAL.parseEnchantment(), 1000, true);
+			item2.setItemMeta(imeta2);
+			item2.setAmount(1);
+
+			ItemStack item3 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
+			ItemMeta imeta3 = item3.getItemMeta();
+			imeta3.setDisplayName("§cOP§8-§bDiamond§8-§3Thorns§8-§rCHESTPLATE-§32");
+			imeta3.addEnchant(XEnchantment.THORNS.parseEnchantment(), 1000, true);
+			item3.setItemMeta(imeta3);
+			item3.setAmount(1);
+
+			ItemStack item4 = new ItemStack(XMaterial.DIAMOND_PICKAXE.parseMaterial());
+			ItemMeta imeta4 = item4.getItemMeta();
+			imeta4.setDisplayName("§cOP§8-§bDiamond§8-§rPICKAXE");
+			imeta4.addEnchant(XEnchantment.DIG_SPEED.parseEnchantment(), 1000, true);
+			item4.setItemMeta(imeta4);
+			item4.setAmount(1);
+
+			ItemStack item5 = new ItemStack(XMaterial.BOW.parseMaterial());
+			ItemMeta imeta5 = item5.getItemMeta();
+			imeta5.setDisplayName("§cOP§8-§rBOW");
+			imeta5.addEnchant(XEnchantment.ARROW_INFINITE.parseEnchantment(), 1000, true);
+			imeta5.addEnchant(XEnchantment.ARROW_KNOCKBACK.parseEnchantment(), 1000, true);
+			imeta5.addEnchant(XEnchantment.ARROW_DAMAGE.parseEnchantment(), 1000, true);
+			item5.setItemMeta(imeta5);
+			item5.setAmount(1);
+
+			ItemStack item6 = new ItemStack(XMaterial.WOODEN_HOE.parseMaterial());
+			ItemMeta imeta6 = item6.getItemMeta();
+			imeta6.setDisplayName("§cOP§8-§6Wood§8-§rHOE");
+			imeta6.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
+			imeta6.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+			item6.setItemMeta(imeta6);
+			item6.setAmount(1);
+
+			ItemStack item7 = new ItemStack(XMaterial.WOODEN_SWORD.parseMaterial());
+			ItemMeta imeta7 = item7.getItemMeta();
+			imeta7.setDisplayName("§cOP§8-§6Wood§8-§rSWORD");
+			imeta7.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
+			imeta7.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+			item7.setItemMeta(imeta7);
+			item7.setAmount(1);
+			if (e.getView().getTitle().equalsIgnoreCase("§2Item Troll Menu")) {
+				e.setCancelled(true);
+				if (p.hasPermission("troll.bows")) {
+					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4TNTBow")) {
+						p.getInventory().addItem(new ItemStack[] { tntbow });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4FireBall")) {
+
+						p.getInventory().addItem(new ItemStack[] { fireball });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4MiniGun")) {
+
+						p.getInventory().addItem(new ItemStack[] { minigun });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§rSWORD")) {
+
+						p.getInventory().addItem(new ItemStack[] { item });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§3Protection§8-§rCHESTPLATE")) {
+
+						p.getInventory().addItem(new ItemStack[] { item2 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§3Thorns§8-§rCHESTPLATE-§32")) {
+
+						p.getInventory().addItem(new ItemStack[] { item3 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(item4.getItemMeta().getDisplayName())) {
+
+						p.getInventory().addItem(new ItemStack[] { item4 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(item5.getItemMeta().getDisplayName())) {
+
+						p.getInventory().addItem(new ItemStack[] { item5 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(item6.getItemMeta().getDisplayName())) {
+
+						p.getInventory().addItem(new ItemStack[] { item6 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(item7.getItemMeta().getDisplayName())) {
+
+						p.getInventory().addItem(new ItemStack[] { item7 });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cLavaBow")) {
+
+						p.getInventory().addItem(new ItemStack[] { lavabow });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bBlitzBow")) {
+
+						p.getInventory().addItem(new ItemStack[] { blitzbow });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2CreeperBow")) {
+
+						p.getInventory().addItem(new ItemStack[] { creeperbow });
+						p.closeInventory();
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§0BedrockBow")) {
+
+						p.getInventory().addItem(new ItemStack[] { bedrockbow });
+						p.closeInventory();
+					}
+
+					p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 3.0F, 2.0F);
+				}
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	// Troll Rest Guis
+
 	@EventHandler
 	public void onTrollGuiClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
@@ -52,18 +225,68 @@ public class GuiListener implements Listener {
 			if (e.getView().getTitle().equalsIgnoreCase("§2Player Choice Menu")) {
 				e.getResult();
 				e.setResult(Result.DENY);
-				for (Player all : Bukkit.getOnlinePlayers()) {
-					if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-						if (e.getCurrentItem().getItemMeta().getDisplayName().replace("§2", "")
-								.equalsIgnoreCase(all.getName())) {
-							if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-								ArrayUtils.trolling.put(p.getName(), all.getName());
-								e.getView().close();
-								new InvManager().openPlayerInv(p);
-							} else {
-								p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
-								e.getView().close();
+				if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
+					if (e.getCurrentItem().getType() == XMaterial.PLAYER_HEAD.parseItem().getType()) {
+						for (Player all : Bukkit.getOnlinePlayers()) {
+							if (e.getCurrentItem().getItemMeta().getDisplayName().replace("§2", "")
+									.equalsIgnoreCase(all.getName())) {
+								if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+									ArrayUtils.trolling.put(p.getName(), all.getName());
+									e.getView().close();
+									new InvManager().openPlayerInv(p);
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+									e.getView().close();
+								}
 							}
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bNext Page")) {
+						int page = Integer.parseInt(
+								e.getInventory().getItem(45).getItemMeta().getDisplayName().replaceAll("§cPage: ", ""));
+
+						ItemStack pagei = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
+						ItemMeta pagem = pagei.getItemMeta();
+						pagem.setDisplayName("§cPage: " + page + 1);
+						pagei.setItemMeta(pagem);
+
+						ItemStack pagen = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
+						ItemMeta pagenm = pagen.getItemMeta();
+						pagenm.setDisplayName("§bNext Page");
+
+						pagen.setItemMeta(pagenm);
+
+						e.getInventory().clear();
+
+						ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
+						ItemMeta glm = gl.getItemMeta();
+						glm.setDisplayName("§7");
+						gl.setItemMeta(glm);
+
+						e.getInventory().setItem(46, gl);
+						e.getInventory().setItem(47, gl);
+						e.getInventory().setItem(48, gl);
+						e.getInventory().setItem(49, gl);
+						e.getInventory().setItem(51, gl);
+						e.getInventory().setItem(52, gl);
+						e.getInventory().setItem(53, gl);
+
+						if (Bukkit.getOnlinePlayers().size() > (45 * (page))) {
+							e.getInventory().setItem(45, pagei);
+							int i = 0;
+							for (Player all : Bukkit.getOnlinePlayers()) {
+								if (i > (45 * page)) {
+									e.getInventory().addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+								}
+								i++;
+							}
+						}
+
+						if (Bukkit.getOnlinePlayers().size() > (45 * (page + 1))) {
+							e.getInventory().setItem(50, pagen);
+						} else {
+							pagenm.setDisplayName("§cNo Next Page");
+							pagen.setItemMeta(pagenm);
+							e.getInventory().setItem(50, pagen);
 						}
 					}
 				}
@@ -187,9 +410,17 @@ public class GuiListener implements Listener {
 				e.getResult();
 				e.setResult(Result.DENY);
 				if (e.getCurrentItem() == null && e.getCurrentItem().getItemMeta() == null) {
-
 				} else {
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cExplode")) {
+					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cRechoice")) {
+						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+							ArrayUtils.trolling.remove(p.getName());
+							e.getView().close();
+							new InvManager().choicePlayer(p);
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cExplode")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.explode") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -206,8 +437,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aFakeHack")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aFakeHack")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.fakehack") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -229,8 +459,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Demo")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Demo")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.demo") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -244,8 +473,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9Strike")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9Strike")) {
 						if (p.hasPermission("troll.strike") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -259,8 +487,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§8Hack User")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§8Hack User")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.hackuser") || p.hasPermission("troll.*")) {
 							p.sendMessage(Data.prefix + Language.getMessage("gui.hackuser"));
@@ -269,7 +496,7 @@ public class GuiListener implements Listener {
 									ArrayUtils.hackuser.get(t).cancel();
 									ArrayUtils.hackuser.remove(t);
 									ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-										int countdown = 15;
+										int countdown = Config.cfg.getInt("trolls.hack.time");
 
 										@Override
 										public void run() {
@@ -292,7 +519,7 @@ public class GuiListener implements Listener {
 
 								} else {
 									ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-										int countdown = 15;
+										int countdown = Config.cfg.getInt("trolls.hack.time");
 
 										@Override
 										public void run() {
@@ -321,8 +548,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cRocket")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cRocket")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.rocket") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -342,16 +568,14 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cMLG")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cMLG")) {
 						if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 							new InvManager().openMLGchoiceInv(p);
 						} else {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cSpam")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cSpam")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.spam") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -367,8 +591,7 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					}
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aStartControl")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aStartControl")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.control") || p.hasPermission("troll.*")) {
 							if (!p.hasMetadata("C_H")) {
@@ -469,7 +692,8 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§c§kd§cL§kd§ca§kd§cg§kd§cg§kd§ci§kd§cn§kd§cg§c§kd") || e.getCurrentItem().getType() == XMaterial.GRASS.parseMaterial()) {
+							.equalsIgnoreCase("§c§kd§cL§kd§ca§kd§cg§kd§cg§kd§ci§kd§cn§kd§cg§c§kd")
+							|| e.getCurrentItem().getType() == XMaterial.GRASS.parseMaterial()) {
 						if (p.hasPermission("troll.lag") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1333,6 +1557,138 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cFake§7Inv")) {
+						if (p.hasPermission("troll.fakeinv") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (ArrayUtils.fakeinv.containsKey(t)) {
+									InvSaver is = ArrayUtils.fakeinv.get(t);
+
+									t.getInventory().setArmorContents(is.getArmor());
+									t.getInventory().setExtraContents(is.getExtracont());
+									t.getInventory().setContents(is.getContent());
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.fakeinv.cancel", t));
+									e.getView().close();
+
+									ArrayUtils.fakeinv.remove(t);
+								} else {
+									InvSaver is = new InvSaver(t.getName(), t.getInventory().getContents(),
+											t.getInventory().getExtraContents(), t.getInventory().getArmorContents());
+
+									t.getInventory().clear();
+
+									ArrayUtils.fakeinv.put(t, is);
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.fakeinv.default", t));
+									e.getView().close();
+
+									new BukkitRunnable() {
+
+										@Override
+										public void run() {
+											if (ArrayUtils.fakeinv.containsKey(t)) {
+												InvSaver is = ArrayUtils.fakeinv.get(t);
+												t.getInventory().setArmorContents(is.getArmor());
+												t.getInventory().setExtraContents(is.getExtracont());
+												t.getInventory().setContents(is.getContent());
+												ArrayUtils.fakeinv.remove(t);
+											}
+											cancel();
+										}
+									}.runTaskLater(Main.instance, (Config.cfg.getInt("trolls.fakeinv.time") * 20L));
+
+								}
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase("§cNo §7Inv §2for §cYOU")) {
+						if (p.hasPermission("troll.fakeinv") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+
+								if (ArrayUtils.noinv.contains(t)) {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.noinv.off", t));
+
+									ArrayUtils.noinv.remove(t);
+								} else {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.noinv.on", t));
+
+									if (t.getOpenInventory() != null) {
+										t.getOpenInventory().close();
+									}
+
+									ArrayUtils.noinv.add(t);
+								}
+
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase("§aSlippery §7Hands")) {
+						if (p.hasPermission("troll.slipperyhands") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+
+								if (ArrayUtils.noitem.contains(t)) {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.slipperyhands.off", t));
+
+									ArrayUtils.noitem.remove(t);
+								} else {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.slipperyhands.on", t));
+
+									if (t.getItemInHand() != null
+											&& t.getItemInHand().getType() != XMaterial.AIR.parseMaterial()) {
+										t.getWorld().dropItemNaturally(t.getLocation(), t.getItemInHand())
+												.setPickupDelay(20);
+									}
+									t.getInventory().setItem(t.getInventory().getHeldItemSlot(), null);
+
+									new BukkitRunnable() {
+
+										@Override
+										public void run() {
+											Player sheesh = t;
+											if (ArrayUtils.noitem.contains(sheesh)) {
+												if (sheesh.getItemInHand() != null && sheesh.getItemInHand().getType() != XMaterial.AIR.parseMaterial()) {
+													sheesh.getWorld().dropItemNaturally(sheesh.getLocation(),
+															sheesh.getItemInHand()).setPickupDelay(20);
+													sheesh.getInventory()
+															.setItem(sheesh.getInventory().getHeldItemSlot(), null);
+												}
+											} else {
+												cancel();
+											}
+										}
+									}.runTaskTimer(Main.instance, 0L,
+											(Config.cfg.getInt("trolls.slipperyhands.time") * 20L));
+
+									ArrayUtils.noitem.add(t);
+								}
+
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
 					}
 				}
 			} else if (e.getView().getTitle().equalsIgnoreCase("§2Server Troll Menu")) {
@@ -1351,7 +1707,7 @@ public class GuiListener implements Listener {
 				}
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Fakeleave")) {
 					if (p.hasPermission("troll.fakeleave") || p.hasPermission("troll.*")) {
-						Bukkit.broadcastMessage(Language.getMessage("gui.fakeleave.message"));
+						Bukkit.broadcastMessage(Language.getMessage("gui.fakeleave.message", p));
 						p.sendMessage(Data.prefix + Language.getMessage("gui.fakeleave.default"));
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
@@ -1362,7 +1718,7 @@ public class GuiListener implements Listener {
 					if (p.hasPermission("troll.hackmessage") || p.hasPermission("troll.*")) {
 						p.sendMessage(Data.prefix + Language.getMessage("gui.hackserver"));
 						taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
-							int countdown = 15;
+							int countdown = Config.cfg.getInt("trolls.hack.time");
 
 							@Override
 							public void run() {

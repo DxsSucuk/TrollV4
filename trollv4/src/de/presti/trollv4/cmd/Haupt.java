@@ -49,12 +49,8 @@ public class Haupt implements CommandExecutor {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
 			public void run() {
 				if (ArrayUtils.randomtp.contains(p)) {
-
-					Random r = new Random();
-					int richtungX = r.nextInt(10);
-					int richtungZ = r.nextInt(10);
-					p.teleport(new Location(p.getWorld(), p.getLocation().getX() - richtungX, p.getLocation().getY(),
-							p.getLocation().getZ() - richtungZ));
+					
+					p.teleport(LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
 				}
 			}
 		}, 0L, 5L);
