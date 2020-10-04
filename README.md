@@ -5,3 +5,5 @@ SpigotMC: https://www.spigotmc.org/resources/trollv4-troll-plugin-troll-plugin-w
 
 BStats: https://bstats.org/plugin/bukkit/TrollV4/4690
 
+XSeries (CrossVersion Items): https://github.com/CryptoMorin/XSeries
+
