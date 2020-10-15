@@ -269,10 +269,25 @@ public class InvManager {
 		inv.setItem(41, SetItems.buildItem("§cFake§7Inv", XMaterial.CHEST.parseMaterial()));
 		inv.setItem(42, SetItems.buildItem("§cNo §7Inv §2for §cYOU", XMaterial.ENDER_CHEST.parseMaterial()));
 		inv.setItem(43, SetItems.buildItem("§aSlippery §7Hands", XMaterial.SLIME_BALL.parseMaterial()));
+		inv.setItem(45, SetItems.buildItem("§cNext Page", XMaterial.PAPER.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
 	
-	public void setOverallTrollMenu(Inventory inv) {
+	public static void setPageTwoTrolls(Inventory inv, Player p) {
+		inv.clear();
+		
+		try {
+			inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+					"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+		} catch (IOException e) {
+		}
+		
+		inv.setItem(10, SetItems.buildItem("§cTnT World", XMaterial.TNT.parseMaterial()));
+		inv.setItem(11, SetItems.buildItem("§bRickRoll", XMaterial.BRICK.parseMaterial()));
+		setOverallTrollMenu(inv);
+	}
+	
+	public static void setOverallTrollMenu(Inventory inv) {
 		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
 		ItemMeta glm = gl.getItemMeta();
 		glm.setDisplayName("§7");

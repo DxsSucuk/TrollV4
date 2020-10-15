@@ -168,7 +168,10 @@ public class Language {
 		addMessage("de", "gui.noinv.on", "Der Spieler §c[PLAYER] §2kann nun keine Inventare mehr öffnen!");
 		addMessage("de", "gui.noinv.off", "Der Spieler §c[PLAYER] §2kann nun wieder Inventare öffnen!");
 		addMessage("de", "gui.slipperyhands.on", "Der Spieler §c[PLAYER] §2hat seine Hände mit Butter vollgeschmiert!");
-		addMessage("de", "gui.slipperyhands.on", "Der Spieler §c[PLAYER] §2hat die Butter runter gewaschen!");
+		addMessage("de", "gui.slipperyhands.off", "Der Spieler §c[PLAYER] §2hat die Butter runter gewaschen!");
+		addMessage("de", "gui.tntworld.default", "Der Spieler §c[PLAYER] §2sieht nun in einem Radius von 75 blöcken nur TNT!");
+		addMessage("de", "gui.rickroll.default", "Der Spieler §c[PLAYER] §2wurde nun gerickrolled!");
+		addMessage("de", "gui.rickroll.ishearing", "Der Spieler §c[PLAYER] §2wird schon gerickrolled!");
 		addMessage("de", "gui.tpall", "Alle Spieler wurden zu dir teleportiert");
 		addMessage("de", "gui.fakeleave.default", "Eine FakeLeave Message wurde in den Chat geschickt!");
 		addMessage("de", "gui.fakeleave.message", "§6[PLAYER] left the Game.");
@@ -258,7 +261,10 @@ public class Language {
 		addMessage("us", "gui.noinv.on", "The User §c[PLAYER] §2cant open any Inventory anymore!");
 		addMessage("us", "gui.noinv.off", "The User §c[PLAYER] §2can open any Inventory again!");
 		addMessage("us", "gui.slipperyhands.on", "The User §c[PLAYER] §2played with some butter!");
-		addMessage("us", "gui.slipperyhands.on", "The User §c[PLAYER] §2cleaned his hands!");
+		addMessage("us", "gui.slipperyhands.off", "The User §c[PLAYER] §2cleaned his hands!");
+		addMessage("us", "gui.tntworld.default", "The User §c[PLAYER] §2now sees only TnT in his World!");
+		addMessage("us", "gui.rickroll.default", "The User §c[PLAYER] §2is getting rickrolled!");
+		addMessage("us", "gui.rickroll.ishearing", "Th User §c[PLAYER] §2is already getting rickrolled!");
 		addMessage("us", "gui.tpall", "All players were teleported to you!");
 		addMessage("us", "gui.fakeleave.default", "A Fake Message has been Posted in the Chat!");
 		addMessage("us", "gui.fakeleave.message", "§6[PLAYER] left the Game.");
@@ -270,6 +276,7 @@ public class Language {
 	public void loadCustom() {
 		for (String s : lang) {
 			addMessage("custome", s, Config.getconfig2().getString(s));
+			addMessage("custom", s, Config.getconfig2().getString(s));
 		}
 	}
 

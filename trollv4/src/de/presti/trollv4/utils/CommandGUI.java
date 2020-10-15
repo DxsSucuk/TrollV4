@@ -136,7 +136,7 @@ public class CommandGUI implements Listener {
 				p.closeInventory();
 
 				if (e.getCurrentItem() != null) {
-					if (e.getCurrentItem().getType() == XMaterial.WHITE_WOOL.parseMaterial()) {
+					if (e.getCurrentItem().getType() == XMaterial.RED_WOOL.parseMaterial()) {
 						if (p.hasPermission("troll.control") || p.hasPermission("troll.*")) {
 							if (p.hasMetadata("C_H")) {
 								Player victim = Bukkit.getPlayer(p.getMetadata("C_H").get(0).asString());

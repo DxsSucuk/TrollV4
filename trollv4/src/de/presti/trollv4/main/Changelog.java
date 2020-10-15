@@ -28,6 +28,11 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Rick Roll");
+		p.sendMessage(Data.cp + "TnT World");
+		p.sendMessage(Data.cu + "SlipperHands Message Fix");
+		p.sendMessage(Data.cu + "StopControl Fix");
+		p.sendMessage(Data.prefix + "Version » 4.3.4");
 		p.sendMessage(Data.cp + "No Inv");
 		p.sendMessage(Data.cp + "Slippery Hands");
 		p.sendMessage(Data.cu + "Gui Select Fixes");

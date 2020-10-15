@@ -420,6 +420,13 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cNext Page")) {
+						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+							InvManager.setPageTwoTrolls(e.getClickedInventory(), p);
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cExplode")) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.explode") || p.hasPermission("troll.*")) {
@@ -1665,7 +1672,8 @@ public class GuiListener implements Listener {
 										public void run() {
 											Player sheesh = t;
 											if (ArrayUtils.noitem.contains(sheesh)) {
-												if (sheesh.getItemInHand() != null && sheesh.getItemInHand().getType() != XMaterial.AIR.parseMaterial()) {
+												if (sheesh.getItemInHand() != null && sheesh.getItemInHand()
+														.getType() != XMaterial.AIR.parseMaterial()) {
 													sheesh.getWorld().dropItemNaturally(sheesh.getLocation(),
 															sheesh.getItemInHand()).setPickupDelay(20);
 													sheesh.getInventory()
@@ -1681,6 +1689,52 @@ public class GuiListener implements Listener {
 									ArrayUtils.noitem.add(t);
 								}
 
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTnT World")) {
+						if (p.hasPermission("troll.tntworld") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								Location oldl = t.getLocation();
+								for (int x = 0; x < 200; x++) {
+									for (int y = 0; y < 30; y++) {
+										for (int z = 0; z < 200; z++) {
+											if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
+													oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z).getBlock()
+															.getType() != XMaterial.AIR.parseMaterial()) {
+												t.sendBlockChange(
+														new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
+																oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z),
+														XMaterial.TNT.parseMaterial().createBlockData());
+											}
+										}
+									}
+								}
+								p.sendMessage(Data.prefix + Language.getMessage("gui.tntworld.default", t));
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bRickRoll")) {
+						if (p.hasPermission("troll.rickroll") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if(!PlayMusic.isPlaying(t)) {
+									PlayMusic.play(t, "plugins/TrollV4/rick.nbs");
+									p.sendMessage(Data.prefix + Language.getMessage("gui.rickroll.default", t));
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.rickroll.ishearing", t));
+								}
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
