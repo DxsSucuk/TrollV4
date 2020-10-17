@@ -1,6 +1,5 @@
 package de.presti.trollv4.utils;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import com.cryptomorin.xseries.XSound;

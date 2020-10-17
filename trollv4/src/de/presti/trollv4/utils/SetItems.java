@@ -8,9 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
 import com.cryptomorin.xseries.SkullUtils;
+
+import de.presti.trollv4.api.PlayerInfo;
 
 /*
 *	Urheberrechtshinweis														*
@@ -59,6 +59,7 @@ public class SetItems {
 		return item;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static ItemStack buildItemCodes(String name, Material m, int in, short sh) {
 		ItemStack item = new ItemStack(m, in, sh);
 		ItemMeta itemm = item.getItemMeta();

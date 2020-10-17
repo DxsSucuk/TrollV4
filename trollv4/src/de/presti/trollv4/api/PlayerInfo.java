@@ -1,18 +1,8 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.api;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.util.Date;
-
 import javax.net.ssl.HttpsURLConnection;
 
-import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PlayerInfo {

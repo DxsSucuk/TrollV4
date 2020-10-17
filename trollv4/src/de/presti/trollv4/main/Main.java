@@ -1,9 +1,16 @@
 package de.presti.trollv4.main;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -12,9 +19,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.presti.trollv4.utils.*;
-import de.presti.trollv4.listener.*;
-import de.presti.trollv4.cmd.*;
+import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.listener.Event;
+import de.presti.trollv4.listener.GuiListener;
+import de.presti.trollv4.listener.iListener;
+import de.presti.trollv4.utils.ArrayUtils;
+import de.presti.trollv4.utils.Config;
+import de.presti.trollv4.utils.Controls;
+import de.presti.trollv4.utils.Language;
+import de.presti.trollv4.utils.Metrics;
+import de.presti.trollv4.utils.UpdateChecker;
 
 /*
 *	Urheberrechtshinweis														*
@@ -31,80 +45,59 @@ import de.presti.trollv4.cmd.*;
 *	bedarf der ausdr§cklichen, schriftlichen Zustimmung von Baris Arslan	    *
 */
 public class Main extends JavaPlugin {
-	public static Main plugin;
 	public static Main instance;
-	public static HashMap<String, ItemStack[]> inventory;
-	public static HashMap<String, ItemStack[]> armor;
-	public static List<String> cd;
 	public Logger logg = Logger.getLogger("Minecraft");
 	public UpdateChecker update;
 	public static Controls control;
 	public static String version;
 
-	// Update Config
-	public static String Lang;
-	public static boolean autoup;
-	public static boolean anim;
-	public static boolean unsup;
-	public static boolean cmsup;
-
 	public void onEnable() {
 
 		instance = this;
-		plugin = this;
 		version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-		armor = new HashMap<String, ItemStack[]>();
-		inventory = new HashMap<String, ItemStack[]>();
-		cd = new ArrayList<String>();
+		ArrayUtils.armor = new HashMap<String, ItemStack[]>();
+		ArrayUtils.inventory = new HashMap<String, ItemStack[]>();
+		ArrayUtils.cd = new ArrayList<String>();
 
-		if (!version.equals("v1_8_R3") && !version.equals("v1_9_R2") && !Config.getconfig().getBoolean("Unsupport")) {
+		boolean need = (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null
+				|| Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null
+				|| Bukkit.getPluginManager().getPlugin("LibsDisguises") == null);
+		downloadAll();
 
-			new Language();
-			new Config().init();
-			new Config().init2();
-			Language.clearAll();
-
-			Bukkit.getConsoleSender().sendMessage("§6>");
-			Bukkit.getConsoleSender().sendMessage("§6TrollV4 is mainly Developed for 1.8 and 1.9!");
-			Bukkit.getConsoleSender().sendMessage("§6Pls set Unsupport to True in the Config!");
-			Bukkit.getConsoleSender().sendMessage("§6Incase of Errors!");
-			Bukkit.getConsoleSender().sendMessage("§6Discord: 平和#0240");
-			Bukkit.getConsoleSender().sendMessage("§6>");
-			setEnabled(false);
-
-		} else {
-			if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null
-					|| Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
-				Bukkit.getConsoleSender().sendMessage("§6--------------------");
-				Bukkit.getConsoleSender().sendMessage("§6PLS INSTALL!");
-				Bukkit.getConsoleSender().sendMessage("§6ProtocolLib");
-				Bukkit.getConsoleSender().sendMessage("§6and");
-				Bukkit.getConsoleSender().sendMessage("§6LibsDisguises");
-				Bukkit.getConsoleSender().sendMessage("§6PLS INSTALL!");
-				Bukkit.getConsoleSender().sendMessage("§6--------------------");
-				this.setEnabled(false);
-			}
+		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
 			new Controls();
-			new Language();
-			new Config().init();
-			new Config().init2();
-			try {
-				Metrics metrics = new Metrics(this, 4690);
-				metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
-			} catch (Exception e) {
-				System.out.println("Error Main Metrics Custom Chart: " + e.getMessage());
-			}
-
-			Language.clearAll();
-			new Language();
-			updateConfig();
-
-			if (Config.getconfig().getBoolean("AutoUpdate")) {
-				update = new UpdateChecker(this);
-				update.checkForUpdate();
-			}
-			Startup();
+		} else {
+			System.out.println("---------->");
+			System.out.println(" ");
+			System.out.println("Pls restart the Server");
+			System.out.println("Because of the Libs Plugin");
+			System.out.println(" ");
 		}
+
+		if (need)
+			System.out.println("---------->");
+
+		new Language();
+		new Config().init();
+		new Config().init2();
+
+		try {
+			Metrics metrics = new Metrics(this, 4690);
+			metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
+		} catch (Exception e) {
+			System.out.println("Error Main Metrics Custom Chart: " + e.getMessage());
+		}
+
+		Language.clearAll();
+		new Language();
+		updateConfig();
+
+		if (Config.getconfig().getBoolean("AutoUpdate")) {
+			update = new UpdateChecker(this);
+			update.checkForUpdate();
+		}
+
+		Startup();
 	}
 
 	public void onDisable() {
@@ -115,6 +108,41 @@ public class Main extends JavaPlugin {
 		instance.getCommand("troll").setExecutor(new Haupt());
 	}
 
+	public void downloadAll() {
+		boolean need = (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null
+				|| Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null
+				|| Bukkit.getPluginManager().getPlugin("LibsDisguises") == null);
+
+		if (need)
+			System.out.println("---------->");
+
+		if (!new File("plugins/TrollV4/rick.nbs").exists()) {
+			Bukkit.getConsoleSender().sendMessage("Downloading Rick.nbs!");
+			download("https://trollv4.000webhostapp.com/download/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
+		}
+
+		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+			Bukkit.getConsoleSender().sendMessage("Downloading ProtocolLib!");
+			download("https://trollv4.000webhostapp.com/download/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
+		}
+
+		if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+			Bukkit.getConsoleSender().sendMessage("Downloading NoteBlockAPI!");
+			download("https://trollv4.000webhostapp.com/download/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
+		}
+
+		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+			Bukkit.getConsoleSender().sendMessage("Downloading LibsDisguises!");
+			if (version.toLowerCase().startsWith("v1_8")) {
+				download("https://trollv4.000webhostapp.com/download/1-8/LibsDisguises.jar",
+						"plugins/LibsDisguises.jar");
+			} else {
+				download("https://trollv4.000webhostapp.com/download/1-12-x/LibsDisguises.jar",
+						"plugins/LibsDisguises.jar");
+			}
+		}
+	}
+
 	public void updateConfig() {
 		if (Config.cfg.getString("Plugin-Version") == null) {
 			Config.getFile().delete();
@@ -123,12 +151,22 @@ public class Main extends JavaPlugin {
 			if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
 			} else {
-				
-				String oldl = Language.getLanguage();
-				
+
+				String l = Language.getLanguage();
+				boolean autoup = Config.cfg.getBoolean("AutoUpdate");
+				boolean anim = Config.cfg.getBoolean("Animations");
+				int hack = Config.cfg.getInt("trolls.hack.time");
+				int fakeinv = Config.cfg.getInt("trolls.fakeinv.time");
+				int hands = Config.cfg.getInt("trolls.slipperyhands.time");
+
 				Config.getFile().delete();
 				new Config().init();
-				Config.cfg.set("language", oldl);
+				Config.cfg.set("Language", l);
+				Config.cfg.set("AutoUpdate", autoup);
+				Config.cfg.set("Animations", anim);
+				Config.cfg.set("trolls.hack.time", hack);
+				Config.cfg.set("trolls.fakeinv.time", fakeinv);
+				Config.cfg.set("trolls.slipperyhands.time", hands);
 			}
 		}
 	}
@@ -141,7 +179,7 @@ public class Main extends JavaPlugin {
 
 	public static void Message() {
 		System.out.println("-----------------------------------");
-		System.out.println("TrollV4 by Presti");
+		System.out.println("TrollV" + Data.version + " by Presti");
 		System.out.println("In case of errors please report");
 		System.out.println("Skype: DxsSucuk@hotmail.com");
 		System.out.println("YouTube: Not Memerinoto");
@@ -157,15 +195,12 @@ public class Main extends JavaPlugin {
 		Message();
 		Listener();
 		CMD();
-		if (Config.getconfig().getBoolean("Community-surprise")) {
-			Community.host = "servertrollv4.dev-presti.tk";
-			Community.port = 187;
-			try {
-				Community.run();
-			} catch (IOException e) {
-				System.out.println("Error at connecting to the Cloud!");
-			}
-		}
+		/*
+		 * if (Config.getconfig().getBoolean("Community-surprise")) { Community.host =
+		 * "servertrollv4.dev-presti.tk"; Community.port = 187; try { Community.run(); }
+		 * catch (IOException e) {
+		 * System.out.println("Error at connecting to the Cloud!"); } }
+		 */
 	}
 
 	public int getRandom(int lower, int upper) {
@@ -190,23 +225,8 @@ public class Main extends JavaPlugin {
 		return str;
 	}
 
-	public static String test() {
-		String str = "";
-		int lastrandom = 0;
-		for (int i = 0; i < 1; i++) {
-			Random r = new Random();
-			int rand = r.nextInt(1);
-			while (rand == lastrandom) {
-				rand = r.nextInt(1);
-			}
-			lastrandom = rand;
-			str = str + rand;
-		}
-		return str;
-	}
-
 	public static Main getPlugin() {
-		return plugin;
+		return instance;
 	}
 
 	public static void startControlling(Player v, Player c) {
@@ -215,6 +235,25 @@ public class Main extends JavaPlugin {
 
 	public static void stopControlling(Player v, Player c) {
 		control.stopControlling(v, c);
+	}
+
+	public static boolean download(String url, String FileName) {
+		try {
+			URL link = new URL(url);
+			URLConnection con = link.openConnection();
+			con.addRequestProperty("User-Agent",
+					"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+			InputStream in = con.getInputStream();
+			ReadableByteChannel readableByteChannel = Channels.newChannel(in);
+			FileOutputStream fileOutputStream = new FileOutputStream(FileName);
+			FileChannel fileChannel = fileOutputStream.getChannel();
+			fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+			fileChannel.close();
+			fileOutputStream.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
 	}
 
 }

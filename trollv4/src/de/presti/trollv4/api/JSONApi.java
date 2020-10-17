@@ -1,7 +1,6 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.api;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -17,11 +16,11 @@ import org.json.JSONObject;
 
 public class JSONApi {
 
-	@SuppressWarnings("unused")
 	public static JSONObject GetData(Requests type, String url) {
 		return GetData(type, url, "");
 	}
 
+	@SuppressWarnings("unused")
 	static JSONArray GetData2(Requests type, String url, String post) {
 		Date start = new Date();
 		Date preconnect = start;
@@ -109,7 +108,7 @@ public class JSONApi {
 		return j;
 	}
 
-	@SuppressWarnings({ "null" })
+	@SuppressWarnings({ "unused" })
 	private static JSONObject GetData(Requests type, String url, String post) {
 		Date start = new Date();
 		Date preconnect = start;

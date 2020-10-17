@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -17,10 +16,12 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
+import de.presti.trollv4.utils.ArrayUtils;
 import de.presti.trollv4.utils.CommandGUI;
 import de.presti.trollv4.utils.Config;
 import me.libraryaddict.disguise.DisguiseAPI;
 
+@SuppressWarnings("deprecation")
 public class iListener implements Listener {
 
 	Main plugin;
@@ -45,7 +46,6 @@ public class iListener implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerChat(PlayerChatEvent e) {
 		Player p = e.getPlayer();
@@ -137,10 +137,10 @@ public class iListener implements Listener {
 			p.getInventory().setContents(c.getInventory().getContents());
 			p.getInventory().setArmorContents(c.getInventory().getArmorContents());
 
-			c.getInventory().setContents(Main.inventory.get(c.getName()));
-			c.getInventory().setArmorContents(Main.armor.get(c.getName()));
-			Main.inventory.remove(c.getName());
-			Main.armor.remove(c.getName());
+			c.getInventory().setContents(ArrayUtils.inventory.get(c.getName()));
+			c.getInventory().setArmorContents(ArrayUtils.armor.get(c.getName()));
+			ArrayUtils.inventory.remove(c.getName());
+			ArrayUtils.armor.remove(c.getName());
 
 			DisguiseAPI.undisguiseToAll(c);
 			p.setGameMode(GameMode.SURVIVAL);
@@ -161,10 +161,10 @@ public class iListener implements Listener {
 				v.getInventory().setContents(p.getInventory().getContents());
 				v.getInventory().setArmorContents(p.getInventory().getArmorContents());
 
-				p.getInventory().setContents(Main.inventory.get(p.getName()));
-				p.getInventory().setArmorContents(Main.armor.get(p.getName()));
-				Main.inventory.remove(p.getName());
-				Main.armor.remove(p.getName());
+				p.getInventory().setContents(ArrayUtils.inventory.get(p.getName()));
+				p.getInventory().setArmorContents(ArrayUtils.armor.get(p.getName()));
+				ArrayUtils.inventory.remove(p.getName());
+				ArrayUtils.armor.remove(p.getName());
 
 				DisguiseAPI.undisguiseToAll(p);
 				v.setGameMode(GameMode.SURVIVAL);
@@ -191,10 +191,10 @@ public class iListener implements Listener {
 			p.getInventory().setContents(c.getInventory().getContents());
 			p.getInventory().setArmorContents(c.getInventory().getArmorContents());
 
-			c.getInventory().setContents(Main.inventory.get(c.getName()));
-			c.getInventory().setArmorContents(Main.armor.get(c.getName()));
-			Main.inventory.remove(c.getName());
-			Main.armor.remove(c.getName());
+			c.getInventory().setContents(ArrayUtils.inventory.get(c.getName()));
+			c.getInventory().setArmorContents(ArrayUtils.armor.get(c.getName()));
+			ArrayUtils.inventory.remove(c.getName());
+			ArrayUtils.armor.remove(c.getName());
 
 			DisguiseAPI.undisguiseToAll(c);
 			p.setGameMode(GameMode.SURVIVAL);
@@ -216,10 +216,10 @@ public class iListener implements Listener {
 				v.getInventory().setContents(p.getInventory().getContents());
 				v.getInventory().setArmorContents(p.getInventory().getArmorContents());
 
-				p.getInventory().setContents(Main.inventory.get(p.getName()));
-				p.getInventory().setArmorContents(Main.armor.get(p.getName()));
-				Main.inventory.remove(p.getName());
-				Main.armor.remove(p.getName());
+				p.getInventory().setContents(ArrayUtils.inventory.get(p.getName()));
+				p.getInventory().setArmorContents(ArrayUtils.armor.get(p.getName()));
+				ArrayUtils.inventory.remove(p.getName());
+				ArrayUtils.armor.remove(p.getName());
 
 				DisguiseAPI.undisguiseToAll(p);
 				v.setGameMode(GameMode.SURVIVAL);

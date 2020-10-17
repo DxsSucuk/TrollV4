@@ -42,7 +42,6 @@ public class Config {
 			cfg.addDefault("Language", "US");
 			cfg.addDefault("AutoUpdate", true);
 			cfg.addDefault("Animations", false);
-			cfg.addDefault("Unsupport", true);
 			cfg.addDefault("Community-surprise", false);
 			cfg.addDefault("trolls.hack.time", 15);
 			cfg.addDefault("trolls.fakeinv.time", 5);

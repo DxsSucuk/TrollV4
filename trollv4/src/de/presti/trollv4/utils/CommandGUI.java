@@ -32,7 +32,7 @@ public class CommandGUI implements Listener {
 		c = cont;
 		v = vict;
 		plugin = cl;
-		if (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
+		if (Language.getLanguage().equalsIgnoreCase("de")) {
 			gui = Bukkit.createInventory(null, 9, "§8§ki §8Command Ausführen §ki");
 
 			ItemStack rat = new ItemStack(XMaterial.BARRIER.parseItem());
@@ -54,37 +54,6 @@ public class CommandGUI implements Listener {
 			im2.setDisplayName("§c§lAls " + c.getName() + " ausführen");
 			List<String> lore2 = new ArrayList<String>();
 			lore2.add("§7Als du selbst ausführen");
-			lore2.add("§7Command: §6" + cmd);
-			im2.setLore(lore2);
-			raa.setItemMeta(im2);
-
-			gui.setItem(2, rat);
-			gui.setItem(6, raa);
-			gui.setItem(8, stop);
-
-			c.openInventory(gui);
-		} else if (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-			gui = Bukkit.createInventory(null, 9, "§8§ki §8Run Command §ki");
-
-			ItemStack rat = new ItemStack(XMaterial.BARRIER.parseItem());
-			ItemMeta im = rat.getItemMeta();
-			im.setDisplayName("§c§lRun as " + v.getName());
-			List<String> lore = new ArrayList<String>();
-			lore.add("§7Runs the command as your target");
-			lore.add("§7Command: §6" + cmd);
-			im.setLore(lore);
-			rat.setItemMeta(im);
-
-			ItemStack stop = new ItemStack(XMaterial.RED_WOOL.parseItem());
-			ItemMeta stopm = stop.getItemMeta();
-			stopm.setDisplayName("§cStopControl");
-			stop.setItemMeta(stopm);
-
-			ItemStack raa = new ItemStack(XMaterial.ARROW.parseItem());
-			ItemMeta im2 = raa.getItemMeta();
-			im2.setDisplayName("§c§lRun as " + c.getName());
-			List<String> lore2 = new ArrayList<String>();
-			lore2.add("§7Run the command as yourself");
 			lore2.add("§7Command: §6" + cmd);
 			im2.setLore(lore2);
 			raa.setItemMeta(im2);
@@ -131,7 +100,9 @@ public class CommandGUI implements Listener {
 	@EventHandler
 	public void clickGUI(InventoryClickEvent e) {
 		try {
-			if (e.getInventory().equals(gui) || e.getView().getTitle().equalsIgnoreCase((Language.getLanguage().equalsIgnoreCase("de") ? "§8§ki §8Command Ausführen §ki" : "§8§ki §8Run Command §ki"))) {
+			if (e.getInventory().equals(gui) || e.getView().getTitle()
+					.equalsIgnoreCase((Language.getLanguage().equalsIgnoreCase("de") ? "§8§ki §8Command Ausführen §ki"
+							: "§8§ki §8Run Command §ki"))) {
 				Player p = (Player) e.getWhoClicked();
 				p.closeInventory();
 
@@ -167,7 +138,9 @@ public class CommandGUI implements Listener {
 
 	@EventHandler
 	public void onClose(InventoryCloseEvent e) {
-		if (e.getInventory().equals(gui) || e.getView().getTitle().equalsIgnoreCase((Language.getLanguage().equalsIgnoreCase("de") ? "§8§ki §8Command Ausführen §ki" : "§8§ki §8Run Command §ki"))) {
+		if (e.getInventory().equals(gui) || e.getView().getTitle()
+				.equalsIgnoreCase((Language.getLanguage().equalsIgnoreCase("de") ? "§8§ki §8Command Ausführen §ki"
+						: "§8§ki §8Run Command §ki"))) {
 			InventoryClickEvent.getHandlerList().unregister(this);
 			InventoryCloseEvent.getHandlerList().unregister(this);
 		}

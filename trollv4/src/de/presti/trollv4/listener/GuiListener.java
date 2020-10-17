@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XPotion;
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.api.PlayMusic;
 import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.invs.*;
@@ -218,6 +219,7 @@ public class GuiListener implements Listener {
 
 	// Troll Rest Guis
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onTrollGuiClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
@@ -1327,7 +1329,6 @@ public class GuiListener implements Listener {
 										int rix = r.nextBoolean() ? -1 : 1;
 										int riz = r.nextBoolean() ? -1 : 1;
 
-										@SuppressWarnings("deprecation")
 										@Override
 										public void run() {
 											Location location1 = t.getLocation();

@@ -28,6 +28,9 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "AutoDependDownloader");
+		p.sendMessage(Data.cu + "Code optimization");
+		p.sendMessage(Data.prefix + "Version » 4.3.5");
 		p.sendMessage(Data.cp + "Rick Roll");
 		p.sendMessage(Data.cp + "TnT World");
 		p.sendMessage(Data.cu + "SlipperHands Message Fix");

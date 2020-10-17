@@ -52,6 +52,7 @@ public class Event implements Listener {
 
 	// OVERALL
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -70,10 +71,11 @@ public class Event implements Listener {
 
 		if (p.hasPermission("troll.help")) {
 			if (Config.getconfig().getBoolean("AutoUpdate")) {
-				if (!Data.version.equals(UpdateChecker.spigotPluginVersion)
-						&& !(UpdateChecker.cvi > UpdateChecker.nvi)) {
+				Main.instance.update.checkForUpdate();
+				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)
+						&& !(Main.instance.update.cvi > Main.instance.update.nvi)) {
 					p.sendMessage(Data.prefix + "TrollV4 has a Update!");
-					p.sendMessage(Data.prefix + "New Version: " + UpdateChecker.spigotPluginVersion);
+					p.sendMessage(Data.prefix + "New Version: " + Main.instance.update.spigotPluginVersion);
 					p.sendMessage(Data.prefix + "Your Version: " + Data.version);
 					p.sendMessage(Data.prefix + "Download here: https://www.spigotmc.org/resources/" + UpdateChecker.ID
 							+ "/updates");
@@ -86,6 +88,7 @@ public class Event implements Listener {
 
 	// OVERALL
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
@@ -185,6 +188,7 @@ public class Event implements Listener {
 
 	// FAKEHACKS FREEZE HEROBRINE LAG
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
@@ -241,6 +245,7 @@ public class Event implements Listener {
 
 	// FIREBALL and MINIGUN
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerStickClick(PlayerInteractEvent e) {
 		try {
@@ -279,6 +284,7 @@ public class Event implements Listener {
 
 	// BOW ITEMS
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onArrowHit(ProjectileHitEvent e) {
 		try {

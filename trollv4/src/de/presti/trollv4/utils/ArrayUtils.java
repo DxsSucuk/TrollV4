@@ -2,9 +2,11 @@ package de.presti.trollv4.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.invs.InvSaver;
@@ -49,5 +51,10 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> arrowspam = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> tornador = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
+	
+	//Controlls
+	public static HashMap<String, ItemStack[]> inventory;
+	public static HashMap<String, ItemStack[]> armor;
+	public static List<String> cd;
 
 }

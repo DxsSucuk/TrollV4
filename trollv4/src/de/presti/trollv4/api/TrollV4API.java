@@ -3,8 +3,6 @@ package de.presti.trollv4.api;
 import java.lang.reflect.InvocationTargetException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,13 +16,10 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.cmd.Haupt;
-import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.Config;
 import de.presti.trollv4.utils.HS;
 import de.presti.trollv4.utils.Language;
-import de.presti.trollv4.utils.Packets;
 import de.presti.trollv4.utils.Titles;
 
 /*

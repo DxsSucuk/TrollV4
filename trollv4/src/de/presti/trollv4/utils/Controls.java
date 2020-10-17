@@ -46,10 +46,10 @@ public class Controls {
 		v.getInventory().setArmorContents(c.getInventory().getArmorContents());
 
 		// Give controller the original inventory back
-		c.getInventory().setContents(Main.inventory.get(c.getName()));
-		c.getInventory().setArmorContents(Main.armor.get(c.getName()));
-		Main.inventory.remove(c.getName());
-		Main.armor.remove(c.getName());
+		c.getInventory().setContents(ArrayUtils.inventory.get(c.getName()));
+		c.getInventory().setArmorContents(ArrayUtils.armor.get(c.getName()));
+		ArrayUtils.inventory.remove(c.getName());
+		ArrayUtils.armor.remove(c.getName());
 
 		v.teleport(c);
 		c.sendMessage(Data.prefix + Language.getMessage("gui.stopcontrol.stop", v));
@@ -59,8 +59,8 @@ public class Controls {
 		v.setMetadata("C_P", new FixedMetadataValue(Main.getPlugin(), c.getName()));
 		c.setMetadata("C_H", new FixedMetadataValue(Main.getPlugin(), v.getName()));
 
-		Main.inventory.put(c.getName(), c.getInventory().getContents());
-		Main.armor.put(c.getName(), c.getInventory().getArmorContents());
+		ArrayUtils.inventory.put(c.getName(), c.getInventory().getContents());
+		ArrayUtils.armor.put(c.getName(), c.getInventory().getArmorContents());
 		c.getInventory().setContents(v.getInventory().getContents());
 		c.getInventory().setArmorContents(v.getInventory().getArmorContents());
 

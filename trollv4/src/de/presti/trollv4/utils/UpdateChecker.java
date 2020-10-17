@@ -33,13 +33,13 @@ public class UpdateChecker {
 
 	public final JavaPlugin javaPlugin;
 	public final String localPluginVersion;
-	public static String spigotPluginVersion;
+	public String spigotPluginVersion;
 
 	public static final int ID = 67318;
 	public static String ERR_MSG = "&cUpdate checker failed!";
 	public static final long CHECK_INTERVAL = 12_000; // In ticks.
-	public static int nvi;
-	public static int cvi;
+	public int nvi;
+	public int cvi;
 
 	public UpdateChecker(final JavaPlugin javaPlugin) {
 		this.javaPlugin = javaPlugin;
