@@ -20,15 +20,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.listener.Event;
 import de.presti.trollv4.listener.GuiListener;
 import de.presti.trollv4.listener.iListener;
 import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.Config;
-import de.presti.trollv4.utils.Controls;
-import de.presti.trollv4.utils.Language;
 import de.presti.trollv4.utils.Metrics;
 import de.presti.trollv4.utils.UpdateChecker;
+import de.presti.trollv4.utils.control.Controls;
 
 /*
 *	Urheberrechtshinweis														*
@@ -147,27 +147,28 @@ public class Main extends JavaPlugin {
 		if (Config.cfg.getString("Plugin-Version") == null) {
 			Config.getFile().delete();
 			new Config().init();
+			
+			System.out.println("Config broken recreating!");
+			
 		} else {
-			if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
+			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
-			} else {
-
+				System.out.print("Updating Config!");
+				
 				String l = Language.getLanguage();
-				boolean autoup = Config.cfg.getBoolean("AutoUpdate");
-				boolean anim = Config.cfg.getBoolean("Animations");
-				int hack = Config.cfg.getInt("trolls.hack.time");
-				int fakeinv = Config.cfg.getInt("trolls.fakeinv.time");
-				int hands = Config.cfg.getInt("trolls.slipperyhands.time");
-
+				boolean autoup = Config.getconfig().getBoolean("AutoUpdate");
+				boolean anim = Config.getconfig().getBoolean("Animations");
+				boolean cs = Config.getconfig().getBoolean("Community-surprise");
+				int hack = Config.getconfig().getInt("trolls.hack.time");
+				int fakeinv = Config.getconfig().getInt("trolls.fakeinv.time");
+				int hands = Config.getconfig().getInt("trolls.slipperyhands.time");
+				
 				Config.getFile().delete();
-				new Config().init();
-				Config.cfg.set("Language", l);
-				Config.cfg.set("AutoUpdate", autoup);
-				Config.cfg.set("Animations", anim);
-				Config.cfg.set("trolls.hack.time", hack);
-				Config.cfg.set("trolls.fakeinv.time", fakeinv);
-				Config.cfg.set("trolls.slipperyhands.time", hands);
+				
+				Config.createFirstConfigWithValue((l.toUpperCase()), autoup, anim, cs, hack, fakeinv, hands);
+				System.out.print("Config updated!");
 			}
+			
 		}
 	}
 

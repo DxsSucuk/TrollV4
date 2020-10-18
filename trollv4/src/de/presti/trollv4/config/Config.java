@@ -1,4 +1,4 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +56,35 @@ public class Config {
 		}
 	}
 	
+	public static void createFirstConfigWithValue(String lang, boolean au, boolean anim, boolean cs, int th, int tf, int ts) {
+		cfg = getconfig();
+		if(!getFile().exists()) {
+			cfg.options().copyDefaults(true);
+			cfg.options().copyHeader(true);
+			cfg.options().header("###############################\n" + 
+					"#                             #\n" + 
+					"# TrollV4 by Presti           #\n" + 
+					"# Configuration File " + Data.version + "    #\n" + 
+					"#                             #\n" + 
+					"###############################");
+			cfg.addDefault("Plugin-Version", Data.version);
+			cfg.addDefault("Language", lang);
+			cfg.addDefault("AutoUpdate", au);
+			cfg.addDefault("Animations", anim);
+			cfg.addDefault("Community-surprise", cs);
+			cfg.addDefault("trolls.hack.time", th);
+			cfg.addDefault("trolls.fakeinv.time", tf);
+			cfg.addDefault("trolls.slipperyhands.time", ts);
+			
+			try {
+                cfg.save(getFile());
+            } catch (IOException e) {
+			    e.printStackTrace();
+            }
+		}
+			
+	}
+	
 	public void init2() {
 		cfg2 = getconfig2();
 		if(!getFile2().exists()) {
@@ -69,7 +98,7 @@ public class Config {
 					"#                             #\n" + 
 					"###############################");
 			for(String s : Language.lang) {
-				cfg2.addDefault(s, Language.getMessage3("us." + s));
+				cfg2.addDefault(s, Language.getMessageFromLanguage("us", s));
 			}
 			
 			try {

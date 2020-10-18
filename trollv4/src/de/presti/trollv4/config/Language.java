@@ -1,4 +1,4 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class Language {
 		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
-			m = messages.get(getLanguage() + "." + path);
+			m = messages.get(getLanguage() + "." + path).replace("[VERSION]", Data.version);
 		}
 
 		return m;
@@ -52,22 +52,11 @@ public class Language {
 		return m;
 	}
 
-	public static String getMessage2(String path) {
-		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
+	public static String getMessageFromLanguage(String lang, String path) {
+		String m = "Couldnt find " + lang + "." +  path + "! (Regenerate message.yml)";
 
-		if (messages.containsKey(getLanguage() + "." + path)) {
-			m = messages.get(getLanguage() + "." + path).replace("[VERSION]", Data.version);
-		}
-
-		return m;
-	}
-
-
-	public static String getMessage3(String path) {
-		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
-
-		if (messages.containsKey(path)) {
-			m = messages.get(path);
+		if (messages.containsKey(lang + "." + path)) {
+			m = messages.get(lang + "." + path);
 		}
 		
 		return m;
@@ -172,6 +161,12 @@ public class Language {
 		addMessage("de", "gui.tntworld.default", "Der Spieler §c[PLAYER] §2sieht nun in einem Radius von 75 blöcken nur TNT!");
 		addMessage("de", "gui.rickroll.default", "Der Spieler §c[PLAYER] §2wurde nun gerickrolled!");
 		addMessage("de", "gui.rickroll.ishearing", "Der Spieler §c[PLAYER] §2wird schon gerickrolled!");
+		addMessage("de", "gui.dontstopjumping.on", "Der Spieler §c[PLAYER] §2kann nicht aufhören zu springen!");
+		addMessage("de", "gui.dontstopjumping.off", "Der Spieler §c[PLAYER] §2hört nun auf zu springen!");
+		addMessage("de", "gui.deaf.on", "Der Spieler §c[PLAYER] §2hört nichts mehr!");
+		addMessage("de", "gui.deaf.off", "Der Spieler §c[PLAYER] §2hört wieder etwas!");
+		addMessage("de", "gui.confused.on", "Der Spieler §c[PLAYER] §2ist nun verwirrt!");
+		addMessage("de", "gui.confused.off", "Der Spieler §c[PLAYER] §2ist nun wieder bei Sinnen!");
 		addMessage("de", "gui.tpall", "Alle Spieler wurden zu dir teleportiert");
 		addMessage("de", "gui.fakeleave.default", "Eine FakeLeave Message wurde in den Chat geschickt!");
 		addMessage("de", "gui.fakeleave.message", "§6[PLAYER] left the Game.");
@@ -219,7 +214,7 @@ public class Language {
 		addMessage("us", "gui.strike", "You hit the Player §c[PLAYER] §2with a lightning bolt!");
 		addMessage("us", "gui.hackuser", "The hacking process starts!");
 		addMessage("us", "gui.rocket", "You made the Player §c[PLAYER] §2fly like a rocket!");
-		addMessage("us", "gui.spam", "YYou've completely blundered the Player §c[PLAYER]§2!");
+		addMessage("us", "gui.spam", "You've completely blundered the Player §c[PLAYER]§2!");
 		addMessage("us", "gui.startcontrol.start", "Youre Controlling §c[PLAYER]§2!");
 		addMessage("us", "gui.startcontrol.cantcontrol", "You cant control this Player!");
 		addMessage("us", "gui.startcontrol.yourself", "You cant control yourself!");
@@ -264,7 +259,13 @@ public class Language {
 		addMessage("us", "gui.slipperyhands.off", "The User §c[PLAYER] §2cleaned his hands!");
 		addMessage("us", "gui.tntworld.default", "The User §c[PLAYER] §2now sees only TnT in his World!");
 		addMessage("us", "gui.rickroll.default", "The User §c[PLAYER] §2is getting rickrolled!");
-		addMessage("us", "gui.rickroll.ishearing", "Th User §c[PLAYER] §2is already getting rickrolled!");
+		addMessage("us", "gui.rickroll.ishearing", "The User §c[PLAYER] §2is already getting rickrolled!");
+		addMessage("us", "gui.dontstopjumping.on", "The User §c[PLAYER] §2cant stop jumping!");
+		addMessage("us", "gui.dontstopjumping.off", "The User §c[PLAYER] §2has stopped jumping!");
+		addMessage("us", "gui.deaf.on", "The User §c[PLAYER] §2cant hear anything anymore!");
+		addMessage("us", "gui.deaf.off", "The User §c[PLAYER] §2can hear something again!");
+		addMessage("us", "gui.confused.on", "The User §c[PLAYER] §2is now confused!");
+		addMessage("us", "gui.confused.off", "The User §c[PLAYER] §2got some milk!");
 		addMessage("us", "gui.tpall", "All players were teleported to you!");
 		addMessage("us", "gui.fakeleave.default", "A Fake Message has been Posted in the Chat!");
 		addMessage("us", "gui.fakeleave.message", "§6[PLAYER] left the Game.");

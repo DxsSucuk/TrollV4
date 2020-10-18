@@ -1,4 +1,4 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.utils.control;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import com.cryptomorin.xseries.XMaterial;
 
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 

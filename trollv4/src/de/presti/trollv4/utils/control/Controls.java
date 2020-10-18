@@ -1,4 +1,4 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.utils.control;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -6,8 +6,10 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
+import de.presti.trollv4.utils.ArrayUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 

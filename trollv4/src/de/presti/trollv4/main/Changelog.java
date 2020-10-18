@@ -28,6 +28,13 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "DontStopJumping");
+		p.sendMessage(Data.cp + "Deaf");
+		p.sendMessage(Data.cp + "Confused");
+		p.sendMessage(Data.cu + "TnTWorld 1.8 fix");
+		p.sendMessage(Data.cu + "Guardian 1.9-1.16 Support");
+		p.sendMessage(Data.cu + "Config Updater Fixed");
+		p.sendMessage(Data.prefix + "Version » 4.3.6");
 		p.sendMessage(Data.cp + "AutoDependDownloader");
 		p.sendMessage(Data.cu + "Code optimization");
 		p.sendMessage(Data.prefix + "Version » 4.3.5");

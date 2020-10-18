@@ -16,10 +16,9 @@ import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.config.Config;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.Config;
-import de.presti.trollv4.utils.SetItems;
 
 /*
 *	Urheberrechtshinweis														*
@@ -282,6 +281,9 @@ public class InvManager {
 		
 		inv.setItem(10, SetItems.buildItem("§cTnT World", XMaterial.TNT.parseMaterial()));
 		inv.setItem(11, SetItems.buildItem("§bRickRoll", XMaterial.BRICK.parseMaterial()));
+		inv.setItem(12, SetItems.buildItem("§cDont Stop §2Jumping", XMaterial.LEATHER_BOOTS.parseMaterial()));
+		inv.setItem(13, SetItems.buildItem("§7Deaf", XMaterial.LEATHER_HELMET.parseMaterial()));
+		inv.setItem(14, SetItems.buildItem("§aConfused", XMaterial.POTION.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
 	

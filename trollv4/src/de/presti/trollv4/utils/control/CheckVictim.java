@@ -1,8 +1,11 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.utils.control;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import de.presti.trollv4.config.Language;
+import de.presti.trollv4.utils.crossversion.Titles;
 
 public class CheckVictim extends BukkitRunnable {
 	

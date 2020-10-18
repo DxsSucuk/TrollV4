@@ -16,11 +16,11 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.HS;
-import de.presti.trollv4.utils.Language;
-import de.presti.trollv4.utils.Titles;
+import de.presti.trollv4.utils.crossversion.HS;
+import de.presti.trollv4.utils.crossversion.Titles;
 
 /*
 *	Urheberrechtshinweis														*
@@ -720,8 +720,14 @@ public class TrollV4API {
 		Packets.sendPacket(Victim, 7, 15);
 	}
 
-	public static void GuardinShow(Player Victim) {
-		sendGameStateChange(Victim, 10, 0);
+	public static void GuardinShow(Player Victim, boolean packet) {
+		if (packet) {
+			sendGameStateChange(Victim, 10, 0);
+		} else {
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+					"particle mobappearance " + Victim.getLocation().getBlockX() + " "
+							+ Victim.getLocation().getBlockY() + " " + Victim.getLocation().getBlockZ() + " 1 1 1 1");
+		}
 	}
 
 	public static void EndGame(Player Victim) {

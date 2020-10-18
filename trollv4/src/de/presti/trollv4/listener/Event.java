@@ -20,6 +20,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -30,6 +31,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.main.*;
 import de.presti.trollv4.utils.*;
@@ -134,6 +137,30 @@ public class Event implements Listener {
 
 			ArrayUtils.fakeinv.remove(p);
 		}
+
+		if (ArrayUtils.fc.contains(p)) {
+			ArrayUtils.fc.remove(p);
+		}
+
+		if (ArrayUtils.lagging.contains(p)) {
+			ArrayUtils.lagging.remove(p);
+		}
+
+		if (ArrayUtils.randomtp.contains(p)) {
+			ArrayUtils.randomtp.remove(p);
+		}
+
+		if (ArrayUtils.noinv.contains(p)) {
+			ArrayUtils.noinv.remove(p);
+		}
+
+		if (ArrayUtils.deaf.contains(p)) {
+			ArrayUtils.deaf.remove(p);
+		}
+
+		if (ArrayUtils.confus.contains(p)) {
+			ArrayUtils.confus.remove(p);
+		}
 	}
 
 	// NoInv
@@ -147,6 +174,30 @@ public class Event implements Listener {
 				p.getOpenInventory().close();
 			}
 		}
+	}
+
+	// DEAF CONFUSED
+	@EventHandler
+	public void onAsyncChat(AsyncPlayerChatEvent e) {
+		if (ArrayUtils.confus.contains(e.getPlayer())) {
+			String msg = e.getMessage().replaceAll("a", "").replaceAll("e", "").replaceAll("i", "").replaceAll("o", "")
+					.replaceAll("u", "").replaceAll("A", "").replaceAll("E", "").replaceAll("I", "").replaceAll("O", "")
+					.replaceAll("U", "");
+			if (!msg.isEmpty()) {
+				e.setMessage(msg);
+			} else {
+				e.setCancelled(true);
+			}
+		}
+
+		for (Player all : e.getRecipients()) {
+			if (ArrayUtils.deaf.contains(all)) {
+				if (e.getRecipients().contains(all)) {
+					e.getRecipients().remove(all);
+				}
+			}
+		}
+
 	}
 
 	// LAG

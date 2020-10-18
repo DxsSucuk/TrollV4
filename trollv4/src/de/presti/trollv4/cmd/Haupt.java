@@ -11,6 +11,7 @@ import org.bukkit.entity.TNTPrimed;
 
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.*;
 import de.presti.trollv4.main.*;
 import de.presti.trollv4.utils.*;

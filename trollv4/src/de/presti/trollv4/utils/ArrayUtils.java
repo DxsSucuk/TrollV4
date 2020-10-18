@@ -31,7 +31,6 @@ public class ArrayUtils {
 	public static ArrayList<Player> vanish = new ArrayList<>();
 	public static ArrayList<Player> fc = new ArrayList<>();
 	public static ArrayList<Player> freeze = new ArrayList<>();
-	public static ArrayList<Player> fly = new ArrayList<>();
 	public static ArrayList<Player> lagging = new ArrayList<>();
 	public static ArrayList<Player> rotateplayer = new ArrayList<>();
 	public static ArrayList<Player> randomtp = new ArrayList<>();
@@ -41,6 +40,8 @@ public class ArrayUtils {
 	public static ArrayList<Player> tornado = new ArrayList<>();
 	public static ArrayList<Player> noinv = new ArrayList<>();
 	public static ArrayList<Player> noitem = new ArrayList<>();
+	public static ArrayList<Player> deaf = new ArrayList<>();
+	public static ArrayList<Player> confus = new ArrayList<>();
 	
 	//HashMaps
     public static HashMap<String, String> trolling = new HashMap<>();
@@ -50,6 +51,7 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> hackuser = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> arrowspam = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> tornador = new HashMap<>();
+	public static HashMap<Player, BukkitRunnable> jumping = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
 	
 	//Controlls

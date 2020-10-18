@@ -14,11 +14,11 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import de.presti.trollv4.config.Config;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.CommandGUI;
-import de.presti.trollv4.utils.Config;
+import de.presti.trollv4.utils.control.CommandGUI;
 import me.libraryaddict.disguise.DisguiseAPI;
 
 @SuppressWarnings("deprecation")

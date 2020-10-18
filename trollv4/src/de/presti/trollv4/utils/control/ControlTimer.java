@@ -1,4 +1,4 @@
-package de.presti.trollv4.utils;
+package de.presti.trollv4.utils.control;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
