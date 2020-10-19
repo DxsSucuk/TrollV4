@@ -28,6 +28,13 @@ public class Changelog {
 		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Custom Item Names");
+		p.sendMessage(Data.cu + "Code optimization");
+		p.sendMessage(Data.cu + "LanguageManager Error Fixed");
+		p.sendMessage(Data.cu + "Configs fixed");
+		p.sendMessage(Data.cu + "Startup Crash fixed");
+		p.sendMessage(Data.cu + "Config Updater Fixed (for older versions)");
+		p.sendMessage(Data.prefix + "Version » 4.3.7");
 		p.sendMessage(Data.cp + "DontStopJumping");
 		p.sendMessage(Data.cp + "Deaf");
 		p.sendMessage(Data.cp + "Confused");

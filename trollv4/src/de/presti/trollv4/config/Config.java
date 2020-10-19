@@ -26,6 +26,7 @@ public class Config {
 
 	public static FileConfiguration cfg;
 	public static FileConfiguration cfg2;
+	public static FileConfiguration cfg3;
 	
 	public void init() {
 		cfg = getconfig();
@@ -40,6 +41,7 @@ public class Config {
 					"###############################");
 			cfg.addDefault("Plugin-Version", Data.version);
 			cfg.addDefault("Language", "US");
+			cfg.addDefault("Custom-Item-Name", false);
 			cfg.addDefault("AutoUpdate", true);
 			cfg.addDefault("Animations", false);
 			cfg.addDefault("Community-surprise", false);
@@ -56,7 +58,7 @@ public class Config {
 		}
 	}
 	
-	public static void createFirstConfigWithValue(String lang, boolean au, boolean anim, boolean cs, int th, int tf, int ts) {
+	public static void createFirstConfigWithValue(String lang, boolean cin, boolean au, boolean anim, boolean cs, int th, int tf, int ts) {
 		cfg = getconfig();
 		if(!getFile().exists()) {
 			cfg.options().copyDefaults(true);
@@ -67,8 +69,10 @@ public class Config {
 					"# Configuration File " + Data.version + "    #\n" + 
 					"#                             #\n" + 
 					"###############################");
+			
 			cfg.addDefault("Plugin-Version", Data.version);
 			cfg.addDefault("Language", lang);
+			cfg.addDefault("Custom-Item-Name", cin);
 			cfg.addDefault("AutoUpdate", au);
 			cfg.addDefault("Animations", anim);
 			cfg.addDefault("Community-surprise", cs);
@@ -97,12 +101,39 @@ public class Config {
 					"# Custome Message File        #\n" + 
 					"#                             #\n" + 
 					"###############################");
+			
 			for(String s : Language.lang) {
-				cfg2.addDefault(s, Language.getMessageFromLanguage("us", s));
+				cfg2.addDefault(s, Language.getMessageFromLanguageRaw("us", s));
 			}
 			
 			try {
 				cfg2.save(getFile2());
+            } catch (IOException e) {
+			    e.printStackTrace();
+            }
+			
+		}
+	}
+	
+	public void init3() {
+		cfg3 = getconfig3();
+		if(!getFile3().exists()) {
+			cfg3.options().copyDefaults(true);
+			cfg3.options().copyHeader(true);
+			cfg3.options().header(
+					"###############################\n" + 
+					"#                             #\n" + 
+					"# TrollV" + Data.version + " by Presti       #\n" + 
+					"# Custome ItemName File       #\n" + 
+					"#                             #\n" + 
+					"###############################");
+			
+			for(String s : Items.path) {
+				cfg3.addDefault(s, Items.getItemFromChoiceRaw("default", s));
+			}
+			
+			try {
+				cfg3.save(getFile3());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -117,6 +148,9 @@ public class Config {
 	public static FileConfiguration getconfig2() {
 		return YamlConfiguration.loadConfiguration(getFile2());
 	}
+	public static FileConfiguration getconfig3() {
+		return YamlConfiguration.loadConfiguration(getFile3());
+	}
 	
 	public static File getFile() {
 		return new File("plugins/TrollV4", "config.yml");
@@ -124,5 +158,9 @@ public class Config {
 	
 	public static File getFile2() {
 		return new File("plugins/TrollV4", "messages.yml");
+	}
+	
+	public static File getFile3() {
+		return new File("plugins/TrollV4", "items.yml");
 	}
 }

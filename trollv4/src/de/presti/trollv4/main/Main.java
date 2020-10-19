@@ -12,21 +12,24 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.listener.Event;
 import de.presti.trollv4.listener.GuiListener;
 import de.presti.trollv4.listener.iListener;
+import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.utils.ArrayUtils;
 import de.presti.trollv4.utils.Metrics;
+import de.presti.trollv4.utils.PluginUtil;
 import de.presti.trollv4.utils.UpdateChecker;
 import de.presti.trollv4.utils.control.Controls;
 
@@ -46,50 +49,56 @@ import de.presti.trollv4.utils.control.Controls;
 */
 public class Main extends JavaPlugin {
 	public static Main instance;
-	public Logger logg = Logger.getLogger("Minecraft");
+	public static Logger logger = new Logger();
 	public UpdateChecker update;
 	public static Controls control;
 	public static String version;
 
 	public void onEnable() {
-
+		
 		instance = this;
 		version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		ArrayUtils.armor = new HashMap<String, ItemStack[]>();
 		ArrayUtils.inventory = new HashMap<String, ItemStack[]>();
 		ArrayUtils.cd = new ArrayList<String>();
 
-		boolean need = (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null
-				|| Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null
-				|| Bukkit.getPluginManager().getPlugin("LibsDisguises") == null);
+		boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
+				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
+				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
+				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
 		downloadAll();
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
 			new Controls();
 		} else {
-			System.out.println("---------->");
-			System.out.println(" ");
-			System.out.println("Pls restart the Server");
-			System.out.println("Because of the Libs Plugin");
-			System.out.println(" ");
+
+			logger.info("---------->");
+			logger.info(" ");
+			logger.info("Pls restart the Server");
+			logger.info("Because of the Libs Plugin");
+			logger.info(" ");
 		}
 
 		if (need)
-			System.out.println("---------->");
+			logger.info("---------->");
 
 		new Language();
+		new Items();
 		new Config().init();
 		new Config().init2();
+		new Config().init3();
 
 		try {
 			Metrics metrics = new Metrics(this, 4690);
 			metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
 		} catch (Exception e) {
-			System.out.println("Error Main Metrics Custom Chart: " + e.getMessage());
+			logger.error("Error Main Metrics Custom Chart: " + e.getMessage());
 		}
 
 		Language.clearAll();
+		Items.clearAll();
 		new Language();
+		new Items();
 		updateConfig();
 
 		if (Config.getconfig().getBoolean("AutoUpdate")) {
@@ -102,6 +111,21 @@ public class Main extends JavaPlugin {
 
 	public void onDisable() {
 		Language.clearAll();
+		Items.clearAll();
+	}
+
+	public static void reloadConfigurations() {
+		Language.clearAll();
+		Items.clearAll();
+		new Language();
+		new Items();
+		new Config().init();
+		new Config().init2();
+		new Config().init3();
+		Language.clearAll();
+		Items.clearAll();
+		new Language();
+		new Items();
 	}
 
 	public static void CMD() {
@@ -109,30 +133,31 @@ public class Main extends JavaPlugin {
 	}
 
 	public void downloadAll() {
-		boolean need = (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null
-				|| Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null
-				|| Bukkit.getPluginManager().getPlugin("LibsDisguises") == null);
+		boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
+				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
+				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
+				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
 
 		if (need)
-			System.out.println("---------->");
+			logger.info("---------->");
 
 		if (!new File("plugins/TrollV4/rick.nbs").exists()) {
-			Bukkit.getConsoleSender().sendMessage("Downloading Rick.nbs!");
+			logger.info("Downloading Rick.nbs!");
 			download("https://trollv4.000webhostapp.com/download/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
-			Bukkit.getConsoleSender().sendMessage("Downloading ProtocolLib!");
+			logger.info("Downloading ProtocolLib!");
 			download("https://trollv4.000webhostapp.com/download/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
-			Bukkit.getConsoleSender().sendMessage("Downloading NoteBlockAPI!");
+			logger.info("Downloading NoteBlockAPI!");
 			download("https://trollv4.000webhostapp.com/download/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
-			Bukkit.getConsoleSender().sendMessage("Downloading LibsDisguises!");
+			logger.info("Downloading LibsDisguises!");
 			if (version.toLowerCase().startsWith("v1_8")) {
 				download("https://trollv4.000webhostapp.com/download/1-8/LibsDisguises.jar",
 						"plugins/LibsDisguises.jar");
@@ -141,34 +166,85 @@ public class Main extends JavaPlugin {
 						"plugins/LibsDisguises.jar");
 			}
 		}
+
+		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+			if (new File("plugins/ProtocolLib.jar").exists()) {
+				logger.info("Trying to load ProtocolLib!");
+				try {
+					PluginUtil.loadPlugin("ProtocolLib");
+					logger.info("Loaded ProtocolLib!");
+				} catch (Exception e) {
+					logger.error("Coudlnt load ProtocolLib!");
+				}
+			}
+		}
+
+		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+			if (new File("plugins/LibsDisguises.jar").exists()) {
+				logger.info("Trying to load LibsDisguises!");
+				try {
+					PluginUtil.loadPlugin("LibsDisguises");
+					logger.info("Loaded LibsDisguises!");
+				} catch (Exception e) {
+					logger.error("Coudlnt load LibsDisguises!");
+				}
+			}
+		}
+
+		if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+			if (new File("plugins/NoteBlockAPI.jar").exists()) {
+				logger.info("Trying to load NoteBlockAPI!");
+				try {
+					PluginUtil.loadPlugin("NoteBlockAPI");
+					logger.info("Loaded NoteBlockAPI!");
+				} catch (Exception e) {
+					logger.error("Coudlnt load NoteBlockAPI!");
+				}
+			}
+		}
 	}
 
 	public void updateConfig() {
 		if (Config.cfg.getString("Plugin-Version") == null) {
 			Config.getFile().delete();
 			new Config().init();
-			
-			System.out.println("Config broken recreating!");
-			
+
+			logger.info("Config broken recreating!");
+
 		} else {
 			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
 				System.out.print("Updating Config!");
-				
-				String l = Language.getLanguage();
-				boolean autoup = Config.getconfig().getBoolean("AutoUpdate");
-				boolean anim = Config.getconfig().getBoolean("Animations");
-				boolean cs = Config.getconfig().getBoolean("Community-surprise");
-				int hack = Config.getconfig().getInt("trolls.hack.time");
-				int fakeinv = Config.getconfig().getInt("trolls.fakeinv.time");
-				int hands = Config.getconfig().getInt("trolls.slipperyhands.time");
-				
+
+				String l = (Language.getLanguage() != null ? Language.getLanguage() : "US");
+				boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
+						? Config.getconfig().getBoolean("Custom-Item-Name")
+						: false);
+				boolean autoup = (Config.getconfig().get("AutoUpdate") != null
+						? Config.getconfig().getBoolean("AutoUpdate")
+						: true);
+				boolean anim = (Config.getconfig().get("Animations") != null
+						? Config.getconfig().getBoolean("Animations")
+						: false);
+				boolean cs = (Config.getconfig().get("Community-surprise") != null
+						? Config.getconfig().getBoolean("Community-surprise")
+						: false);
+				int hack = (Config.getconfig().get("trolls.hack.time") != null
+						? Config.getconfig().getInt("trolls.hack.time")
+						: 15);
+				int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null
+						? Config.getconfig().getInt("trolls.fakeinv.time")
+						: 5);
+				int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null
+						? Config.getconfig().getInt("trolls.slipperyhands.time")
+						: 1);
+
 				Config.getFile().delete();
-				
-				Config.createFirstConfigWithValue((l.toUpperCase()), autoup, anim, cs, hack, fakeinv, hands);
+
+				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, cs, hack, fakeinv, hands);
 				System.out.print("Config updated!");
 			}
-			
+
 		}
 	}
 
@@ -179,17 +255,21 @@ public class Main extends JavaPlugin {
 	}
 
 	public static void Message() {
-		System.out.println("-----------------------------------");
-		System.out.println("TrollV" + Data.version + " by Presti");
-		System.out.println("In case of errors please report");
-		System.out.println("Skype: DxsSucuk@hotmail.com");
-		System.out.println("YouTube: Not Memerinoto");
-		System.out.println("Instagram: Memerinoto");
-		System.out.println("Otherwise have fun");
-		System.out.println("------------------------------------");
-		System.out.println("Online Changelog: " + instance.getDescription().getWebsite());
-		System.out.println("Plugin Version: " + Data.version);
-		System.out.println("Server Version: " + version);
+		logger.info("-----------------------------------");
+		logger.info("TrollV" + Data.version + " by Presti");
+		logger.info("In case of errors please report");
+		logger.info("Skype: DxsSucuk@hotmail.com");
+		logger.info("YouTube: Not Memerinoto");
+		logger.info("Instagram: Memerinoto");
+		logger.info("Otherwise have fun");
+		logger.info("------------------------------------");
+		logger.info("Online Changelog: " + instance.getDescription().getWebsite());
+		logger.info("Plugin Version: " + Data.version);
+		logger.info("Server Version: " + version + " - " + getMcVersion());
+	}
+
+	public static String getMcVersion() {
+		return Bukkit.getVersion().split("MC:")[1].replaceAll(" ", "").replaceAll("\\)", "");
 	}
 
 	public static void Startup() {
@@ -199,8 +279,7 @@ public class Main extends JavaPlugin {
 		/*
 		 * if (Config.getconfig().getBoolean("Community-surprise")) { Community.host =
 		 * "servertrollv4.dev-presti.tk"; Community.port = 187; try { Community.run(); }
-		 * catch (IOException e) {
-		 * System.out.println("Error at connecting to the Cloud!"); } }
+		 * catch (IOException e) { logger.info("Error at connecting to the Cloud!"); } }
 		 */
 	}
 

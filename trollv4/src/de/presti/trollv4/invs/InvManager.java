@@ -17,6 +17,8 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Items;
+import de.presti.trollv4.listener.GuiListener;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
 
@@ -77,6 +79,33 @@ public class InvManager {
 		}
 		item.setItemMeta(meta);
 		return item;
+	}
+	
+	public static void openConfigInv(Player p) {
+		Inventory inv = Bukkit.createInventory(null, 9, "§cTroll Config Menu");
+		
+		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
+		ItemMeta glm = gl.getItemMeta();
+		glm.setDisplayName("§7");
+		gl.setItemMeta(glm);
+		
+		ItemStack back = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
+		ItemMeta backm = back.getItemMeta();
+		backm.setDisplayName("§cBack");
+		back.setItemMeta(backm);
+		
+		inv.setItem(0, gl);
+		inv.setItem(1, gl);
+		inv.setItem(2, gl);
+		inv.setItem(3, gl);
+		inv.setItem(4, SetItems.buildItem("§cReload Config", XMaterial.REDSTONE.parseMaterial()));
+		inv.setItem(5, gl);
+		inv.setItem(6, gl);
+		inv.setItem(7, gl);
+		inv.setItem(8, back);
+		
+		p.openInventory(inv);
+		
 	}
 
 	public void openPlayerInv(Player p) {
@@ -232,40 +261,40 @@ public class InvManager {
 	}
 
 	public void setPageOneTrolls(Inventory inv) {
-		inv.setItem(10, SetItems.buildItem("§bUn/Freeze", XMaterial.ICE.parseMaterial()));
-		inv.setItem(11, SetItems.buildItem("§7FakeOP", XMaterial.GOLDEN_APPLE.parseMaterial()));
-		inv.setItem(12, SetItems.buildItem("§cCrash", XMaterial.PAPER.parseMaterial()));
-		inv.setItem(13, SetItems.buildItem("§aStartControl", XMaterial.GREEN_WOOL.parseMaterial()));
-		inv.setItem(14, SetItems.buildItem("§cSpam", XMaterial.ARROW.parseMaterial()));
-		inv.setItem(15, SetItems.buildItem("§cMLG", XMaterial.WATER_BUCKET.parseMaterial()));
-		inv.setItem(16, SetItems.buildItem("§cRocket", XMaterial.FIREWORK_ROCKET.parseMaterial()));
-		inv.setItem(19, SetItems.buildItem("§8Hack User", XMaterial.NETHER_STAR.parseMaterial()));
-		inv.setItem(20, SetItems.buildItem("§9Strike", XMaterial.BAKED_POTATO.parseMaterial()));
-		inv.setItem(21, SetItems.buildItem("§6Demo", XMaterial.BEDROCK.parseMaterial()));
-		inv.setItem(22, SetItems.buildItem("§cExplode", XMaterial.TNT.parseMaterial()));
-		inv.setItem(23, SetItems.buildItem("§aFakeHack", XMaterial.DIAMOND_SWORD.parseMaterial()));
-		inv.setItem(24, SetItems.buildItem("§bAntiCheat", XMaterial.IRON_AXE.parseMaterial()));
-		inv.setItem(25, SetItems.buildItem("§c§kd§cL§kd§ca§kd§cg§kd§cg§kd§ci§kd§cn§kd§cg§c§kd",
+		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.freeze"), XMaterial.ICE.parseMaterial()));
+		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.fakeop"), XMaterial.GOLDEN_APPLE.parseMaterial()));
+		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.crash"), XMaterial.PAPER.parseMaterial()));
+		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.startcontrol"), XMaterial.GREEN_WOOL.parseMaterial()));
+		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.spam"), XMaterial.ARROW.parseMaterial()));
+		inv.setItem(15, SetItems.buildItem(Items.getItem("gui.trolls.mlg"), XMaterial.WATER_BUCKET.parseMaterial()));
+		inv.setItem(16, SetItems.buildItem(Items.getItem("gui.trolls.rocket"), XMaterial.FIREWORK_ROCKET.parseMaterial()));
+		inv.setItem(19, SetItems.buildItem(Items.getItem("gui.trolls.hackuser"), XMaterial.NETHER_STAR.parseMaterial()));
+		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.strike"), XMaterial.BAKED_POTATO.parseMaterial()));
+		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.demo"), XMaterial.BEDROCK.parseMaterial()));
+		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial()));
+		inv.setItem(23, SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
+		inv.setItem(24, SetItems.buildItem(Items.getItem("gui.trolls.anticheat"), XMaterial.IRON_AXE.parseMaterial()));
+		inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"),
 				XMaterial.GRASS.parseMaterial()));
-		inv.setItem(28, SetItems.buildItem("§cARREST", XMaterial.BEDROCK.parseMaterial()));
-		inv.setItem(29, SetItems.buildItem("§bRotate Player", XMaterial.COOKIE.parseMaterial()));
-		inv.setItem(30, SetItems.buildItem("§cRandom Teleport", XMaterial.COMMAND_BLOCK.parseMaterial()));
-		inv.setItem(31, SetItems.buildItem("§cTnT Trace", XMaterial.DIAMOND_BOOTS.parseMaterial()));
-		inv.setItem(32, SetItems.buildItem("§fWeb §8Trap", XMaterial.COBWEB.parseMaterial()));
-		inv.setItem(33, SetItems.buildItem("§cWTF", XMaterial.MUSIC_DISC_11.parseMaterial()));
-		inv.setItem(34, SetItems.buildItem("§cL§5S§bD", XMaterial.RED_MUSHROOM.parseMaterial()));
-		inv.setItem(37, SetItems.buildItem("§1Guardian", XMaterial.BLAZE_ROD.parseMaterial()));
-		inv.setItem(38, SetItems.buildItem("§3Arrow Spam", XMaterial.BOW.parseMaterial()));
+		inv.setItem(28, SetItems.buildItem(Items.getItem("gui.trolls.arrest"), XMaterial.BEDROCK.parseMaterial()));
+		inv.setItem(29, SetItems.buildItem(Items.getItem("gui.trolls.rotateplayer"), XMaterial.COOKIE.parseMaterial()));
+		inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"), XMaterial.COMMAND_BLOCK.parseMaterial()));
+		inv.setItem(31, SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial()));
+		inv.setItem(32, SetItems.buildItem(Items.getItem("gui.trolls.webtrap"), XMaterial.COBWEB.parseMaterial()));
+		inv.setItem(33, SetItems.buildItem(Items.getItem("gui.trolls.wtf"), XMaterial.MUSIC_DISC_11.parseMaterial()));
+		inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial()));
+		inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
+		inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
 		try {
-			inv.setItem(39, SetItems.buildSkull("Herobrine", "§9Herobrine"));
+			inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		inv.setItem(40, SetItems.buildItem("§7Tornado", XMaterial.WHITE_WOOL.parseMaterial()));
-		inv.setItem(41, SetItems.buildItem("§cFake§7Inv", XMaterial.CHEST.parseMaterial()));
-		inv.setItem(42, SetItems.buildItem("§cNo §7Inv §2for §cYOU", XMaterial.ENDER_CHEST.parseMaterial()));
-		inv.setItem(43, SetItems.buildItem("§aSlippery §7Hands", XMaterial.SLIME_BALL.parseMaterial()));
+		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial()));
+		inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
+		inv.setItem(42, SetItems.buildItem(Items.getItem("gui.trolls.noinvforyou"), XMaterial.ENDER_CHEST.parseMaterial()));
+		inv.setItem(43, SetItems.buildItem(Items.getItem("gui.trolls.slipperyhands"), XMaterial.SLIME_BALL.parseMaterial()));
 		inv.setItem(45, SetItems.buildItem("§cNext Page", XMaterial.PAPER.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
@@ -279,11 +308,11 @@ public class InvManager {
 		} catch (IOException e) {
 		}
 		
-		inv.setItem(10, SetItems.buildItem("§cTnT World", XMaterial.TNT.parseMaterial()));
-		inv.setItem(11, SetItems.buildItem("§bRickRoll", XMaterial.BRICK.parseMaterial()));
-		inv.setItem(12, SetItems.buildItem("§cDont Stop §2Jumping", XMaterial.LEATHER_BOOTS.parseMaterial()));
-		inv.setItem(13, SetItems.buildItem("§7Deaf", XMaterial.LEATHER_HELMET.parseMaterial()));
-		inv.setItem(14, SetItems.buildItem("§aConfused", XMaterial.POTION.parseMaterial()));
+		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
+		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial()));
+		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"), XMaterial.LEATHER_BOOTS.parseMaterial()));
+		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.deaf"), XMaterial.LEATHER_HELMET.parseMaterial()));
+		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.confused"), XMaterial.POTION.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
 	
@@ -326,6 +355,11 @@ public class InvManager {
 		pagem.setDisplayName("§cPage: 1");
 		page.setItemMeta(pagem);
 		
+		ItemStack config = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
+		ItemMeta configm = config.getItemMeta();
+		configm.setDisplayName("§cConfiguration");
+		config.setItemMeta(configm);
+		
 		ItemStack pagep = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
 		ItemMeta pagepm = pagep.getItemMeta();
 		pagepm.setDisplayName("§bPrevious Page");
@@ -353,26 +387,26 @@ public class InvManager {
 		cpinv.setItem(50, pagen);
 		cpinv.setItem(51, gl);
 		cpinv.setItem(52, gl);
-		cpinv.setItem(53, gl);
+		cpinv.setItem(53, config);
 
 		p.openInventory(cpinv);
 	}
 
 	public void openServerInv(Player p) {
 		Inventory inv2 = Bukkit.createInventory(null, 9 * 6, "§2Server Troll Menu");
-		inv2.setItem(10, SetItems.buildItem("§6Tpall", XMaterial.ENDER_PEARL.parseMaterial()));
-		inv2.setItem(11, SetItems.buildItem("§8Hack Message", XMaterial.NETHER_STAR.parseMaterial()));
-		inv2.setItem(12, SetItems.buildItem("§2Fakeleave", XMaterial.DARK_OAK_DOOR.parseMaterial()));
+		inv2.setItem(10, SetItems.buildItem(Items.getItem("gui.servertrolls.tpall"), XMaterial.ENDER_PEARL.parseMaterial()));
+		inv2.setItem(11, SetItems.buildItem(Items.getItem("gui.servertrolls.hackmessage"), XMaterial.NETHER_STAR.parseMaterial()));
+		inv2.setItem(12, SetItems.buildItem(Items.getItem("gui.servertrolls.fakeleave"), XMaterial.DARK_OAK_DOOR.parseMaterial()));
 
 		p.openInventory(inv2);
 	}
 
 	public void openMLGchoiceInv(Player p) {
 		Inventory inv4 = Bukkit.createInventory(null, 9, "§2Which MLG?");
-		inv4.setItem(1, SetItems.buildItem("§cCobweb MLG", XMaterial.COBWEB.parseMaterial()));
-		inv4.setItem(3, SetItems.buildItem("§bWater MLG", XMaterial.WATER_BUCKET.parseMaterial()));
-		inv4.setItem(5, SetItems.buildItem("§6Lava MLG", XMaterial.LAVA_BUCKET.parseMaterial()));
-		inv4.setItem(7, SetItems.buildItem("§aSlime Block MLG", XMaterial.SLIME_BLOCK.parseMaterial()));
+		inv4.setItem(1, SetItems.buildItem(Items.getItem("gui.mlgs.cobweb"), XMaterial.COBWEB.parseMaterial()));
+		inv4.setItem(3, SetItems.buildItem(Items.getItem("gui.mlgs.water"), XMaterial.WATER_BUCKET.parseMaterial()));
+		inv4.setItem(5, SetItems.buildItem(Items.getItem("gui.mlgs.lava"), XMaterial.LAVA_BUCKET.parseMaterial()));
+		inv4.setItem(7, SetItems.buildItem(Items.getItem("gui.mlgs.slime"), XMaterial.SLIME_BLOCK.parseMaterial()));
 		inv4.setItem(8, SetItems.buildItem("§cBack", XMaterial.BARRIER.parseMaterial()));
 
 		p.openInventory(inv4);
@@ -381,7 +415,7 @@ public class InvManager {
 	public void openItemInv(Player p) {
 		ItemStack item = new ItemStack(XMaterial.DIAMOND_SWORD.parseMaterial());
 		ItemMeta imeta = item.getItemMeta();
-		imeta.setDisplayName("§cOP§8-§bDiamond§8-§rSWORD");
+		imeta.setDisplayName(Items.getItem("gui.items.diamondsword"));
 		imeta.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 		imeta.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 		item.setItemMeta(imeta);
@@ -389,28 +423,28 @@ public class InvManager {
 
 		ItemStack item2 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 		ItemMeta imeta2 = item2.getItemMeta();
-		imeta2.setDisplayName("§cOP§8-§bDiamond§8-§3Protection§8-§rCHESTPLATE");
+		imeta2.setDisplayName(Items.getItem("gui.items.diamondprotectionchest"));
 		imeta2.addEnchant(XEnchantment.PROTECTION_ENVIRONMENTAL.parseEnchantment(), 1000, true);
 		item2.setItemMeta(imeta2);
 		item2.setAmount(1);
 
 		ItemStack item3 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 		ItemMeta imeta3 = item3.getItemMeta();
-		imeta3.setDisplayName("§cOP§8-§bDiamond§8-§3Thorns§8-§rCHESTPLATE-§32");
+		imeta3.setDisplayName(Items.getItem("gui.items.diamondthornschest"));
 		imeta3.addEnchant(XEnchantment.THORNS.parseEnchantment(), 1000, true);
 		item3.setItemMeta(imeta3);
 		item3.setAmount(1);
 
 		ItemStack item4 = new ItemStack(XMaterial.DIAMOND_PICKAXE.parseMaterial());
 		ItemMeta imeta4 = item4.getItemMeta();
-		imeta4.setDisplayName("§cOP§8-§bDiamond§8-§rPICKAXE");
+		imeta4.setDisplayName(Items.getItem("gui.items.diamondpickaxe"));
 		imeta4.addEnchant(XEnchantment.DIG_SPEED.parseEnchantment(), 1000, true);
 		item4.setItemMeta(imeta4);
 		item4.setAmount(1);
 
 		ItemStack item5 = new ItemStack(XMaterial.BOW.parseMaterial());
 		ItemMeta imeta5 = item5.getItemMeta();
-		imeta5.setDisplayName("§cOP§8-§rBOW");
+		imeta5.setDisplayName(Items.getItem("gui.items.onehitbow"));
 		imeta5.addEnchant(XEnchantment.ARROW_INFINITE.parseEnchantment(), 1000, true);
 		imeta5.addEnchant(XEnchantment.ARROW_KNOCKBACK.parseEnchantment(), 1000, true);
 		imeta5.addEnchant(XEnchantment.ARROW_DAMAGE.parseEnchantment(), 1000, true);
@@ -419,7 +453,7 @@ public class InvManager {
 
 		ItemStack item6 = new ItemStack(XMaterial.WOODEN_HOE.parseMaterial());
 		ItemMeta imeta6 = item6.getItemMeta();
-		imeta6.setDisplayName("§cOP§8-§6Wood§8-§rHOE");
+		imeta6.setDisplayName(Items.getItem("gui.items.woodenhoe"));
 		imeta6.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 		imeta6.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 		item6.setItemMeta(imeta6);
@@ -427,26 +461,26 @@ public class InvManager {
 
 		ItemStack item7 = new ItemStack(XMaterial.WOODEN_SWORD.parseMaterial());
 		ItemMeta imeta7 = item7.getItemMeta();
-		imeta7.setDisplayName("§cOP§8-§6Wood§8-§rSWORD");
+		imeta7.setDisplayName(Items.getItem("gui.items.woodensword"));
 		imeta7.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 		imeta7.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 		item7.setItemMeta(imeta7);
 		item7.setAmount(1);
 
-		ItemStack tntbow = createItem(XMaterial.BOW.parseMaterial(), 1, "§4TNTBow", "§eTNT-Arrows");
-		ItemStack lavabow = createItem(XMaterial.BOW.parseMaterial(), 1, "§cLavaBow", "§eLava-Arrows");
-		ItemStack strikebow = createItem(XMaterial.BOW.parseMaterial(), 1, "§bBlitzBow", "§eBlitz-Arrows");
-		ItemStack creeperbow = createItem(XMaterial.BOW.parseMaterial(), 1, "§2CreeperBow", "§eCreeper-Arrows");
-		ItemStack bedrockbow = createItem(XMaterial.BOW.parseMaterial(), 1, "§0BedrockBow", "§eBedrock-Arrows");
+		ItemStack tntbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.tnt"), "§eTNT-Arrows");
+		ItemStack lavabow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lava"), "§eLava-Arrows");
+		ItemStack strikebow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lightning"), "§eLightning-Arrows");
+		ItemStack creeperbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.creeper"), "§eCreeper-Arrows");
+		ItemStack bedrockbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.bedrock"), "§eBedrock-Arrows");
 
 		ItemStack minigun = new ItemStack(XMaterial.IRON_AXE.parseMaterial());
 		ItemMeta meta = minigun.getItemMeta();
-		meta.setDisplayName("§4MiniGun");
+		meta.setDisplayName(Items.getItem("gui.items.minigun"));
 		minigun.setItemMeta(meta);
 
 		ItemStack fireball = new ItemStack(XMaterial.STICK.parseMaterial());
 		ItemMeta fmeta = fireball.getItemMeta();
-		fmeta.setDisplayName("§4FireBall");
+		fmeta.setDisplayName(Items.getItem("gui.items.fireball"));
 		fireball.setItemMeta(fmeta);
 
 		Inventory inv3 = Bukkit.createInventory(null, 9 * 6, "§2Item Troll Menu");

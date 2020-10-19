@@ -32,6 +32,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.main.*;
@@ -62,7 +63,7 @@ public class Event implements Listener {
 
 		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081")) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
-			p.sendMessage(Data.prefix + "Server Version: " + Main.version);
+			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + Main.getMcVersion());
 			p.sendMessage(Data.prefix + "Server Language: " + Language.getLanguage());
 		}
 
@@ -74,9 +75,7 @@ public class Event implements Listener {
 
 		if (p.hasPermission("troll.help")) {
 			if (Config.getconfig().getBoolean("AutoUpdate")) {
-				Main.instance.update.checkForUpdate();
-				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)
-						&& !(Main.instance.update.cvi > Main.instance.update.nvi)) {
+				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)) {
 					p.sendMessage(Data.prefix + "TrollV4 has a Update!");
 					p.sendMessage(Data.prefix + "New Version: " + Main.instance.update.spigotPluginVersion);
 					p.sendMessage(Data.prefix + "Your Version: " + Data.version);
@@ -343,28 +342,35 @@ public class Event implements Listener {
 				Player shooter = (Player) e.getEntity().getShooter();
 				World world = e.getEntity().getWorld();
 				Location loc = e.getEntity().getLocation();
-				if (shooter.getItemInHand().getItemMeta().getDisplayName().equals("§4TNTBow")) {
-					if (shooter.hasPermission("troll.bows")) {
+				
+				if(loc == null) {
+					return;
+				}
+				
+				if (shooter.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.items.bow.tnt"))) {
+					if (shooter.hasPermission("troll.items")) {
 						world.createExplosion(loc, 2.0F);
 					}
 				}
-				if (shooter.getItemInHand().getItemMeta().getDisplayName().equals("§cLavaBow")) {
-					if (shooter.hasPermission("troll.bows")) {
+				if (shooter.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.items.bow.lava"))) {
+					if (shooter.hasPermission("troll.items")) {
+						if(world.getBlockAt(loc) != null)
 						world.getBlockAt(loc).setType(XMaterial.LAVA.parseMaterial());
 					}
 				}
-				if (shooter.getItemInHand().getItemMeta().getDisplayName().equals("§bBlitzBow")) {
-					if (shooter.hasPermission("troll.bows")) {
+				if (shooter.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.items.bow.lightning"))) {
+					if (shooter.hasPermission("troll.items")) {
 						world.strikeLightning(loc);
 					}
 				}
-				if (shooter.getItemInHand().getItemMeta().getDisplayName().equals("§2CreeperBow")) {
-					if (shooter.hasPermission("troll.bows")) {
+				if (shooter.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.items.bow.creeper"))) {
+					if (shooter.hasPermission("troll.items")) {
 						world.spawnEntity(loc, EntityType.CREEPER);
 					}
 				}
-				if (shooter.getItemInHand().getItemMeta().getDisplayName().equals("§0BedrockBow")) {
-					if (shooter.hasPermission("troll.bows")) {
+				if (shooter.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.items.bow.bedrock"))) {
+					if (shooter.hasPermission("troll.items")) {
+						if(world.getBlockAt(loc) != null)
 						world.getBlockAt(loc).setType(XMaterial.BEDROCK.parseMaterial());
 					}
 				}

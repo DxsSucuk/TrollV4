@@ -29,6 +29,12 @@ public class InvSaver {
 		extracont = e;
 		armor = a;
 	}
+	
+	public InvSaver(String o, ItemStack[] c, ItemStack[] a) {
+		owner = o;
+		content = c;
+		armor = a;
+	}
 
 	public String getOwner() {
 		return owner;

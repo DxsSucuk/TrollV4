@@ -38,6 +38,8 @@ public class Language {
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[VERSION]", Data.version);
 		}
+		
+		m = m.replaceAll("&", "§");
 
 		return m;
 	}
@@ -48,22 +50,38 @@ public class Language {
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[PLAYER]", t.getName());
 		}
+		
+		m = m.replaceAll("&", "§");
 
 		return m;
 	}
 
 	public static String getMessageFromLanguage(String lang, String path) {
-		String m = "Couldnt find " + lang + "." +  path + "! (Regenerate message.yml)";
+		String m = "Couldnt find " + lang + "." + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(lang + "." + path)) {
 			m = messages.get(lang + "." + path);
 		}
 		
+		m = m.replaceAll("&", "§");
+
 		return m;
 	}
 	
+	public static String getMessageFromLanguageRaw(String lang, String path) {
+		String m = "Couldnt find " + lang + "." + path + "! (Regenerate message.yml)";
+
+		if (messages.containsKey(lang + "." + path)) {
+			m = messages.get(lang + "." + path);
+		}
+
+		return m;
+	}
+
 	public static void addMessage(String language, String path, String message) {
 		path = path.toLowerCase();
+		message = message.replaceAll("§", "&");
+		
 		if (!lang.contains(path)) {
 			lang.add(path);
 		}
@@ -81,8 +99,8 @@ public class Language {
 		addMessage("de", "noonline", "Dieser Spieler ist nicht online!");
 		addMessage("de", "command.troll.default", "Troll Menu wurde geoeffnet!");
 		addMessage("de", "command.troll.help.line.1", "TrollV4 by Presti");
-		addMessage("de", "command.troll.help.line.2", "Troll Modus §aAktiviert");
-		addMessage("de", "command.troll.help.line.3", "Troll Vanish §aAktiviert");
+		addMessage("de", "command.troll.help.line.2", "Troll Modus §aAktiviert!");
+		addMessage("de", "command.troll.help.line.3", "Troll Vanish §aAktiviert!");
 		addMessage("de", "command.troll.help.line.4", "§4Commands:");
 		addMessage("de", "command.troll.help.line.5", "§4Player Troll GUI §8- §c/troll");
 		addMessage("de", "command.troll.help.line.6", "§4Server Troll GUI §8- §c/troll server");
@@ -128,8 +146,8 @@ public class Language {
 		addMessage("de", "gui.crash.default", "Du hast den Spieler §c[PLAYER] §2Crashen lassen!");
 		addMessage("de", "gui.crash.message",
 				"java.net.ConnectException: Connection timed out: No further information");
-		addMessage("de", "gui.freeze.on", "Du hast §c[PLAYER] §2gefreezt");
-		addMessage("de", "gui.freeze.off", "Du hast §c[PLAYER] §2unfreezt");
+		addMessage("de", "gui.freeze.on", "Du hast §c[PLAYER] §2gefreezt!");
+		addMessage("de", "gui.freeze.off", "Du hast §c[PLAYER] §2unfreezt!");
 		addMessage("de", "gui.anticheat.default", "Das Anticheat fängt nun an §c[PLAYER] §2ui bemerken!");
 		addMessage("de", "gui.anticheat.detected",
 				"§7[§cPrestige§7-§cAntiCheat§7] §2Stop §cHacking(SPEED) §7[§1VL§7/§620§7]");
@@ -152,13 +170,15 @@ public class Language {
 		addMessage("de", "gui.arrowspam.off", "Der Spieler §c[PLAYER] §2wird nun nicht mehr von Pfeilen gejagt!");
 		addMessage("de", "gui.tornado.on", "Der Spieler §c[PLAYER] §2wird nun von einem Tornado verfolgt!");
 		addMessage("de", "gui.tornado.off", "Der Spieler §c[PLAYER] §2wird nun nicht mehr von einem Tornado verfolgt!");
-		addMessage("de", "gui.fakeinv.default", "Der Spieler §c[PLAYER] §2hat nun für 5 Sekunden sein Inventar verloren!");
+		addMessage("de", "gui.fakeinv.default",
+				"Der Spieler §c[PLAYER] §2hat nun für 5 Sekunden sein Inventar verloren!");
 		addMessage("de", "gui.fakeinv.cancel", "Der Spieler §c[PLAYER] §2hat nun sein Inventar wieder bekommen!");
 		addMessage("de", "gui.noinv.on", "Der Spieler §c[PLAYER] §2kann nun keine Inventare mehr öffnen!");
 		addMessage("de", "gui.noinv.off", "Der Spieler §c[PLAYER] §2kann nun wieder Inventare öffnen!");
 		addMessage("de", "gui.slipperyhands.on", "Der Spieler §c[PLAYER] §2hat seine Hände mit Butter vollgeschmiert!");
 		addMessage("de", "gui.slipperyhands.off", "Der Spieler §c[PLAYER] §2hat die Butter runter gewaschen!");
-		addMessage("de", "gui.tntworld.default", "Der Spieler §c[PLAYER] §2sieht nun in einem Radius von 75 blöcken nur TNT!");
+		addMessage("de", "gui.tntworld.default",
+				"Der Spieler §c[PLAYER] §2sieht nun in einem Radius von 75 blöcken nur TNT!");
 		addMessage("de", "gui.rickroll.default", "Der Spieler §c[PLAYER] §2wurde nun gerickrolled!");
 		addMessage("de", "gui.rickroll.ishearing", "Der Spieler §c[PLAYER] §2wird schon gerickrolled!");
 		addMessage("de", "gui.dontstopjumping.on", "Der Spieler §c[PLAYER] §2kann nicht aufhören zu springen!");
@@ -180,8 +200,8 @@ public class Language {
 		addMessage("us", "noonline", "This Player is not online!");
 		addMessage("us", "command.troll.default", "Troll Menu has been opened!");
 		addMessage("us", "command.troll.help.line.1", "TrollV4 by Presti");
-		addMessage("us", "command.troll.help.line.2", "Troll Mode §aActive");
-		addMessage("us", "command.troll.help.line.3", "Troll Vanish §aActive");
+		addMessage("us", "command.troll.help.line.2", "Troll Mode §aActive!");
+		addMessage("us", "command.troll.help.line.3", "Troll Vanish §aActive!");
 		addMessage("us", "command.troll.help.line.4", "§4Commands:");
 		addMessage("us", "command.troll.help.line.5", "§4Player Troll GUI §8- §c/troll");
 		addMessage("us", "command.troll.help.line.6", "§4Server Troll GUI §8- §c/troll server");
@@ -275,9 +295,16 @@ public class Language {
 	}
 
 	public void loadCustom() {
-		for (String s : lang) {
-			addMessage("custome", s, Config.getconfig2().getString(s));
-			addMessage("custom", s, Config.getconfig2().getString(s));
+		if (Config.getFile2().exists()) {
+			for (String s : lang) {
+				if(Config.getconfig2().get(s) != null) {
+				addMessage("custome", s, Config.getconfig2().getString(s));
+				addMessage("custom", s, Config.getconfig2().getString(s));
+				} else {
+					addMessage("custome", s, "Couldnt find " + s + " in the message.yml");
+					addMessage("custom", s, "Couldnt find " + s + " in the message.yml");
+				}
+			}
 		}
 	}
 

@@ -26,6 +26,7 @@ import de.presti.trollv4.api.PlayMusic;
 import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.config.Config;
+import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.*;
 import de.presti.trollv4.main.*;
@@ -59,44 +60,9 @@ public class GuiListener implements Listener {
 		try {
 			Player p = (Player) e.getWhoClicked();
 
-			ItemStack tntbow = new ItemStack(XMaterial.BOW.parseMaterial());
-			ItemMeta meta = tntbow.getItemMeta();
-			meta.setDisplayName("§4TNTBow");
-			tntbow.setItemMeta(meta);
-
-			ItemStack lavabow = new ItemStack(XMaterial.BOW.parseMaterial());
-			ItemMeta meta1 = lavabow.getItemMeta();
-			meta1.setDisplayName("§cLavaBow");
-			lavabow.setItemMeta(meta1);
-
-			ItemStack blitzbow = new ItemStack(XMaterial.BOW.parseMaterial());
-			ItemMeta meta2 = blitzbow.getItemMeta();
-			meta2.setDisplayName("§bBlitzBow");
-			blitzbow.setItemMeta(meta2);
-
-			ItemStack creeperbow = new ItemStack(XMaterial.BOW.parseMaterial());
-			ItemMeta meta3 = creeperbow.getItemMeta();
-			meta3.setDisplayName("§2CreeperBow");
-			creeperbow.setItemMeta(meta3);
-
-			ItemStack bedrockbow = new ItemStack(XMaterial.BOW.parseMaterial());
-			ItemMeta meta4 = bedrockbow.getItemMeta();
-			meta4.setDisplayName("§0BedrockBow");
-			bedrockbow.setItemMeta(meta4);
-
-			ItemStack fireball = new ItemStack(XMaterial.STICK.parseMaterial());
-			ItemMeta fmeta = fireball.getItemMeta();
-			fmeta.setDisplayName("§4FireBall");
-			fireball.setItemMeta(fmeta);
-
-			ItemStack minigun = new ItemStack(XMaterial.IRON_AXE.parseMaterial());
-			ItemMeta mmeta = minigun.getItemMeta();
-			mmeta.setDisplayName("§4MiniGun");
-			minigun.setItemMeta(mmeta);
-
 			ItemStack item = new ItemStack(XMaterial.DIAMOND_SWORD.parseMaterial());
 			ItemMeta imeta = item.getItemMeta();
-			imeta.setDisplayName("§cOP§8-§bDiamond§8-§rSWORD");
+			imeta.setDisplayName(Items.getItem("gui.items.diamondsword"));
 			imeta.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 			imeta.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 			item.setItemMeta(imeta);
@@ -104,28 +70,28 @@ public class GuiListener implements Listener {
 
 			ItemStack item2 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 			ItemMeta imeta2 = item2.getItemMeta();
-			imeta2.setDisplayName("§cOP§8-§bDiamond§8-§3Protection§8-§rCHESTPLATE");
+			imeta2.setDisplayName(Items.getItem("gui.items.diamondprotectionchest"));
 			imeta2.addEnchant(XEnchantment.PROTECTION_ENVIRONMENTAL.parseEnchantment(), 1000, true);
 			item2.setItemMeta(imeta2);
 			item2.setAmount(1);
 
 			ItemStack item3 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 			ItemMeta imeta3 = item3.getItemMeta();
-			imeta3.setDisplayName("§cOP§8-§bDiamond§8-§3Thorns§8-§rCHESTPLATE-§32");
+			imeta3.setDisplayName(Items.getItem("gui.items.diamondthornschest"));
 			imeta3.addEnchant(XEnchantment.THORNS.parseEnchantment(), 1000, true);
 			item3.setItemMeta(imeta3);
 			item3.setAmount(1);
 
 			ItemStack item4 = new ItemStack(XMaterial.DIAMOND_PICKAXE.parseMaterial());
 			ItemMeta imeta4 = item4.getItemMeta();
-			imeta4.setDisplayName("§cOP§8-§bDiamond§8-§rPICKAXE");
+			imeta4.setDisplayName(Items.getItem("gui.items.diamondpickaxe"));
 			imeta4.addEnchant(XEnchantment.DIG_SPEED.parseEnchantment(), 1000, true);
 			item4.setItemMeta(imeta4);
 			item4.setAmount(1);
 
 			ItemStack item5 = new ItemStack(XMaterial.BOW.parseMaterial());
 			ItemMeta imeta5 = item5.getItemMeta();
-			imeta5.setDisplayName("§cOP§8-§rBOW");
+			imeta5.setDisplayName(Items.getItem("gui.items.onehitbow"));
 			imeta5.addEnchant(XEnchantment.ARROW_INFINITE.parseEnchantment(), 1000, true);
 			imeta5.addEnchant(XEnchantment.ARROW_KNOCKBACK.parseEnchantment(), 1000, true);
 			imeta5.addEnchant(XEnchantment.ARROW_DAMAGE.parseEnchantment(), 1000, true);
@@ -134,7 +100,7 @@ public class GuiListener implements Listener {
 
 			ItemStack item6 = new ItemStack(XMaterial.WOODEN_HOE.parseMaterial());
 			ItemMeta imeta6 = item6.getItemMeta();
-			imeta6.setDisplayName("§cOP§8-§6Wood§8-§rHOE");
+			imeta6.setDisplayName(Items.getItem("gui.items.woodenhoe"));
 			imeta6.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 			imeta6.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 			item6.setItemMeta(imeta6);
@@ -142,76 +108,73 @@ public class GuiListener implements Listener {
 
 			ItemStack item7 = new ItemStack(XMaterial.WOODEN_SWORD.parseMaterial());
 			ItemMeta imeta7 = item7.getItemMeta();
-			imeta7.setDisplayName("§cOP§8-§6Wood§8-§rSWORD");
+			imeta7.setDisplayName(Items.getItem("gui.items.woodensword"));
 			imeta7.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
 			imeta7.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
 			item7.setItemMeta(imeta7);
 			item7.setAmount(1);
+
+			ItemStack tntbow = InvManager.createItem(XMaterial.BOW.parseMaterial(), 1,
+					Items.getItem("gui.items.bow.tnt"), "§eTNT-Arrows");
+			ItemStack lavabow = InvManager.createItem(XMaterial.BOW.parseMaterial(), 1,
+					Items.getItem("gui.items.bow.lava"), "§eLava-Arrows");
+			ItemStack strikebow = InvManager.createItem(XMaterial.BOW.parseMaterial(), 1,
+					Items.getItem("gui.items.bow.lightning"), "§eLightning-Arrows");
+			ItemStack creeperbow = InvManager.createItem(XMaterial.BOW.parseMaterial(), 1,
+					Items.getItem("gui.items.bow.creeper"), "§eCreeper-Arrows");
+			ItemStack bedrockbow = InvManager.createItem(XMaterial.BOW.parseMaterial(), 1,
+					Items.getItem("gui.items.bow.bedrock"), "§eBedrock-Arrows");
+
+			ItemStack minigun = new ItemStack(XMaterial.IRON_AXE.parseMaterial());
+			ItemMeta meta = minigun.getItemMeta();
+			meta.setDisplayName(Items.getItem("gui.items.minigun"));
+			minigun.setItemMeta(meta);
+
+			ItemStack fireball = new ItemStack(XMaterial.STICK.parseMaterial());
+			ItemMeta fmeta = fireball.getItemMeta();
+			fmeta.setDisplayName(Items.getItem("gui.items.fireball"));
+			fireball.setItemMeta(fmeta);
+
 			if (e.getView().getTitle().equalsIgnoreCase("§2Item Troll Menu")) {
 				e.setCancelled(true);
-				if (p.hasPermission("troll.bows")) {
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4TNTBow")) {
-						p.getInventory().addItem(new ItemStack[] { tntbow });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4FireBall")) {
+				if (p.hasPermission("troll.items")) {
 
-						p.getInventory().addItem(new ItemStack[] { fireball });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4MiniGun")) {
-
-						p.getInventory().addItem(new ItemStack[] { minigun });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§rSWORD")) {
-
-						p.getInventory().addItem(new ItemStack[] { item });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§3Protection§8-§rCHESTPLATE")) {
-
-						p.getInventory().addItem(new ItemStack[] { item2 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§cOP§8-§bDiamond§8-§3Thorns§8-§rCHESTPLATE-§32")) {
-
-						p.getInventory().addItem(new ItemStack[] { item3 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase(item4.getItemMeta().getDisplayName())) {
-
-						p.getInventory().addItem(new ItemStack[] { item4 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase(item5.getItemMeta().getDisplayName())) {
-
-						p.getInventory().addItem(new ItemStack[] { item5 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase(item6.getItemMeta().getDisplayName())) {
-
-						p.getInventory().addItem(new ItemStack[] { item6 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase(item7.getItemMeta().getDisplayName())) {
-
-						p.getInventory().addItem(new ItemStack[] { item7 });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cLavaBow")) {
-
-						p.getInventory().addItem(new ItemStack[] { lavabow });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bBlitzBow")) {
-
-						p.getInventory().addItem(new ItemStack[] { blitzbow });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2CreeperBow")) {
-
-						p.getInventory().addItem(new ItemStack[] { creeperbow });
-						p.closeInventory();
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§0BedrockBow")) {
-
-						p.getInventory().addItem(new ItemStack[] { bedrockbow });
-						p.closeInventory();
+					if(e.getCurrentItem().getItemMeta() == null) {
+						return;
+					}
+					
+					if(e.getCurrentItem().getType() == XMaterial.AIR.parseMaterial()) {
+						return;
+					}
+										
+					if (e.getCurrentItem().getItemMeta().equals(item.getItemMeta())) {
+						p.getInventory().addItem(item);
+					} else if (e.getCurrentItem().getItemMeta().equals(item2.getItemMeta())) {
+						p.getInventory().addItem(item2);
+					} else if (e.getCurrentItem().getItemMeta().equals(item3.getItemMeta())) {
+						p.getInventory().addItem(item3);
+					} else if (e.getCurrentItem().getItemMeta().equals(item4.getItemMeta())) {
+						p.getInventory().addItem(item4);
+					} else if (e.getCurrentItem().getItemMeta().equals(item5.getItemMeta())) {
+						p.getInventory().addItem(item5);
+					} else if (e.getCurrentItem().getItemMeta().equals(item6.getItemMeta())) {
+						p.getInventory().addItem(item6);
+					} else if (e.getCurrentItem().getItemMeta().equals(item7.getItemMeta())) {
+						p.getInventory().addItem(item7);
+					} else if (e.getCurrentItem().getItemMeta().equals(tntbow.getItemMeta())) {
+						p.getInventory().addItem(tntbow);
+					} else if (e.getCurrentItem().getItemMeta().equals(lavabow.getItemMeta())) {
+						p.getInventory().addItem(lavabow);
+					} else if (e.getCurrentItem().getItemMeta().equals(strikebow.getItemMeta())) {
+						p.getInventory().addItem(strikebow);
+					} else if (e.getCurrentItem().getItemMeta().equals(creeperbow.getItemMeta())) {
+						p.getInventory().addItem(creeperbow);
+					} else if (e.getCurrentItem().getItemMeta().equals(bedrockbow.getItemMeta())) {
+						p.getInventory().addItem(bedrockbow);
+					} else if (e.getCurrentItem().getItemMeta().equals(fireball.getItemMeta())) {
+						p.getInventory().addItem(fireball);
+					} else if (e.getCurrentItem().getItemMeta().equals(minigun.getItemMeta())) {
+						p.getInventory().addItem(minigun);
 					}
 
 					p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 3.0F, 2.0F);
@@ -295,8 +258,39 @@ public class GuiListener implements Listener {
 							pagen.setItemMeta(pagenm);
 							e.getInventory().setItem(50, pagen);
 						}
+					} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cConfiguration")) {
+						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+							e.getView().close();
+							InvManager.openConfigInv(p);
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
 					}
 				}
+			} else if (e.getView().getTitle().equalsIgnoreCase("§cTroll Config Menu")) {
+				e.getResult();
+				e.setResult(Result.DENY);
+				
+				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cBack")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						e.getView().close();
+						new InvManager().choicePlayer(p);
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReload Config")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						e.getView().close();
+						Main.reloadConfigurations();
+						p.sendMessage(Data.prefix + "§cReloaded!");
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				}
+				
 			} else if (e.getView().getTitle().equalsIgnoreCase("§2Which MLG?")) {
 				e.getResult();
 				e.setResult(Result.DENY);
@@ -309,7 +303,8 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bWater MLG")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.mlgs.water"))) {
 					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 					if (p.hasPermission("troll.mlg") || p.hasPermission("troll*")) {
 						e.getView().close();
@@ -336,7 +331,8 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Lava MLG")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.mlgs.lava"))) {
 					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 					if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 						e.getView().close();
@@ -362,7 +358,8 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cCobweb MLG")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.mlgs.cobweb"))) {
 					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 					if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 						e.getView().close();
@@ -388,7 +385,8 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aSlime Block MLG")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.mlgs.slime"))) {
 					Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 					if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 						e.getView().close();
@@ -436,7 +434,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cExplode")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.explode"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.explode") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -454,7 +453,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aFakeHack")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.fakehack"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.fakehack") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -478,7 +478,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Demo")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.demo"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.demo") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -493,7 +494,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9Strike")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.strike"))) {
 						if (p.hasPermission("troll.strike") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -508,7 +510,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§8Hack User")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.hackuser"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.hackuser") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -570,7 +573,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cRocket")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.rocket"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.rocket") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -591,14 +595,16 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cMLG")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.mlg"))) {
 						if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 							new InvManager().openMLGchoiceInv(p);
 						} else {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cSpam")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.spam"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.spam") || p.hasPermission("troll.*")) {
 							if (t != null) {
@@ -615,7 +621,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aStartControl")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.startcontrol"))) {
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.control") || p.hasPermission("troll.*")) {
 							if (!p.hasMetadata("C_H")) {
@@ -651,7 +658,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7FakeOP")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.fakeop"))) {
 						if (p.hasPermission("troll.fakeop") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -666,7 +674,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cCrash")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.crash"))) {
 						if (p.hasPermission("troll.crash") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -681,7 +690,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bUn/Freeze")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.freeze"))) {
 						if (p.hasPermission("troll.freeze") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -706,7 +716,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bAntiCheat")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.anticheat"))) {
 						if (p.hasPermission("troll.ac") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -724,7 +735,7 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§c§kd§cL§kd§ca§kd§cg§kd§cg§kd§ci§kd§cn§kd§cg§c§kd")
+							.equalsIgnoreCase(Items.getItem("gui.trolls.lagging"))
 							|| e.getCurrentItem().getType() == XMaterial.GRASS.parseMaterial()) {
 						if (p.hasPermission("troll.lag") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -745,7 +756,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cARREST")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.arrest"))) {
 						if (p.hasPermission("troll.arrest") || p.hasPermission("troll.*")) {
 
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -790,7 +802,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bRotate Player")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.rotateplayer"))) {
 						if (p.hasPermission("troll.rotate") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -812,7 +825,7 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§cRandom Teleport")) {
+							.equalsIgnoreCase(Items.getItem("gui.trolls.randomteleport"))) {
 						if (p.hasPermission("troll.randomtp") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -833,7 +846,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTnT Trace")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.tnttrace"))) {
 						if (p.hasPermission("troll.tnttrain") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -854,7 +868,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cWTF")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.wtf"))) {
 						if (p.hasPermission("troll.wtf") || p.hasPermission("troll.*")) {
 
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -1049,7 +1064,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§fWeb §8Trap")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.webtrap"))) {
 						if (p.hasPermission("troll.webtrap") || p.hasPermission("troll.*")) {
 
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -1185,7 +1201,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cL§5S§bD")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.lsd"))) {
 						if (p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1200,7 +1217,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§1Guardian")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.guardian"))) {
 						if (p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1242,7 +1260,8 @@ public class GuiListener implements Listener {
 						 * 
 						 * }
 						 */
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9Herobrine")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.herobrine"))) {
 						if (p.hasPermission("troll.herobrine") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1264,7 +1283,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3Arrow Spam")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.arrowspam"))) {
 						if (p.hasPermission("troll.arrowspam") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1342,7 +1362,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Tornado")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.tornado"))) {
 						if (p.hasPermission("troll.tornado") || p.hasPermission("troll.*")) {
 
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -1599,7 +1620,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cFake§7Inv")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.fakeinv"))) {
 						if (p.hasPermission("troll.fakeinv") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1615,8 +1637,16 @@ public class GuiListener implements Listener {
 
 									ArrayUtils.fakeinv.remove(t);
 								} else {
-									InvSaver is = new InvSaver(t.getName(), t.getInventory().getContents(),
-											t.getInventory().getExtraContents(), t.getInventory().getArmorContents());
+									InvSaver is;
+
+									if (Main.version.startsWith("v1_8")) {
+										is = new InvSaver(t.getName(), t.getInventory().getContents(),
+												t.getInventory().getArmorContents());
+									} else {
+										is = new InvSaver(t.getName(), t.getInventory().getContents(),
+												t.getInventory().getExtraContents(),
+												t.getInventory().getArmorContents());
+									}
 
 									t.getInventory().clear();
 
@@ -1632,7 +1662,9 @@ public class GuiListener implements Listener {
 											if (ArrayUtils.fakeinv.containsKey(t)) {
 												InvSaver is = ArrayUtils.fakeinv.get(t);
 												t.getInventory().setArmorContents(is.getArmor());
-												t.getInventory().setExtraContents(is.getExtracont());
+												if (!Main.version.startsWith("v1_8")) {
+													t.getInventory().setExtraContents(is.getExtracont());
+												}
 												t.getInventory().setContents(is.getContent());
 												ArrayUtils.fakeinv.remove(t);
 											}
@@ -1650,7 +1682,7 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§cNo §7Inv §2for §cYOU")) {
+							.equalsIgnoreCase(Items.getItem("gui.trolls.noinvforyou"))) {
 						if (p.hasPermission("troll.fakeinv") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1682,7 +1714,7 @@ public class GuiListener implements Listener {
 							e.getView().close();
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
-							.equalsIgnoreCase("§aSlippery §7Hands")) {
+							.equalsIgnoreCase(Items.getItem("gui.trolls.slipperyhands"))) {
 						if (p.hasPermission("troll.slipperyhands") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1736,7 +1768,8 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTnT World")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.tntworld"))) {
 						if (p.hasPermission("troll.tntworld") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
@@ -1749,7 +1782,7 @@ public class GuiListener implements Listener {
 															.getType() != XMaterial.AIR.parseMaterial()) {
 												Location l = new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
 														oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z);
-												t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte)0);
+												t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
 											}
 										}
 									}
@@ -1764,11 +1797,12 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bRickRoll")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.rickroll"))) {
 						if (p.hasPermission("troll.rickroll") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if(!PlayMusic.isPlaying(t)) {
+								if (!PlayMusic.isPlaying(t)) {
 									PlayMusic.play(t, "plugins/TrollV4/rick.nbs");
 									p.sendMessage(Data.prefix + Language.getMessage("gui.rickroll.default", t));
 									e.getView().close();
@@ -1784,38 +1818,39 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cDont Stop §2Jumping")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.dontstopjumping"))) {
 						if (p.hasPermission("troll.dontstopjumping") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if(ArrayUtils.jumping.containsKey(t)) {
-									
+								if (ArrayUtils.jumping.containsKey(t)) {
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.dontstopjumping.off", t));
-									
+
 									ArrayUtils.jumping.get(t).cancel();
 									ArrayUtils.jumping.remove(t);
 									e.getView().close();
 								} else {
-									
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.dontstopjumping.on", t));
-									
+
 									ArrayUtils.jumping.put(t, new BukkitRunnable() {
-										
+
 										@Override
 										public void run() {
-											
+
 											Player jumper = t;
-											
-											if(jumper.isOnGround()) {
+
+											if (jumper.isOnGround()) {
 												jumper.setVelocity(new Vector(0.0, 0.45, 0.0));
 											}
-											
+
 										}
 									});
-									
+
 									ArrayUtils.jumping.get(t).runTaskTimer(Main.instance, 0L, 12L);
 									e.getView().close();
-									
+
 								}
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
@@ -1825,20 +1860,21 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Deaf")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.deaf"))) {
 						if (p.hasPermission("troll.deaf") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if(ArrayUtils.deaf.contains(t)) {
-									
+								if (ArrayUtils.deaf.contains(t)) {
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.deaf.off", t));
-									
+
 									ArrayUtils.deaf.remove(t);
 									e.getView().close();
 								} else {
-									
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.deaf.on", t));
-									
+
 									ArrayUtils.deaf.add(t);
 									e.getView().close();
 								}
@@ -1850,20 +1886,21 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-					} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aConfused")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.confused"))) {
 						if (p.hasPermission("troll.confused") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if(ArrayUtils.confus.contains(t)) {
-									
+								if (ArrayUtils.confus.contains(t)) {
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.confused.off", t));
-									
+
 									ArrayUtils.confus.remove(t);
 									e.getView().close();
 								} else {
-									
+
 									p.sendMessage(Data.prefix + Language.getMessage("gui.confused.on", t));
-									
+
 									ArrayUtils.confus.add(t);
 									e.getView().close();
 								}
@@ -1880,8 +1917,10 @@ public class GuiListener implements Listener {
 			} else if (e.getView().getTitle().equalsIgnoreCase("§2Server Troll Menu")) {
 				e.getResult();
 				e.setResult(Result.DENY);
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Tpall")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.servertrolls.tpall"))) {
 					if (p.hasPermission("troll.tpall") || p.hasPermission("troll.*")) {
+						e.getView().close();
 						for (Player all : Bukkit.getOnlinePlayers()) {
 							all.teleport(p.getLocation());
 						}
@@ -1891,8 +1930,10 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Fakeleave")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.servertrolls.fakeleave"))) {
 					if (p.hasPermission("troll.fakeleave") || p.hasPermission("troll.*")) {
+						e.getView().close();
 						Bukkit.broadcastMessage(Language.getMessage("gui.fakeleave.message", p));
 						p.sendMessage(Data.prefix + Language.getMessage("gui.fakeleave.default"));
 					} else {
@@ -1900,9 +1941,13 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§8Hack Message")) {
+				if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase(Items.getItem("gui.servertrolls.hackmessage"))) {
 					if (p.hasPermission("troll.hackmessage") || p.hasPermission("troll.*")) {
 						p.sendMessage(Data.prefix + Language.getMessage("gui.hackserver"));
+
+						e.getView().close();
+
 						taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
 							int countdown = Config.cfg.getInt("trolls.hack.time");
 

@@ -14,7 +14,6 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import de.presti.trollv4.config.Config;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
@@ -69,9 +68,9 @@ public class iListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Player p = e.getEntity();
-			
-			if(e.getEntity().getKiller() instanceof Player) {
-				if(e.getEntity().getKiller().hasMetadata("C_H")) {
+
+			if (e.getEntity().getKiller() instanceof Player) {
+				if (e.getEntity().getKiller().hasMetadata("C_H")) {
 					Player v = Bukkit.getPlayer(e.getEntity().getKiller().getMetadata("C_H").get(0).asString());
 					e.setDeathMessage(e.getDeathMessage().replaceAll(e.getEntity().getKiller().getName(), v.getName()));
 				}
@@ -81,10 +80,10 @@ public class iListener implements Listener {
 					e.setDeathMessage(e.getDeathMessage().replaceAll(p.getName(), v.getName()));
 				}
 			}
-			
+
 		} else {
-			if(e.getEntity().getKiller() instanceof Player) {
-				if(e.getEntity().getKiller().hasMetadata("C_H")) {
+			if (e.getEntity().getKiller() instanceof Player) {
+				if (e.getEntity().getKiller().hasMetadata("C_H")) {
 					Player v = Bukkit.getPlayer(e.getEntity().getKiller().getMetadata("C_H").get(0).asString());
 					e.setDeathMessage(e.getDeathMessage().replaceAll(e.getEntity().getKiller().getName(), v.getName()));
 				}
@@ -122,13 +121,8 @@ public class iListener implements Listener {
 		Player p = e.getPlayer();
 		if (p.hasMetadata("C_P")) {
 			Player c = Bukkit.getPlayer(p.getMetadata("C_P").get(0).asString());
-			if (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-				c.sendMessage(Data.prefix + p.getName() + " hat denn Server verlassen");
-			} else if (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-				c.sendMessage(Data.prefix + p.getName() + " disconnected");
-			} else {
-				c.sendMessage(Data.prefix + p.getName() + " disconnected");
-			}
+			
+			c.sendMessage(Data.prefix + p.getName() + " disconnected");
 
 			p.removeMetadata("C_P", plugin);
 			c.removeMetadata("C_H", plugin);
@@ -147,13 +141,7 @@ public class iListener implements Listener {
 		} else {
 			if (p.hasMetadata("C_H")) {
 				Player v = Bukkit.getPlayer(p.getMetadata("C_H").get(0).asString());
-				if (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-					v.sendMessage(Data.prefix + p.getName() + " hat denn Server verlassen");
-				} else if (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-					v.sendMessage(Data.prefix + p.getName() + " disconnected");
-				} else {
-					v.sendMessage(Data.prefix + p.getName() + " disconnected");
-				}
+				
 				v.removeMetadata("C_P", plugin);
 				p.removeMetadata("C_H", plugin);
 
@@ -177,13 +165,9 @@ public class iListener implements Listener {
 		Player p = e.getPlayer();
 		if (p.hasMetadata("C_P")) {
 			Player c = Bukkit.getPlayer(p.getMetadata("C_P").get(0).asString());
-			if (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-				c.sendMessage(Data.prefix + p.getName() + " hat denn Server verlassen");
-			} else if (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-				c.sendMessage(Data.prefix + p.getName() + " disconnected");
-			} else {
-				c.sendMessage(Data.prefix + p.getName() + " disconnected");
-			}
+			
+			c.sendMessage(Data.prefix + p.getName() + " disconnected");
+			
 			p.removeMetadata("C_P", plugin);
 			c.removeMetadata("C_H", plugin);
 
@@ -201,13 +185,6 @@ public class iListener implements Listener {
 		} else {
 			if (p.hasMetadata("C_H")) {
 				Player v = Bukkit.getPlayer(p.getMetadata("C_H").get(0).asString());
-				if (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-					v.sendMessage(Data.prefix + p.getName() + " hat denn Server verlassen");
-				} else if (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-					v.sendMessage(Data.prefix + p.getName() + " disconnected");
-				} else {
-					v.sendMessage(Data.prefix + p.getName() + " disconnected");
-				}
 
 				v.removeMetadata("C_P", plugin);
 				p.removeMetadata("C_H", plugin);

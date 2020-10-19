@@ -38,8 +38,6 @@ public class UpdateChecker {
 	public static final int ID = 67318;
 	public static String ERR_MSG = "&cUpdate checker failed!";
 	public static final long CHECK_INTERVAL = 12_000; // In ticks.
-	public int nvi;
-	public int cvi;
 
 	public UpdateChecker(final JavaPlugin javaPlugin) {
 		this.javaPlugin = javaPlugin;
@@ -50,6 +48,7 @@ public class UpdateChecker {
 
 	public void checkForUpdate() {
 		new BukkitRunnable() {
+			@SuppressWarnings("static-access")
 			@Override
 			public void run() {
 				Bukkit.getScheduler().runTaskAsynchronously(javaPlugin, () -> {
@@ -60,36 +59,23 @@ public class UpdateChecker {
 						spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream()))
 								.readLine();
 					} catch (final IOException e) {
-						Bukkit.getServer().getConsoleSender()
-								.sendMessage(ChatColor.translateAlternateColorCodes('&', ERR_MSG));
+						Main.instance.logger.error(ChatColor.translateAlternateColorCodes('&', ERR_MSG));
 						e.printStackTrace();
 						cancel();
 						return;
 					}
-
-					try {
 					
-					cvi = Integer.parseInt(((localPluginVersion).replaceAll(".", "")));
-					nvi = Integer.parseInt(((spigotPluginVersion).replaceAll(".", "")));
-					} catch(Exception ex) {
-						
-					}
-					
-					if (localPluginVersion.equals(spigotPluginVersion) || cvi > nvi) {
-						Main.instance.logg.info(ChatColor.translateAlternateColorCodes('&', "&4TrollV4 Has no Update"));
+					if (localPluginVersion.equals(spigotPluginVersion)) {
+						Main.instance.logger.info("TrollV4 Has no Update");
 					} else {
-						Bukkit.getServer().getConsoleSender()
-								.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6TrollV4 has a Update!"));
-						Bukkit.getServer().getConsoleSender().sendMessage(
-								ChatColor.translateAlternateColorCodes('&', "&6New Version: " + spigotPluginVersion));
-						Bukkit.getServer().getConsoleSender().sendMessage(
-								ChatColor.translateAlternateColorCodes('&', "&6Your Version: " + Data.version));
-						Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
-								"&6Download here: https://www.spigotmc.org/resources/" + ID + "/updates"));
+						Main.instance.logger.warning("TrollV4 has a Update!");
+						Main.instance.logger.warning("New Version: " + spigotPluginVersion);
+						Main.instance.logger.warning("Your Version: " + Data.version);
+						Main.instance.logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
 					}
 					cancel(); // Cancel the runnable as an update has been found.
 				});
 			}
-		}.runTaskTimer(javaPlugin, 60, CHECK_INTERVAL);
+		}.runTaskTimer(javaPlugin, 20, CHECK_INTERVAL);
 	}
 }
