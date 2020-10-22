@@ -25,9 +25,13 @@ public class Changelog {
 	}
 	
 	public static void log(Player p) {
-		new UpdateChecker(Main.instance).checkForUpdate();
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Community Surprise works again!");
+		p.sendMessage(Data.cu + "Item Names fixed");
+		p.sendMessage(Data.cu + "New Gui Animation");
+		p.sendMessage(Data.cu + "Performance Fixes");
+		p.sendMessage(Data.prefix + "Version » 4.3.8");
 		p.sendMessage(Data.cp + "Custom Item Names");
 		p.sendMessage(Data.cu + "Code optimization");
 		p.sendMessage(Data.cu + "LanguageManager Error Fixed");

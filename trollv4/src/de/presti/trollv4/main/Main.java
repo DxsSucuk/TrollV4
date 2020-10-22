@@ -28,6 +28,7 @@ import de.presti.trollv4.listener.GuiListener;
 import de.presti.trollv4.listener.iListener;
 import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.utils.ArrayUtils;
+import de.presti.trollv4.utils.Community;
 import de.presti.trollv4.utils.Metrics;
 import de.presti.trollv4.utils.PluginUtil;
 import de.presti.trollv4.utils.UpdateChecker;
@@ -55,7 +56,7 @@ public class Main extends JavaPlugin {
 	public static String version;
 
 	public void onEnable() {
-		
+
 		instance = this;
 		version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		ArrayUtils.armor = new HashMap<String, ItemStack[]>();
@@ -66,6 +67,7 @@ public class Main extends JavaPlugin {
 				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
 				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
 				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
+		
 		downloadAll();
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
@@ -228,7 +230,7 @@ public class Main extends JavaPlugin {
 						: false);
 				boolean cs = (Config.getconfig().get("Community-surprise") != null
 						? Config.getconfig().getBoolean("Community-surprise")
-						: false);
+						: true);
 				int hack = (Config.getconfig().get("trolls.hack.time") != null
 						? Config.getconfig().getInt("trolls.hack.time")
 						: 15);
@@ -239,6 +241,10 @@ public class Main extends JavaPlugin {
 						? Config.getconfig().getInt("trolls.slipperyhands.time")
 						: 1);
 
+				if(Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
+					cs = true;
+				}
+				
 				Config.getFile().delete();
 
 				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, cs, hack, fakeinv, hands);
@@ -276,11 +282,16 @@ public class Main extends JavaPlugin {
 		Message();
 		Listener();
 		CMD();
-		/*
-		 * if (Config.getconfig().getBoolean("Community-surprise")) { Community.host =
-		 * "servertrollv4.dev-presti.tk"; Community.port = 187; try { Community.run(); }
-		 * catch (IOException e) { logger.info("Error at connecting to the Cloud!"); } }
-		 */
+
+		if (Config.getconfig().getBoolean("Community-surprise")) {
+			Community.host = "trollv4.dev-presti.tk";
+			Community.port = 6918;
+			try {
+				Community.run();
+			} catch (IOException e) {
+				logger.info("Error at connecting to the Cloud!");
+			}
+		}
 	}
 
 	public int getRandom(int lower, int upper) {
@@ -319,8 +330,7 @@ public class Main extends JavaPlugin {
 
 	public static boolean download(String url, String FileName) {
 		try {
-			URL link = new URL(url);
-			URLConnection con = link.openConnection();
+			URLConnection con = new URL(url).openConnection();
 			con.addRequestProperty("User-Agent",
 					"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 			InputStream in = con.getInputStream();
@@ -330,6 +340,8 @@ public class Main extends JavaPlugin {
 			fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
 			fileChannel.close();
 			fileOutputStream.close();
+			readableByteChannel.close();
+			in.close();
 			return true;
 		} catch (IOException e) {
 			return false;

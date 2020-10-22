@@ -44,7 +44,7 @@ public class Config {
 			cfg.addDefault("Custom-Item-Name", false);
 			cfg.addDefault("AutoUpdate", true);
 			cfg.addDefault("Animations", false);
-			cfg.addDefault("Community-surprise", false);
+			cfg.addDefault("Community-surprise", true);
 			cfg.addDefault("trolls.hack.time", 15);
 			cfg.addDefault("trolls.fakeinv.time", 5);
 			cfg.addDefault("trolls.slipperyhands.time", 1);

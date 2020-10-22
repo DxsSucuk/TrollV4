@@ -43,7 +43,7 @@ public class UpdateChecker {
 		this.javaPlugin = javaPlugin;
 		this.localPluginVersion = Data.version;
 		Main.instance.update = this;
-		ERR_MSG = "&cUpdate checker failed!";
+		ERR_MSG = "Update checker failed!";
 	}
 
 	public void checkForUpdate() {
@@ -59,7 +59,7 @@ public class UpdateChecker {
 						spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream()))
 								.readLine();
 					} catch (final IOException e) {
-						Main.instance.logger.error(ChatColor.translateAlternateColorCodes('&', ERR_MSG));
+						Main.instance.logger.error(ERR_MSG);
 						e.printStackTrace();
 						cancel();
 						return;

@@ -19,6 +19,7 @@ import com.cryptomorin.xseries.XSound;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.listener.GuiListener;
+import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
 
@@ -40,7 +41,7 @@ public class InvManager {
 	public int taskID;
 
 	public static ItemStack ad() {
-		ItemStack red = new ItemStack(Material.REDSTONE);
+		ItemStack red = new ItemStack(XMaterial.REDSTONE.parseMaterial());
 		List<String> lorer = new ArrayList<String>();
 		ItemMeta rm = red.getItemMeta();
 
@@ -53,9 +54,53 @@ public class InvManager {
 
 		return red;
 	}
+	
+	public static ItemStack info() {
+		ItemStack red = new ItemStack(XMaterial.PAPER.parseMaterial());
+		List<String> lorer = new ArrayList<String>();
+		ItemMeta rm = red.getItemMeta();
+
+		rm.setDisplayName("§cInfo");
+		lorer.clear();
+		lorer.add("§2Plugin Version: §c" + Data.version);
+		lorer.add("§2Server Version: §c" + Main.getMcVersion());
+		lorer.add("§2Server PacketVersion: §c" + Main.version);
+		rm.setLore(lorer);
+		red.setItemMeta(rm);
+
+		return red;
+	}
 
 	public static ItemStack Glass() {
 		ItemStack glass = new ItemStack(XMaterial.BLACK_STAINED_GLASS_PANE.parseItem());
+		List<String> lore = new ArrayList<String>();
+		ItemMeta m = glass.getItemMeta();
+
+		m.setDisplayName("§8§kddd §c§lLoading... §8§kddd");
+		lore.clear();
+		lore.add("§8§kddd §c§lStill Loading... §8§kddd");
+		m.setLore(lore);
+		glass.setItemMeta(m);
+
+		return glass;
+	}
+	
+	public static ItemStack Glass2() {
+		ItemStack glass = new ItemStack(XMaterial.BLUE_STAINED_GLASS_PANE.parseItem());
+		List<String> lore = new ArrayList<String>();
+		ItemMeta m = glass.getItemMeta();
+
+		m.setDisplayName("§8§kddd §c§lLoading... §8§kddd");
+		lore.clear();
+		lore.add("§8§kddd §c§lStill Loading... §8§kddd");
+		m.setLore(lore);
+		glass.setItemMeta(m);
+
+		return glass;
+	}
+	
+	public static ItemStack Glass3() {
+		ItemStack glass = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseItem());
 		List<String> lore = new ArrayList<String>();
 		ItemMeta m = glass.getItemMeta();
 
@@ -150,77 +195,141 @@ public class InvManager {
 						Bukkit.getScheduler().cancelTask(ArrayUtils.anim.get(p).getTaskId());
 						return;
 					}
+					
 					inv.setItem(22, ad());
+					inv.setItem(31, info());
+					
 					if (countdown == 15) {
-						inv.setItem(0, Glass());
+						inv.setItem(0, Glass3());
+			//			inv.setItem(0, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(1, Glass());
+			//			inv.setItem(1, Glass());
+						inv.setItem(53, Glass3());
 					}
 					if (countdown == 14) {
-						inv.setItem(2, Glass());
+				//		inv.setItem(2, Glass());
+						inv.setItem(10, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(3, Glass());
+			//			inv.setItem(3, Glass());
+						inv.setItem(43, Glass3());
 					}
 					if (countdown == 13) {
-						inv.setItem(4, Glass());
+		//				inv.setItem(4, Glass());
+						inv.setItem(20, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(5, Glass());
+			//			inv.setItem(5, Glass());
+						inv.setItem(33, Glass3());
 					}
 					if (countdown == 12) {
-						inv.setItem(6, Glass());
+			//			inv.setItem(6, Glass());
+						inv.setItem(30, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(7, Glass());
+						//			inv.setItem(7, Glass());
+						inv.setItem(23, Glass3());
 					}
 					if (countdown == 11) {
-						inv.setItem(8, Glass());
+						inv.setItem(8, Glass3());
+			//			inv.setItem(8, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(17, Glass());
+						//			inv.setItem(17, Glass());
+						inv.setItem(45, Glass3());
 					}
 					if (countdown == 10) {
-						inv.setItem(26, Glass());
+						inv.setItem(16, Glass3());
+						//				inv.setItem(26, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(35, Glass());
+						//				inv.setItem(35, Glass());
+						inv.setItem(37, Glass3());
 					}
 					if (countdown == 9) {
-						inv.setItem(44, Glass());
+						inv.setItem(24, Glass3());
+						//			inv.setItem(44, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(53, Glass());
+						//			inv.setItem(53, Glass());
+						inv.setItem(29, Glass3());
 					}
 					if (countdown == 8) {
-						inv.setItem(52, Glass());
+						inv.setItem(32, Glass3());
+						//				inv.setItem(52, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(51, Glass());
+						//				inv.setItem(51, Glass());
+						inv.setItem(21, Glass3());
 					}
 					if (countdown == 7) {
-						inv.setItem(50, Glass());
+						
+						inv.setItem(1, Glass());
+						inv.setItem(11, Glass2());
+						inv.setItem(17, Glass());
+						inv.setItem(52, Glass());
+						inv.setItem(42, Glass2());
+						inv.setItem(19, Glass2());
+						inv.setItem(34, Glass2());
+						inv.setItem(36, Glass());
+						//				inv.setItem(50, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(49, Glass());
+						//			inv.setItem(49, Glass());
 					}
 					if (countdown == 6) {
-						inv.setItem(48, Glass());
+						
+						inv.setItem(2, Glass());
+						inv.setItem(12, Glass2());
+						inv.setItem(26, Glass());
+						inv.setItem(51, Glass());
+						inv.setItem(28, Glass2());
+						inv.setItem(41, Glass2());
+						inv.setItem(25, Glass2());
+						inv.setItem(27, Glass());
+						//			inv.setItem(48, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(47, Glass());
+						//			inv.setItem(47, Glass());
 					}
 					if (countdown == 5) {
-						inv.setItem(46, Glass());
+						
+						inv.setItem(3, Glass());
+						inv.setItem(35, Glass());
+						inv.setItem(50, Glass());
+						inv.setItem(18, Glass());
+						inv.setItem(13, Glass2());
+						inv.setItem(40, Glass2());
+						//			inv.setItem(46, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(45, Glass());
+						//				inv.setItem(45, Glass());
 
 					}
 					if (countdown == 4) {
-						inv.setItem(36, Glass());
+						
+						inv.setItem(4, Glass());
+						inv.setItem(44, Glass());
+						inv.setItem(49, Glass());
+						inv.setItem(9, Glass());
+						inv.setItem(14, Glass2());
+						inv.setItem(39, Glass2());
+						
+						//				inv.setItem(36, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(27, Glass());
+						//				inv.setItem(27, Glass());
 					}
 					if (countdown == 3) {
-						inv.setItem(18, Glass());
+						
+						inv.setItem(5, Glass());
+						inv.setItem(48, Glass());
+						inv.setItem(15, Glass2());
+						inv.setItem(38, Glass2());
+						
+						//				inv.setItem(18, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						inv.setItem(9, Glass());
+						//			inv.setItem(9, Glass());
 					}
 					if (countdown == 2) {
+						
+						inv.setItem(6, Glass());
+						inv.setItem(47, Glass());
+						
 						p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1F, 1F);
 					}
 					if (countdown == 1) {
+						inv.setItem(7, Glass());
+						inv.setItem(46, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1F, 1F);
 					}
 					if (countdown <= 0) {

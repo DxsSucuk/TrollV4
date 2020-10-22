@@ -99,7 +99,7 @@ public class Items {
 		addItem("default", "gui.trolls.arrest", "§cARREST");
 		addItem("default", "gui.trolls.rotateplayer", "§bRotate Player");
 		addItem("default", "gui.trolls.randomteleport", "§cRandom Teleport");
-		addItem("default", "gui.trolls.tnttrace", "§TnT Trace");
+		addItem("default", "gui.trolls.tnttrace", "§cTnT Trace");
 		addItem("default", "gui.trolls.webtrap", "§fWeb §8Trap");
 		addItem("default", "gui.trolls.wtf", "§WTF");
 		addItem("default", "gui.trolls.lsd", "§cL§5S§bD");
