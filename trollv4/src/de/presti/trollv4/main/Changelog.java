@@ -27,6 +27,9 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Russian Language");
+		p.sendMessage(Data.cu + "Rickroll Error fix");
+		p.sendMessage(Data.prefix + "Version » 4.3.9");
 		p.sendMessage(Data.cp + "Community Surprise works again!");
 		p.sendMessage(Data.cu + "Item Names fixed");
 		p.sendMessage(Data.cu + "New Gui Animation");
