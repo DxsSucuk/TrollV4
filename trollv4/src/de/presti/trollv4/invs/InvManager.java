@@ -54,7 +54,7 @@ public class InvManager {
 
 		return red;
 	}
-	
+
 	public static ItemStack info() {
 		ItemStack red = new ItemStack(XMaterial.PAPER.parseMaterial());
 		List<String> lorer = new ArrayList<String>();
@@ -84,7 +84,7 @@ public class InvManager {
 
 		return glass;
 	}
-	
+
 	public static ItemStack Glass2() {
 		ItemStack glass = new ItemStack(XMaterial.BLUE_STAINED_GLASS_PANE.parseItem());
 		List<String> lore = new ArrayList<String>();
@@ -98,7 +98,7 @@ public class InvManager {
 
 		return glass;
 	}
-	
+
 	public static ItemStack Glass3() {
 		ItemStack glass = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseItem());
 		List<String> lore = new ArrayList<String>();
@@ -125,20 +125,20 @@ public class InvManager {
 		item.setItemMeta(meta);
 		return item;
 	}
-	
+
 	public static void openConfigInv(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 9, "§cTroll Config Menu");
-		
+
 		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
 		ItemMeta glm = gl.getItemMeta();
 		glm.setDisplayName("§7");
 		gl.setItemMeta(glm);
-		
+
 		ItemStack back = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
 		ItemMeta backm = back.getItemMeta();
 		backm.setDisplayName("§cBack");
 		back.setItemMeta(backm);
-		
+
 		inv.setItem(0, gl);
 		inv.setItem(1, gl);
 		inv.setItem(2, gl);
@@ -148,9 +148,9 @@ public class InvManager {
 		inv.setItem(6, gl);
 		inv.setItem(7, gl);
 		inv.setItem(8, back);
-		
+
 		p.openInventory(inv);
-		
+
 	}
 
 	public void openPlayerInv(Player p) {
@@ -165,29 +165,14 @@ public class InvManager {
 					if (countdown == 0) {
 						inv.clear();
 						p.playSound(p.getLocation(), XSound.ENTITY_ZOMBIE_INFECT.parseSound(), 1F, 1F);
-						try {
+						inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+								"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+						if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
+							inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+									"§cERROR PLS REOPEN INV"));
+						} else {
 							inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
 									"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
-							try {
-								inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-										"§cERROR PLS REOPEN INV"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} else {
-							try {
-								inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-										"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
 						}
 
 						setPageOneTrolls(inv);
@@ -195,68 +180,68 @@ public class InvManager {
 						Bukkit.getScheduler().cancelTask(ArrayUtils.anim.get(p).getTaskId());
 						return;
 					}
-					
+
 					inv.setItem(22, ad());
 					inv.setItem(31, info());
-					
+
 					if (countdown == 15) {
 						inv.setItem(0, Glass3());
-			//			inv.setItem(0, Glass());
+						// inv.setItem(0, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-			//			inv.setItem(1, Glass());
+						// inv.setItem(1, Glass());
 						inv.setItem(53, Glass3());
 					}
 					if (countdown == 14) {
-				//		inv.setItem(2, Glass());
+						// inv.setItem(2, Glass());
 						inv.setItem(10, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-			//			inv.setItem(3, Glass());
+						// inv.setItem(3, Glass());
 						inv.setItem(43, Glass3());
 					}
 					if (countdown == 13) {
-		//				inv.setItem(4, Glass());
+						// inv.setItem(4, Glass());
 						inv.setItem(20, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-			//			inv.setItem(5, Glass());
+						// inv.setItem(5, Glass());
 						inv.setItem(33, Glass3());
 					}
 					if (countdown == 12) {
-			//			inv.setItem(6, Glass());
+						// inv.setItem(6, Glass());
 						inv.setItem(30, Glass3());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(7, Glass());
+						// inv.setItem(7, Glass());
 						inv.setItem(23, Glass3());
 					}
 					if (countdown == 11) {
 						inv.setItem(8, Glass3());
-			//			inv.setItem(8, Glass());
+						// inv.setItem(8, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(17, Glass());
+						// inv.setItem(17, Glass());
 						inv.setItem(45, Glass3());
 					}
 					if (countdown == 10) {
 						inv.setItem(16, Glass3());
-						//				inv.setItem(26, Glass());
+						// inv.setItem(26, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//				inv.setItem(35, Glass());
+						// inv.setItem(35, Glass());
 						inv.setItem(37, Glass3());
 					}
 					if (countdown == 9) {
 						inv.setItem(24, Glass3());
-						//			inv.setItem(44, Glass());
+						// inv.setItem(44, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(53, Glass());
+						// inv.setItem(53, Glass());
 						inv.setItem(29, Glass3());
 					}
 					if (countdown == 8) {
 						inv.setItem(32, Glass3());
-						//				inv.setItem(52, Glass());
+						// inv.setItem(52, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//				inv.setItem(51, Glass());
+						// inv.setItem(51, Glass());
 						inv.setItem(21, Glass3());
 					}
 					if (countdown == 7) {
-						
+
 						inv.setItem(1, Glass());
 						inv.setItem(11, Glass2());
 						inv.setItem(17, Glass());
@@ -265,12 +250,12 @@ public class InvManager {
 						inv.setItem(19, Glass2());
 						inv.setItem(34, Glass2());
 						inv.setItem(36, Glass());
-						//				inv.setItem(50, Glass());
+						// inv.setItem(50, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(49, Glass());
+						// inv.setItem(49, Glass());
 					}
 					if (countdown == 6) {
-						
+
 						inv.setItem(2, Glass());
 						inv.setItem(12, Glass2());
 						inv.setItem(26, Glass());
@@ -279,52 +264,52 @@ public class InvManager {
 						inv.setItem(41, Glass2());
 						inv.setItem(25, Glass2());
 						inv.setItem(27, Glass());
-						//			inv.setItem(48, Glass());
+						// inv.setItem(48, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(47, Glass());
+						// inv.setItem(47, Glass());
 					}
 					if (countdown == 5) {
-						
+
 						inv.setItem(3, Glass());
 						inv.setItem(35, Glass());
 						inv.setItem(50, Glass());
 						inv.setItem(18, Glass());
 						inv.setItem(13, Glass2());
 						inv.setItem(40, Glass2());
-						//			inv.setItem(46, Glass());
+						// inv.setItem(46, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//				inv.setItem(45, Glass());
+						// inv.setItem(45, Glass());
 
 					}
 					if (countdown == 4) {
-						
+
 						inv.setItem(4, Glass());
 						inv.setItem(44, Glass());
 						inv.setItem(49, Glass());
 						inv.setItem(9, Glass());
 						inv.setItem(14, Glass2());
 						inv.setItem(39, Glass2());
-						
-						//				inv.setItem(36, Glass());
+
+						// inv.setItem(36, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//				inv.setItem(27, Glass());
+						// inv.setItem(27, Glass());
 					}
 					if (countdown == 3) {
-						
+
 						inv.setItem(5, Glass());
 						inv.setItem(48, Glass());
 						inv.setItem(15, Glass2());
 						inv.setItem(38, Glass2());
-						
-						//				inv.setItem(18, Glass());
+
+						// inv.setItem(18, Glass());
 						p.playSound(p.getLocation(), XSound.ENTITY_ARROW_HIT.parseSound(), 1F, 1F);
-						//			inv.setItem(9, Glass());
+						// inv.setItem(9, Glass());
 					}
 					if (countdown == 2) {
-						
+
 						inv.setItem(6, Glass());
 						inv.setItem(47, Glass());
-						
+
 						p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1F, 1F);
 					}
 					if (countdown == 1) {
@@ -341,25 +326,13 @@ public class InvManager {
 			ArrayUtils.anim.get(p).runTaskTimer(Main.instance, 0L, 20L);
 
 		} else {
-			try {
+			inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+					"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+			if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
+				inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()), "§cERROR PLS REOPEN INV"));
+			} else {
 				inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
 						"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
-				try {
-					inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()), "§cERROR PLS REOPEN INV"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else {
-				try {
-					inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-							"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 
 			setPageOneTrolls(inv);
@@ -373,58 +346,57 @@ public class InvManager {
 		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.freeze"), XMaterial.ICE.parseMaterial()));
 		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.fakeop"), XMaterial.GOLDEN_APPLE.parseMaterial()));
 		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.crash"), XMaterial.PAPER.parseMaterial()));
-		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.startcontrol"), XMaterial.GREEN_WOOL.parseMaterial()));
+		inv.setItem(13,
+				SetItems.buildItem(Items.getItem("gui.trolls.startcontrol"), XMaterial.GREEN_WOOL.parseMaterial()));
 		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.spam"), XMaterial.ARROW.parseMaterial()));
 		inv.setItem(15, SetItems.buildItem(Items.getItem("gui.trolls.mlg"), XMaterial.WATER_BUCKET.parseMaterial()));
-		inv.setItem(16, SetItems.buildItem(Items.getItem("gui.trolls.rocket"), XMaterial.FIREWORK_ROCKET.parseMaterial()));
-		inv.setItem(19, SetItems.buildItem(Items.getItem("gui.trolls.hackuser"), XMaterial.NETHER_STAR.parseMaterial()));
+		inv.setItem(16,
+				SetItems.buildItem(Items.getItem("gui.trolls.rocket"), XMaterial.FIREWORK_ROCKET.parseMaterial()));
+		inv.setItem(19,
+				SetItems.buildItem(Items.getItem("gui.trolls.hackuser"), XMaterial.NETHER_STAR.parseMaterial()));
 		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.strike"), XMaterial.BAKED_POTATO.parseMaterial()));
 		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.demo"), XMaterial.BEDROCK.parseMaterial()));
 		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial()));
-		inv.setItem(23, SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
+		inv.setItem(23,
+				SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
 		inv.setItem(24, SetItems.buildItem(Items.getItem("gui.trolls.anticheat"), XMaterial.IRON_AXE.parseMaterial()));
-		inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"),
-				XMaterial.GRASS.parseMaterial()));
+		inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"), XMaterial.GRASS.parseMaterial()));
 		inv.setItem(28, SetItems.buildItem(Items.getItem("gui.trolls.arrest"), XMaterial.BEDROCK.parseMaterial()));
 		inv.setItem(29, SetItems.buildItem(Items.getItem("gui.trolls.rotateplayer"), XMaterial.COOKIE.parseMaterial()));
-		inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"), XMaterial.COMMAND_BLOCK.parseMaterial()));
-		inv.setItem(31, SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial()));
+		inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"),
+				XMaterial.COMMAND_BLOCK.parseMaterial()));
+		inv.setItem(31,
+				SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial()));
 		inv.setItem(32, SetItems.buildItem(Items.getItem("gui.trolls.webtrap"), XMaterial.COBWEB.parseMaterial()));
 		inv.setItem(33, SetItems.buildItem(Items.getItem("gui.trolls.wtf"), XMaterial.MUSIC_DISC_11.parseMaterial()));
 		inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial()));
 		inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
 		inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
-		try {
-			inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
 		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial()));
 		inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
-		inv.setItem(42, SetItems.buildItem(Items.getItem("gui.trolls.noinvforyou"), XMaterial.ENDER_CHEST.parseMaterial()));
-		inv.setItem(43, SetItems.buildItem(Items.getItem("gui.trolls.slipperyhands"), XMaterial.SLIME_BALL.parseMaterial()));
+		inv.setItem(42,
+				SetItems.buildItem(Items.getItem("gui.trolls.noinvforyou"), XMaterial.ENDER_CHEST.parseMaterial()));
+		inv.setItem(43,
+				SetItems.buildItem(Items.getItem("gui.trolls.slipperyhands"), XMaterial.SLIME_BALL.parseMaterial()));
 		inv.setItem(45, SetItems.buildItem("§cNext Page", XMaterial.PAPER.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
-	
+
 	public static void setPageTwoTrolls(Inventory inv, Player p) {
 		inv.clear();
-		
-		try {
-			inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-					"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-		} catch (IOException e) {
-		}
-		
+
+		inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+				"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
 		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
 		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial()));
-		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"), XMaterial.LEATHER_BOOTS.parseMaterial()));
+		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"),
+				XMaterial.LEATHER_BOOTS.parseMaterial()));
 		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.deaf"), XMaterial.LEATHER_HELMET.parseMaterial()));
 		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.confused"), XMaterial.POTION.parseMaterial()));
 		setOverallTrollMenu(inv);
 	}
-	
+
 	public static void setOverallTrollMenu(Inventory inv) {
 		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
 		ItemMeta glm = gl.getItemMeta();
@@ -458,31 +430,31 @@ public class InvManager {
 				i++;
 			}
 		}
-		
+
 		ItemStack page = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
 		ItemMeta pagem = page.getItemMeta();
 		pagem.setDisplayName("§cPage: 1");
 		page.setItemMeta(pagem);
-		
+
 		ItemStack config = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
 		ItemMeta configm = config.getItemMeta();
 		configm.setDisplayName("§cConfiguration");
 		config.setItemMeta(configm);
-		
+
 		ItemStack pagep = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
 		ItemMeta pagepm = pagep.getItemMeta();
 		pagepm.setDisplayName("§bPrevious Page");
 		pagep.setItemMeta(pagepm);
-		
+
 		ItemStack pagen = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
 		ItemMeta pagenm = pagen.getItemMeta();
-		if(Bukkit.getOnlinePlayers().size() < 45) {
+		if (Bukkit.getOnlinePlayers().size() < 45) {
 			pagenm.setDisplayName("§cNo Next Page");
 		} else {
 			pagenm.setDisplayName("§bNext Page");
 		}
 		pagen.setItemMeta(pagenm);
-		
+
 		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
 		ItemMeta glm = gl.getItemMeta();
 		glm.setDisplayName("§7");
@@ -503,9 +475,12 @@ public class InvManager {
 
 	public void openServerInv(Player p) {
 		Inventory inv2 = Bukkit.createInventory(null, 9 * 6, "§2Server Troll Menu");
-		inv2.setItem(10, SetItems.buildItem(Items.getItem("gui.servertrolls.tpall"), XMaterial.ENDER_PEARL.parseMaterial()));
-		inv2.setItem(11, SetItems.buildItem(Items.getItem("gui.servertrolls.hackmessage"), XMaterial.NETHER_STAR.parseMaterial()));
-		inv2.setItem(12, SetItems.buildItem(Items.getItem("gui.servertrolls.fakeleave"), XMaterial.DARK_OAK_DOOR.parseMaterial()));
+		inv2.setItem(10,
+				SetItems.buildItem(Items.getItem("gui.servertrolls.tpall"), XMaterial.ENDER_PEARL.parseMaterial()));
+		inv2.setItem(11, SetItems.buildItem(Items.getItem("gui.servertrolls.hackmessage"),
+				XMaterial.NETHER_STAR.parseMaterial()));
+		inv2.setItem(12, SetItems.buildItem(Items.getItem("gui.servertrolls.fakeleave"),
+				XMaterial.DARK_OAK_DOOR.parseMaterial()));
 
 		p.openInventory(inv2);
 	}
@@ -576,11 +551,16 @@ public class InvManager {
 		item7.setItemMeta(imeta7);
 		item7.setAmount(1);
 
-		ItemStack tntbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.tnt"), "§eTNT-Arrows");
-		ItemStack lavabow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lava"), "§eLava-Arrows");
-		ItemStack strikebow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lightning"), "§eLightning-Arrows");
-		ItemStack creeperbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.creeper"), "§eCreeper-Arrows");
-		ItemStack bedrockbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.bedrock"), "§eBedrock-Arrows");
+		ItemStack tntbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.tnt"),
+				"§eTNT-Arrows");
+		ItemStack lavabow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lava"),
+				"§eLava-Arrows");
+		ItemStack strikebow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.lightning"),
+				"§eLightning-Arrows");
+		ItemStack creeperbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.creeper"),
+				"§eCreeper-Arrows");
+		ItemStack bedrockbow = createItem(XMaterial.BOW.parseMaterial(), 1, Items.getItem("gui.items.bow.bedrock"),
+				"§eBedrock-Arrows");
 
 		ItemStack minigun = new ItemStack(XMaterial.IRON_AXE.parseMaterial());
 		ItemMeta meta = minigun.getItemMeta();

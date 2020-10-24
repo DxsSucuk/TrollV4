@@ -727,6 +727,10 @@ public class TrollV4API {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
 					"particle mobappearance " + Victim.getLocation().getBlockX() + " "
 							+ Victim.getLocation().getBlockY() + " " + Victim.getLocation().getBlockZ() + " 1 1 1 1");
+			
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+					"particle minecraft:elder_guardian " + Victim.getLocation().getBlockX() + " "
+							+ Victim.getLocation().getBlockY() + " " + Victim.getLocation().getBlockZ());
 		}
 	}
 

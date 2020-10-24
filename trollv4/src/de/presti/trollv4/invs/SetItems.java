@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import com.cryptomorin.xseries.SkullUtils;
+import com.cryptomorin.xseries.XMaterial;
 
 import de.presti.trollv4.api.PlayerInfo;
 
@@ -28,9 +29,23 @@ import de.presti.trollv4.api.PlayerInfo;
 */
 public class SetItems {
 
-	public static ItemStack buildSkull(String p, String name) throws IOException {
+	public static ItemStack buildSkull(String p, String name) {
 		ArrayList<String> lore = new ArrayList<String>();
-		ItemStack skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID(p)));
+
+		String uuid = "";
+
+		try {
+			uuid = PlayerInfo.getUUID(p);
+		} catch (Exception e) {
+			uuid = "cracked";
+		}
+
+		if (uuid == null || uuid.equalsIgnoreCase("") || uuid.isEmpty()) {
+			uuid = "cracked";
+		}
+
+		ItemStack skull = (uuid.equalsIgnoreCase("cracked") ? new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial())
+				: SkullUtils.getSkull(UUID.fromString(uuid)));
 		ItemMeta skullm = skull.getItemMeta();
 
 		if (Bukkit.getPlayer(p) != null) {
