@@ -44,10 +44,12 @@ public class Config {
 			cfg.addDefault("Custom-Item-Name", false);
 			cfg.addDefault("AutoUpdate", true);
 			cfg.addDefault("Animations", false);
+			cfg.addDefault("ASync", false);
 			cfg.addDefault("Community-surprise", true);
 			cfg.addDefault("trolls.hack.time", 15);
 			cfg.addDefault("trolls.fakeinv.time", 5);
 			cfg.addDefault("trolls.slipperyhands.time", 1);
+			cfg.addDefault("trolls.tnttrace.spawndelay", 2);
 			
 			try {
                 cfg.save(getFile());
@@ -58,7 +60,7 @@ public class Config {
 		}
 	}
 	
-	public static void createFirstConfigWithValue(String lang, boolean cin, boolean au, boolean anim, boolean cs, int th, int tf, int ts) {
+	public static void createFirstConfigWithValue(String lang, boolean cin, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
 		cfg = getconfig();
 		if(!getFile().exists()) {
 			cfg.options().copyDefaults(true);
@@ -75,10 +77,12 @@ public class Config {
 			cfg.addDefault("Custom-Item-Name", cin);
 			cfg.addDefault("AutoUpdate", au);
 			cfg.addDefault("Animations", anim);
+			cfg.addDefault("ASync", async);
 			cfg.addDefault("Community-surprise", cs);
 			cfg.addDefault("trolls.hack.time", th);
 			cfg.addDefault("trolls.fakeinv.time", tf);
 			cfg.addDefault("trolls.slipperyhands.time", ts);
+			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
 			
 			try {
                 cfg.save(getFile());

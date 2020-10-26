@@ -1,5 +1,7 @@
 package de.presti.trollv4.main;
 
+import de.presti.trollv4.config.Config;
+
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -21,5 +23,6 @@ public class Data {
     public static String cp = prefix + "§7[§a+§7]§2";
     public static String cm = prefix + "§7[§c-§7]§2";
     public static String cu = prefix + "§7[§8=§7]§2";
+    public static boolean async = Config.getconfig().getBoolean("ASync");
 	
 }

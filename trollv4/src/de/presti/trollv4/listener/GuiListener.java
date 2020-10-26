@@ -1,5 +1,6 @@
 package de.presti.trollv4.listener;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -139,14 +140,14 @@ public class GuiListener implements Listener {
 				e.setCancelled(true);
 				if (p.hasPermission("troll.items")) {
 
-					if(e.getCurrentItem().getItemMeta() == null) {
+					if (e.getCurrentItem().getItemMeta() == null) {
 						return;
 					}
-					
-					if(e.getCurrentItem().getType() == XMaterial.AIR.parseMaterial()) {
+
+					if (e.getCurrentItem().getType() == XMaterial.AIR.parseMaterial()) {
 						return;
 					}
-										
+
 					if (e.getCurrentItem().getItemMeta().equals(item.getItemMeta())) {
 						p.getInventory().addItem(item);
 					} else if (e.getCurrentItem().getItemMeta().equals(item2.getItemMeta())) {
@@ -241,13 +242,46 @@ public class GuiListener implements Listener {
 						e.getInventory().setItem(53, gl);
 
 						if (Bukkit.getOnlinePlayers().size() > (45 * (page))) {
+
+							ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+
 							e.getInventory().setItem(45, pagei);
-							int i = 0;
-							for (Player all : Bukkit.getOnlinePlayers()) {
-								if (i > (45 * page)) {
-									e.getInventory().addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+
+							if (Data.async) {
+								new BukkitRunnable() {
+
+									@Override
+									public void run() {
+										int i = 0;
+										for (Player all : Bukkit.getOnlinePlayers()) {
+											if (i > (45 * page)) {
+												items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+											}
+											i++;
+										}
+
+										new BukkitRunnable() {
+
+											@Override
+											public void run() {
+
+												for (ItemStack is : items) {
+													e.getInventory().addItem(is);
+												}
+
+											}
+										}.runTask(Main.instance);
+									}
+								}.runTaskAsynchronously(Main.instance);
+							} else {
+								int i = 0;
+								for (Player all : Bukkit.getOnlinePlayers()) {
+									if (i > (45 * page)) {
+										e.getInventory()
+												.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+									}
+									i++;
 								}
-								i++;
 							}
 						}
 
@@ -258,7 +292,7 @@ public class GuiListener implements Listener {
 							pagen.setItemMeta(pagenm);
 							e.getInventory().setItem(50, pagen);
 						}
-					} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cConfiguration")) {
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cConfiguration")) {
 						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 							e.getView().close();
 							InvManager.openConfigInv(p);
@@ -271,7 +305,7 @@ public class GuiListener implements Listener {
 			} else if (e.getView().getTitle().equalsIgnoreCase("§cTroll Config Menu")) {
 				e.getResult();
 				e.setResult(Result.DENY);
-				
+
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cBack")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						e.getView().close();
@@ -280,7 +314,7 @@ public class GuiListener implements Listener {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReload Config")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReload Config")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						e.getView().close();
 						Main.reloadConfigurations();
@@ -290,7 +324,7 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-				
+
 			} else if (e.getView().getTitle().equalsIgnoreCase("§2Which MLG?")) {
 				e.getResult();
 				e.setResult(Result.DENY);

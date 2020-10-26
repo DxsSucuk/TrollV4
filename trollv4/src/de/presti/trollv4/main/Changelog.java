@@ -27,6 +27,11 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Added Async Heads");
+		p.sendMessage(Data.cp + "Notification if i join the Server");
+		p.sendMessage(Data.cp + "Added an Warning to some Trolls");
+		p.sendMessage(Data.cp + "TnTTrace tnt spawn delay can be changed");
+		p.sendMessage(Data.prefix + "Version » 4.4.2");
 		p.sendMessage(Data.cu + "Hotfix!");
 		p.sendMessage(Data.prefix + "Version » 4.4.1");
 		p.sendMessage(Data.cu + "Fix for Cracked Server in GUI");
@@ -128,11 +133,12 @@ public class Changelog {
 	
 	public static void credits(Player p) {
 			p.sendMessage(Data.prefix + "§3Devs§7:");
-			p.sendMessage(Data.prefix + "Presti(DxsSucuk)");
-			p.sendMessage(Data.prefix + "David(Davidjordan2006)");
+			p.sendMessage(Data.prefix + "Presti(Prestigemaster62)");
+			p.sendMessage(Data.prefix + "§3Code Support§7:");
+			p.sendMessage(Data.prefix + "RyTheFirst");
+			p.sendMessage(Data.prefix + "CryptoMorin");
 			p.sendMessage(Data.prefix + "§3Ideas§7:");
 			p.sendMessage(Data.prefix + "CrashDezz");
-			p.sendMessage(Data.prefix + "Vincelive");
 			p.sendMessage(Data.prefix + "Garkolym");
 			p.sendMessage(Data.prefix + "§3THANKS TO§7:");
 			p.sendMessage(Data.prefix + "Lara");
@@ -144,9 +150,7 @@ public class Changelog {
 			p.sendMessage(Data.prefix + "Fabian");
 			p.sendMessage(Data.prefix + "Vince");
 			p.sendMessage(Data.prefix + "Husham");
-			p.sendMessage(Data.prefix + "Bivieh");
-			p.sendMessage(Data.prefix + "Robin");
-			p.sendMessage(Data.prefix + "und " + p.getName());	
+			p.sendMessage(Data.prefix + "and " + p.getName());	
 	}
 
 }

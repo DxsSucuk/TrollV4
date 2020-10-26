@@ -73,6 +73,27 @@ public class SetItems {
 		item.setItemMeta(itemm);
 		return item;
 	}
+	
+
+	public static ItemStack buildItem(String name, XMaterial m) {
+		ItemStack item = new ItemStack(m.parseItem());
+		ItemMeta itemm = item.getItemMeta();
+		itemm.setDisplayName(name);
+		item.setItemMeta(itemm);
+		return item;
+	}
+	
+
+	public static ItemStack buildItem(String name, Material m, String lore) {
+		ArrayList<String> lores = new ArrayList<String>();
+		lores.add(lore);
+		ItemStack item = new ItemStack(m);
+		ItemMeta itemm = item.getItemMeta();
+		itemm.setLore(lores);
+		itemm.setDisplayName(name);
+		item.setItemMeta(itemm);
+		return item;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static ItemStack buildItemCodes(String name, Material m, int in, short sh) {

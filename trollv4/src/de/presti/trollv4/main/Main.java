@@ -214,6 +214,7 @@ public class Main extends JavaPlugin {
 			logger.info("Config broken recreating!");
 
 		} else {
+			
 			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
 				System.out.print("Updating Config!");
@@ -228,6 +229,9 @@ public class Main extends JavaPlugin {
 				boolean anim = (Config.getconfig().get("Animations") != null
 						? Config.getconfig().getBoolean("Animations")
 						: false);
+				boolean async = (Config.getconfig().get("ASync") != null
+						? Config.getconfig().getBoolean("ASync")
+						: false);
 				boolean cs = (Config.getconfig().get("Community-surprise") != null
 						? Config.getconfig().getBoolean("Community-surprise")
 						: true);
@@ -241,13 +245,18 @@ public class Main extends JavaPlugin {
 						? Config.getconfig().getInt("trolls.slipperyhands.time")
 						: 1);
 
+				int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null
+						? Config.getconfig().getInt("trolls.tnttrace.spawndelay")
+						: 2);
+
+				
 				if(Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
 					cs = true;
 				}
 				
 				Config.getFile().delete();
 
-				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, cs, hack, fakeinv, hands);
+				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
 				System.out.print("Config updated!");
 			}
 

@@ -11,6 +11,7 @@ import org.bukkit.entity.TNTPrimed;
 
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.*;
 import de.presti.trollv4.main.*;
@@ -63,7 +64,7 @@ public class Haupt implements CommandExecutor {
 					tnt.setCustomName("§cExplode");
 				}
 			}
-		}, 0L, 2L);
+		}, 0L, (long)(Config.cfg.getInt("trolls.tnttrace.spawndelay")));
 	}
 
 	@SuppressWarnings("deprecation")

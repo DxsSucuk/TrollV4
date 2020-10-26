@@ -1,6 +1,5 @@
 package de.presti.trollv4.invs;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.listener.GuiListener;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.ArrayUtils;
@@ -154,6 +152,7 @@ public class InvManager {
 	}
 
 	public void openPlayerInv(Player p) {
+		ArrayList<ItemStack> items = new ArrayList<>();
 		Inventory inv = Bukkit.createInventory(null, 9 * 6, "§2Player Troll Menu");
 		if (Config.getconfig().getBoolean("Animations")) {
 			ArrayUtils.anim.put(p, new BukkitRunnable() {
@@ -165,15 +164,25 @@ public class InvManager {
 					if (countdown == 0) {
 						inv.clear();
 						p.playSound(p.getLocation(), XSound.ENTITY_ZOMBIE_INFECT.parseSound(), 1F, 1F);
-						inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-								"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-						if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
-							inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-									"§cERROR PLS REOPEN INV"));
-						} else {
-							inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-									"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-						}
+						new BukkitRunnable() {
+
+							@Override
+							public void run() {
+								items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+										"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+
+								new BukkitRunnable() {
+
+									@Override
+									public void run() {
+
+										inv.setItem(0, items.get(0));
+
+									}
+								}.runTask(Main.instance);
+
+							}
+						}.runTaskAsynchronously(Main.instance);
 
 						setPageOneTrolls(inv);
 
@@ -326,14 +335,25 @@ public class InvManager {
 			ArrayUtils.anim.get(p).runTaskTimer(Main.instance, 0L, 20L);
 
 		} else {
-			inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-					"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-			if (inv.getItem(0).getItemMeta().getDisplayName().equalsIgnoreCase("§2Youre Trolling §cnull")) {
-				inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()), "§cERROR PLS REOPEN INV"));
-			} else {
-				inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-						"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
-			}
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+					items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+							"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+
+							inv.setItem(0, items.get(0));
+
+						}
+					}.runTask(Main.instance);
+
+				}
+			}.runTaskAsynchronously(Main.instance);
 
 			setPageOneTrolls(inv);
 
@@ -347,7 +367,7 @@ public class InvManager {
 		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.fakeop"), XMaterial.GOLDEN_APPLE.parseMaterial()));
 		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.crash"), XMaterial.PAPER.parseMaterial()));
 		inv.setItem(13,
-				SetItems.buildItem(Items.getItem("gui.trolls.startcontrol"), XMaterial.GREEN_WOOL.parseMaterial()));
+				SetItems.buildItem(Items.getItem("gui.trolls.startcontrol"), XMaterial.GREEN_WOOL));
 		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.spam"), XMaterial.ARROW.parseMaterial()));
 		inv.setItem(15, SetItems.buildItem(Items.getItem("gui.trolls.mlg"), XMaterial.WATER_BUCKET.parseMaterial()));
 		inv.setItem(16,
@@ -356,7 +376,7 @@ public class InvManager {
 				SetItems.buildItem(Items.getItem("gui.trolls.hackuser"), XMaterial.NETHER_STAR.parseMaterial()));
 		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.strike"), XMaterial.BAKED_POTATO.parseMaterial()));
 		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.demo"), XMaterial.BEDROCK.parseMaterial()));
-		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial()));
+		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial(), "§cDestorys the Map!"));
 		inv.setItem(23,
 				SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
 		inv.setItem(24, SetItems.buildItem(Items.getItem("gui.trolls.anticheat"), XMaterial.IRON_AXE.parseMaterial()));
@@ -366,14 +386,14 @@ public class InvManager {
 		inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"),
 				XMaterial.COMMAND_BLOCK.parseMaterial()));
 		inv.setItem(31,
-				SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial()));
+				SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial(), "§cDestorys the Map!"));
 		inv.setItem(32, SetItems.buildItem(Items.getItem("gui.trolls.webtrap"), XMaterial.COBWEB.parseMaterial()));
 		inv.setItem(33, SetItems.buildItem(Items.getItem("gui.trolls.wtf"), XMaterial.MUSIC_DISC_11.parseMaterial()));
 		inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial()));
 		inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
 		inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
 		inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
-		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial()));
+		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial(), "§cDestorys the Map!"));
 		inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
 		inv.setItem(42,
 				SetItems.buildItem(Items.getItem("gui.trolls.noinvforyou"), XMaterial.ENDER_CHEST.parseMaterial()));
@@ -384,10 +404,31 @@ public class InvManager {
 	}
 
 	public static void setPageTwoTrolls(Inventory inv, Player p) {
+
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+
 		inv.clear();
 
-		inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-				"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+		new BukkitRunnable() {
+
+			@Override
+			public void run() {
+				items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+						"§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+
+				new BukkitRunnable() {
+
+					@Override
+					public void run() {
+
+						inv.setItem(0, items.get(0));
+
+					}
+				}.runTask(Main.instance);
+
+			}
+		}.runTaskAsynchronously(Main.instance);
+
 		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
 		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial()));
 		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"),
@@ -418,17 +459,57 @@ public class InvManager {
 	}
 
 	public void choicePlayer(Player p) {
-		int i = 0;
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		Inventory cpinv = Bukkit.createInventory(null, 9 * 6, "§2Player Choice Menu");
-		for (Player all : Bukkit.getOnlinePlayers()) {
-			if (i != 45) {
-				try {
-					cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
-				} catch (Exception e) {
-					e.printStackTrace();
+		if (Data.async) {
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+					int i = 0;
+					for (Player all : Bukkit.getOnlinePlayers()) {
+						if (i != 45) {
+							try {
+								items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							i++;
+						}
+					}
+
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+
+							for (ItemStack it : items) {
+
+								cpinv.addItem(it);
+
+							}
+
+						}
+					}.runTask(Main.instance);
+
 				}
-				i++;
+			}.runTaskAsynchronously(Main.instance);
+		} else {
+
+			int i = 0;
+			for (Player all : Bukkit.getOnlinePlayers()) {
+				if (i != 45) {
+					try {
+						cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					i++;
+				}
 			}
+			
 		}
 
 		ItemStack page = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
