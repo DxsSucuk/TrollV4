@@ -13,6 +13,14 @@ import de.presti.trollv4.main.Main;
 
 public class PlayMusic {
 
+	/**
+	 * Plays Musik(.nbs) with NoteBlocks.
+	 * 
+	 * @param p the player that should hear the song.
+	 * @param PATH the full file path.
+	 * @since 4.4.4
+	 * 
+	 */
 	public static void play(Player p, String PATH) {
 		if (new File(PATH).exists()) {
 			Song song = NBSDecoder.parse(new File(PATH));
@@ -37,11 +45,26 @@ public class PlayMusic {
 		}
 	}
 
+	/**
+	 * Check if the NoteBlockAPI plays Music to an User.
+	 * 
+	 * @param p the player that should be checked.
+	 * @return boolean
+	 * @since 4.4.4
+	 * 
+	 */
 	@SuppressWarnings("static-access")
 	public static boolean isPlaying(Player p) {
 		return NoteBlockAPI.getAPI().isReceivingSong(p);
 	}
 
+	/**
+	 * Stops every Music that is playing by the NoteBlockAPI.
+	 * 
+	 * @param p the player that shouldnt hear any music anymore.
+	 * @since 4.4.4
+	 * 
+	 */
 	public static void stop(Player p) {
 		if (isPlaying(p)) {
 			NoteBlockAPI.stopPlaying(p);

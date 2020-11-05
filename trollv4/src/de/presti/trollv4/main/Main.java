@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
@@ -67,7 +68,7 @@ public class Main extends JavaPlugin {
 				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
 				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
 				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
-		
+
 		downloadAll();
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
@@ -214,7 +215,7 @@ public class Main extends JavaPlugin {
 			logger.info("Config broken recreating!");
 
 		} else {
-			
+
 			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
 				System.out.print("Updating Config!");
@@ -229,8 +230,7 @@ public class Main extends JavaPlugin {
 				boolean anim = (Config.getconfig().get("Animations") != null
 						? Config.getconfig().getBoolean("Animations")
 						: false);
-				boolean async = (Config.getconfig().get("ASync") != null
-						? Config.getconfig().getBoolean("ASync")
+				boolean async = (Config.getconfig().get("ASync") != null ? Config.getconfig().getBoolean("ASync")
 						: false);
 				boolean cs = (Config.getconfig().get("Community-surprise") != null
 						? Config.getconfig().getBoolean("Community-surprise")
@@ -249,17 +249,16 @@ public class Main extends JavaPlugin {
 						? Config.getconfig().getInt("trolls.tnttrace.spawndelay")
 						: 2);
 
-				
-				if(Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
+				if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
 					cs = true;
 				}
-				
+
 				Config.getFile().delete();
 
-				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
+				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, async, cs, hack, fakeinv, hands,
+						tnttrace);
 				System.out.print("Config updated!");
 			}
-
 		}
 	}
 

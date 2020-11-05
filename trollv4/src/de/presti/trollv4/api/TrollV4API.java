@@ -40,18 +40,48 @@ public class TrollV4API {
 
 	private static int taskID;
 
-	public static void startControl(Player user, Player Victim) {
-		Main.startControlling(user, Victim);
+    /**
+     * Lets an player control an other player.
+     * This will be stopped after the player leaves or the control stops.
+     *
+     * @param user the player thats should control.
+     * @param victim the player that should be controlled.
+     * @since 4.4.4
+     */
+	public static void startControl(Player user, Player victim) {
+		Main.startControlling(user, victim);
 	}
 
-	public static void stopControl(Player user, Player Victim) {
-		Main.stopControlling(user, Victim);
+    /**
+     * Stops the control of an user.
+     * This will stop the control of an player.
+     *
+     * @param user the player thats should release the victim.
+     * @param victim the player that should be released.
+     * @since 4.4.4
+     */
+	public static void stopControl(Player user, Player victim) {
+		Main.stopControlling(user, victim);
 	}
 
-	public static void DemoScreen(Player Victim) {
-		sendGameStateChange(Victim, 5, 0);
+    /**
+     * Shows an player the Minecraft Demoscreen.
+     * Currently this only works with 1.8.
+     *
+     * @param victim the player that should be controlled.
+     * @since 4.4.4
+     */
+	public static void DemoScreen(Player victim) {
+		sendGameStateChange(victim, 5, 0);
 	}
 
+    /**
+     * Lets an player be Herobrine.
+     * This spwanes Silvefishes and Thunder bolts around him.
+     *
+     * @param victim the player thats should be herobrine.
+     * @since 4.4.4
+     */
 	public static void Herobrine(Player victim) {
 		if (ArrayUtils.herobrine.contains(victim)) {
 			ArrayUtils.herobrine.remove(victim);
@@ -60,6 +90,13 @@ public class TrollV4API {
 		}
 	}
 
+    /**
+     * This spawnes Arrows around an player.
+     * Just Vibing in here.
+     *
+     * @param victim that should get spammed.
+     * @since 4.4.4
+     */
 	public static void ArrowSpam(Player victim) {
 		if (ArrayUtils.userbowspam.contains(victim)) {
 			ArrayUtils.arrowspam.get(victim).cancel();
@@ -123,6 +160,13 @@ public class TrollV4API {
 		}
 	}
 
+    /**
+     * This "hacks" an player.
+     * Plays sound and send titles.
+     *
+     * @param victim that should get hacked.
+     * @since 4.4.4
+     */
 	public static void Hack(Player victim) {
 		if (victim != null) {
 			taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
@@ -149,6 +193,13 @@ public class TrollV4API {
 		}
 	}
 
+    /**
+     * This explodes the player.
+     * Spawns an explosion and set the health to 0.
+     *
+     * @param victim that should go boom.
+     * @since 4.4.4
+     */
 	public static void Explode(Player victim) {
 		if (victim != null) {
 			victim.playSound(victim.getLocation(), XSound.ENTITY_FIREWORK_ROCKET_LAUNCH.parseSound(), 100.0F, 200.0F);
@@ -159,14 +210,21 @@ public class TrollV4API {
 		}
 	}
 
-	public static void FakeHack(Player Victim) {
-		if (Victim != null) {
-			if (ArrayUtils.fc.contains(Victim)) {
-				Victim.setWalkSpeed(0.2F);
-				Victim.setAllowFlight(false);
-				ArrayUtils.fc.remove(Victim);
+    /**
+     * Lets others think that the player cheates.
+     * Lets an player fly in the air and fall down.
+     *
+     * @param victim that should seem like an cheater.
+     * @since 4.4.4
+     */
+	public static void FakeHack(Player victim) {
+		if (victim != null) {
+			if (ArrayUtils.fc.contains(victim)) {
+				victim.setWalkSpeed(0.2F);
+				victim.setAllowFlight(false);
+				ArrayUtils.fc.remove(victim);
 			} else {
-				ArrayUtils.fc.add(Victim);
+				ArrayUtils.fc.add(victim);
 
 			}
 		} else {
@@ -174,119 +232,161 @@ public class TrollV4API {
 		}
 	}
 
-	public static void Strike(Player Victim) {
-		if (Victim != null) {
-			Victim.getLocation().getWorld().strikeLightning(Victim.getLocation());
+    /**
+     * This spawns an thunder bolt on an player.
+     * Player go bzzzzzzzzz.
+     *
+     * @param victim that should get striked.
+     * @since 4.4.4
+     */
+	public static void Strike(Player victim) {
+		if (victim != null) {
+			victim.getLocation().getWorld().strikeLightning(victim.getLocation());
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Rocket(Player Victim) {
-		if (Victim != null) {
-			Victim.setAllowFlight(true);
-			Victim.setVelocity(Victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
-			Victim.playSound(Victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
-			Victim.playSound(Victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
-			Victim.setAllowFlight(false);
+    /**
+     * Lets an player fly in the air.
+     * Adds y-velocity to the player.
+     *
+     * @param victim that should fly like an rocket.
+     * @since 4.4.4
+     */
+	public static void Rocket(Player victim) {
+		if (victim != null) {
+			victim.setAllowFlight(true);
+			victim.setVelocity(victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
+			victim.playSound(victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
+			victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
+			victim.setAllowFlight(false);
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Spam(Player Victim) {
-		if (Victim != null) {
+    /**
+     * This spams the chat of an player.
+     * Sends an message 500 times.
+     *
+     * @param victim that should get spammed.
+     * @since 4.4.4
+     */
+	public static void Spam(Player victim) {
+		if (victim != null) {
 			for (int i = 0; i < 500; i++) {
-				Victim.sendMessage("§cDont Cheat!");
+				victim.sendMessage("§cDont Cheat!");
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void FakeOP(Player Victim) {
-		if (Victim != null) {
-			Victim.sendMessage(Language.getMessage("gui.fakeop.opm", Victim));
+    /**
+     * This send an fakeop message to the player.
+     * jebaited.
+     *
+     * @param victim that should get fakeoped.
+     * @since 4.4.4
+     */
+	public static void FakeOP(Player victim) {
+		if (victim != null) {
+			victim.sendMessage(Language.getMessage("gui.fakeop.opm", victim));
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Crash(Player Victim) {
-		if (Victim != null) {
-			Victim.kickPlayer(Language.getMessage("gui.crash.message"));
+    /**
+     * This crashes an player.
+     * It kicks an player with a fake crashmessage.
+     *
+     * @param victim that should get kicked.
+     * @since 4.4.4
+     */
+	public static void Crash(Player victim) {
+		if (victim != null) {
+			victim.kickPlayer(Language.getMessage("gui.crash.message"));
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Freeze(Player Victim) {
-		if (Victim != null) {
-			if (ArrayUtils.freeze.contains(Victim)) {
-				Victim.setWalkSpeed(0.2F);
-				Victim.setFlySpeed(0.1F);
-				ArrayUtils.freeze.remove(Victim);
+    /**
+     * Freeze ma budda.
+     * This adds the player to an arraylist which teleports him back everytime he moves.
+     *
+     * @param victim that should get freezed.
+     * @since 4.4.4
+     */
+	public static void Freeze(Player victim) {
+		if (victim != null) {
+			if (ArrayUtils.freeze.contains(victim)) {
+				victim.setWalkSpeed(0.2F);
+				victim.setFlySpeed(0.1F);
+				ArrayUtils.freeze.remove(victim);
 			} else {
-				Victim.setWalkSpeed(0F);
-				Victim.setFlySpeed(0F);
-				ArrayUtils.freeze.add(Victim);
+				victim.setWalkSpeed(0F);
+				victim.setFlySpeed(0F);
+				ArrayUtils.freeze.add(victim);
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void AntiCheat(Player Victim) {
-		if (Victim != null) {
-			Victim.sendMessage(Language.getMessage("gui.anticheat.detected"));
-			Victim.teleport(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-					Victim.getLocation().getY() + 2, Victim.getLocation().getZ()));
+	public static void AntiCheat(Player victim) {
+		if (victim != null) {
+			victim.sendMessage(Language.getMessage("gui.anticheat.detected"));
+			victim.teleport(new Location(victim.getWorld(), victim.getLocation().getX(),
+					victim.getLocation().getY() + 2, victim.getLocation().getZ()));
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Lagging(Player Victim) {
-		if (Victim != null) {
-			if (!ArrayUtils.lagging.contains(Victim)) {
-				ArrayUtils.lagging.add(Victim);
+	public static void Lagging(Player victim) {
+		if (victim != null) {
+			if (!ArrayUtils.lagging.contains(victim)) {
+				ArrayUtils.lagging.add(victim);
 			} else {
-				ArrayUtils.lagging.remove(Victim);
+				ArrayUtils.lagging.remove(victim);
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void Arrest(Player Victim) {
-		if (Victim != null) {
-			Victim.teleport(Victim.getLocation());
+	public static void Arrest(Player victim) {
+		if (victim != null) {
+			victim.teleport(victim.getLocation());
 			// Y
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() - 1, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() - 1, victim.getLocation().getZ()))
 					.setType(XMaterial.BEDROCK.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 					.setType(XMaterial.BEDROCK.parseMaterial());
 			// X
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY(), victim.getLocation().getZ()))
 					.setType(XMaterial.BEDROCK.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY(), victim.getLocation().getZ()))
 					.setType(XMaterial.BEDROCK.parseMaterial());
 			// Z
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 					.setType(XMaterial.BEDROCK.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 					.setType(XMaterial.BEDROCK.parseMaterial());
 
 		} else {
@@ -294,350 +394,350 @@ public class TrollV4API {
 		}
 	}
 
-	public static void Rotate(Player Victim) {
-		if (Victim != null) {
-			if (ArrayUtils.rotateplayer.contains(Victim)) {
-				ArrayUtils.rotateplayer.remove(Victim);
+	public static void Rotate(Player victim) {
+		if (victim != null) {
+			if (ArrayUtils.rotateplayer.contains(victim)) {
+				ArrayUtils.rotateplayer.remove(victim);
 			} else {
-				new Haupt().rop(Victim);
-				ArrayUtils.rotateplayer.add(Victim);
+				new Haupt().rop(victim);
+				ArrayUtils.rotateplayer.add(victim);
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void RandomTP(Player Victim) {
-		if (Victim != null) {
-			if (ArrayUtils.randomtp.contains(Victim)) {
-				ArrayUtils.randomtp.remove(Victim);
+	public static void RandomTP(Player victim) {
+		if (victim != null) {
+			if (ArrayUtils.randomtp.contains(victim)) {
+				ArrayUtils.randomtp.remove(victim);
 			} else {
-				new Haupt().rtp(Victim);
-				ArrayUtils.randomtp.add(Victim);
+				new Haupt().rtp(victim);
+				ArrayUtils.randomtp.add(victim);
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void TnTTrace(Player Victim) {
-		if (Victim != null) {
-			if (ArrayUtils.tntp.contains(Victim)) {
-				ArrayUtils.tntp.remove(Victim);
+	public static void TnTTrace(Player victim) {
+		if (victim != null) {
+			if (ArrayUtils.tntp.contains(victim)) {
+				ArrayUtils.tntp.remove(victim);
 			} else {
-				new Haupt().spawntntatplayer(Victim);
-				ArrayUtils.tntp.add(Victim);
+				new Haupt().spawntntatplayer(victim);
+				ArrayUtils.tntp.add(victim);
 			}
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void WTF(Player Victim) {
-		if (Victim != null) {
+	public static void WTF(Player victim) {
+		if (victim != null) {
 
-			Victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 5, true));
-			Victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 2));
-			Victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, true));
+			victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 5, true));
+			victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 2));
+			victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, true));
 
-			ArrayUtils.wtf.put(Victim, new BukkitRunnable() {
+			ArrayUtils.wtf.put(victim, new BukkitRunnable() {
 				int countdown = 4;
 
 				@Override
 				public void run() {
 
 					if (countdown == 0) {
-						Victim.teleport(Victim.getLocation());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+						victim.teleport(victim.getLocation());
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.GLASS.parseMaterial());
-						Victim.chat("Help me Pls im stucked ;-; I dont know where im pls help!!!");
-						Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(Victim).getTaskId());
+						victim.chat("Help me Pls im stucked ;-; I dont know where im pls help!!!");
+						Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(victim).getTaskId());
 						return;
 					}
 
 					if (countdown == 4) {
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() - 1, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() - 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.teleport(Victim.getLocation());
+						victim.teleport(victim.getLocation());
 					}
 
 					if (countdown == 3) {
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY(), victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY(), victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ()))
 								.setType(XMaterial.GLASS.parseMaterial());
-						Victim.teleport(Victim.getLocation());
+						victim.teleport(victim.getLocation());
 					}
 
 					if (countdown == 2) {
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.GLASS.parseMaterial());
-						Victim.teleport(Victim.getLocation());
+						victim.teleport(victim.getLocation());
 					}
 
 					if (countdown == 1) {
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 								.setType(XMaterial.BEDROCK.parseMaterial());
-						Victim.getWorld()
-								.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-										Victim.getLocation().getY() + 1, Victim.getLocation().getZ()))
+						victim.getWorld()
+								.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+										victim.getLocation().getY() + 1, victim.getLocation().getZ()))
 								.setType(XMaterial.GLASS.parseMaterial());
-						Victim.teleport(Victim.getLocation());
+						victim.teleport(victim.getLocation());
 					}
 
 					if (countdown <= 0) {
-						Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(Victim).getTaskId());
+						Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(victim).getTaskId());
 					}
 					countdown--;
 				}
 			});
-			ArrayUtils.wtf.get(Victim).runTaskTimer(Main.instance, 0L, 20L);
+			ArrayUtils.wtf.get(victim).runTaskTimer(Main.instance, 0L, 20L);
 		} else {
 			System.out.println(Language.getMessage("noonline"));
 		}
 	}
 
-	public static void WebTrap(Player Victim) {
-		if (Victim != null) {
+	public static void WebTrap(Player victim) {
+		if (victim != null) {
 
 			// Oben
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 2, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
 			// Mitte
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 1, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY() + 1, Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
 			// Unten
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY(), Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY(), victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY(), victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ()))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY(), victim.getLocation().getZ()))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ() + 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY(), victim.getLocation().getZ() + 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX(),
-							Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+							victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() + 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+							victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
-			Victim.getWorld()
-					.getBlockAt(new Location(Victim.getWorld(), Victim.getLocation().getX() - 1,
-							Victim.getLocation().getY(), Victim.getLocation().getZ() - 1))
+			victim.getWorld()
+					.getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+							victim.getLocation().getY(), victim.getLocation().getZ() - 1))
 					.setType(XMaterial.COBWEB.parseMaterial());
 
 		} else {
@@ -645,68 +745,68 @@ public class TrollV4API {
 		}
 	}
 
-	public static void MLG(Player Victim, String mlg) {
+	public static void MLG(Player victim, String mlg) {
 		if (mlg.equalsIgnoreCase("slime")) {
-			if (Victim != null) {
-				Victim.setAllowFlight(true);
-				Victim.setVelocity(Victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
+			if (victim != null) {
+				victim.setAllowFlight(true);
+				victim.setVelocity(victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
+				victim.playSound(victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
+				victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
 				ItemStack slime = new ItemStack(XMaterial.SLIME_BLOCK.parseMaterial());
 				ItemMeta slimem = slime.getItemMeta();
 				slimem.setDisplayName("§cMLG§8-§aSlime");
 				slime.setItemMeta(slimem);
-				Victim.getInventory().addItem(new ItemStack[] { slime });
-				Titles.send(Victim, 1, 10, 1, "§2MAKE A §cMLG", "");
-				Victim.setAllowFlight(false);
+				victim.getInventory().addItem(new ItemStack[] { slime });
+				Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
+				victim.setAllowFlight(false);
 			} else {
 				System.out.println(Language.getMessage("noonline"));
 			}
 		} else if (mlg.equalsIgnoreCase("lava")) {
-			if (Victim != null) {
-				Victim.setAllowFlight(true);
-				Victim.setVelocity(Victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
+			if (victim != null) {
+				victim.setAllowFlight(true);
+				victim.setVelocity(victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
+				victim.playSound(victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
+				victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
 				ItemStack bucket = new ItemStack(XMaterial.LAVA_BUCKET.parseMaterial());
 				ItemMeta meta = bucket.getItemMeta();
 				meta.setDisplayName("§cMLG§8-§bBucket");
 				bucket.setItemMeta(meta);
-				Victim.getInventory().addItem(new ItemStack[] { bucket });
-				Titles.send(Victim, 1, 10, 1, "§2MAKE A §cMLG", "");
-				Victim.setAllowFlight(false);
+				victim.getInventory().addItem(new ItemStack[] { bucket });
+				Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
+				victim.setAllowFlight(false);
 			} else {
 				System.out.println(Language.getMessage("noonline"));
 			}
 		} else if (mlg.equalsIgnoreCase("cobweb")) {
-			if (Victim != null) {
-				Victim.setAllowFlight(true);
-				Victim.setVelocity(Victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
+			if (victim != null) {
+				victim.setAllowFlight(true);
+				victim.setVelocity(victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
+				victim.playSound(victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
+				victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
 				ItemStack web = new ItemStack(XMaterial.COBWEB.parseMaterial());
 				ItemMeta webm = web.getItemMeta();
 				webm.setDisplayName("§cMLG§8-§bWeb");
 				web.setItemMeta(webm);
-				Victim.getInventory().addItem(new ItemStack[] { web });
-				Titles.send(Victim, 1, 10, 1, "§2MAKE A §cMLG", "");
-				Victim.setAllowFlight(false);
+				victim.getInventory().addItem(new ItemStack[] { web });
+				Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
+				victim.setAllowFlight(false);
 			} else {
 				System.out.println(Language.getMessage("noonline"));
 			}
 		} else if (mlg.equalsIgnoreCase("water")) {
-			if (Victim != null) {
-				Victim.setAllowFlight(true);
-				Victim.setVelocity(Victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
-				Victim.playSound(Victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
+			if (victim != null) {
+				victim.setAllowFlight(true);
+				victim.setVelocity(victim.getLocation().getDirection().multiply(0.5D).setY(3.8D));
+				victim.playSound(victim.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
+				victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
 				ItemStack bucket = new ItemStack(XMaterial.WATER_BUCKET.parseMaterial());
 				ItemMeta meta = bucket.getItemMeta();
 				meta.setDisplayName("§cMLG§8-§bBucket");
 				bucket.setItemMeta(meta);
-				Victim.getInventory().addItem(new ItemStack[] { bucket });
-				Titles.send(Victim, 1, 10, 1, "§2MAKE A §cMLG", "");
-				Victim.setAllowFlight(false);
+				victim.getInventory().addItem(new ItemStack[] { bucket });
+				Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
+				victim.setAllowFlight(false);
 			} else {
 				System.out.println(Language.getMessage("noonline"));
 			}
@@ -716,31 +816,31 @@ public class TrollV4API {
 		}
 	}
 
-	public static void LSD(Player Victim) {
-		Packets.sendPacket(Victim, 7, 15);
+	public static void LSD(Player victim) {
+		Packets.sendPacket(victim, 7, 15);
 	}
 
-	public static void GuardinShow(Player Victim, boolean packet) {
+	public static void GuardinShow(Player victim, boolean packet) {
 		if (packet) {
-			sendGameStateChange(Victim, 10, 0);
+			sendGameStateChange(victim, 10, 0);
 		} else {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-					"particle mobappearance " + Victim.getLocation().getBlockX() + " "
-							+ Victim.getLocation().getBlockY() + " " + Victim.getLocation().getBlockZ() + " 1 1 1 1");
+					"particle mobappearance " + victim.getLocation().getBlockX() + " "
+							+ victim.getLocation().getBlockY() + " " + victim.getLocation().getBlockZ() + " 1 1 1 1");
 			
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-					"particle minecraft:elder_guardian " + Victim.getLocation().getBlockX() + " "
-							+ Victim.getLocation().getBlockY() + " " + Victim.getLocation().getBlockZ());
+					"particle minecraft:elder_guardian " + victim.getLocation().getBlockX() + " "
+							+ victim.getLocation().getBlockY() + " " + victim.getLocation().getBlockZ());
 		}
 	}
 
-	public static void EndGame(Player Victim) {
-		sendGameStateChange(Victim, 4, 1);
+	public static void EndGame(Player victim) {
+		sendGameStateChange(victim, 4, 1);
 	}
 
-	public static void sendGameStateChange(Player Victim, int type, float state) {
+	public static void sendGameStateChange(Player victim, int type, float state) {
 		try {
-			Object entityPlayer = Victim.getClass().getMethod("getHandle").invoke(Victim);
+			Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
 			Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 			Object packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
 					.newInstance(type, state);
