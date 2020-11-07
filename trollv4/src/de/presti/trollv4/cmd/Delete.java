@@ -39,7 +39,9 @@ public class Delete implements CommandExecutor {
 				File f = new File("plugins/TrollV4Updater.jar");
 				if (f.exists()) {
 					try {
-						PluginUtil.unloadPlugin("TrollV4Updater");
+						if (PluginUtil.isLoaded("TrollV4Updater")) {
+							PluginUtil.unloadPlugin("TrollV4Updater");
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

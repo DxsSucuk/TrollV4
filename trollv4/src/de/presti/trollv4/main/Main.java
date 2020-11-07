@@ -216,8 +216,7 @@ public class Main extends JavaPlugin {
 				boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
 						? Config.getconfig().getBoolean("Custom-Item-Name")
 						: false);
-				boolean uc = (Config.getconfig().get("AutoUpdate") != null
-						? Config.getconfig().getBoolean("AutoUpdate")
+				boolean uc = (Config.getconfig().get("AutoUpdate") != null ? Config.getconfig().getBoolean("AutoUpdate")
 						: true);
 				boolean autoup = (Config.getconfig().get("UpdateChecker") != null
 						? Config.getconfig().getBoolean("UpdateChecker")
@@ -250,8 +249,8 @@ public class Main extends JavaPlugin {
 
 				Config.getFile().delete();
 
-				Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands,
-						tnttrace);
+				Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv,
+						hands, tnttrace);
 				System.out.print("Config updated!");
 			}
 		}
@@ -352,16 +351,17 @@ public class Main extends JavaPlugin {
 	}
 
 	public static void updater() {
-		
-	/*	if(download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar", "plugins/TrollV4Updater.jar")) {
+
+		if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
+				"plugins/TrollV4Updater.jar")) {
 			logger.info("Downloading the updater!");
 			try {
 				PluginUtil.loadPlugin("TrollV4Updater");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} */
-		
+		}
+
 	}
 
 }
