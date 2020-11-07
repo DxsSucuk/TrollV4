@@ -16,24 +16,14 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.presti.trollv4.api.TrollV4API;
-import de.presti.trollv4.cmd.Haupt;
-import de.presti.trollv4.config.Config;
-import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
-import de.presti.trollv4.listener.Event;
-import de.presti.trollv4.listener.GuiListener;
-import de.presti.trollv4.listener.iListener;
-import de.presti.trollv4.logging.Logger;
-import de.presti.trollv4.utils.ArrayUtils;
-import de.presti.trollv4.utils.Community;
-import de.presti.trollv4.utils.Metrics;
-import de.presti.trollv4.utils.PluginUtil;
-import de.presti.trollv4.utils.UpdateChecker;
-import de.presti.trollv4.utils.control.Controls;
+import de.presti.trollv4.cmd.*;
+import de.presti.trollv4.config.*;
+import de.presti.trollv4.listener.*;
+import de.presti.trollv4.logging.*;
+import de.presti.trollv4.utils.*;
+import de.presti.trollv4.utils.control.*;
 
 /*
 *	Urheberrechtshinweis														*
@@ -104,7 +94,7 @@ public class Main extends JavaPlugin {
 		new Items();
 		updateConfig();
 
-		if (Config.getconfig().getBoolean("AutoUpdate")) {
+		if (Config.getconfig().getBoolean("UpdateChecker")) {
 			update = new UpdateChecker(this);
 			update.checkForUpdate();
 		}
@@ -133,6 +123,8 @@ public class Main extends JavaPlugin {
 
 	public static void CMD() {
 		instance.getCommand("troll").setExecutor(new Haupt());
+		instance.getCommand("troll").setTabCompleter(new TabCompleter());
+		instance.getCommand("delete").setExecutor(new Delete());
 	}
 
 	public void downloadAll() {
@@ -224,8 +216,11 @@ public class Main extends JavaPlugin {
 				boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
 						? Config.getconfig().getBoolean("Custom-Item-Name")
 						: false);
-				boolean autoup = (Config.getconfig().get("AutoUpdate") != null
+				boolean uc = (Config.getconfig().get("AutoUpdate") != null
 						? Config.getconfig().getBoolean("AutoUpdate")
+						: true);
+				boolean autoup = (Config.getconfig().get("UpdateChecker") != null
+						? Config.getconfig().getBoolean("UpdateChecker")
 						: true);
 				boolean anim = (Config.getconfig().get("Animations") != null
 						? Config.getconfig().getBoolean("Animations")
@@ -255,7 +250,7 @@ public class Main extends JavaPlugin {
 
 				Config.getFile().delete();
 
-				Config.createFirstConfigWithValue((l.toUpperCase()), cin, autoup, anim, async, cs, hack, fakeinv, hands,
+				Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands,
 						tnttrace);
 				System.out.print("Config updated!");
 			}
@@ -354,6 +349,19 @@ public class Main extends JavaPlugin {
 		} catch (IOException e) {
 			return false;
 		}
+	}
+
+	public static void updater() {
+		
+	/*	if(download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar", "plugins/TrollV4Updater.jar")) {
+			logger.info("Downloading the updater!");
+			try {
+				PluginUtil.loadPlugin("TrollV4Updater");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} */
+		
 	}
 
 }

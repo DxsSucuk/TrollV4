@@ -80,7 +80,7 @@ public class Event implements Listener {
 		}
 
 		if (p.hasPermission("troll.help")) {
-			if (Config.getconfig().getBoolean("AutoUpdate")) {
+			if (Config.getconfig().getBoolean("UpdateChecker")) {
 				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)) {
 					p.sendMessage(Data.prefix + "TrollV4 has a Update!");
 					p.sendMessage(Data.prefix + "New Version: " + Main.instance.update.spigotPluginVersion);

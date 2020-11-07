@@ -1,7 +1,5 @@
 package de.presti.trollv4.logging;
 
-import org.bukkit.Bukkit;
-
 import de.presti.trollv4.main.Main;
 
 /*

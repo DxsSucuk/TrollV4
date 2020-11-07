@@ -2,8 +2,6 @@ package de.presti.trollv4.main;
 
 import org.bukkit.entity.Player;
 
-import de.presti.trollv4.utils.UpdateChecker;
-
 /*
 *	Urheberrechtshinweis														*
 *																				*
@@ -27,6 +25,11 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "AutoUpdater");
+		p.sendMessage(Data.cp + "Added an TabCompleter");
+		p.sendMessage(Data.cp + "Config GUI");
+		p.sendMessage(Data.cu + "Some API Trolls got an Documentation");
+		p.sendMessage(Data.prefix + "Version » 4.4.3");
 		p.sendMessage(Data.cp + "Added Async Heads");
 		p.sendMessage(Data.cp + "Notification if i join the Server");
 		p.sendMessage(Data.cp + "Added an Warning to some Trolls");
@@ -138,8 +141,9 @@ public class Changelog {
 			p.sendMessage(Data.prefix + "RyTheFirst");
 			p.sendMessage(Data.prefix + "CryptoMorin");
 			p.sendMessage(Data.prefix + "§3Ideas§7:");
-			p.sendMessage(Data.prefix + "CrashDezz");
+			p.sendMessage(Data.prefix + "CrashDezz(CrashedTroll)");
 			p.sendMessage(Data.prefix + "Garkolym");
+			p.sendMessage(Data.prefix + "Minesuchtiiii(TrollBoss)");
 			p.sendMessage(Data.prefix + "§3THANKS TO§7:");
 			p.sendMessage(Data.prefix + "Lara");
 			p.sendMessage(Data.prefix + "David");

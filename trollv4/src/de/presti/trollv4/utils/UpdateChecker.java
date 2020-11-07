@@ -4,10 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import de.presti.trollv4.config.Config;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
-import net.md_5.bungee.api.ChatColor;
-
 import javax.net.ssl.HttpsURLConnection;
 
 import java.io.BufferedReader;
@@ -64,14 +63,20 @@ public class UpdateChecker {
 						cancel();
 						return;
 					}
-					
+
 					if (localPluginVersion.equals(spigotPluginVersion)) {
 						Main.instance.logger.info("TrollV4 Has no Update");
 					} else {
 						Main.instance.logger.warning("TrollV4 has a Update!");
-						Main.instance.logger.warning("New Version: " + spigotPluginVersion);
-						Main.instance.logger.warning("Your Version: " + Data.version);
-						Main.instance.logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
+						if (!Config.cfg.getBoolean("AutoUpdate")) {
+							Main.instance.logger.warning("New Version: " + spigotPluginVersion);
+							Main.instance.logger.warning("Your Version: " + Data.version);
+							Main.instance.logger
+									.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
+						} else {
+							Main.instance.logger.info("AutoUpdate is enabled! Downloading it now!");
+							Main.updater();
+						}
 					}
 					cancel(); // Cancel the runnable as an update has been found.
 				});

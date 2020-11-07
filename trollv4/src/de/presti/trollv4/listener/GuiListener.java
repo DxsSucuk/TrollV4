@@ -323,6 +323,73 @@ public class GuiListener implements Listener {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase("§cCustom§7-§2Item§7-§2Name")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("Custom-Item-Name", !Config.cfg.getBoolean("Custom-Item-Name"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(0, SetItems.buildItem("§cCustom§7-§2Item§7-§2Name", XMaterial.PAPER, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Custom-Item-Name") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bUpdateChecker")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("UpdateChecker", !Config.cfg.getBoolean("UpdateChecker"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(1, SetItems.buildItem("§bUpdateChecker", XMaterial.CLOCK, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("UpdateChecker") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cAuto§bUpdate")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("AutoUpdate", !Config.cfg.getBoolean("AutoUpdate"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(2, SetItems.buildItem("§cAuto§bUpdate", XMaterial.CAULDRON, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("AutoUpdate") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Animations")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("Animations", !Config.cfg.getBoolean("Animations"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(3, SetItems.buildItem("§2Animations", XMaterial.GLASS_PANE, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Animations") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aASync")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("ASync", !Config.cfg.getBoolean("ASync"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(4, SetItems.buildItem("§aASync", XMaterial.PLAYER_HEAD, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("ASync") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
+				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Community§7-§csurprise")) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Config.cfg.set("Community-surprise", !Config.cfg.getBoolean("Community-surprise"));
+						Config.cfg.save(Config.getFile());
+						
+						e.getInventory().setItem(5, SetItems.buildItem("§2Community§7-§csurprise", XMaterial.CAKE, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Community-surprise") ? "§ayes" : "§cno") }));
+						
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+						e.getView().close();
+					}
 				}
 
 			} else if (e.getView().getTitle().equalsIgnoreCase("§2Which MLG?")) {

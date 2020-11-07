@@ -1,6 +1,5 @@
 package de.presti.trollv4.invs;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -73,7 +72,6 @@ public class SetItems {
 		item.setItemMeta(itemm);
 		return item;
 	}
-	
 
 	public static ItemStack buildItem(String name, XMaterial m) {
 		ItemStack item = new ItemStack(m.parseItem());
@@ -82,14 +80,58 @@ public class SetItems {
 		item.setItemMeta(itemm);
 		return item;
 	}
-	
 
-	public static ItemStack buildItem(String name, Material m, String lore) {
-		ArrayList<String> lores = new ArrayList<String>();
-		lores.add(lore);
+	public static ItemStack buildItem(String name, XMaterial m, String[] lores) {
+		ArrayList<String> lore = new ArrayList<String>();
+
+		for (String s : lores) {
+			lore.add(s);
+		}
+
+		ItemStack item = new ItemStack(m.parseItem());
+		ItemMeta itemm = item.getItemMeta();
+		itemm.setLore(lore);
+		itemm.setDisplayName(name);
+		item.setItemMeta(itemm);
+		return item;
+	}
+
+	public static ItemStack buildItem(String name, Material m, String[] lores) {
+		ArrayList<String> lore = new ArrayList<String>();
+
+		for (String s : lores) {
+			lore.add(s);
+		}
+
 		ItemStack item = new ItemStack(m);
 		ItemMeta itemm = item.getItemMeta();
-		itemm.setLore(lores);
+		itemm.setLore(lore);
+		itemm.setDisplayName(name);
+		item.setItemMeta(itemm);
+		return item;
+	}
+
+	public static ItemStack buildItem(String name, Material m, String lores) {
+		ArrayList<String> lore = new ArrayList<String>();
+
+		lore.add(lores);
+
+		ItemStack item = new ItemStack(m);
+		ItemMeta itemm = item.getItemMeta();
+		itemm.setLore(lore);
+		itemm.setDisplayName(name);
+		item.setItemMeta(itemm);
+		return item;
+	}
+	
+	public static ItemStack buildItem(String name, XMaterial m, String lores) {
+		ArrayList<String> lore = new ArrayList<String>();
+
+		lore.add(lores);
+
+		ItemStack item = new ItemStack(m.parseItem());
+		ItemMeta itemm = item.getItemMeta();
+		itemm.setLore(lore);
 		itemm.setDisplayName(name);
 		item.setItemMeta(itemm);
 		return item;

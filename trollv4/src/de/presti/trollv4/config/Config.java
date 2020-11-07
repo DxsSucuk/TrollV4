@@ -42,6 +42,7 @@ public class Config {
 			cfg.addDefault("Plugin-Version", Data.version);
 			cfg.addDefault("Language", "US");
 			cfg.addDefault("Custom-Item-Name", false);
+			cfg.addDefault("UpdateChecker", true);
 			cfg.addDefault("AutoUpdate", true);
 			cfg.addDefault("Animations", false);
 			cfg.addDefault("ASync", false);
@@ -60,7 +61,7 @@ public class Config {
 		}
 	}
 	
-	public static void createFirstConfigWithValue(String lang, boolean cin, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
+	public static void createFirstConfigWithValue(String lang, boolean cin, boolean uc, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
 		cfg = getconfig();
 		if(!getFile().exists()) {
 			cfg.options().copyDefaults(true);
@@ -75,6 +76,7 @@ public class Config {
 			cfg.addDefault("Plugin-Version", Data.version);
 			cfg.addDefault("Language", lang);
 			cfg.addDefault("Custom-Item-Name", cin);
+			cfg.addDefault("UpdateChecker", uc);
 			cfg.addDefault("AutoUpdate", au);
 			cfg.addDefault("Animations", anim);
 			cfg.addDefault("ASync", async);
