@@ -141,19 +141,13 @@ public class Changelog {
 			p.sendMessage(Data.prefix + "RyTheFirst");
 			p.sendMessage(Data.prefix + "CryptoMorin");
 			p.sendMessage(Data.prefix + "§3Ideas§7:");
-			p.sendMessage(Data.prefix + "CrashDezz(CrashedTroll)");
 			p.sendMessage(Data.prefix + "Garkolym");
+			p.sendMessage(Data.prefix + "CrashDezz(CrashedTroll)");
 			p.sendMessage(Data.prefix + "Minesuchtiiii(TrollBoss)");
 			p.sendMessage(Data.prefix + "§3THANKS TO§7:");
 			p.sendMessage(Data.prefix + "Lara");
 			p.sendMessage(Data.prefix + "David");
-			p.sendMessage(Data.prefix + "Corsin");
-		    p.sendMessage(Data.prefix + "Maxi");
 			p.sendMessage(Data.prefix + "Sam");
-			p.sendMessage(Data.prefix + "Noah");
-			p.sendMessage(Data.prefix + "Fabian");
-			p.sendMessage(Data.prefix + "Vince");
-			p.sendMessage(Data.prefix + "Husham");
 			p.sendMessage(Data.prefix + "and " + p.getName());	
 	}
 
