@@ -217,7 +217,7 @@ public class Main extends JavaPlugin {
 						? Config.getconfig().getBoolean("Custom-Item-Name")
 						: false);
 				boolean uc = (Config.getconfig().get("AutoUpdate") != null ? Config.getconfig().getBoolean("AutoUpdate")
-						: true);
+						: false);
 				boolean autoup = (Config.getconfig().get("UpdateChecker") != null
 						? Config.getconfig().getBoolean("UpdateChecker")
 						: true);
@@ -352,13 +352,15 @@ public class Main extends JavaPlugin {
 
 	public static void updater() {
 
-		if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
-				"plugins/TrollV4Updater.jar")) {
-			logger.info("Downloading the updater!");
-			try {
-				PluginUtil.loadPlugin("TrollV4Updater");
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (!new File("plugins/TrollV4Updater.jar").exists()) {
+			if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
+					"plugins/TrollV4Updater.jar")) {
+				logger.info("Downloading the updater!");
+				try {
+					PluginUtil.loadPlugin("TrollV4Updater");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
