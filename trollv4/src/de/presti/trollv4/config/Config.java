@@ -43,7 +43,7 @@ public class Config {
 			cfg.addDefault("Language", "US");
 			cfg.addDefault("Custom-Item-Name", false);
 			cfg.addDefault("UpdateChecker", true);
-			cfg.addDefault("AutoUpdate", true);
+			cfg.addDefault("AutoUpdate", false);
 			cfg.addDefault("Animations", false);
 			cfg.addDefault("ASync", false);
 			cfg.addDefault("Community-surprise", true);
