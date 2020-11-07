@@ -16,6 +16,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.presti.trollv4.cmd.*;
@@ -352,12 +353,18 @@ public class Main extends JavaPlugin {
 
 	public static void updater() {
 
-		if (!new File("plugins/TrollV4Updater.jar").exists()) {
+		File f = new File("plugins/TrollV4Updater.jar");
+		
+		
+		if (!f.exists()) {
 			if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
 					"plugins/TrollV4Updater.jar")) {
 				logger.info("Downloading the updater!");
 				try {
-					PluginUtil.loadPlugin("TrollV4Updater");
+					Plugin pl = Bukkit.getPluginManager().loadPlugin(f);
+					pl.onLoad();
+
+					Bukkit.getPluginManager().enablePlugin(pl);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
