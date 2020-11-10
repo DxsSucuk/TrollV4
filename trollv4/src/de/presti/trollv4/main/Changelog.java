@@ -25,6 +25,8 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cu + "Big Error Fix!");
+		p.sendMessage(Data.prefix + "Version » 4.4.5");
 		p.sendMessage(Data.cu + "Hotfix");
 		p.sendMessage(Data.prefix + "Version » 4.4.4");
 		p.sendMessage(Data.cp + "AutoUpdater");
