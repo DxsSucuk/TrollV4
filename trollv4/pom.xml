@@ -6,7 +6,7 @@
 
 	<groupId>de.presti</groupId>
 	<artifactId>trollv4</artifactId>
-	<version>4.3.3</version>
+	<version>4.4.6</version>
 
 	<repositories>
 
@@ -44,12 +44,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.github.cryptomorin</groupId>
-			<artifactId>XSeries</artifactId>
-			<version>7.5.5</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -74,28 +68,6 @@
 						<relocation>
 							<pattern>org.bstats</pattern>
 							<shadedPattern>org.bstats</shadedPattern>
-						</relocation>
-					</relocations>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.4</version>
-				<configuration>
-					<relocations>
-						<relocation>
-							<pattern>com.cryptomorin.xseries</pattern>
-							<shadedPattern>com.cryptomorin.xseries</shadedPattern>
 						</relocation>
 					</relocations>
 				</configuration>
