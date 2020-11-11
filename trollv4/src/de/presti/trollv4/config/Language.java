@@ -27,6 +27,7 @@ public class Language {
 		loadGerman();
 		loadEnglish();
 		loadRussian();
+		loadSingapore();
 		loadCustom();
 	}
 
@@ -392,6 +393,105 @@ public class Language {
 		addMessage("ru", "gui.hackserver", "Начинается чит-процесс!");
 		addMessage("ru", "control.world", "§cМир изменился!");
 		addMessage("ru", "control.distance", "§cСлишком далеко!");
+	}
+	
+	public void loadSingapore() {
+		addMessage("sg", "nopermission", "Anda tidak memiliki izin untuk perintah ini!");
+		addMessage("sg", "noonline", "Pemain ini tidak online!");
+		addMessage("sg", "command.troll.default", "Menu Troll telah dibuka!");
+		addMessage("sg", "command.troll.help.line.1", "TrollV4 by Presti");
+		addMessage("sg", "command.troll.help.line.2", "Troll Mode §aActive!");
+		addMessage("sg", "command.troll.help.line.3", "Troll Vanish §aActive!");
+		addMessage("sg", "command.troll.help.line.4", "§4Commands:");
+		addMessage("sg", "command.troll.help.line.5", "§4Player Troll GUI §8- §c/troll");
+		addMessage("sg", "command.troll.help.line.6", "§4Server Troll GUI §8- §c/troll server");
+		addMessage("sg", "command.troll.help.line.7", "§4Item Troll GUI §8- §c/troll items");
+		addMessage("sg", "command.troll.help.line.8", "§4Troll Vanish §8- §c/troll v");
+		addMessage("sg", "command.troll.help.line.9", "§4Gamemode §8- §c/troll gm");
+		addMessage("sg", "command.troll.help.line.10", "§4Fly §8- §c/troll fly");
+		addMessage("sg", "command.troll.help.line.11", "§4Changelog §8- §c/troll changelog");
+		addMessage("sg", "command.troll.help.line.12", "§4Credits §8- §c/troll credits");
+		addMessage("sg", "command.troll.gm", "Anda sekarang berada di Gamemode 1!");
+		addMessage("sg", "command.troll.fly.on", "Kamu bisa terbang sekarang!");
+		addMessage("sg", "command.troll.fly.off", "Kamu sudah tidak bisa terbang lagi!");
+		addMessage("sg", "command.troll.vanish.on", "sekarang kamu lagi vanish!");
+		addMessage("sg", "command.troll.vanish.off", "kamu tidak vanish lagi!");
+		addMessage("sg", "command.troll.items", "Item Troll Inventory dibuka!");
+		addMessage("sg", "command.troll.server", "Server Troll Inventory dibuka!");
+		addMessage("sg", "command.troll.notfound.line.1", "§8>");
+		addMessage("sg", "command.troll.notfound.line.2", "Troll V4 [VERSION]");
+		addMessage("sg", "command.troll.notfound.line.3", "Semua Perintah /troll help");
+		addMessage("sg", "command.troll.notfound.line.4", "TrollV4 by");
+		addMessage("sg", "command.troll.notfound.line.5", "Presti");
+		addMessage("sg", "command.troll.notfound.line.6", "§8>");
+		addMessage("sg", "command.troll.wrongargs", "Argumen yang tidak diketahui, harap gunakan /troll help");
+		addMessage("sg", "command.troll.noplayer", "Anda bukan seorang Player!");
+		addMessage("sg", "gui.mlg", "kamu membuat &c[PLAYER] &2melakukan &cMLG&2!");
+		addMessage("sg", "gui.explode", "kamu membuat &c[PLAYER] &2meledak!");
+		addMessage("sg", "gui.fakehack.on", "kamu membuat &c[PLAYER] &2hack!");
+		addMessage("sg", "gui.fakehack.off", "kamu memaksa &c[PLAYER] &2untuk berhenti!");
+		addMessage("sg", "gui.demo", "player &c[PLAYER] &2sekarang lagi melihat layar demo!");
+		addMessage("sg", "gui.strike", "kamu memukul &c[PLAYER] &2dengan petir!");
+		addMessage("sg", "gui.hackuser", "proses hack sedang dimulai!");
+		addMessage("sg", "gui.rocket", "kamu membuat &c[PLAYER] &2terbang seperti rocket!");
+		addMessage("sg", "gui.spam", "kamu telah spam &c[PLAYER]&2!");
+		addMessage("sg", "gui.startcontrol.start", "kamu telah mengendalikan &c[PLAYER]&2!");
+		addMessage("sg", "gui.startcontrol.cantcontrol", "Kamu tidak bisa mengendalikan dia!");
+		addMessage("sg", "gui.startcontrol.yourself", "kamu tidak bisa mengontrol diri sendiri!");
+		addMessage("sg", "gui.startcontrol.iscontroled", "player ini sudah di control!");
+		addMessage("sg", "gui.startcontrol.alreadyc", "kamu sudah mengontrol orang lain!");
+		addMessage("sg", "gui.stopcontrol.stop", "kamu berhenti mengontol &c[PLAYER]&2!");
+		addMessage("sg", "gui.stopcontrol.nocontrol", "kamu tidak mengontrol siapa siapa!");
+		addMessage("sg", "gui.fakeop.default", "kamu fake op kan &c[PLAYER]&2!");
+		addMessage("sg", "gui.fakeop.opm", "§7§o[Server: Opped [PLAYER]]");
+		addMessage("sg", "gui.crash.default", "kamu membuat &c[PLAYER] &2Crash!");
+		addMessage("sg", "gui.crash.message",
+				"java.net.ConnectException: Connection timed out: No further information");
+		addMessage("sg", "gui.freeze.on", "kamu membekukan &c[PLAYER]&2!");
+		addMessage("sg", "gui.freeze.off", "kamu mencairkan &c[PLAYER]&2!");
+		addMessage("sg", "gui.anticheat.default", "anticheat sudah di nyalakan &c[PLAYER]&2!");
+		addMessage("sg", "gui.anticheat.detected",
+				"§7[§cPrestige§7-§cAntiCheat§7] §2Stop §cHacking(SPEED) §7[§1VL§7/§620§7]");
+		addMessage("sg", "gui.lag.on", "player &c[PLAYER] &2sekarang lagging!");
+		addMessage("sg", "gui.lag.off", "player &c[PLAYER] &2berhenti lagging!");
+		addMessage("sg", "gui.arrest", "player &c[PLAYER] &2tertangkap!");
+		addMessage("sg", "gui.rotate.on", "player &c[PLAYER] &2berputar!");
+		addMessage("sg", "gui.rotate.off", "player &c[PLAYER] &2berhenti berputar!");
+		addMessage("sg", "gui.rndmtp.on", "player &c[PLAYER] &2mulai berpindah!");
+		addMessage("sg", "gui.rndmtp.off", "player &c[PLAYER] &2sudah berhenti berpindah!");
+		addMessage("sg", "gui.tnttrace.on", "dibelakang &c[PLAYER] &2sudah muncul banyak tnt!");
+		addMessage("sg", "gui.tnttrace.off", "dibelakang &c[PLAYER] &2tnt nya sudah tidak muncul lagi!");
+		addMessage("sg", "gui.wtf", "Player &c[PLAYER] &2menjadi gila!");
+		addMessage("sg", "gui.webtrap", "player &c[PLAYER] &2sekarang stuck di cobweb!");
+		addMessage("sg", "gui.lsd", "player &c[PLAYER] &2sekarang melihat dunia lebih berbeda!");
+		addMessage("sg", "gui.guardian", "player &c[PLAYER] &2sekarang mempunyai efek guardian!");
+		addMessage("sg", "gui.herobrine.on", "The User &c[PLAYER] &2sekarang jadi herobrine!");
+		addMessage("sg", "gui.herobrine.off", "The User &c[PLAYER] &2tidak jadi herobrine lagi!");
+		addMessage("sg", "gui.arrowspam.on", "The User &c[PLAYER] &2telah di spam anak panah!");
+		addMessage("sg", "gui.arrowspam.off", "The User &c[PLAYER] &2sudah tidak di spam anak panah lagi!");
+		addMessage("sg", "gui.tornado.on", "The User &c[PLAYER] &2di kejar tornado!");
+		addMessage("sg", "gui.tornado.off", "The User &c[PLAYER] &2sudah tidak di kejar tornado!");
+		addMessage("sg", "gui.fakeinv.default", "The User &c[PLAYER] &2kehilangan inventory nya untuk 5 detik!");
+		addMessage("sg", "gui.fakeinv.cancel", "The User &c[PLAYER] &2dapat inventory nya kembali!");
+		addMessage("sg", "gui.noinv.on", "The User &c[PLAYER] &2tidak bisa buka inventory lagi!");
+		addMessage("sg", "gui.noinv.off", "The User &c[PLAYER] &2sudah bisa buka inventory!");
+		addMessage("sg", "gui.slipperyhands.on", "The User &c[PLAYER] &2tangan nya di oleskan mentega!");
+		addMessage("sg", "gui.slipperyhands.off", "The User &c[PLAYER] &2tangan nya sudah di bersihkan!");
+		addMessage("sg", "gui.tntworld.default", "The User &c[PLAYER] &2hanya melihat tnt di world!");
+		addMessage("sg", "gui.rickroll.default", "The User &c[PLAYER] &2mendengar sebuah lagu!");
+		addMessage("sg", "gui.rickroll.ishearing", "The User &c[PLAYER] &2sudah mendengar sebuah lagu!");
+		addMessage("sg", "gui.dontstopjumping.on", "The User &c[PLAYER] &2tidak bisa berhenti melompat!");
+		addMessage("sg", "gui.dontstopjumping.off", "The User &c[PLAYER] &2berhenti lompat!");
+		addMessage("sg", "gui.deaf.on", "The User &c[PLAYER] &2tidak bisa mendengar apa apa lagi!");
+		addMessage("sg", "gui.deaf.off", "The User &c[PLAYER] &2sudah bisa mendengar!");
+		addMessage("sg", "gui.confused.on", "The User &c[PLAYER] &2sekarang pusing!");
+		addMessage("sg", "gui.confused.off", "The User &c[PLAYER] &2sudah tidak pusing!");
+		addMessage("sg", "gui.tpall", "semua player teleport ke kamu!");
+		addMessage("sg", "gui.fakeleave.default", "fake message sudah di jabarkan di chat!");
+		addMessage("sg", "gui.fakeleave.message", "§6[PLAYER] left the Game.");
+		addMessage("sg", "gui.hackserver", "proses hack di mulai!");
+		addMessage("sg", "control.world", "&4Mengganti dunia");
+		addMessage("sg", "control.distance", "&4TERLALU JAUH");
 	}
 
 	public void loadCustom() {

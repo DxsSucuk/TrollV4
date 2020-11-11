@@ -75,7 +75,7 @@ public class UpdateChecker {
 									.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
 						} else {
 							Main.instance.logger.info("AutoUpdate is enabled! Downloading it now!");
-							Main.updater();
+							Main.updater(spigotPluginVersion);
 						}
 					}
 					cancel(); // Cancel the runnable as an update has been found.

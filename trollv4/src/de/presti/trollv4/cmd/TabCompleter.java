@@ -30,6 +30,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 				
 				ArrayList<String> list = new ArrayList<String>();
 				
+				list.add(" ");
 				list.add("help");
 				list.add("server");
 				list.add("items");

@@ -212,48 +212,60 @@ public class Main extends JavaPlugin {
 
 			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
-				System.out.print("Updating Config!");
+				double confv = Double.valueOf((Config.cfg.getString("Plugin-Version").replace("4.", "")));
 
-				String l = (Language.getLanguage() != null ? Language.getLanguage() : "US");
-				boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
-						? Config.getconfig().getBoolean("Custom-Item-Name")
-						: false);
-				boolean uc = (Config.getconfig().get("AutoUpdate") != null ? Config.getconfig().getBoolean("AutoUpdate")
-						: false);
-				boolean autoup = (Config.getconfig().get("UpdateChecker") != null
-						? Config.getconfig().getBoolean("UpdateChecker")
-						: true);
-				boolean anim = (Config.getconfig().get("Animations") != null
-						? Config.getconfig().getBoolean("Animations")
-						: false);
-				boolean async = (Config.getconfig().get("ASync") != null ? Config.getconfig().getBoolean("ASync")
-						: false);
-				boolean cs = (Config.getconfig().get("Community-surprise") != null
-						? Config.getconfig().getBoolean("Community-surprise")
-						: true);
-				int hack = (Config.getconfig().get("trolls.hack.time") != null
-						? Config.getconfig().getInt("trolls.hack.time")
-						: 15);
-				int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null
-						? Config.getconfig().getInt("trolls.fakeinv.time")
-						: 5);
-				int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null
-						? Config.getconfig().getInt("trolls.slipperyhands.time")
-						: 1);
+				double pluginv = Double.valueOf((Data.version.replace("4.", "")));
 
-				int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null
-						? Config.getconfig().getInt("trolls.tnttrace.spawndelay")
-						: 2);
+				if (confv > pluginv) {
 
-				if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
-					cs = true;
+					logger.warning("Your Config is newer than the Plugin Version!");
+
+				} else {
+
+					logger.info("Updating Config!");
+
+					String l = (Language.getLanguage() != null ? Language.getLanguage() : "US");
+					boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
+							? Config.getconfig().getBoolean("Custom-Item-Name")
+							: false);
+					boolean uc = (Config.getconfig().get("AutoUpdate") != null
+							? Config.getconfig().getBoolean("AutoUpdate")
+							: false);
+					boolean autoup = (Config.getconfig().get("UpdateChecker") != null
+							? Config.getconfig().getBoolean("UpdateChecker")
+							: true);
+					boolean anim = (Config.getconfig().get("Animations") != null
+							? Config.getconfig().getBoolean("Animations")
+							: false);
+					boolean async = (Config.getconfig().get("ASync") != null ? Config.getconfig().getBoolean("ASync")
+							: false);
+					boolean cs = (Config.getconfig().get("Community-surprise") != null
+							? Config.getconfig().getBoolean("Community-surprise")
+							: true);
+					int hack = (Config.getconfig().get("trolls.hack.time") != null
+							? Config.getconfig().getInt("trolls.hack.time")
+							: 15);
+					int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null
+							? Config.getconfig().getInt("trolls.fakeinv.time")
+							: 5);
+					int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null
+							? Config.getconfig().getInt("trolls.slipperyhands.time")
+							: 1);
+
+					int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null
+							? Config.getconfig().getInt("trolls.tnttrace.spawndelay")
+							: 2);
+
+					if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
+						cs = true;
+					}
+
+					Config.getFile().delete();
+
+					Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack,
+							fakeinv, hands, tnttrace);
+					logger.info("Config updated!");
 				}
-
-				Config.getFile().delete();
-
-				Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv,
-						hands, tnttrace);
-				System.out.print("Config updated!");
 			}
 		}
 	}
@@ -352,31 +364,36 @@ public class Main extends JavaPlugin {
 		}
 	}
 
-	public static void updater() {
+	public static void updater(String newerversion) {
 
-		File f = new File("plugins/TrollV4Updater.jar");
+		double spigotver = Double.valueOf(newerversion.replace("4.", ""));
 
-		if (!f.exists()) {
-			if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
-					"plugins/TrollV4Updater.jar")) {
-				logger.info("Downlaoded the updater!");
-				new BukkitRunnable() {
-					@Override
-					public void run() {
-						try {
-							Plugin pl = Bukkit.getPluginManager().loadPlugin(f);
-							pl.onLoad();
+		double pluginv = Double.valueOf((Data.version.replace("4.", "")));
 
-							Bukkit.getPluginManager().enablePlugin(pl);
-						} catch (Exception e) {
-							logger.info("Failed to Load the Updater!");
-							logger.info("Error: " + e.getMessage());
+		if (spigotver > pluginv) {
+			File f = new File("plugins/TrollV4Updater.jar");
+
+			if (!f.exists()) {
+				if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
+						"plugins/TrollV4Updater.jar")) {
+					logger.info("Downlaoded the updater!");
+					new BukkitRunnable() {
+						@Override
+						public void run() {
+							try {
+								Plugin pl = Bukkit.getPluginManager().loadPlugin(f);
+								pl.onLoad();
+
+								Bukkit.getPluginManager().enablePlugin(pl);
+							} catch (Exception e) {
+								logger.info("Failed to Load the Updater!");
+								logger.info("Error: " + e.getMessage());
+							}
 						}
-					}
-				}.runTaskLater(getPlugin(), 20L);
+					}.runTaskLater(getPlugin(), 20L);
+				}
 			}
 		}
-
 	}
 
 }

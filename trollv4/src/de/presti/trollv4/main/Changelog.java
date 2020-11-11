@@ -25,6 +25,9 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Added Language Singapore (by the Community)");
+		p.sendMessage(Data.cu + "Fixed Performance Problems with AutoUpdate");
+		p.sendMessage(Data.prefix + "Version » 4.4.6");
 		p.sendMessage(Data.cu + "Big Error Fix!");
 		p.sendMessage(Data.prefix + "Version » 4.4.5");
 		p.sendMessage(Data.cu + "Hotfix");
@@ -152,6 +155,7 @@ public class Changelog {
 			p.sendMessage(Data.prefix + "Lara");
 			p.sendMessage(Data.prefix + "David");
 			p.sendMessage(Data.prefix + "Sam");
+			p.sendMessage(Data.prefix + "Alex");
 			p.sendMessage(Data.prefix + "and " + p.getName());	
 	}
 
