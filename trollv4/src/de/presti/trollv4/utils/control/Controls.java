@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.ArrayUtils;
+import de.presti.trollv4.utils.player.ArrayUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 

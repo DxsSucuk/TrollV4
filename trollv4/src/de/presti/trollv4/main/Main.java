@@ -26,6 +26,10 @@ import de.presti.trollv4.listener.*;
 import de.presti.trollv4.logging.*;
 import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.control.*;
+import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.plugin.Metrics;
+import de.presti.trollv4.utils.plugin.PluginUtil;
+import de.presti.trollv4.utils.plugin.UpdateChecker;
 
 /*
 *	Urheberrechtshinweis														*

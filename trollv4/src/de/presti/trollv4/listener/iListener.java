@@ -16,8 +16,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.ArrayUtils;
 import de.presti.trollv4.utils.control.CommandGUI;
+import de.presti.trollv4.utils.player.ArrayUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 
 @SuppressWarnings("deprecation")

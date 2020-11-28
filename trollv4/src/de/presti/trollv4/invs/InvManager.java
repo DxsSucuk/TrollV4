@@ -19,7 +19,7 @@ import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.ArrayUtils;
+import de.presti.trollv4.utils.player.ArrayUtils;
 
 /*
 *	Urheberrechtshinweis														*
@@ -435,6 +435,11 @@ public class InvManager {
 				XMaterial.LEATHER_BOOTS.parseMaterial()));
 		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.deaf"), XMaterial.LEATHER_HELMET.parseMaterial()));
 		inv.setItem(14, SetItems.buildItem(Items.getItem("gui.trolls.confused"), XMaterial.POTION.parseMaterial()));
+		inv.setItem(16, SetItems.buildItem(Items.getItem("gui.trolls.anvils"), XMaterial.ANVIL.parseMaterial(), "§cCould give Player Items!"));
+		inv.setItem(19, SetItems.buildItem(Items.getItem("gui.trolls.cows"), XMaterial.ANVIL.parseMaterial()));
+		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.giorno"), XMaterial.ARROW.parseMaterial(), "§cIs this an JoJo reference?"));
+		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.johncena"), XMaterial.GREEN_DYE));
+		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.spookyworld"), XMaterial.JACK_O_LANTERN, "§cThis is going to come out in 4.5.0 ;D"));
 		setOverallTrollMenu(inv);
 	}
 

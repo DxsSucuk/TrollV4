@@ -9,7 +9,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.utils.PluginUtil;
+import de.presti.trollv4.utils.plugin.PluginUtil;
 
 /*
 *	Urheberrechtshinweis														*

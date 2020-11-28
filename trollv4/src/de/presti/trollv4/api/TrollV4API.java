@@ -18,9 +18,9 @@ import com.cryptomorin.xseries.XSound;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.ArrayUtils;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
+import de.presti.trollv4.utils.player.ArrayUtils;
 
 /*
 *	Urheberrechtshinweis														*

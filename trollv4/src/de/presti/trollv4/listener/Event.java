@@ -37,6 +37,9 @@ import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.main.*;
 import de.presti.trollv4.utils.*;
+import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.player.LocationUtil;
+import de.presti.trollv4.utils.plugin.UpdateChecker;
 
 /*
 *	Urheberrechtshinweis														*
