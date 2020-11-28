@@ -429,8 +429,8 @@ public class InvManager {
 			}
 		}.runTaskAsynchronously(Main.instance);
 
-		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial(), "laggy!"));
-		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "Cant be stopped!"));
+		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
+		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "§cCant be stopped!"));
 		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"),
 				XMaterial.LEATHER_BOOTS.parseMaterial()));
 		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.deaf"), XMaterial.LEATHER_HELMET.parseMaterial()));
