@@ -376,24 +376,24 @@ public class InvManager {
 				SetItems.buildItem(Items.getItem("gui.trolls.hackuser"), XMaterial.NETHER_STAR.parseMaterial()));
 		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.strike"), XMaterial.BAKED_POTATO.parseMaterial()));
 		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.demo"), XMaterial.BEDROCK.parseMaterial()));
-		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial(), "§cDestorys the Map!"));
+		inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.explode"), XMaterial.TNT.parseMaterial(), "§cDestroys the Map!"));
 		inv.setItem(23,
 				SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
 		inv.setItem(24, SetItems.buildItem(Items.getItem("gui.trolls.anticheat"), XMaterial.IRON_AXE.parseMaterial()));
 		inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"), XMaterial.GRASS.parseMaterial()));
-		inv.setItem(28, SetItems.buildItem(Items.getItem("gui.trolls.arrest"), XMaterial.BEDROCK.parseMaterial()));
+		inv.setItem(28, SetItems.buildItem(Items.getItem("gui.trolls.arrest"), XMaterial.BEDROCK.parseMaterial(), "§cReplaces Blocks!"));
 		inv.setItem(29, SetItems.buildItem(Items.getItem("gui.trolls.rotateplayer"), XMaterial.COOKIE.parseMaterial()));
 		inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"),
 				XMaterial.COMMAND_BLOCK.parseMaterial()));
 		inv.setItem(31,
-				SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial(), "§cDestorys the Map!"));
-		inv.setItem(32, SetItems.buildItem(Items.getItem("gui.trolls.webtrap"), XMaterial.COBWEB.parseMaterial()));
+				SetItems.buildItem(Items.getItem("gui.trolls.tnttrace"), XMaterial.DIAMOND_BOOTS.parseMaterial(), "§cDestroys the Map!"));
+		inv.setItem(32, SetItems.buildItem(Items.getItem("gui.trolls.webtrap"), XMaterial.COBWEB.parseMaterial(), "§cReplaces Blocks!"));
 		inv.setItem(33, SetItems.buildItem(Items.getItem("gui.trolls.wtf"), XMaterial.MUSIC_DISC_11.parseMaterial()));
-		inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial()));
+		inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial(), "§cLag out the Game of the Player!"));
 		inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
 		inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
 		inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
-		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial(), "§cDestorys the Map!"));
+		inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial(), "§cDestroys the Map!"));
 		inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
 		inv.setItem(42,
 				SetItems.buildItem(Items.getItem("gui.trolls.noinvforyou"), XMaterial.ENDER_CHEST.parseMaterial()));
@@ -429,8 +429,8 @@ public class InvManager {
 			}
 		}.runTaskAsynchronously(Main.instance);
 
-		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
-		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial()));
+		inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial(), "laggy!"));
+		inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "Cant be stopped!"));
 		inv.setItem(12, SetItems.buildItem(Items.getItem("gui.trolls.dontstopjumping"),
 				XMaterial.LEATHER_BOOTS.parseMaterial()));
 		inv.setItem(13, SetItems.buildItem(Items.getItem("gui.trolls.deaf"), XMaterial.LEATHER_HELMET.parseMaterial()));

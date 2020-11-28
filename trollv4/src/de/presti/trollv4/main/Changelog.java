@@ -26,7 +26,9 @@ public class Changelog {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
 		p.sendMessage(Data.cp + "Added Language Singapore (by the Community)");
+		p.sendMessage(Data.cp + "TnT World is now ASync!");
 		p.sendMessage(Data.cu + "Fixed Performance Problems with AutoUpdate");
+		p.sendMessage(Data.cu + "Added more Warnings!");
 		p.sendMessage(Data.prefix + "Version » 4.4.6");
 		p.sendMessage(Data.cu + "Big Error Fix!");
 		p.sendMessage(Data.prefix + "Version » 4.4.5");

@@ -1874,20 +1874,26 @@ public class GuiListener implements Listener {
 						if (p.hasPermission("troll.tntworld") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								Location oldl = t.getLocation();
-								for (int x = 0; x < 200; x++) {
-									for (int y = 0; y < 30; y++) {
-										for (int z = 0; z < 200; z++) {
-											if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
-													oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z).getBlock()
-															.getType() != XMaterial.AIR.parseMaterial()) {
-												Location l = new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
-														oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z);
-												t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
+								new BukkitRunnable() {
+									
+									@Override
+									public void run() {
+										Location oldl = t.getLocation();
+										for (int x = 0; x < 200; x++) {
+											for (int y = 0; y < 30; y++) {
+												for (int z = 0; z < 200; z++) {
+													if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
+															oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z).getBlock()
+																	.getType() != XMaterial.AIR.parseMaterial()) {
+														Location l = new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
+																oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z);
+														t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
+													}
+												}
 											}
 										}
 									}
-								}
+								}.runTaskAsynchronously(Main.instance);
 								p.sendMessage(Data.prefix + Language.getMessage("gui.tntworld.default", t));
 								e.getView().close();
 							} else {
