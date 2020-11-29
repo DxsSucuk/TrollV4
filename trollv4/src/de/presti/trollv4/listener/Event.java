@@ -65,7 +65,7 @@ public class Event implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 
-		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase("Prestigemaster62")) {
+		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase("TheTrueSlayer")) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
 			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + ServerInfo.getMcVersion());
 			p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
