@@ -1,5 +1,6 @@
 package de.presti.trollv4.api;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,6 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
@@ -21,6 +24,8 @@ import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.server.ServerInfo;
+import net.minecraft.server.v1_16_R2.PacketPlayOutGameStateChange;
 
 /*
 *	Urheberrechtshinweis														*
@@ -840,16 +845,26 @@ public class TrollV4API {
 
 	public static void sendGameStateChange(Player victim, int type, float state) {
 		try {
+			
 			Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
 			Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
-			Object packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
+			Object packet = null;
+			
+			if(ServerInfo.supportOldPackets()) {
+			packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
 					.newInstance(type, state);
-
+			} else {
+				
+				packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
+				.newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class).newInstance(type), state);
+			}
+			
 			playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection,
-					packet);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException | NoSuchFieldException | InstantiationException e) {
+					packet); 
+		} catch (Exception e) {
 			System.out.println("Your Server Version isnt Supporting this Packet! (PacketPlayOutGameStateChange)");
+			System.out.println("Return Exception: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

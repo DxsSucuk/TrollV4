@@ -20,6 +20,7 @@ import de.presti.trollv4.config.Items;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
 *	Urheberrechtshinweis														*
@@ -61,7 +62,7 @@ public class InvManager {
 		rm.setDisplayName("§cInfo");
 		lorer.clear();
 		lorer.add("§2Plugin Version: §c" + Data.version);
-		lorer.add("§2Server Version: §c" + Main.getMcVersion());
+		lorer.add("§2Server Version: §c" + ServerInfo.getMcVersion());
 		lorer.add("§2Server PacketVersion: §c" + Main.version);
 		rm.setLore(lorer);
 		red.setItemMeta(rm);

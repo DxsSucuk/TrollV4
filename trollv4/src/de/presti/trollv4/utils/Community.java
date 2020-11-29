@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
+import de.presti.trollv4.utils.server.ServerInfo;
 
 
 public class Community {
@@ -22,7 +23,7 @@ public class Community {
 	    client.setSoTimeout(5000);
 	    System.out.println("Cloud Connection Succesful!");
 	    output = new PrintStream(client.getOutputStream());
-	    output.println("Server:" + Bukkit.getPort() + "+" + Main.getMcVersion() + "-" + Data.version);
+	    output.println("Server:" + Bukkit.getPort() + "+" + ServerInfo.getMcVersion() + "-" + Data.version);
 	    output.close();
 	    client.close();
 	    

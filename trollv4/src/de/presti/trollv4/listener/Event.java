@@ -40,6 +40,7 @@ import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
+import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
 *	Urheberrechtshinweis														*
@@ -66,7 +67,8 @@ public class Event implements Listener {
 
 		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase("Prestigemaster62")) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
-			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + Main.getMcVersion());
+			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + ServerInfo.getMcVersion());
+			p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
 			p.sendMessage(Data.prefix + "Server Language: " + Language.getLanguage());
 			
 			for(Player ops : Bukkit.getOnlinePlayers()) {

@@ -20,16 +20,18 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+
 import de.presti.trollv4.cmd.*;
 import de.presti.trollv4.config.*;
 import de.presti.trollv4.listener.*;
 import de.presti.trollv4.logging.*;
 import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.control.*;
-import de.presti.trollv4.utils.player.ArrayUtils;
-import de.presti.trollv4.utils.plugin.Metrics;
-import de.presti.trollv4.utils.plugin.PluginUtil;
-import de.presti.trollv4.utils.plugin.UpdateChecker;
+import de.presti.trollv4.utils.player.*;
+import de.presti.trollv4.utils.plugin.*;
+import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
 *	Urheberrechtshinweis														*
@@ -51,6 +53,7 @@ public class Main extends JavaPlugin {
 	public UpdateChecker update;
 	public static Controls control;
 	public static String version;
+	public static ProtocolManager protocolM;
 
 	public void onEnable() {
 
@@ -60,6 +63,10 @@ public class Main extends JavaPlugin {
 		ArrayUtils.inventory = new HashMap<String, ItemStack[]>();
 		ArrayUtils.cd = new ArrayList<String>();
 
+		protocolM = ProtocolLibrary.getProtocolManager();
+		
+		ServerInfo.checkForServerSoftware();
+		
 		boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
 				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
 				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
@@ -291,11 +298,8 @@ public class Main extends JavaPlugin {
 		logger.info("------------------------------------");
 		logger.info("Online Changelog: " + instance.getDescription().getWebsite());
 		logger.info("Plugin Version: " + Data.version);
-		logger.info("Server Version: " + version + " - " + getMcVersion());
-	}
-
-	public static String getMcVersion() {
-		return Bukkit.getVersion().split("MC:")[1].replaceAll(" ", "").replaceAll("\\)", "");
+		logger.info("Server Version: " + version + " - " + ServerInfo.getMcVersion());
+		logger.info("Server Software: " + ServerInfo.getServerSoftware());
 	}
 
 	public static void Startup() {
