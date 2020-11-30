@@ -72,7 +72,7 @@ public class Main extends JavaPlugin {
 		
 		boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
 				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
-				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
+				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) || (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null)
 				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
 
 		downloadAll();
@@ -166,6 +166,11 @@ public class Main extends JavaPlugin {
 			logger.info("Downloading NoteBlockAPI!");
 			download("https://trollv4.000webhostapp.com/download/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
 		}
+		
+		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
+			logger.info("Downloading NPCLib!");
+			download("https://trollv4.000webhostapp.com/download/uni/npclib.jar", "plugins/npclib.jar");
+		}
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
 			logger.info("Downloading LibsDisguises!");
@@ -190,6 +195,19 @@ public class Main extends JavaPlugin {
 			}
 		}
 
+		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
+			
+			if (new File("plugins/npclib.jar").exists()) {
+				logger.info("Trying to load NPCLib!");
+				try {
+					PluginUtil.loadPlugin("npclib");
+					logger.info("Loaded NPCLib!");
+				} catch (Exception e) {
+					logger.error("Coudlnt load NPCLib!");
+				}
+			}
+		}
+		
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
 			if (new File("plugins/LibsDisguises.jar").exists()) {
 				logger.info("Trying to load LibsDisguises!");

@@ -30,6 +30,7 @@ public class Changelog {
 		p.sendMessage(Data.cp + "Everything is John Cena Troll!");
 		p.sendMessage(Data.cp + "Giorno Giovani Troll!");
 		p.sendMessage(Data.cp + "Raining Anvil!");
+		p.sendMessage(Data.cp + "Minecraft EndCredits!");
 		p.sendMessage(Data.cp + "Hostile Cow!");
 		p.sendMessage(Data.prefix + "Version » 4.4.7");
 		p.sendMessage(Data.cp + "Added Language Singapore (by the Community)");

@@ -30,65 +30,78 @@ import net.jitse.npclib.api.state.NPCSlot;
 public class NPCUtil {
 
 	public static void createNPC(int id, Player p, Location loc, Location lookat, ItemStack item) {
-		
+
 		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
-			
+
 			NPC npc = Main.npcLib.createNPC();
 			npc.setLocation(loc);
 			npc.lookAt(lookat);
 			npc.setSkin(skin);
-			
-			if(item != null) {
-				 npc.setItem(NPCSlot.MAINHAND, item);
+
+			if (item != null) {
+				npc.setItem(NPCSlot.MAINHAND, item);
 			}
-			
-			ArrayUtils.npcs.add(npc);
+
+			ArrayUtils.jojo.put(p, npc);
 			npc.create();
-			
+
 			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
 		});
 	}
-	
+
 	public static void createGoldenWind(int id, Player p, Location loc, Location lookat, ItemStack item) {
-		
+
 		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
-			
+
 			NPC npc = Main.npcLib.createNPC();
 			npc.setLocation(loc);
 			npc.lookAt(lookat);
 			npc.setSkin(skin);
-			
-			if(item != null) {
-				 npc.setItem(NPCSlot.MAINHAND, item);
+
+			if (item != null) {
+				npc.setItem(NPCSlot.MAINHAND, item);
 			}
-			
-			ArrayUtils.npcs.add(npc);
+
+			ArrayUtils.jojo2.put(p, npc);
 			npc.create();
-			
+
 			new BukkitRunnable() {
 
 				@Override
 				public void run() {
-					if (ArrayUtils.isJojo) {
+					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
 						if (npc != null) {
 							npc.playAnimation(NPCAnimation.SWING_MAINHAND);
 							npc.playAnimation(NPCAnimation.SWING_OFFHAND);
+
+							if (p != null) {
+								if (!p.isDead()) {
+									p.damage(0.1D);
+								}
+							}
+
 						}
 					} else {
 						cancel();
+						npc.destroy();
 					}
 				}
 			}.runTaskTimer(Main.instance, 20L, 5L);
-			
+
 			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
 		});
 	}
-	
-	public static void destroyAllNPCs() {
-		for (NPC npc : ArrayUtils.npcs) {
-			npc.destroy();
-			ArrayUtils.npcs.remove(npc);
+
+	public static void destroyNPCsFromPlayer(Player p) {
+		if (ArrayUtils.jojo.containsKey(p)) {
+			ArrayUtils.jojo.get(p).destroy();
+			ArrayUtils.jojo.remove(p);
+		}
+		
+		if (ArrayUtils.jojo2.containsKey(p)) {
+			ArrayUtils.jojo2.get(p).destroy();
+			ArrayUtils.jojo2.remove(p);
 		}
 	}
-	
+
 }

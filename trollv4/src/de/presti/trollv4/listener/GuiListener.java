@@ -1368,33 +1368,6 @@ public class GuiListener implements Listener {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
 						}
-						/*
-						 * } else if
-						 * (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(
-						 * "§7EndScreen")) { if (p.hasPermission("troll.lsd") ||
-						 * p.hasPermission("troll.*")) { Player t =
-						 * Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName())); if (t != null) {
-						 * TrollV4API.EndGame(t); if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-						 * p.sendMessage(Data.prefix + "Der Spieler §c" + t.getName() +
-						 * " §2sieht nun den EndScreen!"); } else if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-						 * p.sendMessage(Data.prefix + "The User §c" + t.getName() +
-						 * " §2now sees the EndScreen!"); } else { p.sendMessage(Data.prefix +
-						 * "The User §c" + t.getName() + " §2now sees the EndScreen!"); }
-						 * e.getView().close(); } else { if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-						 * p.sendMessage(Data.noton); } else if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-						 * p.sendMessage(Data.notonus); } else { p.sendMessage(Data.notonus); }
-						 * e.getView().close(); } } else { if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("DE")) {
-						 * p.sendMessage(Data.noperm); } else if
-						 * (Config.getconfig().getString("Language").equalsIgnoreCase("US")) {
-						 * p.sendMessage(Data.nopermus); } else { p.sendMessage(Data.nopermus); }
-						 * 
-						 * }
-						 */
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.herobrine"))) {
 						if (p.hasPermission("troll.herobrine") || p.hasPermission("troll.*")) {
@@ -2075,8 +2048,8 @@ public class GuiListener implements Listener {
 
 										@Override
 										public void run() {
-											Location oldl = t.getLocation().add(0, 5, 0);
-											Location randoml = LocationUtil.getLocFromRad(oldl, 5, 0, 5);
+											Location oldl = t.getLocation().add(0, 10, 0);
+											Location randoml = LocationUtil.getLocFromRad(oldl, 5, 5);
 
 											randoml.getWorld().spawnFallingBlock(randoml,
 													XMaterial.DAMAGED_ANVIL.parseMaterial(), (byte) 0);
@@ -2105,13 +2078,18 @@ public class GuiListener implements Listener {
 
 								p.sendMessage(Data.prefix + Language.getMessage("gui.cows", t));
 
-								for (int x = -1; x < 1; x++) {
-									for (int z = -1; z < 1; z++) {
-										if (x != 0 && z != 0) {
-											t.getWorld().spawnEntity(t.getLocation().add(x, z, 0), EntityType.COW);
-										}
-									}
-								}
+								t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.COW);
+								t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.COW);
+								t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.COW);
+								t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.COW);
 
 								e.getView().close();
 							} else {
@@ -2127,13 +2105,11 @@ public class GuiListener implements Listener {
 						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if (!ArrayUtils.isJojo) {
+								if (!ArrayUtils.jojo.containsKey(t) && !ArrayUtils.jojo2.containsKey(t)) {
 									PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
-									ArrayUtils.isJojo = true;
-
-									Location front = t.getLocation().add(t.getLocation().getDirection());
+									Location front = t.getLocation().add(t.getLocation().getDirection().multiply(3));
 									Location front2 = t.getLocation().add(t.getLocation().getDirection().multiply(2));
 
 									new BukkitRunnable() {
@@ -2151,8 +2127,8 @@ public class GuiListener implements Listener {
 												@Override
 												public void run() {
 
-													NPCUtil.createGoldenWind(1831521135, t, front2.add(0, 1, 0),
-															t.getLocation(), null);
+													NPCUtil.createGoldenWind(1831521135, t, front2, t.getLocation(),
+															null);
 												}
 											}.runTaskLater(Main.instance, 40L);
 										}
@@ -2161,20 +2137,34 @@ public class GuiListener implements Listener {
 								} else {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
 
-									ArrayUtils.isJojo = false;
 									PlayMusic.stop(t);
 
 									new BukkitRunnable() {
 
 										@Override
 										public void run() {
-											NPCUtil.destroyAllNPCs();
+											NPCUtil.destroyNPCsFromPlayer(t);
 										}
 
 									}.runTaskLater(Main.instance, 20L);
 
 									e.getView().close();
 								}
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.endcredits"))) {
+						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								p.sendMessage(Data.prefix + Language.getMessage("gui.endcredits", t));
+								TrollV4API.EndGame(t);
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -2246,7 +2236,9 @@ public class GuiListener implements Listener {
 					}
 				}
 			}
-		} catch (Exception e2) {
+		} catch (
+
+		Exception e2) {
 
 		}
 	}

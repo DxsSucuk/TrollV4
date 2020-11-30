@@ -28,9 +28,6 @@ import net.jitse.npclib.api.NPC;
 */
 public class ArrayUtils {
 	
-	//Rest Information
-	public static boolean isJojo = false;
-	
 	//ArrayLists
 	public static ArrayList<Player> vanish = new ArrayList<>();
 	public static ArrayList<Player> fc = new ArrayList<>();
@@ -46,7 +43,6 @@ public class ArrayUtils {
 	public static ArrayList<Player> noitem = new ArrayList<>();
 	public static ArrayList<Player> deaf = new ArrayList<>();
 	public static ArrayList<Player> confus = new ArrayList<>();
-	public static ArrayList<NPC> npcs = new ArrayList<>();
 	
 	//HashMaps
     public static HashMap<String, String> trolling = new HashMap<>();
@@ -59,6 +55,8 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> anvils = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> jumping = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
+	public static HashMap<Player, NPC> jojo = new HashMap<>();
+	public static HashMap<Player, NPC> jojo2 = new HashMap<>();
 	
 	//Controlls
 	public static HashMap<String, ItemStack[]> inventory;
