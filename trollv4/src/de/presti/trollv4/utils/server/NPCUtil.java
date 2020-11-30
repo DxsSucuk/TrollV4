@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
+import net.jitse.npclib.NPCLib;
 import net.jitse.npclib.api.NPC;
 import net.jitse.npclib.api.skin.MineSkinFetcher;
 import net.jitse.npclib.api.state.NPCAnimation;
@@ -29,11 +30,17 @@ import net.jitse.npclib.api.state.NPCSlot;
 */
 public class NPCUtil {
 
+	public static NPCLib npcLib;
+
+	public static void init() {
+		npcLib = new NPCLib(Main.instance);
+	}
+
 	public static void createNPC(int id, Player p, Location loc, Location lookat, ItemStack item) {
 
 		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
 
-			NPC npc = Main.npcLib.createNPC();
+			NPC npc = npcLib.createNPC();
 			npc.setLocation(loc);
 			npc.lookAt(lookat);
 			npc.setSkin(skin);
@@ -53,7 +60,7 @@ public class NPCUtil {
 
 		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
 
-			NPC npc = Main.npcLib.createNPC();
+			NPC npc = npcLib.createNPC();
 			npc.setLocation(loc);
 			npc.lookAt(lookat);
 			npc.setSkin(skin);
@@ -72,7 +79,10 @@ public class NPCUtil {
 					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
 						if (npc != null) {
 							npc.playAnimation(NPCAnimation.SWING_MAINHAND);
-							npc.playAnimation(NPCAnimation.SWING_OFFHAND);
+							
+							if (!Main.version.startsWith("v1_8")) {
+								npc.playAnimation(NPCAnimation.SWING_OFFHAND);
+							}
 
 							if (p != null) {
 								if (!p.isDead()) {
@@ -97,7 +107,7 @@ public class NPCUtil {
 			ArrayUtils.jojo.get(p).destroy();
 			ArrayUtils.jojo.remove(p);
 		}
-		
+
 		if (ArrayUtils.jojo2.containsKey(p)) {
 			ArrayUtils.jojo2.get(p).destroy();
 			ArrayUtils.jojo2.remove(p);

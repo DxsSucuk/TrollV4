@@ -32,7 +32,6 @@ public class PlayMusic {
 			esp.addPlayer(p);
 			esp.setPlaying(true);
 		} else {
-			Main.logger.error("Couldnt find rick.nbs");
 			if (!new File("plugins/TrollV4/rick.nbs").exists()) {
 				Main.logger.info("Downloading Rick.nbs!");
 				Main.download("https://trollv4.000webhostapp.com/download/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
@@ -40,6 +39,14 @@ public class PlayMusic {
 					Main.logger.info("Downloaded Rick.nbs!");
 				} else {
 					Main.logger.info("Couldnt download Rick.nbs!");
+				}
+			} else if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
+				Main.logger.info("Downloading Giorno.nbs!");
+				Main.download("https://trollv4.000webhostapp.com/download/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+				if (new File("plugins/TrollV4/giorno.nbs").exists()) {
+					Main.logger.info("Downloaded Giorno.nbs!");
+				} else {
+					Main.logger.info("Couldnt download Giorno.nbs!");
 				}
 			}
 		}

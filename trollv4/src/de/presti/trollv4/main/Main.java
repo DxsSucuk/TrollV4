@@ -31,6 +31,7 @@ import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.control.*;
 import de.presti.trollv4.utils.player.*;
 import de.presti.trollv4.utils.plugin.*;
+import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 import net.jitse.npclib.NPCLib;
 
@@ -54,8 +55,6 @@ public class Main extends JavaPlugin {
 	public UpdateChecker update;
 	public static Controls control;
 	public static String version;
-	public static ProtocolManager protocolM;
-	public static NPCLib npcLib;
 
 	public void onEnable() {
 
@@ -64,9 +63,6 @@ public class Main extends JavaPlugin {
 		ArrayUtils.armor = new HashMap<String, ItemStack[]>();
 		ArrayUtils.inventory = new HashMap<String, ItemStack[]>();
 		ArrayUtils.cd = new ArrayList<String>();
-
-		protocolM = ProtocolLibrary.getProtocolManager();
-		npcLib = new NPCLib(instance);
 		
 		ServerInfo.checkForServerSoftware();
 		
@@ -91,6 +87,10 @@ public class Main extends JavaPlugin {
 		if (need)
 			logger.info("---------->");
 
+		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") != null) {
+			NPCUtil.init();
+		}
+		
 		new Language();
 		new Items();
 		new Config().init();

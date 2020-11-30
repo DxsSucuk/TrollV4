@@ -63,7 +63,8 @@ public class InvManager {
 		lorer.clear();
 		lorer.add("§2Plugin Version: §c" + Data.version);
 		lorer.add("§2Server Version: §c" + ServerInfo.getMcVersion());
-		lorer.add("§2Server PacketVersion: §c" + Main.version);
+		lorer.add("§2Server Packet Version: §c" + ServerInfo.getNMSVersion());
+		lorer.add("§2Server Software: §c" + ServerInfo.getServerSoftware());
 		rm.setLore(lorer);
 		red.setItemMeta(rm);
 
