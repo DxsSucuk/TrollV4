@@ -32,6 +32,7 @@ import de.presti.trollv4.utils.control.*;
 import de.presti.trollv4.utils.player.*;
 import de.presti.trollv4.utils.plugin.*;
 import de.presti.trollv4.utils.server.ServerInfo;
+import net.jitse.npclib.NPCLib;
 
 /*
 *	Urheberrechtshinweis														*
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin {
 	public static Controls control;
 	public static String version;
 	public static ProtocolManager protocolM;
+	public static NPCLib npcLib;
 
 	public void onEnable() {
 
@@ -64,6 +66,7 @@ public class Main extends JavaPlugin {
 		ArrayUtils.cd = new ArrayList<String>();
 
 		protocolM = ProtocolLibrary.getProtocolManager();
+		npcLib = new NPCLib(instance);
 		
 		ServerInfo.checkForServerSoftware();
 		

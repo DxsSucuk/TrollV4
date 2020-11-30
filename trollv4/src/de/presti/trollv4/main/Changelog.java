@@ -25,6 +25,13 @@ public class Changelog {
 	public static void log(Player p) {
 		p.sendMessage(Data.prefix + "Changelog:");
 		p.sendMessage(Data.prefix + "Version » " + Data.version);
+		p.sendMessage(Data.cp + "Added ServerSoftware Detection!");
+		p.sendMessage(Data.cp + "Added Demoscreen 1.16 Support!");
+		p.sendMessage(Data.cp + "Everything is John Cena Troll!");
+		p.sendMessage(Data.cp + "Giorno Giovani Troll!");
+		p.sendMessage(Data.cp + "Raining Anvil!");
+		p.sendMessage(Data.cp + "Hostile Cow!");
+		p.sendMessage(Data.prefix + "Version » 4.4.7");
 		p.sendMessage(Data.cp + "Added Language Singapore (by the Community)");
 		p.sendMessage(Data.cp + "TnT World is now ASync!");
 		p.sendMessage(Data.cu + "Fixed Performance Problems with AutoUpdate");

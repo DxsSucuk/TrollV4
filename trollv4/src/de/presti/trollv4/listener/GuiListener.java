@@ -6,6 +6,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
@@ -36,6 +37,14 @@ import de.presti.trollv4.utils.crossversion.DemoScreen;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.player.LocationUtil;
+import net.jitse.npclib.NPCLib;
+import net.jitse.npclib.api.NPC;
+import net.jitse.npclib.api.skin.MineSkinFetcher;
+import net.jitse.npclib.api.skin.Skin;
+import net.jitse.npclib.api.state.NPCAnimation;
+import net.jitse.npclib.api.state.NPCSlot;
+import net.jitse.npclib.api.state.NPCState;
 
 /*
 *	Urheberrechtshinweis														*
@@ -329,64 +338,81 @@ public class GuiListener implements Listener {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("Custom-Item-Name", !Config.cfg.getBoolean("Custom-Item-Name"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(0, SetItems.buildItem("§cCustom§7-§2Item§7-§2Name", XMaterial.PAPER, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Custom-Item-Name") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(0,
+								SetItems.buildItem("§cCustom§7-§2Item§7-§2Name", XMaterial.PAPER,
+										new String[] { "§cCurrent Value:",
+												(Config.cfg.getBoolean("Custom-Item-Name") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bUpdateChecker")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bUpdateChecker")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("UpdateChecker", !Config.cfg.getBoolean("UpdateChecker"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(1, SetItems.buildItem("§bUpdateChecker", XMaterial.CLOCK, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("UpdateChecker") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(1,
+								SetItems.buildItem("§bUpdateChecker", XMaterial.CLOCK,
+										new String[] { "§cCurrent Value:",
+												(Config.cfg.getBoolean("UpdateChecker") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cAuto§bUpdate")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cAuto§bUpdate")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("AutoUpdate", !Config.cfg.getBoolean("AutoUpdate"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(2, SetItems.buildItem("§cAuto§bUpdate", XMaterial.CAULDRON, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("AutoUpdate") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(2,
+								SetItems.buildItem("§cAuto§bUpdate", XMaterial.CAULDRON,
+										new String[] { "§cCurrent Value:",
+												(Config.cfg.getBoolean("AutoUpdate") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Animations")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Animations")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("Animations", !Config.cfg.getBoolean("Animations"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(3, SetItems.buildItem("§2Animations", XMaterial.GLASS_PANE, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Animations") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(3,
+								SetItems.buildItem("§2Animations", XMaterial.GLASS_PANE,
+										new String[] { "§cCurrent Value:",
+												(Config.cfg.getBoolean("Animations") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aASync")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aASync")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("ASync", !Config.cfg.getBoolean("ASync"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(4, SetItems.buildItem("§aASync", XMaterial.PLAYER_HEAD, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("ASync") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(4, SetItems.buildItem("§aASync", XMaterial.PLAYER_HEAD, new String[] {
+								"§cCurrent Value:", (Config.cfg.getBoolean("ASync") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
 					}
-				} else if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Community§7-§csurprise")) {
+				} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+						.equalsIgnoreCase("§2Community§7-§csurprise")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						Config.cfg.set("Community-surprise", !Config.cfg.getBoolean("Community-surprise"));
 						Config.cfg.save(Config.getFile());
-						
-						e.getInventory().setItem(5, SetItems.buildItem("§2Community§7-§csurprise", XMaterial.CAKE, new String[] { "§cCurrent Value:", (Config.cfg.getBoolean("Community-surprise") ? "§ayes" : "§cno") }));
-						
+
+						e.getInventory().setItem(5,
+								SetItems.buildItem("§2Community§7-§csurprise", XMaterial.CAKE,
+										new String[] { "§cCurrent Value:",
+												(Config.cfg.getBoolean("Community-surprise") ? "§ayes" : "§cno") }));
+
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
@@ -712,9 +738,15 @@ public class GuiListener implements Listener {
 							if (t != null) {
 								p.sendMessage(Data.prefix + Language.getMessage("gui.spam", t));
 								e.getView().close();
-								for (int i = 0; i < 500; i++) {
-									t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
-								}
+								new BukkitRunnable() {
+
+									@Override
+									public void run() {
+										for (int i = 0; i < 1000; i++) {
+											t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
+										}
+									}
+								}.runTaskAsynchronously(Main.instance);
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -1876,7 +1908,7 @@ public class GuiListener implements Listener {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
 								new BukkitRunnable() {
-									
+
 									@Override
 									public void run() {
 										Location oldl = t.getLocation();
@@ -1884,10 +1916,12 @@ public class GuiListener implements Listener {
 											for (int y = 0; y < 30; y++) {
 												for (int z = 0; z < 200; z++) {
 													if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
-															oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z).getBlock()
+															oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z)
+																	.getBlock()
 																	.getType() != XMaterial.AIR.parseMaterial()) {
-														Location l = new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
-																oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z);
+														Location l = new Location(oldl.getWorld(),
+																oldl.getBlockX() - 100 + x, oldl.getBlockY() - 7 + y,
+																oldl.getBlockZ() - 100 + z);
 														t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
 													}
 												}
@@ -2010,6 +2044,186 @@ public class GuiListener implements Listener {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.confused.on", t));
 
 									ArrayUtils.confus.add(t);
+									e.getView().close();
+								}
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.anvils"))) {
+						if (p.hasPermission("troll.anvils") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (ArrayUtils.anvils.containsKey(t)) {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.anvils.off", t));
+
+									ArrayUtils.anvils.get(t).cancel();
+									ArrayUtils.anvils.remove(t);
+									e.getView().close();
+								} else {
+
+									p.sendMessage(Data.prefix + Language.getMessage("gui.anvils.on", t));
+
+									ArrayUtils.anvils.put(t, new BukkitRunnable() {
+
+										@Override
+										public void run() {
+											Location oldl = t.getLocation().add(0, 5, 0);
+											Location randoml = LocationUtil.getLocFromRad(oldl, 5, 0, 5);
+
+											randoml.getWorld().spawnFallingBlock(randoml,
+													XMaterial.DAMAGED_ANVIL.parseMaterial(), (byte) 0);
+
+										}
+									});
+
+									ArrayUtils.anvils.get(t).runTaskTimer(Main.instance, 20L,
+											(Config.cfg.getInt("trolls.anvils.time") * 20L));
+
+									e.getView().close();
+								}
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.cows"))) {
+						if (p.hasPermission("troll.cows") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+
+								p.sendMessage(Data.prefix + Language.getMessage("gui.cows", t));
+
+								for (int x = -1; x < 1; x++) {
+									for (int z = -1; z < 1; z++) {
+										if (x != 0 && z != 0) {
+											t.getWorld().spawnEntity(t.getLocation().add(x, z, 0), EntityType.COW);
+										}
+									}
+								}
+
+								e.getView().close();
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.giorno"))) {
+						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (!ArrayUtils.isJojo) {
+									PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
+									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
+
+									final Skin[] giorno = new Skin[1];
+									final Skin[] goldenwind = new Skin[1];
+
+									MineSkinFetcher.fetchSkinFromIdAsync(2073768622, new MineSkinFetcher.Callback() {
+
+										@Override
+										public void call(Skin skinData) {
+
+											if (skinData != null) {
+												giorno[0] = skinData;
+											}
+
+										}
+									});
+
+									MineSkinFetcher.fetchSkinFromIdAsync(1831521135, new MineSkinFetcher.Callback() {
+
+										@Override
+										public void call(Skin skinData) {
+
+											if (skinData != null) {
+												goldenwind[0] = skinData;
+											}
+
+										}
+									});
+
+									ArrayUtils.isJojo = true;
+									
+									new BukkitRunnable() {
+
+										@Override
+										public void run() {
+											for (Player all : Bukkit.getOnlinePlayers()) {
+												NPC npc = Main.npcLib.createNPC();
+												npc.setSkin(giorno[0]);
+												npc.create();
+												npc.setLocation(all.getLocation());
+												npc.create();
+												npc.lookAt(all.getLocation().add(0, 1, 0));
+												npc.setItem(NPCSlot.MAINHAND,
+														new ItemStack(XMaterial.ARROW.parseMaterial()));
+												all.sendMessage("Giorno Giovanna have a Dream!");
+
+												new BukkitRunnable() {
+
+													@Override
+													public void run() {
+														npc.toggleState(NPCState.CROUCHED);
+
+														NPC npc2 = Main.npcLib.createNPC();
+														npc2.setSkin(goldenwind[0]);
+														npc2.create();
+														npc2.setLocation(all.getLocation().add(0, 2, 0));
+
+														new BukkitRunnable() {
+
+															@Override
+															public void run() {
+																if (ArrayUtils.isJojo) {
+																	npc2.playAnimation(NPCAnimation.SWING_MAINHAND);
+																	npc2.playAnimation(NPCAnimation.SWING_OFFHAND);
+																} else {
+																	cancel();
+																}
+															}
+														}.runTaskTimer(Main.instance, 20L, 20L);
+
+														npc2.create();
+														npc2.lookAt(all.getLocation().add(0, 1, 0));
+
+														npc.toggleState(NPCState.CROUCHED);
+														
+														ArrayUtils.npcs.add(npc2);
+
+													}
+												}.runTaskLaterAsynchronously(Main.instance, 60L);
+												
+												ArrayUtils.npcs.add(npc);
+												
+											}
+										}
+									}.runTaskLaterAsynchronously(Main.instance, 20L);
+									e.getView().close();
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
+
+									ArrayUtils.isJojo = false;
+									
+									for (NPC npcs : ArrayUtils.npcs) {
+										npcs.destroy();
+										ArrayUtils.npcs.remove(npcs);
+									}
+									
 									e.getView().close();
 								}
 							} else {

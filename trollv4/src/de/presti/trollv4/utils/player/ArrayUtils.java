@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.invs.InvSaver;
+import net.jitse.npclib.api.NPC;
 
 /*
 *	Urheberrechtshinweis														*
@@ -27,6 +28,9 @@ import de.presti.trollv4.invs.InvSaver;
 */
 public class ArrayUtils {
 	
+	//Rest Information
+	public static boolean isJojo = false;
+	
 	//ArrayLists
 	public static ArrayList<Player> vanish = new ArrayList<>();
 	public static ArrayList<Player> fc = new ArrayList<>();
@@ -42,6 +46,7 @@ public class ArrayUtils {
 	public static ArrayList<Player> noitem = new ArrayList<>();
 	public static ArrayList<Player> deaf = new ArrayList<>();
 	public static ArrayList<Player> confus = new ArrayList<>();
+	public static ArrayList<NPC> npcs = new ArrayList<>();
 	
 	//HashMaps
     public static HashMap<String, String> trolling = new HashMap<>();
@@ -51,6 +56,7 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> hackuser = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> arrowspam = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> tornador = new HashMap<>();
+	public static HashMap<Player, BukkitRunnable> anvils = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> jumping = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
 	
