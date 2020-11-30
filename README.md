@@ -8,3 +8,5 @@ BStats: https://bstats.org/plugin/bukkit/TrollV4/4690
 
 [XSeries (CrossVersion Items) by CryptoMorin](https://github.com/CryptoMorin/XSeries)
 
+[NPCLib (NPC Util) by MinecraftLibraries](https://github.com/MinecraftLibraries/NPCLib)
+
