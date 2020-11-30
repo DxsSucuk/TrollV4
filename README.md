@@ -10,3 +10,5 @@ BStats: https://bstats.org/plugin/bukkit/TrollV4/4690
 
 [NPCLib (NPC Util) by MinecraftLibraries](https://github.com/MinecraftLibraries/NPCLib)
 
+If i forgot someone pls message me!
+
