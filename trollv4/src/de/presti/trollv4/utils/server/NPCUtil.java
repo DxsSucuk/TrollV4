@@ -4,11 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import net.jitse.npclib.api.NPC;
 import net.jitse.npclib.api.skin.MineSkinFetcher;
+import net.jitse.npclib.api.state.NPCAnimation;
 import net.jitse.npclib.api.state.NPCSlot;
 
 /*
@@ -34,37 +36,52 @@ public class NPCUtil {
 			NPC npc = Main.npcLib.createNPC();
 			npc.setLocation(loc);
 			npc.lookAt(lookat);
-			ArrayUtils.npcs.add(npc);
-			npc.create();
+			npc.setSkin(skin);
 			
 			if(item != null) {
 				 npc.setItem(NPCSlot.MAINHAND, item);
 			}
 			
+			ArrayUtils.npcs.add(npc);
+			npc.create();
+			
 			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
 		});
 	}
 	
-	public static NPC createNPCandGetNPC(int id, Player p, Location loc, Location lookat, ItemStack item) {
-		
-		final NPC[] npc = new NPC[1];
+	public static void createGoldenWind(int id, Player p, Location loc, Location lookat, ItemStack item) {
 		
 		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
 			
-		    npc[0] = Main.npcLib.createNPC();
-		    npc[0].setLocation(loc);
-		    npc[0].lookAt(lookat);
-			ArrayUtils.npcs.add(npc[0]);
-			npc[0].create();
+			NPC npc = Main.npcLib.createNPC();
+			npc.setLocation(loc);
+			npc.lookAt(lookat);
+			npc.setSkin(skin);
 			
 			if(item != null) {
-				npc[0].setItem(NPCSlot.MAINHAND, item);
+				 npc.setItem(NPCSlot.MAINHAND, item);
 			}
 			
-			Bukkit.getScheduler().runTask(Main.instance, () -> npc[0].show(p));
+			ArrayUtils.npcs.add(npc);
+			npc.create();
+			
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+					if (ArrayUtils.isJojo) {
+						if (npc != null) {
+							npc.playAnimation(NPCAnimation.SWING_MAINHAND);
+							npc.playAnimation(NPCAnimation.SWING_OFFHAND);
+						}
+					} else {
+						cancel();
+					}
+				}
+			}.runTaskTimer(Main.instance, 20L, 5L);
+			
+			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
 		});
-		
-		return npc[0];
 	}
 	
 	public static void destroyAllNPCs() {

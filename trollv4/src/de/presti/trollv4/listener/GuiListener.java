@@ -2132,42 +2132,29 @@ public class GuiListener implements Listener {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
 									ArrayUtils.isJojo = true;
-									
+
+									Location front = t.getLocation().add(t.getLocation().getDirection());
+									Location front2 = t.getLocation().add(t.getLocation().getDirection().multiply(2));
+
 									new BukkitRunnable() {
 
 										@Override
 										public void run() {
-											for (Player all : Bukkit.getOnlinePlayers()) {
-												
-												NPCUtil.createNPC(2073768622, all, all.getLocation(), all.getLocation().add(0, 1, 0), new ItemStack(XMaterial.ARROW.parseMaterial()));
-												
-												all.sendMessage("Giorno Giovanna have a Dream!");
 
-												new BukkitRunnable() {
+											NPCUtil.createNPC(1718197637, t, front, t.getLocation(),
+													new ItemStack(XMaterial.ARROW.parseMaterial()));
 
-													@Override
-													public void run() {
+											t.sendMessage("I Giorno Giovanna have a Dream!");
 
-														NPCUtil.createNPC(1831521135, all, all.getLocation().add(0, 2, 0), all.getLocation().add(0, 1, 0), null);
-														
-														NPC npc2 = NPCUtil.createNPCandGetNPC(1831521135, all, all.getLocation().add(0, 2, 0), all.getLocation().add(0, 1, 0), null);
+											new BukkitRunnable() {
 
-														new BukkitRunnable() {
+												@Override
+												public void run() {
 
-															@Override
-															public void run() {
-																if (ArrayUtils.isJojo) {
-																	npc2.playAnimation(NPCAnimation.SWING_MAINHAND);
-																	npc2.playAnimation(NPCAnimation.SWING_OFFHAND);
-																} else {
-																	cancel();
-																}
-															}
-														}.runTaskTimer(Main.instance, 20L, 20L);
-													}
-												}.runTaskLater(Main.instance, 60L);
-												
-											}
+													NPCUtil.createGoldenWind(1831521135, t, front2.add(0, 1, 0),
+															t.getLocation(), null);
+												}
+											}.runTaskLater(Main.instance, 40L);
 										}
 									}.runTaskLater(Main.instance, 20L);
 									e.getView().close();
@@ -2175,16 +2162,17 @@ public class GuiListener implements Listener {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
 
 									ArrayUtils.isJojo = false;
-									
-									for (NPC npcs : ArrayUtils.npcs) {
-										npcs.destroy();
-										ArrayUtils.npcs.remove(npcs);
-									}
-									
-									for (Player all : Bukkit.getOnlinePlayers()) {
-										PlayMusic.stop(all);
-									}
-									
+									PlayMusic.stop(t);
+
+									new BukkitRunnable() {
+
+										@Override
+										public void run() {
+											NPCUtil.destroyAllNPCs();
+										}
+
+									}.runTaskLater(Main.instance, 20L);
+
 									e.getView().close();
 								}
 							} else {

@@ -2,7 +2,7 @@ name: TrollV4
 version: 4.4.8
 main: de.presti.trollv4.main.Main
 author: [Presti]
-softdepend: [ProtocolLib, LibsDisguises, NoteBlockAPI]
+softdepend: [ProtocolLib, LibsDisguises, NoteBlockAPI, NPCLibPlugin]
 loadbefore: [TrollV4Updater]
 website: http://dev-presti.tk
 api-version: 1.16
