@@ -20,6 +20,11 @@
 			<url>https://repo.codemc.org/repository/maven-public/</url>
 		</repository>
 
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+
 	</repositories>
 
 	<dependencies>
@@ -28,6 +33,13 @@
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit</artifactId>
 			<version>1.7</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.jitse</groupId>
+			<artifactId>npclib-api</artifactId>
+			<version>2.11-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 

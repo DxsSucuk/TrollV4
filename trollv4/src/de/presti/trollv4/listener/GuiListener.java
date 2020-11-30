@@ -38,6 +38,7 @@ import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
+import de.presti.trollv4.utils.server.NPCUtil;
 import net.jitse.npclib.NPCLib;
 import net.jitse.npclib.api.NPC;
 import net.jitse.npclib.api.skin.MineSkinFetcher;
@@ -2130,33 +2131,6 @@ public class GuiListener implements Listener {
 									PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
-									final Skin[] giorno = new Skin[1];
-									final Skin[] goldenwind = new Skin[1];
-
-									MineSkinFetcher.fetchSkinFromIdAsync(2073768622, new MineSkinFetcher.Callback() {
-
-										@Override
-										public void call(Skin skinData) {
-
-											if (skinData != null) {
-												giorno[0] = skinData;
-											}
-
-										}
-									});
-
-									MineSkinFetcher.fetchSkinFromIdAsync(1831521135, new MineSkinFetcher.Callback() {
-
-										@Override
-										public void call(Skin skinData) {
-
-											if (skinData != null) {
-												goldenwind[0] = skinData;
-											}
-
-										}
-									});
-
 									ArrayUtils.isJojo = true;
 									
 									new BukkitRunnable() {
@@ -2164,26 +2138,19 @@ public class GuiListener implements Listener {
 										@Override
 										public void run() {
 											for (Player all : Bukkit.getOnlinePlayers()) {
-												NPC npc = Main.npcLib.createNPC();
-												npc.setSkin(giorno[0]);
-												npc.create();
-												npc.setLocation(all.getLocation());
-												npc.create();
-												npc.lookAt(all.getLocation().add(0, 1, 0));
-												npc.setItem(NPCSlot.MAINHAND,
-														new ItemStack(XMaterial.ARROW.parseMaterial()));
+												
+												NPCUtil.createNPC(2073768622, all, all.getLocation(), all.getLocation().add(0, 1, 0), new ItemStack(XMaterial.ARROW.parseMaterial()));
+												
 												all.sendMessage("Giorno Giovanna have a Dream!");
 
 												new BukkitRunnable() {
 
 													@Override
 													public void run() {
-														npc.toggleState(NPCState.CROUCHED);
 
-														NPC npc2 = Main.npcLib.createNPC();
-														npc2.setSkin(goldenwind[0]);
-														npc2.create();
-														npc2.setLocation(all.getLocation().add(0, 2, 0));
+														NPCUtil.createNPC(1831521135, all, all.getLocation().add(0, 2, 0), all.getLocation().add(0, 1, 0), null);
+														
+														NPC npc2 = NPCUtil.createNPCandGetNPC(1831521135, all, all.getLocation().add(0, 2, 0), all.getLocation().add(0, 1, 0), null);
 
 														new BukkitRunnable() {
 
@@ -2197,18 +2164,8 @@ public class GuiListener implements Listener {
 																}
 															}
 														}.runTaskTimer(Main.instance, 20L, 20L);
-
-														npc2.create();
-														npc2.lookAt(all.getLocation().add(0, 1, 0));
-
-														npc.toggleState(NPCState.CROUCHED);
-														
-														ArrayUtils.npcs.add(npc2);
-
 													}
 												}.runTaskLater(Main.instance, 60L);
-												
-												ArrayUtils.npcs.add(npc);
 												
 											}
 										}
