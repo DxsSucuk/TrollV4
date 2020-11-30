@@ -13,5 +13,17 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/DeveloperAPIShit/Minecraft/Apis/LibsDisguises-10.0.16-Free.jar"/>
 	<classpathentry kind="lib" path="C:/DeveloperAPIShit/Minecraft/Apis/NoteBlockAPI-1.6.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="I:/Troll Testing18/spigot.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.9.4-R0.1-SNAPSHOT-latest.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.9-R0.1-SNAPSHOT-latest.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.10.2-R0.1-SNAPSHOT-latest.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.11.2.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.12.2.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.13.2.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.14.4.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.15.2.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.16.1.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.13.jar"/>
+	<classpathentry kind="lib" path="I:/spigotversions/spigot-1.16.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

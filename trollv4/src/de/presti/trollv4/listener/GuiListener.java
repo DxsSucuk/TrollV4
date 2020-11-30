@@ -2206,13 +2206,13 @@ public class GuiListener implements Listener {
 														ArrayUtils.npcs.add(npc2);
 
 													}
-												}.runTaskLaterAsynchronously(Main.instance, 60L);
+												}.runTaskLater(Main.instance, 60L);
 												
 												ArrayUtils.npcs.add(npc);
 												
 											}
 										}
-									}.runTaskLaterAsynchronously(Main.instance, 20L);
+									}.runTaskLater(Main.instance, 20L);
 									e.getView().close();
 								} else {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
@@ -2222,6 +2222,10 @@ public class GuiListener implements Listener {
 									for (NPC npcs : ArrayUtils.npcs) {
 										npcs.destroy();
 										ArrayUtils.npcs.remove(npcs);
+									}
+									
+									for (Player all : Bukkit.getOnlinePlayers()) {
+										PlayMusic.stop(all);
 									}
 									
 									e.getView().close();
