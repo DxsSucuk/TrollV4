@@ -115,6 +115,12 @@ public class Items {
 		addItem("default", "gui.trolls.dontstopjumping", "§cDont Stop §2Jumping");
 		addItem("default", "gui.trolls.deaf", "§7Deaf");
 		addItem("default", "gui.trolls.confused", "§aConfused");
+		addItem("default", "gui.trolls.anvils", "§7Falling Anvils");
+		addItem("default", "gui.trolls.cows", "§cMad Cows");
+		addItem("default", "gui.trolls.giorno", "§6Giorno Giovanna");
+		addItem("default", "gui.trolls.johncena", "§2Everything is JOHN CENA");
+		addItem("default", "gui.trolls.spookyworld", "§6Spooky §eWorld §2;D");
+		addItem("default", "gui.trolls.endcredits", "§dEnd Credits");
 		addItem("default", "gui.servertrolls.tpall", "§6Tpall");
 		addItem("default", "gui.servertrolls.hackmessage", "§8Hack Message");
 		addItem("default", "gui.servertrolls.fakeleave", "§2Fakeleave");

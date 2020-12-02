@@ -40,6 +40,7 @@ import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
+import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
@@ -146,6 +147,10 @@ public class Event implements Listener {
 			p.getInventory().setExtraContents(is.getExtracont());
 
 			ArrayUtils.fakeinv.remove(p);
+		}
+		
+		if (ArrayUtils.jojo.containsKey(p)) {
+			NPCUtil.destroyNPCsFromPlayer(p);
 		}
 
 		if (ArrayUtils.fc.contains(p)) {
@@ -279,6 +284,10 @@ public class Event implements Listener {
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				all.playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 0);
 			}
+		}
+		
+		if (ArrayUtils.jojo.containsKey(p)) {
+			p.teleport(e.getFrom());
 		}
 
 		if (ArrayUtils.lagging.contains(p)) {

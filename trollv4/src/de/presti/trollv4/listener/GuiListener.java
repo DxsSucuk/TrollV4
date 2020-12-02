@@ -2109,30 +2109,37 @@ public class GuiListener implements Listener {
 									PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
-									Location front = t.getLocation().add(t.getLocation().getDirection().multiply(3));
-									Location front2 = t.getLocation().add(t.getLocation().getDirection().multiply(2));
-
 									new BukkitRunnable() {
-
+										
 										@Override
 										public void run() {
-
-											NPCUtil.createNPC(1718197637, t, front, t.getLocation(),
-													new ItemStack(XMaterial.ARROW.parseMaterial()));
-
-											t.sendMessage("I Giorno Giovanna have a Dream!");
+											Location front = t.getLocation().add(t.getLocation().getDirection().multiply(3));
+											Location front2 = t.getLocation().add(t.getLocation().getDirection().multiply(2));
 
 											new BukkitRunnable() {
 
 												@Override
 												public void run() {
 
-													NPCUtil.createGoldenWind(1831521135, t, front2, t.getLocation(),
-															null);
+													NPCUtil.createNPC(1718197637, t, front, t.getLocation(),
+															new ItemStack(XMaterial.ARROW.parseMaterial()));
+
+													t.sendMessage("§6I Giorno Giovanna have a Dream!");
+
+													new BukkitRunnable() {
+
+														@Override
+														public void run() {
+
+															NPCUtil.createGoldenWind(1831521135, t, front2, t.getLocation(),
+																	null);
+														}
+													}.runTaskLater(Main.instance, 60L);
 												}
-											}.runTaskLater(Main.instance, 40L);
+											}.runTaskLater(Main.instance, 20L);
 										}
-									}.runTaskLater(Main.instance, 20L);
+									}.runTaskLater(Main.instance, 10L);
+									
 									e.getView().close();
 								} else {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
