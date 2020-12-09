@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.invs.InvSaver;
+import de.presti.trollv4.utils.server.NPCUserContainer;
 import net.jitse.npclib.api.NPC;
 
 /*
@@ -57,6 +58,8 @@ public class ArrayUtils {
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
 	public static HashMap<Player, NPC> jojo = new HashMap<>();
 	public static HashMap<Player, NPC> jojo2 = new HashMap<>();
+	public static HashMap<Player, NPCUserContainer> spooky = new HashMap<>();
+	public static HashMap<Player, Location> spookylast = new HashMap<>();
 	
 	//Controlls
 	public static HashMap<String, ItemStack[]> inventory;

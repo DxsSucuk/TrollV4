@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XPotion;
 import com.cryptomorin.xseries.XSound;
 
 import de.presti.trollv4.cmd.Haupt;
@@ -20,7 +21,13 @@ import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
+import de.presti.trollv4.utils.player.LocationUtil;
+import de.presti.trollv4.utils.server.NPCUserContainer;
+import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
+import de.presti.trollv4.utils.server.WorldCreator;
+import net.jitse.npclib.api.NPC;
+import net.jitse.npclib.api.skin.MineSkinFetcher;
 
 /*
 *	Urheberrechtshinweis														*
@@ -40,48 +47,46 @@ public class TrollV4API {
 
 	private static int taskID;
 
-    /**
-     * Lets an player control an other player.
-     * This will be stopped after the player leaves or the control stops.
-     *
-     * @param user the player thats should control.
-     * @param victim the player that should be controlled.
-     * @since 4.4.4
-     */
+	/**
+	 * Lets an player control an other player. This will be stopped after the player
+	 * leaves or the control stops.
+	 *
+	 * @param user   the player thats should control.
+	 * @param victim the player that should be controlled.
+	 * @since 4.4.4
+	 */
 	public static void startControl(Player user, Player victim) {
 		Main.startControlling(user, victim);
 	}
 
-    /**
-     * Stops the control of an user.
-     * This will stop the control of an player.
-     *
-     * @param user the player thats should release the victim.
-     * @param victim the player that should be released.
-     * @since 4.4.4
-     */
+	/**
+	 * Stops the control of an user. This will stop the control of an player.
+	 *
+	 * @param user   the player thats should release the victim.
+	 * @param victim the player that should be released.
+	 * @since 4.4.4
+	 */
 	public static void stopControl(Player user, Player victim) {
 		Main.stopControlling(user, victim);
 	}
 
-    /**
-     * Shows an player the Minecraft Demoscreen.
-     * Currently this only works with 1.8.
-     *
-     * @param victim the player that should be controlled.
-     * @since 4.4.4
-     */
+	/**
+	 * Shows an player the Minecraft Demoscreen. Currently this only works with 1.8.
+	 *
+	 * @param victim the player that should be controlled.
+	 * @since 4.4.4
+	 */
 	public static void DemoScreen(Player victim) {
 		sendGameStateChange(victim, 5, 0);
 	}
 
-    /**
-     * Lets an player be Herobrine.
-     * This spwanes Silvefishes and Thunder bolts around him.
-     *
-     * @param victim the player thats should be herobrine.
-     * @since 4.4.4
-     */
+	/**
+	 * Lets an player be Herobrine. This spwanes Silvefishes and Thunder bolts
+	 * around him.
+	 *
+	 * @param victim the player thats should be herobrine.
+	 * @since 4.4.4
+	 */
 	public static void Herobrine(Player victim) {
 		if (ArrayUtils.herobrine.contains(victim)) {
 			ArrayUtils.herobrine.remove(victim);
@@ -90,13 +95,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This spawnes Arrows around an player.
-     * Just Vibing in here.
-     *
-     * @param victim that should get spammed.
-     * @since 4.4.4
-     */
+	/**
+	 * This spawnes Arrows around an player. Just Vibing in here.
+	 *
+	 * @param victim that should get spammed.
+	 * @since 4.4.4
+	 */
 	public static void ArrowSpam(Player victim) {
 		if (ArrayUtils.userbowspam.contains(victim)) {
 			ArrayUtils.arrowspam.get(victim).cancel();
@@ -160,13 +164,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This "hacks" an player.
-     * Plays sound and send titles.
-     *
-     * @param victim that should get hacked.
-     * @since 4.4.4
-     */
+	/**
+	 * This "hacks" an player. Plays sound and send titles.
+	 *
+	 * @param victim that should get hacked.
+	 * @since 4.4.4
+	 */
 	public static void Hack(Player victim) {
 		if (victim != null) {
 			taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
@@ -193,13 +196,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This explodes the player.
-     * Spawns an explosion and set the health to 0.
-     *
-     * @param victim that should go boom.
-     * @since 4.4.4
-     */
+	/**
+	 * This explodes the player. Spawns an explosion and set the health to 0.
+	 *
+	 * @param victim that should go boom.
+	 * @since 4.4.4
+	 */
 	public static void Explode(Player victim) {
 		if (victim != null) {
 			victim.playSound(victim.getLocation(), XSound.ENTITY_FIREWORK_ROCKET_LAUNCH.parseSound(), 100.0F, 200.0F);
@@ -210,13 +212,13 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * Lets others think that the player cheates.
-     * Lets an player fly in the air and fall down.
-     *
-     * @param victim that should seem like an cheater.
-     * @since 4.4.4
-     */
+	/**
+	 * Lets others think that the player cheates. Lets an player fly in the air and
+	 * fall down.
+	 *
+	 * @param victim that should seem like an cheater.
+	 * @since 4.4.4
+	 */
 	public static void FakeHack(Player victim) {
 		if (victim != null) {
 			if (ArrayUtils.fc.contains(victim)) {
@@ -232,13 +234,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This spawns an thunder bolt on an player.
-     * Player go bzzzzzzzzz.
-     *
-     * @param victim that should get striked.
-     * @since 4.4.4
-     */
+	/**
+	 * This spawns an thunder bolt on an player. Player go bzzzzzzzzz.
+	 *
+	 * @param victim that should get striked.
+	 * @since 4.4.4
+	 */
 	public static void Strike(Player victim) {
 		if (victim != null) {
 			victim.getLocation().getWorld().strikeLightning(victim.getLocation());
@@ -247,13 +248,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * Lets an player fly in the air.
-     * Adds y-velocity to the player.
-     *
-     * @param victim that should fly like an rocket.
-     * @since 4.4.4
-     */
+	/**
+	 * Lets an player fly in the air. Adds y-velocity to the player.
+	 *
+	 * @param victim that should fly like an rocket.
+	 * @since 4.4.4
+	 */
 	public static void Rocket(Player victim) {
 		if (victim != null) {
 			victim.setAllowFlight(true);
@@ -266,13 +266,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This spams the chat of an player.
-     * Sends an message 500 times.
-     *
-     * @param victim that should get spammed.
-     * @since 4.4.4
-     */
+	/**
+	 * This spams the chat of an player. Sends an message 500 times.
+	 *
+	 * @param victim that should get spammed.
+	 * @since 4.4.4
+	 */
 	public static void Spam(Player victim) {
 		if (victim != null) {
 			for (int i = 0; i < 500; i++) {
@@ -283,13 +282,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This send an fakeop message to the player.
-     * jebaited.
-     *
-     * @param victim that should get fakeoped.
-     * @since 4.4.4
-     */
+	/**
+	 * This send an fakeop message to the player. jebaited.
+	 *
+	 * @param victim that should get fakeoped.
+	 * @since 4.4.4
+	 */
 	public static void FakeOP(Player victim) {
 		if (victim != null) {
 			victim.sendMessage(Language.getMessage("gui.fakeop.opm", victim));
@@ -298,13 +296,12 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * This crashes an player.
-     * It kicks an player with a fake crashmessage.
-     *
-     * @param victim that should get kicked.
-     * @since 4.4.4
-     */
+	/**
+	 * This crashes an player. It kicks an player with a fake crashmessage.
+	 *
+	 * @param victim that should get kicked.
+	 * @since 4.4.4
+	 */
 	public static void Crash(Player victim) {
 		if (victim != null) {
 			victim.kickPlayer(Language.getMessage("gui.crash.message"));
@@ -313,13 +310,13 @@ public class TrollV4API {
 		}
 	}
 
-    /**
-     * Freeze ma budda.
-     * This adds the player to an arraylist which teleports him back everytime he moves.
-     *
-     * @param victim that should get freezed.
-     * @since 4.4.4
-     */
+	/**
+	 * Freeze ma budda. This adds the player to an arraylist which teleports him
+	 * back everytime he moves.
+	 *
+	 * @param victim that should get freezed.
+	 * @since 4.4.4
+	 */
 	public static void Freeze(Player victim) {
 		if (victim != null) {
 			if (ArrayUtils.freeze.contains(victim)) {
@@ -827,7 +824,7 @@ public class TrollV4API {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
 					"particle mobappearance " + victim.getLocation().getBlockX() + " "
 							+ victim.getLocation().getBlockY() + " " + victim.getLocation().getBlockZ() + " 1 1 1 1");
-			
+
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
 					"particle minecraft:elder_guardian " + victim.getLocation().getBlockX() + " "
 							+ victim.getLocation().getBlockY() + " " + victim.getLocation().getBlockZ());
@@ -840,27 +837,129 @@ public class TrollV4API {
 
 	public static void sendGameStateChange(Player victim, int type, float state) {
 		try {
-			
+
 			Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
 			Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 			Object packet = null;
-			
-			if(ServerInfo.supportOldPackets()) {
-			packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
-					.newInstance(type, state);
+
+			if (ServerInfo.supportOldPackets()) {
+				packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
+						.newInstance(type, state);
 			} else {
-				
-				packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
-				.newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class).newInstance(type), state);
+
+				packet = Packets.getNMSClass("PacketPlayOutGameStateChange")
+						.getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
+						.newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class)
+								.newInstance(type), state);
 			}
-			
+
 			playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection,
-					packet); 
+					packet);
 		} catch (Exception e) {
 			System.out.println("Your Server Version isnt Supporting this Packet! (PacketPlayOutGameStateChange)");
 			System.out.println("Return Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Creates an Empty World with Random Creppy NPCs and Noises. If the world exist
+	 * the player is going to be teleported.
+	 *
+	 * @param victim the player that should be scared.
+	 * @since 4.4.8
+	 */
+	@SuppressWarnings("deprecation")
+	public static void SpookyWorld(Player victim) {
+
+		if (!ArrayUtils.spooky.containsKey(victim)) {
+
+			if (!ArrayUtils.spookylast.containsKey(victim)) {
+				ArrayUtils.spookylast.put(victim, victim.getLocation());
+			}
+
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+					if (Bukkit.getWorld("SpookyWorld") != null) {
+						victim.teleport(Bukkit.getWorld("SpookyWorld").getSpawnLocation());
+
+						for (Player all : Bukkit.getOnlinePlayers()) {
+							victim.hidePlayer(all);
+						}
+
+						NPCUserContainer container = new NPCUserContainer(victim);
+
+						for (int x = 0; x < 30; x++) {
+							MineSkinFetcher.fetchSkinFromIdAsync(getRandomSkinID(), skin -> {
+
+								NPC npc = NPCUtil.npcLib.createNPC();
+								npc.setLocation(LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20));
+								npc.lookAt(victim.getLocation());
+								npc.setSkin(skin);
+
+								npc.create();
+
+								Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(victim));
+
+								container.addNPC(npc);
+
+								// Moving NPCs? YEEEEEEEEEEEEEEEEEEEEEEEEE BOI
+
+								new BukkitRunnable() {
+
+									@Override
+									public void run() {
+										if (ArrayUtils.spooky.containsKey(victim)) {
+											float angle = victim.getEyeLocation().getDirection().angle(npc.getLocation()
+													.toVector().subtract(victim.getEyeLocation().toVector()));
+											if (angle > 0.5F) {
+												npc.lookAt(victim.getLocation());
+											}
+										} else {
+											cancel();
+										}
+									}
+								}.runTaskTimer(Main.instance, 20, 20);
+
+							});
+						}
+
+						ArrayUtils.spooky.put(victim, container);
+						victim.addPotionEffect(XPotion.BLINDNESS.parsePotion(1000000, 5));
+						victim.addPotionEffect(XPotion.SLOW.parsePotion(1000000, 10));
+					} else {
+						WorldCreator.createWorld("SpookyWorld");
+						SpookyWorld(victim);
+					}
+				}
+			}.runTaskLater(Main.instance, 40L);
+		} else {
+
+			for (NPC npc : ArrayUtils.spooky.get(victim).getNPCs()) {
+				npc.destroy();
+			}
+
+			victim.removePotionEffect(XPotion.BLINDNESS.parsePotionEffectType());
+			victim.removePotionEffect(XPotion.SLOW.parsePotionEffectType());
+
+			for (Player all : Bukkit.getOnlinePlayers()) {
+				victim.showPlayer(all);
+			}
+			
+			if (ArrayUtils.spookylast.containsKey(victim)) {
+				victim.teleport(ArrayUtils.spookylast.get(victim));
+				ArrayUtils.spookylast.remove(victim);
+			}
+			
+			ArrayUtils.spooky.remove(victim);
+
+		}
+	}
+
+	public static int getRandomSkinID() {
+		return 1831521135;
 	}
 
 }

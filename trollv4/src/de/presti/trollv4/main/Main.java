@@ -33,6 +33,7 @@ import de.presti.trollv4.utils.player.*;
 import de.presti.trollv4.utils.plugin.*;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
+import de.presti.trollv4.utils.server.WorldCreator;
 import net.jitse.npclib.NPCLib;
 
 /*
@@ -63,34 +64,41 @@ public class Main extends JavaPlugin {
 		ArrayUtils.armor = new HashMap<String, ItemStack[]>();
 		ArrayUtils.inventory = new HashMap<String, ItemStack[]>();
 		ArrayUtils.cd = new ArrayList<String>();
-		
+
 		ServerInfo.checkForServerSoftware();
-		
+
 		boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
 				|| (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null)
-				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) || (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null)
+				|| (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
+				|| (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null)
+				|| (!new File("plugins/TrollV4/giorno.nbs").exists())
 				|| (!new File("plugins/TrollV4/rick.nbs").exists()));
 
 		downloadAll();
 
-		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
-			new Controls();
-		} else {
+		try {
+			if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null) {
+				new Controls();
+			} else {
 
-			logger.info("---------->");
-			logger.info(" ");
-			logger.info("Pls restart the Server");
-			logger.info("Because of the Libs Plugin");
-			logger.info(" ");
+				logger.info("---------->");
+				logger.info(" ");
+				logger.info("Pls restart the Server");
+				logger.info("Because of the Libs Plugin");
+				logger.info(" ");
+			}
+		} catch (Exception ex) {
 		}
-
 		if (need)
 			logger.info("---------->");
 
-		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") != null) {
-			NPCUtil.init();
+		try {
+
+			if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") != null) {
+				NPCUtil.init();
+			}
+		} catch (Exception ex) {
 		}
-		
 		new Language();
 		new Items();
 		new Config().init();
@@ -157,6 +165,11 @@ public class Main extends JavaPlugin {
 			download("https://trollv4.000webhostapp.com/download/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
 		}
 
+		if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
+			logger.info("Downloading Giorno.nbs!");
+			download("https://trollv4.000webhostapp.com/download/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+		}
+
 		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
 			logger.info("Downloading ProtocolLib!");
 			download("https://trollv4.000webhostapp.com/download/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
@@ -166,7 +179,7 @@ public class Main extends JavaPlugin {
 			logger.info("Downloading NoteBlockAPI!");
 			download("https://trollv4.000webhostapp.com/download/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
 		}
-		
+
 		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
 			logger.info("Downloading NPCLib!");
 			download("https://trollv4.000webhostapp.com/download/uni/npclib.jar", "plugins/npclib.jar");
@@ -196,7 +209,7 @@ public class Main extends JavaPlugin {
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-			
+
 			if (new File("plugins/npclib.jar").exists()) {
 				logger.info("Trying to load NPCLib!");
 				try {
@@ -207,7 +220,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
 			if (new File("plugins/LibsDisguises.jar").exists()) {
 				logger.info("Trying to load LibsDisguises!");
@@ -337,6 +350,11 @@ public class Main extends JavaPlugin {
 				logger.info("Error at connecting to the Cloud!");
 			}
 		}
+
+		if (Bukkit.getWorld("SpookyWorld") == null) {
+			WorldCreator.createWorld("SpookyWorld");
+		}
+
 	}
 
 	public int getRandom(int lower, int upper) {

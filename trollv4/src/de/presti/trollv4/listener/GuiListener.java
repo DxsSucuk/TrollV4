@@ -19,33 +19,16 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.cryptomorin.xseries.XEnchantment;
-import com.cryptomorin.xseries.XMaterial;
-import com.cryptomorin.xseries.XPotion;
-import com.cryptomorin.xseries.XSound;
+import com.cryptomorin.xseries.*;
 
-import de.presti.trollv4.api.PlayMusic;
-import de.presti.trollv4.api.TrollV4API;
+import de.presti.trollv4.api.*;
 import de.presti.trollv4.cmd.Haupt;
-import de.presti.trollv4.config.Config;
-import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
+import de.presti.trollv4.config.*;
 import de.presti.trollv4.invs.*;
 import de.presti.trollv4.main.*;
-import de.presti.trollv4.utils.*;
-import de.presti.trollv4.utils.crossversion.DemoScreen;
-import de.presti.trollv4.utils.crossversion.HS;
-import de.presti.trollv4.utils.crossversion.Titles;
-import de.presti.trollv4.utils.player.ArrayUtils;
-import de.presti.trollv4.utils.player.LocationUtil;
-import de.presti.trollv4.utils.server.NPCUtil;
-import net.jitse.npclib.NPCLib;
-import net.jitse.npclib.api.NPC;
-import net.jitse.npclib.api.skin.MineSkinFetcher;
-import net.jitse.npclib.api.skin.Skin;
-import net.jitse.npclib.api.state.NPCAnimation;
-import net.jitse.npclib.api.state.NPCSlot;
-import net.jitse.npclib.api.state.NPCState;
+import de.presti.trollv4.utils.crossversion.*;
+import de.presti.trollv4.utils.player.*;
+import de.presti.trollv4.utils.server.*;
 
 /*
 *	Urheberrechtshinweis														*
@@ -2172,6 +2155,25 @@ public class GuiListener implements Listener {
 							if (t != null) {
 								p.sendMessage(Data.prefix + Language.getMessage("gui.endcredits", t));
 								TrollV4API.EndGame(t);
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.spookyworld"))) {
+						if (p.hasPermission("troll.spooky") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (!ArrayUtils.spooky.containsKey(t)) {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.on", t));
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.off", t));
+								}
+								TrollV4API.SpookyWorld(t);
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
