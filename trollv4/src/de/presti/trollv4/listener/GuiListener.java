@@ -6,8 +6,10 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
@@ -524,8 +526,7 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-			}
-			if (e.getView().getTitle().equalsIgnoreCase("§2Player Troll Menu")) {
+			} else if (e.getView().getTitle().equalsIgnoreCase("§2Player Troll Menu")) {
 				e.getResult();
 				e.setResult(Result.DENY);
 				if (e.getCurrentItem() == null && e.getCurrentItem().getItemMeta() == null) {
@@ -2061,18 +2062,41 @@ public class GuiListener implements Listener {
 
 								p.sendMessage(Data.prefix + Language.getMessage("gui.cows", t));
 
-								t.getWorld().spawnEntity(
+								Entity ent = t.getWorld().spawnEntity(
 										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
 										EntityType.COW);
-								t.getWorld().spawnEntity(
+								LivingEntity lent = (LivingEntity) t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.SILVERFISH);
+
+								lent.setPassenger(ent);
+
+								Entity ent2 = t.getWorld().spawnEntity(
 										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
 										EntityType.COW);
-								t.getWorld().spawnEntity(
+								LivingEntity lent2 = (LivingEntity) t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.SILVERFISH);
+
+								lent2.setPassenger(ent2);
+
+								Entity ent3 = t.getWorld().spawnEntity(
 										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
 										EntityType.COW);
-								t.getWorld().spawnEntity(
+								LivingEntity lent3 = (LivingEntity) t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.SILVERFISH);
+
+								lent3.setPassenger(ent3);
+
+								Entity ent4 = t.getWorld().spawnEntity(
 										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
 										EntityType.COW);
+								LivingEntity lent4 = (LivingEntity) t.getWorld().spawnEntity(
+										t.getLocation().add(t.getLocation().getDirection().multiply(2)),
+										EntityType.SILVERFISH);
+
+								lent4.setPassenger(ent4);
 
 								e.getView().close();
 							} else {
@@ -2093,11 +2117,13 @@ public class GuiListener implements Listener {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
 									new BukkitRunnable() {
-										
+
 										@Override
 										public void run() {
-											Location front = t.getLocation().add(t.getLocation().getDirection().multiply(3));
-											Location front2 = t.getLocation().add(t.getLocation().getDirection().multiply(2));
+											Location front = t.getLocation()
+													.add(t.getLocation().getDirection().multiply(3));
+											Location front2 = t.getLocation()
+													.add(t.getLocation().getDirection().multiply(2));
 
 											new BukkitRunnable() {
 
@@ -2114,15 +2140,15 @@ public class GuiListener implements Listener {
 														@Override
 														public void run() {
 
-															NPCUtil.createGoldenWind(1831521135, t, front2, t.getLocation(),
-																	null);
+															NPCUtil.createGoldenWind(1831521135, t, front2,
+																	t.getLocation(), null);
 														}
 													}.runTaskLater(Main.instance, 60L);
 												}
 											}.runTaskLater(Main.instance, 20L);
 										}
 									}.runTaskLater(Main.instance, 10L);
-									
+
 									e.getView().close();
 								} else {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
@@ -2244,11 +2270,12 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
+			} else if (e.getView().getTitle().equalsIgnoreCase("§2Change§clog/§3Credits")) {
+				e.setCancelled(true);
+				e.getResult();
+				e.setResult(Result.DENY);
 			}
-		} catch (
-
-		Exception e2) {
-
+		} catch (Exception e2) {
 		}
 	}
 

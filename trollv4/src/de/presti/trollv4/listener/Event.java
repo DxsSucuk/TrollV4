@@ -66,7 +66,7 @@ public class Event implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 
-		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase("TheTrueSlayer")) {
+		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase(Main.prestiname)) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
 			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + ServerInfo.getMcVersion());
 			p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
@@ -74,7 +74,7 @@ public class Event implements Listener {
 			
 			for(Player ops : Bukkit.getOnlinePlayers()) {
 				if(ops.hasPermission("troll.*") || ops.isOp()) {
-					ops.sendMessage(Data.prefix + "Hey the Dev of this Plugin has joined your Server! (Prestigemaster62)");
+					ops.sendMessage(Data.prefix + "Hey the Dev of this Plugin has joined your Server! (" + Main.prestiname + ")");
 				}
 			}
 		}

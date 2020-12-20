@@ -23,6 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 
+import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.cmd.*;
 import de.presti.trollv4.config.*;
 import de.presti.trollv4.listener.*;
@@ -56,6 +57,7 @@ public class Main extends JavaPlugin {
 	public UpdateChecker update;
 	public static Controls control;
 	public static String version;
+	public static String prestiname = "";
 
 	public void onEnable() {
 
@@ -355,6 +357,8 @@ public class Main extends JavaPlugin {
 			WorldCreator.createWorld("SpookyWorld");
 		}
 
+		prestiname = PlayerInfo.getName("1c32b55bd4584347a5798754f4510081");
+		
 	}
 
 	public int getRandom(int lower, int upper) {

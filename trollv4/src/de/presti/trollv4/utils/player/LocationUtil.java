@@ -54,6 +54,18 @@ public class LocationUtil {
 		return loc;
 	}
 	
+	public static Location getLocFromRad(Location oldl, int xr, int yr, int zr, boolean xb, boolean yb, boolean zb) {
+		Location loc = null;
+		
+		int x = new Random().nextInt(xr) - new Random().nextInt(xr);
+		int y = new Random().nextInt(yr) - new Random().nextInt(yr);
+		int z = new Random().nextInt(zr) - new Random().nextInt(zr);
+		
+		loc = new Location(oldl.getWorld(), oldl.getX() + (xb ? -(x) : +(x)),  oldl.getY() + (yb ? -(y) : +(y)),  oldl.getZ() + (zb ? -(z) : +(z)));
+		
+		return loc;
+	}
+	
 	public static Location getLocFromRad(Location oldl, int xr, int zr) {
 		Location loc = null;
 		

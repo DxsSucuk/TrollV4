@@ -1,7 +1,10 @@
 package de.presti.trollv4.api;
 
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -888,14 +891,18 @@ public class TrollV4API {
 						for (Player all : Bukkit.getOnlinePlayers()) {
 							victim.hidePlayer(all);
 						}
-
+						
+						Bukkit.getWorld("SpookyWorld").setTime(15000);
+						Bukkit.getWorld("SpookyWorld").setThundering(true);
+						Bukkit.getWorld("SpookyWorld").setThunderDuration((60 * 10) * 20);
+						
 						NPCUserContainer container = new NPCUserContainer(victim);
 
 						for (int x = 0; x < 30; x++) {
 							MineSkinFetcher.fetchSkinFromIdAsync(getRandomSkinID(), skin -> {
 
 								NPC npc = NPCUtil.npcLib.createNPC();
-								npc.setLocation(LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20));
+								npc.setLocation(LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0) , false, ((new Random().nextInt(1)) == 0)));
 								npc.lookAt(victim.getLocation());
 								npc.setSkin(skin);
 
@@ -927,11 +934,17 @@ public class TrollV4API {
 						}
 
 						ArrayUtils.spooky.put(victim, container);
-						victim.addPotionEffect(XPotion.BLINDNESS.parsePotion(1000000, 5));
-						victim.addPotionEffect(XPotion.SLOW.parsePotion(1000000, 10));
+						victim.addPotionEffect(XPotion.BLINDNESS.parsePotion(1000000, 3));
+						victim.addPotionEffect(XPotion.SLOW.parsePotion(1000000, 3));
 					} else {
 						WorldCreator.createWorld("SpookyWorld");
-						SpookyWorld(victim);
+						new BukkitRunnable() {
+							
+							@Override
+							public void run() {
+								SpookyWorld(victim);
+							}
+						}.runTaskLater(Main.instance, (10 * 20));
 					}
 				}
 			}.runTaskLater(Main.instance, 40L);
@@ -959,7 +972,10 @@ public class TrollV4API {
 	}
 
 	public static int getRandomSkinID() {
-		return 1831521135;
+		
+		int[] ids = new int[] { 536534506, 205466795, 1598883677, 922817251};
+		
+		return ids[new Random().nextInt(ids.length)];
 	}
 
 }
