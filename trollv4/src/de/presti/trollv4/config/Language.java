@@ -265,7 +265,7 @@ public class Language {
 		addMessage("us", "gui.lag.on", "The User &c[PLAYER] &2is now lagging!");
 		addMessage("us", "gui.lag.off", "The User &c[PLAYER] &2stopped lagging");
 		addMessage("us", "gui.arrest", "The User &c[PLAYER] &2is Arrested!");
-		addMessage("us", "gui.rotate.on", "The User &c[PLAYER] &2dreht sich nun!");
+		addMessage("us", "gui.rotate.on", "The User &c[PLAYER] &2started rotating!");
 		addMessage("us", "gui.rotate.off", "The User &c[PLAYER] &2stopped rotating!");
 		addMessage("us", "gui.rndmtp.on", "The User &c[PLAYER] &2starts to be teleported through the air!");
 		addMessage("us", "gui.rndmtp.off", "The User &c[PLAYER] &2stops to be teleported through the air!");
