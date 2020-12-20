@@ -336,6 +336,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Teleport the Player to the same position he is and that simulates a SetBack
+	 * and it sends a "AntiCheat Detection" Message.
+	 *
+	 * @param victim that should get fake detected.
+	 * @since 4.4.4
+	 */
 	public static void AntiCheat(Player victim) {
 		if (victim != null) {
 			victim.sendMessage(Language.getMessage("gui.anticheat.detected"));
@@ -346,6 +353,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * This SetBacks the player sometimes and delays block placements and block breaks
+	 * delays the Itempickup too.
+	 *
+	 * @param victim that should lag.
+	 * @since 4.4.4
+	 */
 	public static void Lagging(Player victim) {
 		if (victim != null) {
 			if (!ArrayUtils.lagging.contains(victim)) {
@@ -358,6 +372,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Spawn a Bedrock Jail around the Player
+	 * and dont let him escape.
+	 *
+	 * @param victim that should be arrested.
+	 * @since 4.4.4
+	 */
 	public static void Arrest(Player victim) {
 		if (victim != null) {
 			victim.teleport(victim.getLocation());
@@ -394,6 +415,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Permantly Rotate a Player
+	 * rotation seems legit.
+	 *
+	 * @param victim that should rotate.
+	 * @since 4.4.4
+	 */
 	public static void Rotate(Player victim) {
 		if (victim != null) {
 			if (ArrayUtils.rotateplayer.contains(victim)) {
@@ -407,6 +435,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Randomly Teleport a Player around the world
+	 * the server could lag.
+	 *
+	 * @param victim that should get teleported.
+	 * @since 4.4.4
+	 */
 	public static void RandomTP(Player victim) {
 		if (victim != null) {
 			if (ArrayUtils.randomtp.contains(victim)) {
@@ -420,6 +455,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Spawns a TNT Trace behind the Player
+	 * timer can be adjusted in the config.
+	 *
+	 * @param victim the TNT Trace victim.
+	 * @since 4.4.4
+	 */
 	public static void TnTTrace(Player victim) {
 		if (victim != null) {
 			if (ArrayUtils.tntp.contains(victim)) {
@@ -433,6 +475,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Same as Arrest
+	 * Lets the Player send weird messages.
+	 *
+	 * @param victim that should get WTFed.
+	 * @since 4.4.4
+	 */
 	public static void WTF(Player victim) {
 		if (victim != null) {
 
@@ -617,6 +666,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Same as Arrested
+	 * but with Cobweb.
+	 *
+	 * @param victim that should get WebTraped.
+	 * @since 4.4.4
+	 */
 	public static void WebTrap(Player victim) {
 		if (victim != null) {
 
@@ -745,6 +801,14 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Let a player MLG
+	 * many mlgs like slime, lava, water, cobweb.
+	 *
+	 * @param victim that should mlg.
+	 * @param mlg the mlg he should do
+	 * @since 4.4.4
+	 */
 	public static void MLG(Player victim, String mlg) {
 		if (mlg.equalsIgnoreCase("slime")) {
 			if (victim != null) {
@@ -816,10 +880,24 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Changes the world color to yellow
+	 * and the game start lagging.
+	 *
+	 * @param victim that should get some LSD.
+	 * @since 4.4.4
+	 */
 	public static void LSD(Player victim) {
 		Packets.sendPacket(victim, 7, 15);
 	}
 
+	/**
+	 * Spawns a Guardin effect on a Player
+	 * a bit scary if you ask me.
+	 *
+	 * @param victim that should see the effect.
+	 * @since 4.4.4
+	 */
 	public static void GuardinShow(Player victim, boolean packet) {
 		if (packet) {
 			sendGameStateChange(victim, 10, 0);
@@ -834,10 +912,24 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Shows the EndCredits
+	 * simple.
+	 *
+	 * @param victim that should see the EndCredits.
+	 * @since 4.4.4
+	 */
 	public static void EndGame(Player victim) {
 		sendGameStateChange(victim, 4, 1);
 	}
 
+	/**
+	 * Send Custome GameStateChange Packets
+	 * used for demoscreen, lsd and others.
+	 *
+	 * @param victim that should get freezed.
+	 * @since 4.4.4
+	 */
 	public static void sendGameStateChange(Player victim, int type, float state) {
 		try {
 
@@ -971,6 +1063,13 @@ public class TrollV4API {
 		}
 	}
 
+	/**
+	 * Get a Random Creppy Skin ID
+	 * by Mineskin.
+	 *
+	 * @return int it returns a SkinID from MineSkin.
+	 * @since 4.4.4
+	 */
 	public static int getRandomSkinID() {
 		
 		int[] ids = new int[] { 536534506, 205466795, 1598883677, 922817251};
