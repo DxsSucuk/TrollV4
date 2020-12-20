@@ -288,7 +288,7 @@ public class Main extends JavaPlugin {
 							: false);
 					boolean cs = (Config.getconfig().get("Community-surprise") != null
 							? Config.getconfig().getBoolean("Community-surprise")
-							: true);
+							: false);
 					int hack = (Config.getconfig().get("trolls.hack.time") != null
 							? Config.getconfig().getInt("trolls.hack.time")
 							: 15);
