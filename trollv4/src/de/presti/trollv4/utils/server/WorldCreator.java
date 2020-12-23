@@ -1,7 +1,6 @@
 package de.presti.trollv4.utils.server;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameRule;
 
 /*
 *	Urheberrechtshinweis														*
@@ -22,20 +21,23 @@ public class WorldCreator {
 	@SuppressWarnings("deprecation")
 	public static void createWorld(String name) {
 		Bukkit.createWorld(new org.bukkit.WorldCreator(name));
-		Bukkit.getWorld(name).setGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE.getName(), "false");
-		Bukkit.getWorld(name).setGameRuleValue(GameRule.DO_MOB_SPAWNING.getName(), "false");
+		try {
+			Bukkit.getWorld(name).setGameRuleValue("doDaylightCycle", "false");
+			Bukkit.getWorld(name).setGameRuleValue("doMobSpawning", "false");
+		} catch (Exception ex) {
+		}
 	}
-	
+
 	public static void createWorld(String name, GenTyps gen) {
 		org.bukkit.WorldCreator wc = new org.bukkit.WorldCreator(name);
-		
+
 		Bukkit.createWorld(wc);
 	}
 
 	public enum GenTyps {
 
 		FLAT, NORMAL, NETHER, END
-		
+
 	}
-	
+
 }
