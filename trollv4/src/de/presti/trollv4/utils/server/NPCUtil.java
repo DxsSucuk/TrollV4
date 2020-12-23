@@ -86,14 +86,15 @@ public class NPCUtil {
 							
 							if (!Main.version.startsWith("v1_8")) {
 								npc.playAnimation(NPCAnimation.SWING_OFFHAND);
+							    p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
 							}
-
+							
 							if (p != null) {
 								if (!p.isDead()) {
 									p.damage(0.1D);
-								    p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
 								}
 							}
+
 
 						}
 					} else {
