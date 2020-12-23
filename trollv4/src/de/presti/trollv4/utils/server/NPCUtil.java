@@ -83,18 +83,17 @@ public class NPCUtil {
 				public void run() {
 					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
 						if (npc != null) {
-							
+
 							if (!Main.version.startsWith("v1_8")) {
 								npc.playAnimation(NPCAnimation.SWING_OFFHAND);
-							    p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+								p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
 							}
-							
+
 							if (p != null) {
 								if (!p.isDead()) {
 									p.damage(0.1D);
 								}
 							}
-
 
 						}
 					} else {
@@ -103,20 +102,20 @@ public class NPCUtil {
 					}
 				}
 			}.runTaskTimer(Main.instance, 20L, 10L);
-			
+
 			new BukkitRunnable() {
 
 				@Override
 				public void run() {
 					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
 						if (npc != null) {
-							
+
 							npc.playAnimation(NPCAnimation.SWING_MAINHAND);
 
 							if (p != null) {
 								if (!p.isDead()) {
 									p.damage(0.1D);
-								    p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+									p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
 								}
 							}
 
@@ -131,21 +130,21 @@ public class NPCUtil {
 			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
 		});
 	}
-	
+
 	public static void teleportNPCToPlayer(NPC npc, Player p) {
 		npc.destroy();
 		npc.setLocation(p.getLocation());
 		npc.create();
 		npc.show(p);
 	}
-	
+
 	public static void teleportNPCToLocation(NPC npc, Location t, Player p) {
 		npc.destroy();
 		npc.setLocation(t);
 		npc.create();
 		npc.show(p);
 	}
-	
+
 	public static void teleportNPCToLocationWithLook(NPC npc, Location t, Location lookat, Player p) {
 		npc.destroy();
 		npc.setLocation(t);
@@ -153,7 +152,7 @@ public class NPCUtil {
 		npc.create();
 		npc.show(p);
 	}
-	
+
 	public static void destroyNPCsFromPlayer(Player p) {
 		if (ArrayUtils.jojo.containsKey(p)) {
 			ArrayUtils.jojo.get(p).destroy();
