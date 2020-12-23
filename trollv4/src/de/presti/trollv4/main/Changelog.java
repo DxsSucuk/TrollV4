@@ -83,6 +83,8 @@ public class Changelog {
 								Data.cp + "API Doc Finished!", Data.cp + "Giorno Giovani Troll!",
 								Data.cp + "Raining Anvil!", Data.cp + "Minecraft EndCredits!", Data.cp + "Hostile Cow!",
 								Data.cm + "Removed Changelog < 4.4.0" }));
+		inv.setItem(21, SetItems.buildItem("§2Version » §c4.4.9", XMaterial.PAPER,
+				new String[] { Data.cu + "Hotfix!" }));
 
 		inv.setItem(50, SetItems.buildItem("§3Devs§7:", XMaterial.REDSTONE,
 				new String[] { "§2Presti (" + Main.prestiname + ")" }));
@@ -93,8 +95,11 @@ public class Changelog {
 		inv.setItem(52, SetItems.buildItem("§3Ideas§7:", XMaterial.TORCH,
 				new String[] { "§2Garkolym", "§2CrashDezz(CrashedTroll)", "§2Minesuchtiiii(TrollBoss)" }));
 
-		inv.setItem(53, SetItems.buildItem("§3Thanks to§7:", XMaterial.DIAMOND,
-				new String[] { "§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2"), "§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd"), "§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad"), "§2" + p.getName() }));
+		inv.setItem(53,
+				SetItems.buildItem("§3Thanks to§7:", XMaterial.DIAMOND,
+						new String[] { "§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2"),
+								"§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd"),
+								"§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad"), "§2" + p.getName() }));
 
 		p.openInventory(inv);
 	}

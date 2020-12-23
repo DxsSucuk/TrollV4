@@ -440,7 +440,7 @@ public class InvManager {
 		inv.setItem(15, SetItems.buildItem(Items.getItem("gui.trolls.anvils"), XMaterial.ANVIL.parseMaterial(), "§cCould give Player Items!"));
 		inv.setItem(16, SetItems.buildItem(Items.getItem("gui.trolls.cows"), XMaterial.COOKED_BEEF.parseMaterial()));
 		inv.setItem(19, SetItems.buildItem(Items.getItem("gui.trolls.giorno"), XMaterial.ARROW.parseMaterial(), "§cIs this an JoJo reference?"));
-//		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.johncena"), XMaterial.GREEN_DYE, "§cThis is going to come out in 4.4.9"));
+//		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.johncena"), XMaterial.GREEN_DYE, "§cThis is going to come out in 4.5.0"));
 		inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.spookyworld"), XMaterial.JACK_O_LANTERN));
 		inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.endcredits"), XMaterial.DRAGON_EGG.parseMaterial()));
 		setOverallTrollMenu(inv);
