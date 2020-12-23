@@ -87,7 +87,7 @@ public class Changelog {
 				new String[] { Data.cu + "Hotfix!" }));
 
 		inv.setItem(50, SetItems.buildItem("§3Devs§7:", XMaterial.REDSTONE,
-				new String[] { "§2Presti (" + Main.prestiname + ")" }));
+				new String[] { "§2Presti (" + Main.prestiname + ")", "§2David (" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + ")" }));
 
 		inv.setItem(51, SetItems.buildItem("§3Code Support§7:", XMaterial.WRITABLE_BOOK,
 				new String[] { "§2RyTheFirst", "§2CryptoMorin" }));
