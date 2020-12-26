@@ -27,7 +27,8 @@ public class Language {
 		loadGerman();
 		loadEnglish();
 		loadRussian();
-		loadSingapore();
+		loadIndo();
+		loadSpanish();
 		loadCustom();
 	}
 
