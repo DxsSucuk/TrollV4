@@ -2270,7 +2270,17 @@ public class GuiListener implements Listener {
 						e.getView().close();
 					}
 				}
-			} else if (e.getView().getTitle().equalsIgnoreCase("§2Change§clog/§3Credits")) {
+			} else if (e.getView().getTitle().equalsIgnoreCase("§2Change§clog")) {
+				e.setCancelled(true);
+				e.getResult();
+				e.setResult(Result.DENY);
+				if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta()) {
+					if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3Credits")) {
+						e.getView().close();
+						Changelog.credits((Player)e.getWhoClicked());
+					}
+				}
+			} else if (e.getView().getTitle().equalsIgnoreCase("§3Credits")) {
 				e.setCancelled(true);
 				e.getResult();
 				e.setResult(Result.DENY);

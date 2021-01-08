@@ -1,11 +1,16 @@
 package de.presti.trollv4.main;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import com.cryptomorin.xseries.SkullUtils;
 import com.cryptomorin.xseries.XMaterial;
 
 import de.presti.trollv4.api.PlayerInfo;
@@ -32,7 +37,7 @@ public class Changelog {
 	}
 
 	public static void logGUI(Player p) {
-		Inventory inv = Bukkit.createInventory(null, 9 * 6, "§2Change§clog/§3Credits");
+		Inventory inv = Bukkit.createInventory(null, 9 * 6, "§2Change§clog");
 
 		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
 		ItemMeta glm = gl.getItemMeta();
@@ -83,23 +88,13 @@ public class Changelog {
 								Data.cp + "API Doc Finished!", Data.cp + "Giorno Giovani Troll!",
 								Data.cp + "Raining Anvil!", Data.cp + "Minecraft EndCredits!", Data.cp + "Hostile Cow!",
 								Data.cm + "Removed Changelog < 4.4.0" }));
-		inv.setItem(21, SetItems.buildItem("§2Version » §c4.4.9", XMaterial.PAPER,
-				new String[] { Data.cu + "Hotfix!" }));
+		inv.setItem(21,
+				SetItems.buildItem("§2Version » §c4.4.9", XMaterial.PAPER, new String[] { Data.cu + "Hotfix!" }));
+		inv.setItem(21, SetItems.buildItem("§2Version » §c4.5.0", XMaterial.PAPER, new String[] {
+				Data.cp + "Added Spanish!", "Added new CreditsGUI", Data.cu + "Fixed LanguageManager", Data.cu + "Fixed a Random Error", Data.cm + "BigUpdate delayed to 4.5.5 or 4.6.0"}));
 
-		inv.setItem(50, SetItems.buildItem("§3Devs§7:", XMaterial.REDSTONE,
-				new String[] { "§2Presti (" + Main.prestiname + ")", "§2David (" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + ")" }));
 
-		inv.setItem(51, SetItems.buildItem("§3Code Support§7:", XMaterial.WRITABLE_BOOK,
-				new String[] { "§2RyTheFirst", "§2CryptoMorin" }));
-
-		inv.setItem(52, SetItems.buildItem("§3Ideas§7:", XMaterial.TORCH,
-				new String[] { "§2Garkolym", "§2CrashDezz(CrashedTroll)", "§2Minesuchtiiii(TrollBoss)" }));
-
-		inv.setItem(53,
-				SetItems.buildItem("§3Thanks to§7:", XMaterial.DIAMOND,
-						new String[] { "§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2"),
-								"§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd"),
-								"§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad"), "§2" + p.getName() }));
+		inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
 		p.openInventory(inv);
 	}
@@ -113,7 +108,166 @@ public class Changelog {
 	}
 
 	public static void credits(Player p) {
-		log(p);
+		creditsGUI(p);
+	}
+
+	public static void creditsGUI(Player p) {
+		Inventory inv = Bukkit.createInventory(null, 9 * 6, "§3Credits");
+
+		ItemStack blue = XMaterial.CYAN_STAINED_GLASS_PANE.parseItem();
+		ItemMeta bluem = blue.getItemMeta();
+		bluem.setDisplayName("§b");
+		blue.setItemMeta(bluem);
+		
+		ItemStack darkblue = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
+		ItemMeta darkbluem = darkblue.getItemMeta();
+		darkbluem.setDisplayName("§3");
+		darkblue.setItemMeta(darkbluem);
+		
+		ItemStack darkgreen = XMaterial.GREEN_STAINED_GLASS_PANE.parseItem();
+		ItemMeta darkgreenm = darkgreen.getItemMeta();
+		darkgreenm.setDisplayName("§2");
+		darkgreen.setItemMeta(darkgreenm);
+
+		for (int i = 0; i <= 8; i++) {
+			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
+				if (i == 0) {
+					ItemStack bcopy = blue.clone();
+					ItemMeta newm = bluem.clone();
+					newm.setDisplayName("§bDevs§7:");
+					bcopy.setItemMeta(newm);
+					inv.setItem(i, bcopy);
+				} else {
+					inv.setItem(i, blue);
+				}
+			}
+		}
+		
+		for (int i = 18; i <= 26; i++) {
+			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
+				if (i == 18) {
+					ItemStack bcopy = darkblue.clone();
+					ItemMeta newm = darkbluem.clone();
+					newm.setDisplayName("§3Ideas and Code Support§7:");
+					bcopy.setItemMeta(newm);
+					inv.setItem(i, bcopy);
+				} else {
+					inv.setItem(i, darkblue);
+				}
+			}
+		}
+		
+		for (int i = 36; i <= 45; i++) {
+			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
+				if (i == 36) {
+					ItemStack bcopy = darkgreen.clone();
+					ItemMeta newm = darkgreenm.clone();
+					newm.setDisplayName("§2Special Thanks to my friends§7:");
+					bcopy.setItemMeta(newm);
+					inv.setItem(i, bcopy);
+				} else {
+					inv.setItem(i, darkgreen);
+				}
+			}
+		}
+		
+		inv.setItem(45, darkgreen);
+		inv.setItem(27, darkblue);
+		inv.setItem(9, blue);
+		
+		ItemStack skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("1c32b55bd4584347a5798754f4510081")));
+		SkullMeta skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§bPresti §8(§2" + Main.prestiname + "§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(13, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§bDavid §8(§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + "§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(14, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("d05d95d592ed45cd9320ee2e2e491d78")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§3RyTheFirst §8(§3Code Support§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(29, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("964e966639cd474493134ef0bf430635")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§3CryptoMorin §8(§3Code Support§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(30, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("fdeb5f5ec4984d5380b325e430513db2")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§3Garkolym §8(§3Ideas§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(31, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("f81a5c1be0a74a359181a1b3ce527340")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§3CrashedLife §8(§3Ideas§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(32, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("b864637e34734abb9f76d07689a0309e")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§3Minesuchtiiii §8(§3Ideas§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(33, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("13fe75ebf9b74e23a44ee3ed342bdec2")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2") + " §8(§c<3§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(48, skull);
+		
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + " §8(§c<3§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(49, skull);
+		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(50, skull);
+		
+		skull = XMaterial.PLAYER_HEAD.parseItem();
+		skullm = (SkullMeta) skull.getItemMeta();
+		skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
+		skullm.setOwner(p.getName());
+		skull.setItemMeta(skullm);
+		
+		inv.setItem(51, skull);
+		
+		inv.setItem(17, blue);
+		inv.setItem(35, darkblue);
+		inv.setItem(53, darkgreen);
+
+		ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
+		ItemMeta glm = gl.getItemMeta();
+		glm.setDisplayName("§7");
+		gl.setItemMeta(glm);
+
+		for (int i = 0; i < (inv.getSize()); i++) {
+			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
+				inv.setItem(i, gl);
+			}
+		}
+
+		p.openInventory(inv);
 	}
 
 }
