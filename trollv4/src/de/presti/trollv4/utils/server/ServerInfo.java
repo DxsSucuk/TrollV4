@@ -31,6 +31,15 @@ public class ServerInfo {
 		boolean found = false;
 		
 		try {
+			if(Class.forName("net.pl3x.purpur") != null && !found) {
+				v = ServerVersions.PURPUR;
+				found = true;
+			}
+		} catch (ClassNotFoundException e) {
+		}
+		
+		
+		try {
 			if(Class.forName("com.tuinity.tuinity.config.TuinityConfig") != null && !found) {
 				v = ServerVersions.TUINITY;
 				found = true;
@@ -47,7 +56,7 @@ public class ServerInfo {
 		}
 		
 		try {
-			if(Class.forName("co.aikar.util.JSONUtil") != null && !found) {
+			if((Class.forName("co.aikar.util.JSONUtil") != null || Class.forName("com.destroystokyo.paper.PaperConfig") != null) && !found) {
 				v = ServerVersions.PAPER;
 				found = true;
 			}
