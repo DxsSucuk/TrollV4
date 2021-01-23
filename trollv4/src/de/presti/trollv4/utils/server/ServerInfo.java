@@ -90,7 +90,7 @@ public class ServerInfo {
 	}
 	
 	public static boolean supportOldPackets() {
-		return is18() || is19() || is10() || is11() || is12() || is13() || is14() || is15();
+		return !is16();
 	}
 	
 	public static boolean is18() {
