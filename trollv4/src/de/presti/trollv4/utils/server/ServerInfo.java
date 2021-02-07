@@ -31,7 +31,7 @@ public class ServerInfo {
 		boolean found = false;
 		
 		try {
-			if(Class.forName("net.pl3x.purpur") != null && !found) {
+			if(Class.forName("net.pl3x.purpur.PurpurConfig") != null && !found) {
 				v = ServerVersions.PURPUR;
 				found = true;
 			}
@@ -90,7 +90,7 @@ public class ServerInfo {
 	}
 	
 	public static boolean supportOldPackets() {
-		return !is16();
+		return !is116() && !is117();
 	}
 	
 	public static boolean is18() {
@@ -113,19 +113,23 @@ public class ServerInfo {
 		return getNMSVersion().startsWith("v1_12");
 	}
 	
-	public static boolean is13() {
+	public static boolean is113() {
 		return getNMSVersion().startsWith("v1_13");
 	}
 	
-	public static boolean is14() {
+	public static boolean is114() {
 		return getNMSVersion().startsWith("v1_14");
 	}
 	
-	public static boolean is15() {
+	public static boolean is115() {
 		return getNMSVersion().startsWith("v1_15");
 	}
 	
-	public static boolean is16() {
+	public static boolean is116() {
 		return getNMSVersion().startsWith("v1_16");
+	}
+	
+	public static boolean is117() {
+		return getNMSVersion().startsWith("v1_17");
 	}
 }
