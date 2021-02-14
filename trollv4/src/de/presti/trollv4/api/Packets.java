@@ -7,9 +7,19 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLib;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedAttribute;
+import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
+import com.comphenix.protocol.wrappers.MinecraftKey;
+
 import de.presti.trollv4.main.Main;
+import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
 *	Urheberrechtshinweis														*
@@ -52,6 +62,28 @@ public class Packets {
 			System.out.println("Your Server Version isnt Supporting this Packet! (" + packetNum + ")");
 			return false;
 		}
+		return true;
+	}
+	
+	public static boolean sendPacket(Player player) {
+		
+		if(!ServerInfo.supportOldPackets())
+			return false;
+		
+		PacketContainer respawn = new PacketContainer(PacketType.Play.Server.RESPAWN);
+		
+		respawn.getDimensions().write(0, player.getWorld().getEnvironment().getId());
+		respawn.getLongs().write(0, (long)player.getWorld().getDifficulty().getValue());
+		respawn.getGameModes().write(0, NativeGameMode.fromBukkit(player.getGameMode()));
+		respawn.getWorldTypeModifier().write(0, player.getWorld().getWorldType());
+		
+		try {
+			ProtocolLibrary.getProtocolManager().sendServerPacket(player, respawn);
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 		return true;
 	}
 

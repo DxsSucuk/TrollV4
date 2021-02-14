@@ -90,9 +90,16 @@ public class Changelog {
 								Data.cm + "Removed Changelog < 4.4.0" }));
 		inv.setItem(21,
 				SetItems.buildItem("§2Version » §c4.4.9", XMaterial.PAPER, new String[] { Data.cu + "Hotfix!" }));
-		inv.setItem(21, SetItems.buildItem("§2Version » §c4.5.0", XMaterial.PAPER, new String[] {
-				Data.cp + "Added Spanish!", "Added new CreditsGUI", Data.cu + "Fixed LanguageManager", Data.cu + "Fixed a Random Error", Data.cm + "BigUpdate delayed to 4.5.5 or 4.6.0"}));
 
+		inv.setItem(22,
+				SetItems.buildItem("§2Version » §c4.5.0", XMaterial.PAPER,
+						new String[] { Data.cp + "Added Spanish!", "Added new CreditsGUI",
+								Data.cu + "Fixed LanguageManager", Data.cu + "Fixed a Random Error",
+								Data.cm + "BigUpdate delayed to 4.5.5 or 4.6.0" }));
+		
+		inv.setItem(23,
+				SetItems.buildItem("§2Version » §c4.5.1", XMaterial.PAPER,
+						new String[] { Data.cp + "Added PurpurClip detection", Data.cp + "" }));
 
 		inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
@@ -118,12 +125,12 @@ public class Changelog {
 		ItemMeta bluem = blue.getItemMeta();
 		bluem.setDisplayName("§b");
 		blue.setItemMeta(bluem);
-		
+
 		ItemStack darkblue = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
 		ItemMeta darkbluem = darkblue.getItemMeta();
 		darkbluem.setDisplayName("§3");
 		darkblue.setItemMeta(darkbluem);
-		
+
 		ItemStack darkgreen = XMaterial.GREEN_STAINED_GLASS_PANE.parseItem();
 		ItemMeta darkgreenm = darkgreen.getItemMeta();
 		darkgreenm.setDisplayName("§2");
@@ -142,7 +149,7 @@ public class Changelog {
 				}
 			}
 		}
-		
+
 		for (int i = 18; i <= 26; i++) {
 			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
 				if (i == 18) {
@@ -156,7 +163,7 @@ public class Changelog {
 				}
 			}
 		}
-		
+
 		for (int i = 36; i <= 45; i++) {
 			if (inv.getItem(i) == null || inv.getItem(i).getType() == XMaterial.AIR.parseMaterial()) {
 				if (i == 36) {
@@ -170,88 +177,88 @@ public class Changelog {
 				}
 			}
 		}
-		
+
 		inv.setItem(45, darkgreen);
 		inv.setItem(27, darkblue);
 		inv.setItem(9, blue);
-		
+
 		ItemStack skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("1c32b55bd4584347a5798754f4510081")));
 		SkullMeta skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§bPresti §8(§2" + Main.prestiname + "§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(13, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§bDavid §8(§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + "§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(14, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("d05d95d592ed45cd9320ee2e2e491d78")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§3RyTheFirst §8(§3Code Support§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(29, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("964e966639cd474493134ef0bf430635")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§3CryptoMorin §8(§3Code Support§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(30, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("fdeb5f5ec4984d5380b325e430513db2")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§3Garkolym §8(§3Ideas§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(31, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("f81a5c1be0a74a359181a1b3ce527340")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§3CrashedLife §8(§3Ideas§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(32, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("b864637e34734abb9f76d07689a0309e")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§3Minesuchtiiii §8(§3Ideas§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(33, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("13fe75ebf9b74e23a44ee3ed342bdec2")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2") + " §8(§c<3§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(48, skull);
-		
+
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + " §8(§c<3§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(49, skull);
 		skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(50, skull);
-		
+
 		skull = XMaterial.PLAYER_HEAD.parseItem();
 		skullm = (SkullMeta) skull.getItemMeta();
 		skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
 		skullm.setOwner(p.getName());
 		skull.setItemMeta(skullm);
-		
+
 		inv.setItem(51, skull);
-		
+
 		inv.setItem(17, blue);
 		inv.setItem(35, darkblue);
 		inv.setItem(53, darkgreen);

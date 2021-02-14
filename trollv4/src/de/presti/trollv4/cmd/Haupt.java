@@ -11,6 +11,7 @@ import org.bukkit.entity.TNTPrimed;
 
 import com.cryptomorin.xseries.XSound;
 
+import de.presti.trollv4.api.Packets;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.invs.*;
@@ -74,6 +75,9 @@ public class Haupt implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
+			
+			Packets.sendPacket(p);
+			
 			if (args.length == 0) {
 				if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 					new InvManager().choicePlayer(p);
