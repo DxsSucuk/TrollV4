@@ -681,4 +681,9 @@ public class InvManager {
 		p.openInventory(inv3);
 	}
 
+	public void openTrollInv(Player p, Player victim) {
+		ArrayUtils.trolling.put(p.getName(), victim.getName());
+		openPlayerInv(p);
+	}
+
 }

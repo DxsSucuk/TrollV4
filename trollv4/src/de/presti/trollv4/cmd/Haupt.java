@@ -174,6 +174,14 @@ public class Haupt implements CommandExecutor {
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 					}
+				} else if (Bukkit.getPlayer(args[0]) != null) {
+					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
+						Player t = Bukkit.getPlayer(args[0]);
+						new InvManager().openTrollInv(p, t);
+						p.sendMessage(Data.prefix + Language.getMessage("command.troll.default"));
+					} else {
+						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+					}
 				} else {
 					if (p.hasPermission("troll.help") || p.hasPermission("troll.*")) {
 						p.sendMessage(Data.prefix + Language.getMessage("command.troll.notfound.line.1"));
