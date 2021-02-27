@@ -76,7 +76,7 @@ public class Haupt implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
 			
-			Packets.sendPacket(p);
+			//Packets.sendPacket(p);
 			
 			if (args.length == 0) {
 				if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {

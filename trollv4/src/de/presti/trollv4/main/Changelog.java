@@ -99,7 +99,11 @@ public class Changelog {
 		
 		inv.setItem(23,
 				SetItems.buildItem("§2Version » §c4.5.1", XMaterial.PAPER,
-						new String[] { Data.cp + "Added PurpurClip detection", Data.cp + "" }));
+						new String[] { Data.cp + "Added PurpurClip detection", Data.cp + "Added /troll [Player]" }));
+		
+		inv.setItem(234,
+				SetItems.buildItem("§2Version » §c4.5.2", XMaterial.PAPER,
+						new String[] { Data.cu + "Fixed /troll error!" }));
 
 		inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
