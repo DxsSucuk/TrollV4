@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.cryptomorin.xseries.XSound;
 
@@ -36,35 +37,44 @@ import de.presti.trollv4.utils.player.LocationUtil;
 */
 public class Haupt implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public void rop(final Player p) {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
 			public void run() {
 				if (ArrayUtils.rotateplayer.contains(p)) {
 					p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(),
 							p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
+				} else {
+					cancel();
 				}
 			}
 		}, 0L, 2L);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void rtp(final Player p) {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
 			public void run() {
 				if (ArrayUtils.randomtp.contains(p)) {
 					
 					p.teleport(LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
+				} else {
+					cancel();
 				}
 			}
 		}, 0L, 5L);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void spawntntatplayer(final Player p) {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
 			public void run() {
 				if (ArrayUtils.tntp.contains(p)) {
 
 					TNTPrimed tnt = (TNTPrimed) p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
 					tnt.setCustomName("§cExplode");
+				} else {
+					cancel();
 				}
 			}
 		}, 0L, (long)(Config.cfg.getInt("trolls.tnttrace.spawndelay")));

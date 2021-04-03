@@ -102,80 +102,10 @@ public class Event implements Listener {
 
 	// OVERALL
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		if (ArrayUtils.vanish.contains(p)) {
-			ArrayUtils.vanish.remove(p);
-			for (Player all : Bukkit.getOnlinePlayers()) {
-				all.showPlayer(p);
-			}
-		}
-		if (ArrayUtils.freeze.contains(p)) {
-			p.setWalkSpeed(0.2F);
-			p.setFlySpeed(0.1F);
-			ArrayUtils.freeze.remove(p);
-		}
-
-		if (ArrayUtils.herobrine.contains(p)) {
-			ArrayUtils.herobrine.remove(p);
-		}
-
-		if (ArrayUtils.userbowspam.contains(p)) {
-			ArrayUtils.arrowspam.get(p).cancel();
-			ArrayUtils.userbowspam.remove(p);
-		}
-
-		if (ArrayUtils.hackuser.containsKey(p)) {
-			ArrayUtils.hackuser.get(p).cancel();
-		}
-
-		if (ArrayUtils.tntp.contains(p)) {
-			ArrayUtils.tntp.remove(p);
-		}
-
-		if (ArrayUtils.rotateplayer.contains(p)) {
-			ArrayUtils.rotateplayer.remove(p);
-		}
-
-		if (ArrayUtils.fakeinv.containsKey(p)) {
-			InvSaver is = ArrayUtils.fakeinv.get(p);
-
-			p.getInventory().setArmorContents(is.getArmor());
-			p.getInventory().setContents(is.getContent());
-			p.getInventory().setExtraContents(is.getExtracont());
-
-			ArrayUtils.fakeinv.remove(p);
-		}
-		
-		if (ArrayUtils.jojo.containsKey(p)) {
-			NPCUtil.destroyNPCsFromPlayer(p);
-		}
-
-		if (ArrayUtils.fc.contains(p)) {
-			ArrayUtils.fc.remove(p);
-		}
-
-		if (ArrayUtils.lagging.contains(p)) {
-			ArrayUtils.lagging.remove(p);
-		}
-
-		if (ArrayUtils.randomtp.contains(p)) {
-			ArrayUtils.randomtp.remove(p);
-		}
-
-		if (ArrayUtils.noinv.contains(p)) {
-			ArrayUtils.noinv.remove(p);
-		}
-
-		if (ArrayUtils.deaf.contains(p)) {
-			ArrayUtils.deaf.remove(p);
-		}
-
-		if (ArrayUtils.confus.contains(p)) {
-			ArrayUtils.confus.remove(p);
-		}
+		ArrayUtils.removeFromAll(p);
 	}
 
 	// NoInv
