@@ -1,0 +1,13 @@
+name: TrollV4
+version: 4.5.4
+main: de.presti.trollv4.main.Main
+author: [Presti, David]
+softdepend: [ProtocolLib, LibsDisguises, NoteBlockAPI, NPCLibPlugin]
+loadbefore: [TrollV4Updater]
+website: http://dev-presti.tk
+api-version: 1.16
+commands:
+   delete:
+      description: Updater Delete Command
+   troll:
+      description: MainCommand

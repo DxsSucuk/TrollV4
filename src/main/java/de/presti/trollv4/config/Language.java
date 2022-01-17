@@ -3,24 +3,12 @@ package de.presti.trollv4.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.presti.trollv4.main.Main;
+import de.presti.trollv4.trolls.Troll;
 import org.bukkit.entity.Player;
 
 import de.presti.trollv4.main.Data;
 
-/*
-*	Urheberrechtshinweis														*
-*																				*
-*	Copyright © Baris Arslan 2019											    *
-*	Erstellt: 20.05.2020 / 22:17:20											    *
-*																				*
-*	Alle Inhalte dieses Quelltextes sind urheberrechtlich geschützt.			*
-*	Das Urheberrecht liegt, soweit nicht ausdrücklich anders gekennzeichnet,	*
-*	bei Baris Arslan. Alle Rechte vorbehalten.								    *
-*																				*
-*	Jede Art der Vervielfältigung, Verbreitung, Vermietung, Verleihung,			*
-*	öffentlichen Zugänglichmachung oder anderer Nutzung							*
-*	bedarf der ausdrücklichen, schriftlichen Zustimmung von Baris Arslan	    *
-*/
 public class Language {
 
 	public Language() {
@@ -35,8 +23,24 @@ public class Language {
 	public static HashMap<String, String> messages = new HashMap<>();
 	public static ArrayList<String> lang = new ArrayList<>();
 
+	public static String getMessage(Troll troll) {
+		return getMessage("gui." + troll.getName());
+	}
+
+	public static String getMessage(Troll troll, Player t) {
+		return getMessage("gui." + troll.getName(), t);
+	}
+
+	public static String getMessage(Troll troll, String path) {
+		return getMessage("gui." + troll.getName() + "." + path);
+	}
+
+	public static String getMessage(Troll troll, String path, Player t) {
+		return getMessage("gui." + troll.getName() + "." + path, t);
+	}
+
 	public static String getMessage(String path) {
-		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
+		String m = "Couldn't find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[VERSION]", Data.version);
@@ -48,7 +52,7 @@ public class Language {
 	}
 
 	public static String getMessage(String path, Player t) {
-		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
+		String m = "Couldn't find " + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(getLanguage() + "." + path)) {
 			m = messages.get(getLanguage() + "." + path).replace("[PLAYER]", t.getName());
@@ -60,7 +64,7 @@ public class Language {
 	}
 
 	public static String getMessageFromLanguage(String lang, String path) {
-		String m = "Couldnt find " + lang + "." + path + "! (Regenerate message.yml)";
+		String m = "Couldn't find " + lang + "." + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(lang + "." + path)) {
 			m = messages.get(lang + "." + path);
@@ -72,7 +76,7 @@ public class Language {
 	}
 
 	public static String getMessageFromLanguageRaw(String lang, String path) {
-		String m = "Couldnt find " + lang + "." + path + "! (Regenerate message.yml)";
+		String m = "Couldn't find " + lang + "." + path + "! (Regenerate message.yml)";
 
 		if (messages.containsKey(lang + "." + path)) {
 			m = messages.get(lang + "." + path);
@@ -94,7 +98,7 @@ public class Language {
 	}
 
 	public static String getLanguage() {
-		return Config.getconfig().getString("Language").toLowerCase();
+		return Main.instance.config.config.getString("Language").toLowerCase();
 	}
 
 	public void loadGerman() {
@@ -137,13 +141,13 @@ public class Language {
 		addMessage("de", "gui.hackuser", "Der Hackvorgang startet!");
 		addMessage("de", "gui.rocket", "Du hast den Spieler &c[PLAYER] &2wie eine Rakete Fliegen lassen!");
 		addMessage("de", "gui.spam", "Du hast den Spieler &c[PLAYER] &2voll gespamt!");
-		addMessage("de", "gui.startcontrol.start", "Du kontrollierst nun &c[PLAYER]&2!");
-		addMessage("de", "gui.startcontrol.cantcontrol", "Du kannst diesen Spieler nicht kontrollieren!");
-		addMessage("de", "gui.startcontrol.yourself", "Du kannst nicht dich selbst kontrollieren!");
-		addMessage("de", "gui.startcontrol.iscontroled", "Der Spieler wird schon kontrolliert!");
-		addMessage("de", "gui.startcontrol.alreadyc", "Du kontrollierst schon jemanden anderen!");
-		addMessage("de", "gui.stopcontrol.stop", "Du kontrollierst nun &c[PLAYER] &2nicht mehr!");
-		addMessage("de", "gui.stopcontrol.nocontrol", "Du kontrollierst niemanden!");
+		addMessage("de", "gui.control.start.start", "Du kontrollierst nun &c[PLAYER]&2!");
+		addMessage("de", "gui.control.start.cantcontrol", "Du kannst diesen Spieler nicht kontrollieren!");
+		addMessage("de", "gui.control.start.yourself", "Du kannst nicht dich selbst kontrollieren!");
+		addMessage("de", "gui.control.start.iscontroled", "Der Spieler wird schon kontrolliert!");
+		addMessage("de", "gui.control.start.alreadyc", "Du kontrollierst schon jemanden anderen!");
+		addMessage("de", "gui.control.stop.stop", "Du kontrollierst nun &c[PLAYER] &2nicht mehr!");
+		addMessage("de", "gui.control.stop.nocontrol", "Du kontrollierst niemanden!");
 		addMessage("de", "gui.fakeop.default", "Du hast &c[PLAYER] &2Fakeoped!");
 		addMessage("de", "gui.fakeop.opm", "&7&o[Server: [PLAYER] wurde zum Operator ernannt]");
 		addMessage("de", "gui.crash.default", "Du hast den Spieler &c[PLAYER] &2Crashen lassen!");
@@ -246,13 +250,13 @@ public class Language {
 		addMessage("us", "gui.hackuser", "The hacking process starts!");
 		addMessage("us", "gui.rocket", "You made the Player &c[PLAYER] &2fly like a rocket!");
 		addMessage("us", "gui.spam", "You've completely blundered the Player &c[PLAYER]&2!");
-		addMessage("us", "gui.startcontrol.start", "Youre Controlling &c[PLAYER]&2!");
-		addMessage("us", "gui.startcontrol.cantcontrol", "You cant control this Player!");
-		addMessage("us", "gui.startcontrol.yourself", "You cant control yourself!");
-		addMessage("us", "gui.startcontrol.iscontroled", "The player is already controlled!");
-		addMessage("us", "gui.startcontrol.alreadyc", "You already control someone else!");
-		addMessage("us", "gui.stopcontrol.stop", "You stopped Controlling &c[PLAYER]&2!");
-		addMessage("us", "gui.stopcontrol.nocontrol", "You control nobody!");
+		addMessage("us", "gui.control.start.start", "Youre Controlling &c[PLAYER]&2!");
+		addMessage("us", "gui.control.start.cantcontrol", "You cant control this Player!");
+		addMessage("us", "gui.control.start.yourself", "You cant control yourself!");
+		addMessage("us", "gui.control.start.iscontroled", "The player is already controlled!");
+		addMessage("us", "gui.control.start.alreadyc", "You already control someone else!");
+		addMessage("us", "gui.control.stop.stop", "You stopped Controlling &c[PLAYER]&2!");
+		addMessage("us", "gui.control.stop.nocontrol", "You control nobody!");
 		addMessage("us", "gui.fakeop.default", "You Fakeopped &c[PLAYER]&2!");
 		addMessage("us", "gui.fakeop.opm", "&7&o[Server: Opped [PLAYER]]");
 		addMessage("us", "gui.crash.default", "You let the Player &c[PLAYER] &2Crash!");
@@ -353,13 +357,13 @@ public class Language {
 		addMessage("ru", "gui.hackuser", "Начинается чит-процесс!");
 		addMessage("ru", "gui.rocket", "Вы позволяете игроку &c[PLAYER] &2летать, как ракета!");
 		addMessage("ru", "gui.spam", "Вы полностью заспамили игрока &c[PLAYER]&2!");
-		addMessage("ru", "gui.startcontrol.start", "Теперь вы контролируете &c[PLAYER]&2!");
-		addMessage("ru", "gui.startcontrol.cantcontrol", "Вы не можете управлять этим игроком!");
-		addMessage("ru", "gui.startcontrol.yourself", "Ты не можешь себя контролировать!");
-		addMessage("ru", "gui.startcontrol.iscontroled", "Игрок уже находится под контролем!");
-		addMessage("ru", "gui.startcontrol.alreadyc", "Вы уже контролируете кого-то другого!");
-		addMessage("ru", "gui.stopcontrol.stop", "Теперь вы больше не контролируете &c[PLAYER]&2!");
-		addMessage("ru", "gui.stopcontrol.nocontrol", "Вы никого не контролируете!");
+		addMessage("ru", "gui.control.start.start", "Теперь вы контролируете &c[PLAYER]&2!");
+		addMessage("ru", "gui.control.start.cantcontrol", "Вы не можете управлять этим игроком!");
+		addMessage("ru", "gui.control.start.yourself", "Ты не можешь себя контролировать!");
+		addMessage("ru", "gui.control.start.iscontroled", "Игрок уже находится под контролем!");
+		addMessage("ru", "gui.control.start.alreadyc", "Вы уже контролируете кого-то другого!");
+		addMessage("ru", "gui.control.stop.stop", "Теперь вы больше не контролируете &c[PLAYER]&2!");
+		addMessage("ru", "gui.control.stop.nocontrol", "Вы никого не контролируете!");
 		addMessage("ru", "gui.fakeop.default", "У вас есть &c[PLAYER]&2Fakeoped!");
 		addMessage("ru", "gui.fakeop.opm", "&7&o[Server: [PLAYER] теперь оператор]");
 		addMessage("ru", "gui.crash.default", "Вы привели к сбою игрока &c[PLAYER]&2!");
@@ -419,7 +423,7 @@ public class Language {
 		addMessage("ru", "control.world", "&cМир изменился!");
 		addMessage("ru", "control.distance", "&cСлишком далеко!");
 	}
-	
+
 	public void loadIndo() {
 		addMessage("indo", "nopermission", "Anda tidak memiliki izin untuk perintah ini!");
 		addMessage("indo", "noonline", "Pemain ini tidak online!");
@@ -460,13 +464,13 @@ public class Language {
 		addMessage("indo", "gui.hackuser", "proses hack sedang dimulai!");
 		addMessage("indo", "gui.rocket", "kamu membuat &c[PLAYER] &2terbang seperti rocket!");
 		addMessage("indo", "gui.spam", "kamu telah spam &c[PLAYER]&2!");
-		addMessage("indo", "gui.startcontrol.start", "kamu telah mengendalikan &c[PLAYER]&2!");
-		addMessage("indo", "gui.startcontrol.cantcontrol", "Kamu tidak bisa mengendalikan dia!");
-		addMessage("indo", "gui.startcontrol.yourself", "kamu tidak bisa mengontrol diri sendiri!");
-		addMessage("indo", "gui.startcontrol.iscontroled", "player ini sudah di control!");
-		addMessage("indo", "gui.startcontrol.alreadyc", "kamu sudah mengontrol orang lain!");
-		addMessage("indo", "gui.stopcontrol.stop", "kamu berhenti mengontol &c[PLAYER]&2!");
-		addMessage("indo", "gui.stopcontrol.nocontrol", "kamu tidak mengontrol siapa siapa!");
+		addMessage("indo", "gui.control.start.start", "kamu telah mengendalikan &c[PLAYER]&2!");
+		addMessage("indo", "gui.control.start.cantcontrol", "Kamu tidak bisa mengendalikan dia!");
+		addMessage("indo", "gui.control.start.yourself", "kamu tidak bisa mengontrol diri sendiri!");
+		addMessage("indo", "gui.control.start.iscontroled", "player ini sudah di control!");
+		addMessage("indo", "gui.control.start.alreadyc", "kamu sudah mengontrol orang lain!");
+		addMessage("indo", "gui.control.stop.stop", "kamu berhenti mengontol &c[PLAYER]&2!");
+		addMessage("indo", "gui.control.stop.nocontrol", "kamu tidak mengontrol siapa siapa!");
 		addMessage("indo", "gui.fakeop.default", "kamu fake op kan &c[PLAYER]&2!");
 		addMessage("indo", "gui.fakeop.opm", "&7&o[Server: Opped [PLAYER]]");
 		addMessage("indo", "gui.crash.default", "kamu membuat &c[PLAYER] &2Crash!");
@@ -526,7 +530,7 @@ public class Language {
 		addMessage("indo", "control.world", "&4Mengganti dunia");
 		addMessage("indo", "control.distance", "&4TERLALU JAUH");
 	}
-	
+
 	public void loadSpanish() {
 		addMessage("es", "nopermission", "¡No tienes permiso para este comando!");
 		addMessage("es", "noonline", "¡Este jugador no está conectado!");
@@ -567,13 +571,13 @@ public class Language {
 		addMessage("es", "gui.hackeser", "¡El proceso de piratería comienza ahora!");
 		addMessage("es", "gui.rocket", "Hiciste al jugador &c[PLAYER] &2volar como un bolsillo!");
 		addMessage("es", "gui.spam", "¡Has golpeado completamente al jugador &c[PLAYER]&2!");
-		addMessage("es", "gui.startcontrol.start", "Controlar su &c[PLAYER]&2!");
-		addMessage("es", "gui.startcontrol.cantcontrol", "¡No puedes controlar a este jugador!");
-		addMessage("es", "gui.startcontrol.yourself", "¡No puedes controlarte a ti mismo!");
-		addMessage("es", "gui.startcontrol.iscontroled", "¡El jugador ya está controlado!");
-		addMessage("es", "gui.startcontrol.alreadyc", "¡Ya controlas a otra persona!");
-		addMessage("es", "gui.stopcontrol.stop", "¡Has dejado de controlar &c[PLAYER]&2!");
-		addMessage("es", "gui.stopcontrol.nocontrol", "¡No controlas nada!");
+		addMessage("es", "gui.control.start.start", "Controlar su &c[PLAYER]&2!");
+		addMessage("es", "gui.control.start.cantcontrol", "¡No puedes controlar a este jugador!");
+		addMessage("es", "gui.control.start.yourself", "¡No puedes controlarte a ti mismo!");
+		addMessage("es", "gui.control.start.iscontroled", "¡El jugador ya está controlado!");
+		addMessage("es", "gui.control.start.alreadyc", "¡Ya controlas a otra persona!");
+		addMessage("es", "gui.control.stop.stop", "¡Has dejado de controlar &c[PLAYER]&2!");
+		addMessage("es", "gui.control.stop.nocontrol", "¡No controlas nada!");
 		addMessage("es", "gui.fakeop.default", "¡Usted falsificó &c[PLAYER]&2!");
 		addMessage("es", "gui.fakeop.opm", "&7&o[Servidor: Apareció [PLAYER]]");
 		addMessage("es", "gui.crash.default", "¡Deja que el jugador &c[PLAYER] &2bloquee!");
@@ -635,13 +639,11 @@ public class Language {
 	}
 
 	public void loadCustom() {
-		if (Config.getFile2().exists()) {
+		if (Main.instance.config.getLanguageFile().exists()) {
 			for (String s : lang) {
-				if (Config.getconfig2().get(s) != null) {
-					addMessage("custome", s, Config.getconfig2().getString(s));
-					addMessage("custom", s, Config.getconfig2().getString(s));
+				if (Main.instance.config.langugeConfig.get(s) != null) {
+					addMessage("custom", s, Main.instance.config.langugeConfig.getString(s));
 				} else {
-					addMessage("custome", s, "Couldnt find " + s + " in the message.yml");
 					addMessage("custom", s, "Couldnt find " + s + " in the message.yml");
 				}
 			}

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Apis">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../../../DeveloperAPIShit/Minecraft/Apis" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../../DeveloperAPIShit/Minecraft/Apis" recursive="false" />
+  </library>
+</component>

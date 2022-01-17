@@ -1,22 +1,10 @@
 package de.presti.trollv4.config;
 
+import de.presti.trollv4.main.Main;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/*
-*	Urheberrechtshinweis														*
-*																				*
-*	Copyright © Baris Arslan 2019											    *
-*	Erstellt: 19.10.2020 / 17:34:26											    *
-*																				*
-*	Alle Inhalte dieses Quelltextes sind urheberrechtlich geschützt.			*
-*	Das Urheberrecht liegt, soweit nicht ausdrücklich anders gekennzeichnet,	*
-*	bei Baris Arslan. Alle Rechte vorbehalten.								    *
-*																				*
-*	Jede Art der Vervielfältigung, Verbreitung, Vermietung, Verleihung,			*
-*	öffentlichen Zugänglichmachung oder anderer Nutzung							*
-*	bedarf der ausdrücklichen, schriftlichen Zustimmung von Baris Arslan	    *
-*/
 public class Items {
 
 	public static HashMap<String, String> names = new HashMap<>();
@@ -73,7 +61,7 @@ public class Items {
 	}
 
 	public static String getItemLang() {
-		return Config.cfg.getBoolean("Custom-Item-Name") ? "custome" : "default";
+		return Main.instance.config.config.getBoolean("Custom-Item-Name") ? "custome" : "default";
 	}
 
 	public Items() {
@@ -146,10 +134,10 @@ public class Items {
 	}
 
 	public static void loadCustome() {
-		if (Config.getFile3().exists()) {
+		if (Main.instance.config.getItemFile().exists()) {
 			for (String paths : path) {
-				if (Config.getconfig3().get(paths) != null) {
-					addItem("custome", paths, Config.getconfig3().getString(paths));
+				if (Main.instance.config.itemConfig.get(paths) != null) {
+					addItem("custome", paths, Main.instance.config.itemConfig.getString(paths));
 				} else {
 					addItem("custome", paths, "Couldnt find " + paths + " in the items.yml!");
 				}

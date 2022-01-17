@@ -8,52 +8,44 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import de.presti.trollv4.main.Data;
 
-/*
-*	Urheberrechtshinweis														*
-*																				*
-*	Copyright © Baris Arslan 2018											    *
-*	Erstellt: 18.04.2019 / 19:35:22												    *
-*																				*
-*	Alle Inhalte dieses Quelltextes sind urheberrechtlich geschützt.			*
-*	Das Urheberrecht liegt, soweit nicht ausdrücklich anders gekennzeichnet,	*
-*	bei Baris Arslan. Alle Rechte vorbehalten.								    *
-*																				*
-*	Jede Art der Vervielfältigung, Verbreitung, Vermietung, Verleihung,			*
-*	öffentlichen Zugänglichmachung oder anderer Nutzung							*
-*	bedarf der ausdrücklichen, schriftlichen Zustimmung von Baris Arslan	    *
-*/
 public class Config {
 
-	public static FileConfiguration cfg;
-	public static FileConfiguration cfg2;
-	public static FileConfiguration cfg3;
+	public Config() {
+		initConfig();
+		initItemName();
+		initLanguageFile();
+	}
+
+	public FileConfiguration config;
+	public FileConfiguration langugeConfig;
+	public FileConfiguration itemConfig;
 	
-	public void init() {
-		cfg = getconfig();
-		if(!getFile().exists()) {
-			cfg.options().copyDefaults(true);
-			cfg.options().copyHeader(true);
-			cfg.options().header("###############################\n" + 
+	public void initConfig() {
+		config = getConfig();
+		if(!getConfigFile().exists()) {
+			config.options().copyDefaults(true);
+			config.options().copyHeader(true);
+			config.options().header("###############################\n" +
 					"#                             #\n" + 
 					"# TrollV4 by Presti           #\n" + 
 					"# Configuration File " + Data.version + "    #\n" + 
 					"#                             #\n" + 
 					"###############################");
-			cfg.addDefault("Plugin-Version", Data.version);
-			cfg.addDefault("Language", "US");
-			cfg.addDefault("Custom-Item-Name", false);
-			cfg.addDefault("UpdateChecker", true);
-			cfg.addDefault("AutoUpdate", false);
-			cfg.addDefault("Animations", false);
-			cfg.addDefault("ASync", false);
-			cfg.addDefault("Community-surprise", false);
-			cfg.addDefault("trolls.hack.time", 15);
-			cfg.addDefault("trolls.fakeinv.time", 5);
-			cfg.addDefault("trolls.slipperyhands.time", 1);
-			cfg.addDefault("trolls.tnttrace.spawndelay", 2);
+			config.addDefault("Plugin-Version", Data.version);
+			config.addDefault("Language", "US");
+			config.addDefault("Custom-Item-Name", false);
+			config.addDefault("UpdateChecker", true);
+			config.addDefault("AutoUpdate", false);
+			config.addDefault("Animations", false);
+			config.addDefault("ASync", false);
+			config.addDefault("Community-surprise", false);
+			config.addDefault("trolls.hack.time", 15);
+			config.addDefault("trolls.fakeinv.time", 5);
+			config.addDefault("trolls.slipperyhands.time", 1);
+			config.addDefault("trolls.tnttrace.spawndelay", 2);
 			
 			try {
-                cfg.save(getFile());
+				config.save(getConfigFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -61,33 +53,33 @@ public class Config {
 		}
 	}
 	
-	public static void createFirstConfigWithValue(String lang, boolean cin, boolean uc, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
-		cfg = getconfig();
-		if(!getFile().exists()) {
-			cfg.options().copyDefaults(true);
-			cfg.options().copyHeader(true);
-			cfg.options().header("###############################\n" + 
+	public void createFirstConfigWithValue(String lang, boolean cin, boolean uc, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
+		config = getConfig();
+		if(!getConfigFile().exists()) {
+			config.options().copyDefaults(true);
+			config.options().copyHeader(true);
+			config.options().header("###############################\n" +
 					"#                             #\n" + 
 					"# TrollV4 by Presti           #\n" + 
 					"# Configuration File " + Data.version + "    #\n" + 
 					"#                             #\n" + 
 					"###############################");
-			
-			cfg.addDefault("Plugin-Version", Data.version);
-			cfg.addDefault("Language", lang);
-			cfg.addDefault("Custom-Item-Name", cin);
-			cfg.addDefault("UpdateChecker", uc);
-			cfg.addDefault("AutoUpdate", au);
-			cfg.addDefault("Animations", anim);
-			cfg.addDefault("ASync", async);
-			cfg.addDefault("Community-surprise", cs);
-			cfg.addDefault("trolls.hack.time", th);
-			cfg.addDefault("trolls.fakeinv.time", tf);
-			cfg.addDefault("trolls.slipperyhands.time", ts);
-			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
+
+			config.addDefault("Plugin-Version", Data.version);
+			config.addDefault("Language", lang);
+			config.addDefault("Custom-Item-Name", cin);
+			config.addDefault("UpdateChecker", uc);
+			config.addDefault("AutoUpdate", au);
+			config.addDefault("Animations", anim);
+			config.addDefault("ASync", async);
+			config.addDefault("Community-surprise", cs);
+			config.addDefault("trolls.hack.time", th);
+			config.addDefault("trolls.fakeinv.time", tf);
+			config.addDefault("trolls.slipperyhands.time", ts);
+			config.addDefault("trolls.tnttrace.spawndelay", tt);
 			
 			try {
-                cfg.save(getFile());
+				config.save(getConfigFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -95,12 +87,12 @@ public class Config {
 			
 	}
 	
-	public void init2() {
-		cfg2 = getconfig2();
-		if(!getFile2().exists()) {
-			cfg2.options().copyDefaults(true);
-			cfg2.options().copyHeader(true);
-			cfg2.options().header(
+	public void initLanguageFile() {
+		langugeConfig = getLanguageConfig();
+		if(!getLanguageFile().exists()) {
+			langugeConfig.options().copyDefaults(true);
+			langugeConfig.options().copyHeader(true);
+			langugeConfig.options().header(
 					"###############################\n" + 
 					"#                             #\n" + 
 					"# TrollV" + Data.version + " by Presti       #\n" + 
@@ -109,11 +101,11 @@ public class Config {
 					"###############################");
 			
 			for(String s : Language.lang) {
-				cfg2.addDefault(s, Language.getMessageFromLanguageRaw("us", s));
+				langugeConfig.addDefault(s, Language.getMessageFromLanguageRaw("us", s));
 			}
 			
 			try {
-				cfg2.save(getFile2());
+				langugeConfig.save(getLanguageFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -121,12 +113,12 @@ public class Config {
 		}
 	}
 	
-	public void init3() {
-		cfg3 = getconfig3();
-		if(!getFile3().exists()) {
-			cfg3.options().copyDefaults(true);
-			cfg3.options().copyHeader(true);
-			cfg3.options().header(
+	public void initItemName() {
+		itemConfig = getItemConfig();
+		if(!getItemFile().exists()) {
+			itemConfig.options().copyDefaults(true);
+			itemConfig.options().copyHeader(true);
+			itemConfig.options().header(
 					"###############################\n" + 
 					"#                             #\n" + 
 					"# TrollV" + Data.version + " by Presti       #\n" + 
@@ -135,11 +127,11 @@ public class Config {
 					"###############################");
 			
 			for(String s : Items.path) {
-				cfg3.addDefault(s, Items.getItemFromChoiceRaw("default", s));
+				itemConfig.addDefault(s, Items.getItemFromChoiceRaw("default", s));
 			}
 			
 			try {
-				cfg3.save(getFile3());
+				itemConfig.save(getItemFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -147,26 +139,26 @@ public class Config {
 		}
 	}
 	
-	public static FileConfiguration getconfig() {
-		return YamlConfiguration.loadConfiguration(getFile());
+	public FileConfiguration getConfig() {
+		return YamlConfiguration.loadConfiguration(getConfigFile());
 	}
 	
-	public static FileConfiguration getconfig2() {
-		return YamlConfiguration.loadConfiguration(getFile2());
+	public FileConfiguration getLanguageConfig() {
+		return YamlConfiguration.loadConfiguration(getLanguageFile());
 	}
-	public static FileConfiguration getconfig3() {
-		return YamlConfiguration.loadConfiguration(getFile3());
+	public FileConfiguration getItemConfig() {
+		return YamlConfiguration.loadConfiguration(getItemFile());
 	}
 	
-	public static File getFile() {
+	public File getConfigFile() {
 		return new File("plugins/TrollV4", "config.yml");
 	}
 	
-	public static File getFile2() {
+	public File getLanguageFile() {
 		return new File("plugins/TrollV4", "messages.yml");
 	}
 	
-	public static File getFile3() {
+	public File getItemFile() {
 		return new File("plugins/TrollV4", "items.yml");
 	}
 }
