@@ -2,11 +2,7 @@ package de.presti.trollv4.listener;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -34,13 +30,10 @@ import com.cryptomorin.xseries.XSound;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.Language;
-import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.main.*;
-import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
-import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 
 /*
@@ -171,12 +164,11 @@ public class Event implements Listener {
 		if (ArrayUtils.lagging.contains(player)) {
 			Material drops = e.getBlock().getType();
 			e.setCancelled(true);
-			Bukkit.getScheduler().runTaskLater(Main.instance, new Runnable() {
-				@Override
-				public void run() {
+			Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+				if (e.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
 					e.getBlock().getLocation().getWorld().getBlockAt(e.getBlock().getLocation())
 							.setType(XMaterial.AIR.parseMaterial());
-					e.getBlock().getLocation().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(drops));
+					if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) e.getBlock().getLocation().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(drops));
 				}
 			}, 31);
 		}

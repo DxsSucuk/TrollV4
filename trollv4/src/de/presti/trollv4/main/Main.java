@@ -9,6 +9,8 @@ import java.net.URLConnection;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -28,14 +30,12 @@ import de.presti.trollv4.cmd.*;
 import de.presti.trollv4.config.*;
 import de.presti.trollv4.listener.*;
 import de.presti.trollv4.logging.*;
-import de.presti.trollv4.utils.*;
 import de.presti.trollv4.utils.control.*;
 import de.presti.trollv4.utils.player.*;
 import de.presti.trollv4.utils.plugin.*;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 import de.presti.trollv4.utils.server.WorldCreator;
-import net.jitse.npclib.NPCLib;
 
 /*
 *	Urheberrechtshinweis														*
@@ -95,11 +95,13 @@ public class Main extends JavaPlugin {
 			logger.info("---------->");
 
 		try {
-
 			if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") != null) {
 				NPCUtil.init();
+			} else {
+				logger.error("Please install the NPCLibPlugin for NPC support.");
 			}
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		new Language();
 		new Items();
@@ -164,36 +166,36 @@ public class Main extends JavaPlugin {
 
 		if (!new File("plugins/TrollV4/rick.nbs").exists()) {
 			logger.info("Downloading Rick.nbs!");
-			download("https://trollv4.000webhostapp.com/download/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
+			download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
 		}
 
 		if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
 			logger.info("Downloading Giorno.nbs!");
-			download("https://trollv4.000webhostapp.com/download/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+			download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
 			logger.info("Downloading ProtocolLib!");
-			download("https://trollv4.000webhostapp.com/download/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
+			download("https://cdn.azura.best/download/trollv4/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
 			logger.info("Downloading NoteBlockAPI!");
-			download("https://trollv4.000webhostapp.com/download/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
+			download("https://cdn.azura.best/download/trollv4/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
 			logger.info("Downloading NPCLib!");
-			download("https://trollv4.000webhostapp.com/download/uni/npclib.jar", "plugins/npclib.jar");
+			download("https://cdn.azura.best/download/trollv4/uni/npclib.jar", "plugins/npclib.jar");
 		}
 
 		if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
 			logger.info("Downloading LibsDisguises!");
 			if (version.toLowerCase().startsWith("v1_8")) {
-				download("https://trollv4.000webhostapp.com/download/1-8/LibsDisguises.jar",
+				download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar",
 						"plugins/LibsDisguises.jar");
 			} else {
-				download("https://trollv4.000webhostapp.com/download/1-12-x/LibsDisguises.jar",
+				download("https://cdn.azura.best/download/trollv4/1-12-x/LibsDisguises.jar",
 						"plugins/LibsDisguises.jar");
 			}
 		}
@@ -205,7 +207,7 @@ public class Main extends JavaPlugin {
 					PluginUtil.loadPlugin("ProtocolLib");
 					logger.info("Loaded ProtocolLib!");
 				} catch (Exception e) {
-					logger.error("Coudlnt load ProtocolLib!");
+					logger.error("Couldn't load ProtocolLib!");
 				}
 			}
 		}
@@ -218,7 +220,7 @@ public class Main extends JavaPlugin {
 					PluginUtil.loadPlugin("npclib");
 					logger.info("Loaded NPCLib!");
 				} catch (Exception e) {
-					logger.error("Coudlnt load NPCLib!");
+					logger.error("Couldn't load NPCLib!");
 				}
 			}
 		}
@@ -230,7 +232,7 @@ public class Main extends JavaPlugin {
 					PluginUtil.loadPlugin("LibsDisguises");
 					logger.info("Loaded LibsDisguises!");
 				} catch (Exception e) {
-					logger.error("Coudlnt load LibsDisguises!");
+					logger.error("Couldn't load LibsDisguises!");
 				}
 			}
 		}
@@ -242,7 +244,7 @@ public class Main extends JavaPlugin {
 					PluginUtil.loadPlugin("NoteBlockAPI");
 					logger.info("Loaded NoteBlockAPI!");
 				} catch (Exception e) {
-					logger.error("Coudlnt load NoteBlockAPI!");
+					logger.error("Couldn't load NoteBlockAPI!");
 				}
 			}
 		}
@@ -259,9 +261,9 @@ public class Main extends JavaPlugin {
 
 			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
-				double confv = Double.valueOf((Config.cfg.getString("Plugin-Version").replace("4.", "")));
+				double confv = Double.parseDouble((Config.cfg.getString("Plugin-Version").replace("4.", "")));
 
-				double pluginv = Double.valueOf((Data.version.replace("4.", "")));
+				double pluginv = Double.parseDouble((Data.version.replace("4.", "")));
 
 				if (confv > pluginv) {
 
@@ -271,24 +273,14 @@ public class Main extends JavaPlugin {
 
 					logger.info("Updating Config!");
 
-					String l = (Language.getLanguage() != null ? Language.getLanguage() : "US");
-					boolean cin = (Config.getconfig().get("Custom-Item-Name") != null
-							? Config.getconfig().getBoolean("Custom-Item-Name")
-							: false);
-					boolean uc = (Config.getconfig().get("AutoUpdate") != null
-							? Config.getconfig().getBoolean("AutoUpdate")
-							: false);
-					boolean autoup = (Config.getconfig().get("UpdateChecker") != null
-							? Config.getconfig().getBoolean("UpdateChecker")
-							: true);
-					boolean anim = (Config.getconfig().get("Animations") != null
-							? Config.getconfig().getBoolean("Animations")
-							: false);
-					boolean async = (Config.getconfig().get("ASync") != null ? Config.getconfig().getBoolean("ASync")
-							: false);
-					boolean cs = (Config.getconfig().get("Community-surprise") != null
-							? Config.getconfig().getBoolean("Community-surprise")
-							: false);
+					Language.getLanguage();
+					String l = Language.getLanguage();
+					boolean cin = (Config.getconfig().get("Custom-Item-Name") != null && Config.getconfig().getBoolean("Custom-Item-Name"));
+					boolean uc = (Config.getconfig().get("AutoUpdate") != null && Config.getconfig().getBoolean("AutoUpdate"));
+					boolean autoup = (Config.getconfig().get("UpdateChecker") == null || Config.getconfig().getBoolean("UpdateChecker"));
+					boolean anim = (Config.getconfig().get("Animations") != null && Config.getconfig().getBoolean("Animations"));
+					boolean async = (Config.getconfig().get("ASync") != null && Config.getconfig().getBoolean("ASync"));
+					boolean cs = (Config.getconfig().get("Community-surprise") != null && Config.getconfig().getBoolean("Community-surprise"));
 					int hack = (Config.getconfig().get("trolls.hack.time") != null
 							? Config.getconfig().getInt("trolls.hack.time")
 							: 15);
@@ -327,12 +319,10 @@ public class Main extends JavaPlugin {
 		logger.info("-----------------------------------");
 		logger.info("TrollV" + Data.version + " by Presti");
 		logger.info("In case of errors please report");
-		logger.info("Skype: DxsSucuk@hotmail.com");
+		logger.info("Email: presti@presti.me");
 		logger.info("YouTube: Not Memerinoto");
-		logger.info("Instagram: Memerinoto");
 		logger.info("Otherwise have fun");
 		logger.info("------------------------------------");
-		logger.info("Online Changelog: " + instance.getDescription().getWebsite());
 		logger.info("Plugin Version: " + Data.version);
 		logger.info("Server Version: " + version + " - " + ServerInfo.getMcVersion());
 		logger.info("Server Software: " + ServerInfo.getServerSoftware());
@@ -343,7 +333,7 @@ public class Main extends JavaPlugin {
 		Listener();
 		CMD();
 
-		if (Config.getconfig().getBoolean("Community-surprise")) {
+		/*if (Config.getconfig().getBoolean("Community-surprise")) {
 			Community.host = "trollv4.dev-presti.tk";
 			Community.port = 6918;
 			try {
@@ -351,7 +341,7 @@ public class Main extends JavaPlugin {
 			} catch (IOException e) {
 				logger.info("Error at connecting to the Cloud!");
 			}
-		}
+		} */
 
 		if (Bukkit.getWorld("SpookyWorld") == null) {
 			WorldCreator.createWorld("SpookyWorld");
@@ -362,10 +352,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public int getRandom(int lower, int upper) {
-		Random r = new Random();
-		int toreturn = r.nextInt(upper - lower + 1) + lower;
-
-		return toreturn;
+		return new Random().nextInt(upper - lower + 1) + lower;
 	}
 
 	public static String getRandomID() {
@@ -410,41 +397,8 @@ public class Main extends JavaPlugin {
 			readableByteChannel.close();
 			in.close();
 			return true;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
-
-	public static void updater(String newerversion) {
-
-		double spigotver = Double.valueOf(newerversion.replace("4.", ""));
-
-		double pluginv = Double.valueOf((Data.version.replace("4.", "")));
-
-		if (spigotver > pluginv) {
-			File f = new File("plugins/TrollV4Updater.jar");
-
-			if (!f.exists()) {
-				if (download("https://trollv4.000webhostapp.com/download/uni/TrollV4Updater.jar",
-						"plugins/TrollV4Updater.jar")) {
-					logger.info("Downlaoded the updater!");
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							try {
-								Plugin pl = Bukkit.getPluginManager().loadPlugin(f);
-								pl.onLoad();
-
-								Bukkit.getPluginManager().enablePlugin(pl);
-							} catch (Exception e) {
-								logger.info("Failed to Load the Updater!");
-								logger.info("Error: " + e.getMessage());
-							}
-						}
-					}.runTaskLater(getPlugin(), 20L);
-				}
-			}
-		}
-	}
-
 }

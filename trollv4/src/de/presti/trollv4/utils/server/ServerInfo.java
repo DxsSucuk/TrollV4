@@ -90,7 +90,7 @@ public class ServerInfo {
 	}
 	
 	public static boolean supportOldPackets() {
-		return !is116() && !is117();
+		return !is116() && !is117() && !is118() && !is119();
 	}
 	
 	public static boolean is18() {
@@ -132,4 +132,8 @@ public class ServerInfo {
 	public static boolean is117() {
 		return getNMSVersion().startsWith("v1_17");
 	}
+
+	public static boolean is118() { return getNMSVersion().startsWith("v1_18"); }
+
+	public static boolean is119() { return getNMSVersion().startsWith("v1_19"); }
 }

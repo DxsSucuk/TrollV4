@@ -1,10 +1,14 @@
 package de.presti.trollv4.api;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.Random;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -467,7 +471,7 @@ public class TrollV4API {
 			if (ArrayUtils.tntp.contains(victim)) {
 				ArrayUtils.tntp.remove(victim);
 			} else {
-				new Haupt().spawntntatplayer(victim);
+				new Haupt().spawnTnTAtPlayer(victim);
 				ArrayUtils.tntp.add(victim);
 			}
 		} else {
@@ -931,8 +935,12 @@ public class TrollV4API {
 	 * @since 4.4.4
 	 */
 	public static void sendGameStateChange(Player victim, int type, float state) {
-		try {
 
+		if (ServerInfo.is117() || ServerInfo.is118() || ServerInfo.is119()) {
+			return;
+		}
+
+		try {
 			Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
 			Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 			Object packet = null;
@@ -941,14 +949,15 @@ public class TrollV4API {
 				packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
 						.newInstance(type, state);
 			} else {
-
-				packet = Packets.getNMSClass("PacketPlayOutGameStateChange")
-						.getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
-						.newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class)
-								.newInstance(type), state);
+                if (!ServerInfo.is118() && !ServerInfo.is119()) {
+                    packet = Packets.getNMSClass("PacketPlayOutGameStateChange")
+                            .getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
+                            .newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class)
+                                    .newInstance(type), state);
+                }
 			}
 
-			playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection,
+			if (packet != null) playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection,
 					packet);
 		} catch (Exception e) {
 			System.out.println("Your Server Version isnt Supporting this Packet! (PacketPlayOutGameStateChange)");
@@ -983,11 +992,11 @@ public class TrollV4API {
 						for (Player all : Bukkit.getOnlinePlayers()) {
 							victim.hidePlayer(all);
 						}
-						
+
 						Bukkit.getWorld("SpookyWorld").setTime(15000);
 						Bukkit.getWorld("SpookyWorld").setThundering(true);
 						Bukkit.getWorld("SpookyWorld").setThunderDuration((60 * 10) * 20);
-						
+
 						NPCUserContainer container = new NPCUserContainer(victim);
 
 						for (int x = 0; x < 30; x++) {
@@ -1003,8 +1012,6 @@ public class TrollV4API {
 								Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(victim));
 
 								container.addNPC(npc);
-
-								// Moving NPCs? YEEEEEEEEEEEEEEEEEEEEEEEEE BOI
 
 								new BukkitRunnable() {
 
@@ -1026,12 +1033,12 @@ public class TrollV4API {
 						}
 
 						ArrayUtils.spooky.put(victim, container);
-						victim.addPotionEffect(XPotion.BLINDNESS.parsePotion(1000000, 3));
-						victim.addPotionEffect(XPotion.SLOW.parsePotion(1000000, 3));
+						victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
+						victim.addPotionEffect(XPotion.SLOW.buildPotionEffect(1000000, 3));
 					} else {
 						WorldCreator.createWorld("SpookyWorld");
 						new BukkitRunnable() {
-							
+
 							@Override
 							public void run() {
 								SpookyWorld(victim);
@@ -1046,18 +1053,18 @@ public class TrollV4API {
 				npc.destroy();
 			}
 
-			victim.removePotionEffect(XPotion.BLINDNESS.parsePotionEffectType());
-			victim.removePotionEffect(XPotion.SLOW.parsePotionEffectType());
+			victim.removePotionEffect(XPotion.BLINDNESS.getPotionEffectType());
+			victim.removePotionEffect(XPotion.SLOW.getPotionEffectType());
 
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				victim.showPlayer(all);
 			}
-			
+
 			if (ArrayUtils.spookylast.containsKey(victim)) {
 				victim.teleport(ArrayUtils.spookylast.get(victim));
 				ArrayUtils.spookylast.remove(victim);
 			}
-			
+
 			ArrayUtils.spooky.remove(victim);
 
 		}
@@ -1071,9 +1078,9 @@ public class TrollV4API {
 	 * @since 4.4.4
 	 */
 	public static int getRandomSkinID() {
-		
+
 		int[] ids = new int[] { 536534506, 205466795, 1598883677, 922817251};
-		
+
 		return ids[new Random().nextInt(ids.length)];
 	}
 

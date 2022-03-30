@@ -589,54 +589,54 @@ public class InvManager {
 		ItemStack item = new ItemStack(XMaterial.DIAMOND_SWORD.parseMaterial());
 		ItemMeta imeta = item.getItemMeta();
 		imeta.setDisplayName(Items.getItem("gui.items.diamondsword"));
-		imeta.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
-		imeta.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+		imeta.addEnchant(XEnchantment.DAMAGE_ALL.getEnchant(), 1000, true);
+		imeta.addEnchant(XEnchantment.FIRE_ASPECT.getEnchant(), 1000, true);
 		item.setItemMeta(imeta);
 		item.setAmount(1);
 
 		ItemStack item2 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 		ItemMeta imeta2 = item2.getItemMeta();
 		imeta2.setDisplayName(Items.getItem("gui.items.diamondprotectionchest"));
-		imeta2.addEnchant(XEnchantment.PROTECTION_ENVIRONMENTAL.parseEnchantment(), 1000, true);
+		imeta2.addEnchant(XEnchantment.PROTECTION_ENVIRONMENTAL.getEnchant(), 1000, true);
 		item2.setItemMeta(imeta2);
 		item2.setAmount(1);
 
 		ItemStack item3 = new ItemStack(XMaterial.DIAMOND_CHESTPLATE.parseMaterial());
 		ItemMeta imeta3 = item3.getItemMeta();
 		imeta3.setDisplayName(Items.getItem("gui.items.diamondthornschest"));
-		imeta3.addEnchant(XEnchantment.THORNS.parseEnchantment(), 1000, true);
+		imeta3.addEnchant(XEnchantment.THORNS.getEnchant(), 1000, true);
 		item3.setItemMeta(imeta3);
 		item3.setAmount(1);
 
 		ItemStack item4 = new ItemStack(XMaterial.DIAMOND_PICKAXE.parseMaterial());
 		ItemMeta imeta4 = item4.getItemMeta();
 		imeta4.setDisplayName(Items.getItem("gui.items.diamondpickaxe"));
-		imeta4.addEnchant(XEnchantment.DIG_SPEED.parseEnchantment(), 1000, true);
+		imeta4.addEnchant(XEnchantment.DIG_SPEED.getEnchant(), 1000, true);
 		item4.setItemMeta(imeta4);
 		item4.setAmount(1);
 
 		ItemStack item5 = new ItemStack(XMaterial.BOW.parseMaterial());
 		ItemMeta imeta5 = item5.getItemMeta();
 		imeta5.setDisplayName(Items.getItem("gui.items.onehitbow"));
-		imeta5.addEnchant(XEnchantment.ARROW_INFINITE.parseEnchantment(), 1000, true);
-		imeta5.addEnchant(XEnchantment.ARROW_KNOCKBACK.parseEnchantment(), 1000, true);
-		imeta5.addEnchant(XEnchantment.ARROW_DAMAGE.parseEnchantment(), 1000, true);
+		imeta5.addEnchant(XEnchantment.ARROW_INFINITE.getEnchant(), 1000, true);
+		imeta5.addEnchant(XEnchantment.ARROW_KNOCKBACK.getEnchant(), 1000, true);
+		imeta5.addEnchant(XEnchantment.ARROW_DAMAGE.getEnchant(), 1000, true);
 		item5.setItemMeta(imeta5);
 		item5.setAmount(1);
 
 		ItemStack item6 = new ItemStack(XMaterial.WOODEN_HOE.parseMaterial());
 		ItemMeta imeta6 = item6.getItemMeta();
 		imeta6.setDisplayName(Items.getItem("gui.items.woodenhoe"));
-		imeta6.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
-		imeta6.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+		imeta6.addEnchant(XEnchantment.DAMAGE_ALL.getEnchant(), 1000, true);
+		imeta6.addEnchant(XEnchantment.FIRE_ASPECT.getEnchant(), 1000, true);
 		item6.setItemMeta(imeta6);
 		item6.setAmount(1);
 
 		ItemStack item7 = new ItemStack(XMaterial.WOODEN_SWORD.parseMaterial());
 		ItemMeta imeta7 = item7.getItemMeta();
 		imeta7.setDisplayName(Items.getItem("gui.items.woodensword"));
-		imeta7.addEnchant(XEnchantment.DAMAGE_ALL.parseEnchantment(), 1000, true);
-		imeta7.addEnchant(XEnchantment.FIRE_ASPECT.parseEnchantment(), 1000, true);
+		imeta7.addEnchant(XEnchantment.DAMAGE_ALL.getEnchant(), 1000, true);
+		imeta7.addEnchant(XEnchantment.FIRE_ASPECT.getEnchant(), 1000, true);
 		item7.setItemMeta(imeta7);
 		item7.setAmount(1);
 
