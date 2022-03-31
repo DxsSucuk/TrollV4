@@ -109,9 +109,13 @@ public class Changelog {
 				SetItems.buildItem("§2Version » §c4.5.3", XMaterial.PAPER,
 						new String[] { Data.cu + "Fixed many disconnecting Problems with the Trolls!" }));
 
-		inv.setItem(26,
+		inv.setItem(28,
 				SetItems.buildItem("§2Version » §c4.5.4", XMaterial.PAPER,
 						new String[] { Data.cp + "Added 1.17 and 1.18 support!" }));
+
+		inv.setItem(29,
+				SetItems.buildItem("§2Version » §c4.5.5", XMaterial.PAPER,
+						new String[] { Data.cu + "Fixed Titles!", Data.cu + "Fixed Changelog!", Data.cu + "Fixed Credits!" }));
 
 		inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 

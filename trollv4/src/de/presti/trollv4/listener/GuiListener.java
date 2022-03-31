@@ -132,6 +132,8 @@ public class GuiListener implements Listener {
 			fmeta.setDisplayName(Items.getItem("gui.items.fireball"));
 			fireball.setItemMeta(fmeta);
 
+			if (e.getCurrentItem() == null || e.getCurrentItem().getType() == XMaterial.AIR.parseMaterial()) return;
+
 			if (e.getView().getTitle().equalsIgnoreCase("§2Item Troll Menu")) {
 				e.setCancelled(true);
 				if (p.hasPermission("troll.items")) {
@@ -2317,7 +2319,7 @@ public class GuiListener implements Listener {
 				e.getResult();
 				e.setResult(Result.DENY);
 				if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta()) {
-					if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3Credits")) {
+					if(e.getCurrentItem().getType() == XMaterial.WRITABLE_BOOK.parseMaterial()) {
 						e.getView().close();
 						Changelog.credits((Player)e.getWhoClicked());
 					}
