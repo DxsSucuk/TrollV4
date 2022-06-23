@@ -47,7 +47,7 @@ public class Event implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 
-		if (p.getUniqueId().toString().trim().equalsIgnoreCase("1c32b55b-d458-4347-a579-8754f4510081") && p.getName().equalsIgnoreCase(Main.prestiname)) {
+		if (p.getUniqueId().toString().replace("-", "").equalsIgnoreCase("1c32b55bd4584347a5798754f4510081")) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
 			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + ServerInfo.getMcVersion());
 			p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
@@ -55,7 +55,7 @@ public class Event implements Listener {
 			
 			for(Player ops : Bukkit.getOnlinePlayers()) {
 				if(ops.hasPermission("troll.*") || ops.isOp()) {
-					ops.sendMessage(Data.prefix + "Hey the Dev of this Plugin has joined your Server! (" + Main.prestiname + ")");
+					ops.sendMessage(Data.prefix + "Hey the Dev of this Plugin has joined your Server! (" + p.getDisplayName() + ")");
 				}
 			}
 		}
@@ -69,13 +69,13 @@ public class Event implements Listener {
 		if (p.hasPermission("troll.help")) {
 			if (Config.getconfig().getBoolean("UpdateChecker")) {
 				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)) {
-					p.sendMessage(Data.prefix + "TrollV4 has a Update!");
+					p.sendMessage(Data.prefix + "TrollV4 has a update!");
 					p.sendMessage(Data.prefix + "New Version: " + Main.instance.update.spigotPluginVersion);
 					p.sendMessage(Data.prefix + "Your Version: " + Data.version);
 					p.sendMessage(Data.prefix + "Download here: https://www.spigotmc.org/resources/" + UpdateChecker.ID
 							+ "/updates");
 				} else {
-					p.sendMessage(Data.prefix + "TrollV4 has no Update");
+					p.sendMessage(Data.prefix + "TrollV4 has no update");
 				}
 			}
 		}
@@ -306,7 +306,7 @@ public class Event implements Listener {
 				}
 			}
 		} catch (Exception e1) {
-			System.out.println("Couldnt Spawn! Pls Report: " + e1.getMessage());
+			Main.getPlugin().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
 		}
 	}
 }

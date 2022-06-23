@@ -13,20 +13,6 @@ import de.presti.trollv4.utils.player.ArrayUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
-/*
-*	Urheberrechtshinweis														*
-*																				*
-*	Copyright © Baris Arslan 2019											    *
-*	Erstellt: 13.12.2019 / 22:51:38											    *
-*																				*
-*	Alle Inhalte dieses Quelltextes sind urheberrechtlich geschützt.			*
-*	Das Urheberrecht liegt, soweit nicht ausdrücklich anders gekennzeichnet,	*
-*	bei Baris Arslan. Alle Rechte vorbehalten.								    *
-*																				*
-*	Jede Art der Vervielfältigung, Verbreitung, Vermietung, Verleihung,			*
-*	öffentlichen Zugänglichmachung oder anderer Nutzung							*
-*	bedarf der ausdrücklichen, schriftlichen Zustimmung von Baris Arslan	    *
-*/
 public class Controls {
 
 	public Controls() {
