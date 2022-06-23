@@ -1,6 +1,6 @@
 # TrollV4
 
-#### An Troll Plugin with a GUI to Troll your Friends!
+#### A Troll Plugin with a GUI to Troll your Friends!
 
 SpigotMC: https://www.spigotmc.org/resources/trollv4-troll-plugin-troll-plugin-with-gui.67318/
 
@@ -10,5 +10,5 @@ BStats: https://bstats.org/plugin/bukkit/TrollV4/4690
 
 [NPCLib (NPC Util) by MinecraftLibraries](https://github.com/MinecraftLibraries/NPCLib)
 
-If i forgot someone pls message me!
+If I forgot someone pls message me!
 
