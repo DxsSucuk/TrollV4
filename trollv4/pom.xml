@@ -6,7 +6,7 @@
 
 	<groupId>de.presti</groupId>
 	<artifactId>trollv4</artifactId>
-	<version>4.5.6</version>
+	<version>4.5.7</version>
 
 	<repositories>
 		<repository>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.github.libraryaddict</groupId>
 			<artifactId>LibsDisguises</artifactId>
-			<version>master-cc86e130ea-1</version>
+			<version>v10.0.19</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -81,15 +81,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>1.18.2-R0.1-SNAPSHOT</version>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.13.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.18.2-R0.1-SNAPSHOT</version>
+			<version>1.13-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

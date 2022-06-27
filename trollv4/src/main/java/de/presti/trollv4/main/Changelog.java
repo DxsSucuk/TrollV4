@@ -111,6 +111,14 @@ public class Changelog {
                         }
                 ));
 
+        inv.setItem(31,
+                SetItems.buildItem("§2Version » §c4.5.7", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogChange + "Fixed JAR!"
+                        }
+                ));
+
+
         inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
         p.openInventory(inv);
