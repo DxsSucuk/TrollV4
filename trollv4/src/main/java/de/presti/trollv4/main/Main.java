@@ -19,7 +19,6 @@ import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.plugin.Metrics;
 import de.presti.trollv4.utils.plugin.PluginUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
-import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 import de.presti.trollv4.utils.server.WorldCreator;
 import org.bukkit.Bukkit;
@@ -44,7 +43,6 @@ public class Main extends JavaPlugin {
     public static Config config;
 
     public void onEnable() {
-
         instance = this;
         version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         ArrayUtils.armor = new HashMap<>();
@@ -53,7 +51,11 @@ public class Main extends JavaPlugin {
 
         ServerInfo.checkForServerSoftware();
 
-        boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) || (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) || (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) || (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) || (!new File("plugins/TrollV4/giorno.nbs").exists()) || (!new File("plugins/TrollV4/rick.nbs").exists()));
+        boolean need = Bukkit.getPluginManager().getPlugin("ProtocolLib") == null ||
+                Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null ||
+                Bukkit.getPluginManager().getPlugin("LibsDisguises") == null ||
+                !Files.exists(Paths.get("plugins/TrollV4/giorno.nbs")) ||
+                !Files.exists(Paths.get("plugins/TrollV4/rick.nbs"));
 
         if (need) {
             Logger.info("---------->");
@@ -202,6 +204,8 @@ public class Main extends JavaPlugin {
     }
 
     public static void startControlling(Player v, Player c) {
+        if (control == null)
+            control = new Controls();
         control.startControlling(v, c);
     }
 
@@ -211,13 +215,13 @@ public class Main extends JavaPlugin {
 
     public void downloadAll() {
 
-        if (!new File("plugins/TrollV4/rick.nbs").exists()) {
-            Logger.info("Downloading Rick.nbs!");
+        if (!Files.exists(Paths.get("plugins/TrollV4/rick.nbs"))) {
+            Logger.info("Downloading rick.nbs!");
             download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
         }
 
-        if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
-            Logger.info("Downloading Giorno.nbs!");
+        if (!Files.exists(Paths.get("plugins/TrollV4/giorno.nbs"))) {
+            Logger.info("Downloading giorno.nbs!");
             download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
         }
 
@@ -252,19 +256,6 @@ public class Main extends JavaPlugin {
                     Logger.info("Loaded ProtocolLib!");
                 } catch (Exception e) {
                     Logger.error("Couldn't load ProtocolLib!");
-                }
-            }
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-
-            if (new File("plugins/npclib.jar").exists()) {
-                Logger.info("Trying to load NPCLib!");
-                try {
-                    PluginUtil.loadPlugin("npclib");
-                    Logger.info("Loaded NPCLib!");
-                } catch (Exception e) {
-                    Logger.error("Couldn't load NPCLib!");
                 }
             }
         }

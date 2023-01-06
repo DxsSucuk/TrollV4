@@ -2,9 +2,8 @@ name: TrollV4
 version: '${project.version}'
 main: de.presti.trollv4.main.Main
 author: Presti
-depend:
-   - ProtocolLib
 softdepend:
+   - ProtocolLib
    - LibsDisguises
    - NoteBlockAPI
 loadbefore: [TrollV4Updater]
