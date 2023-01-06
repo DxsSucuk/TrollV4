@@ -3,6 +3,7 @@ package de.presti.trollv4.config;
 import java.io.File;
 import java.io.IOException;
 
+import de.presti.trollv4.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -43,7 +44,9 @@ public class Config {
             } catch (IOException e) {
 			    e.printStackTrace();
             }
-			
+
+			init2();
+			init3();
 		}
 	}
 	
@@ -132,7 +135,54 @@ public class Config {
 			
 		}
 	}
-	
+
+	public void updateConfig() {
+		if (Config.cfg.getString("Plugin-Version") == null) {
+			Config.getFile().delete();
+			new Config().init();
+
+			Logger.info("Config broken recreating!");
+		} else {
+
+			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
+
+				double confv = Double.parseDouble((Config.cfg.getString("Plugin-Version").replace("4.", "")));
+
+				double pluginv = Double.parseDouble((Data.version.replace("4.", "")));
+
+				if (confv > pluginv) {
+					Logger.warning("Your Config is newer than the Plugin Version!");
+				} else {
+
+					Logger.info("Updating Config!");
+
+					Language.getLanguage();
+					String l = Language.getLanguage();
+					boolean cin = (Config.getconfig().get("Custom-Item-Name") != null && Config.getconfig().getBoolean("Custom-Item-Name"));
+					boolean uc = (Config.getconfig().get("AutoUpdate") != null && Config.getconfig().getBoolean("AutoUpdate"));
+					boolean autoup = (Config.getconfig().get("UpdateChecker") == null || Config.getconfig().getBoolean("UpdateChecker"));
+					boolean anim = (Config.getconfig().get("Animations") != null && Config.getconfig().getBoolean("Animations"));
+					boolean async = (Config.getconfig().get("ASync") != null && Config.getconfig().getBoolean("ASync"));
+					boolean cs = (Config.getconfig().get("Community-surprise") != null && Config.getconfig().getBoolean("Community-surprise"));
+					int hack = (Config.getconfig().get("trolls.hack.time") != null ? Config.getconfig().getInt("trolls.hack.time") : 15);
+					int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null ? Config.getconfig().getInt("trolls.fakeinv.time") : 5);
+					int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null ? Config.getconfig().getInt("trolls.slipperyhands.time") : 1);
+
+					int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null ? Config.getconfig().getInt("trolls.tnttrace.spawndelay") : 2);
+
+					if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
+						cs = true;
+					}
+
+					Config.getFile().delete();
+
+					Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
+					Logger.info("Config updated!");
+				}
+			}
+		}
+	}
+
 	public static FileConfiguration getconfig() {
 		return YamlConfiguration.loadConfiguration(getFile());
 	}

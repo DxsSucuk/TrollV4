@@ -1,5 +1,6 @@
 package de.presti.trollv4.utils.plugin;
 
+import de.presti.trollv4.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,19 +45,19 @@ public class UpdateChecker {
                         spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream()))
                                 .readLine();
                     } catch (final IOException e) {
-                        Main.instance.logger.error(ERR_MSG);
+                        Logger.error(ERR_MSG);
                         e.printStackTrace();
                         cancel();
                         return;
                     }
 
                     if (localPluginVersion.equals(spigotPluginVersion)) {
-                        Main.instance.logger.info("TrollV4 Has no Update");
+                        Logger.info("TrollV4 Has no Update");
                     } else {
-                        Main.instance.logger.warning("TrollV4 has a Update!");
-                        Main.instance.logger.warning("New Version: " + spigotPluginVersion);
-                        Main.instance.logger.warning("Your Version: " + Data.version);
-                        Main.instance.logger
+                        Logger.warning("TrollV4 has a Update!");
+                        Logger.warning("New Version: " + spigotPluginVersion);
+                        Logger.warning("Your Version: " + Data.version);
+                        Logger
                                 .warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
                     }
                     cancel(); // Cancel the runnable as an update has been found.

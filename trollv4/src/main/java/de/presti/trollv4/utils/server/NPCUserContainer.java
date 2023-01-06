@@ -2,28 +2,27 @@ package de.presti.trollv4.utils.server;
 
 import java.util.ArrayList;
 
+import com.github.juliarn.npclib.api.Npc;
 import org.bukkit.entity.Player;
-
-import net.jitse.npclib.api.NPC;
 
 public class NPCUserContainer {
 
 	Player p;
-	ArrayList<NPC> npcs = new ArrayList<NPC>();
+	ArrayList<Npc> npcs = new ArrayList<Npc>();
 	
 	public NPCUserContainer(Player user) {
 		p = user;
 	}
 	
-	public void addNPC(NPC np) {
+	public void addNPC(Npc np) {
 		npcs.add(np);
 	}
 	
-	public ArrayList<NPC> getNPCs() {
+	public ArrayList<Npc> getNPCs() {
 		return npcs;
 	}
 	
-	public void removeNPC(NPC np) {
+	public void removeNPC(Npc np) {
 		npcs.remove(np);
 	}
 	

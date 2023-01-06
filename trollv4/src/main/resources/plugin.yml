@@ -1,14 +1,18 @@
 name: TrollV4
-version: 4.5.7
+version: '${project.version}'
 main: de.presti.trollv4.main.Main
-author: [Presti, David]
-depend: [ProtocolLib]
-softdepend: [LibsDisguises, NoteBlockAPI, NPCLibPlugin]
+author: Presti
+depend:
+   - ProtocolLib
+softdepend:
+   - LibsDisguises
+   - NoteBlockAPI
+   - NPCLibPlugin
 loadbefore: [TrollV4Updater]
 website: https://presti.me
 api-version: 1.13
 commands:
    delete:
-      description: Delete command for the Automatic Updater.
+      description: Delete command for the automatic Updater.
    troll:
-      description: The Main Troll Command.
+      description: The Troll command.

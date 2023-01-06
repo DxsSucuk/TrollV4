@@ -1,153 +1,135 @@
 package de.presti.trollv4.utils.server;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.EntityEffect;
-import org.bukkit.Location;
+import com.github.juliarn.npclib.api.Npc;
+import com.github.juliarn.npclib.api.Platform;
+import com.github.juliarn.npclib.api.flag.NpcFlag;
+import com.github.juliarn.npclib.api.profile.Profile;
+import com.github.juliarn.npclib.api.protocol.enums.ItemSlot;
+import com.github.juliarn.npclib.bukkit.BukkitPlatform;
+import com.github.juliarn.npclib.bukkit.BukkitWorldAccessor;
+import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
+import com.github.juliarn.npclib.common.CommonNpcTracker;
+import com.github.juliarn.npclib.common.npc.CommonNpcBuilder;
+import com.sun.istack.internal.NotNull;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.cryptomorin.xseries.particles.XParticle;
 
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
-import net.jitse.npclib.NPCLib;
-import net.jitse.npclib.api.NPC;
-import net.jitse.npclib.api.skin.MineSkinFetcher;
-import net.jitse.npclib.api.state.NPCAnimation;
-import net.jitse.npclib.api.state.NPCSlot;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 
 public class NPCUtil {
 
-	public static NPCLib npcLib;
+    public static @NotNull Platform<World, Player, ItemStack, Plugin> platform = BukkitPlatform.bukkitNpcPlatformBuilder()
+            .extension(Main.instance)
+            .debug(true)
+            .worldAccessor(BukkitWorldAccessor.nameBasedAccessor())
+            .npcTracker(CommonNpcTracker.newNpcTracker())
+            .build();
 
-	public static void init() {
-		npcLib = new NPCLib(Main.instance);
-	}
+    public static Npc createNPC(Location loc, Location lookat, ItemStack item) {
 
-	public static void createNPC(int id, Player p, Location loc, Location lookat, ItemStack item) {
+        Npc npc = new CommonNpcBuilder<>(platform)
+                .position(BukkitPlatformUtil.positionFromBukkitLegacy(loc))
+                .profile(Profile.resolved("name", UUID.randomUUID()))
+                .buildAndTrack();
 
-		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
+        npc.lookAt(BukkitPlatformUtil.positionFromBukkitLegacy(lookat));
 
-			NPC npc = npcLib.createNPC();
-			npc.setLocation(loc);
-			npc.lookAt(lookat);
-			npc.setSkin(skin);
+        if (item != null)
+            npc.changeItem(ItemSlot.MAIN_HAND, item);
 
-			if (item != null) {
-				npc.setItem(NPCSlot.MAINHAND, item);
-			}
 
-			ArrayUtils.jojo.put(p, npc);
-			npc.create();
+        // TODO:: add skin.
+        return npc;
+    }
 
-			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
-		});
-	}
+    public static void createGiorno(int id, Player p, Location loc, Location lookat, ItemStack item) {
+        ArrayUtils.jojo.put(p, new Npc[]{createNPC(loc, lookat, item), null});
+    }
 
-	public static void createGoldenWind(int id, Player p, Location loc, Location lookat, ItemStack item) {
+    public static void createGoldenWind(int id, Player p, Location loc, Location lookat, ItemStack item) {
 
-		MineSkinFetcher.fetchSkinFromIdAsync(id, skin -> {
+        Npc npc = new CommonNpcBuilder<>(platform)
+                .position(BukkitPlatformUtil.positionFromBukkitLegacy(loc))
+                .profile(Profile.resolved("name", UUID.randomUUID()))
+                .buildAndTrack();
 
-			NPC npc = npcLib.createNPC();
-			npc.setLocation(loc);
-			npc.lookAt(lookat);
-			npc.setSkin(skin);
+        npc.lookAt(BukkitPlatformUtil.positionFromBukkitLegacy(lookat));
 
-			if (item != null) {
-				npc.setItem(NPCSlot.MAINHAND, item);
-			}
+        if (item != null)
+            npc.changeItem(ItemSlot.MAIN_HAND, item);
 
-			ArrayUtils.jojo2.put(p, npc);
-			npc.create();
+        Npc[] npcs = ArrayUtils.jojo.get(p);
+        npcs[1] = npc;
 
-			new BukkitRunnable() {
+        ArrayUtils.jojo.put(p, npcs);
 
-				@Override
-				public void run() {
-					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
-						if (npc != null) {
+        new BukkitRunnable() {
 
-							if (!Main.version.startsWith("v1_8")) {
-								npc.playAnimation(NPCAnimation.SWING_OFFHAND);
-								p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
-							}
+            @Override
+            public void run() {
+                if (ArrayUtils.jojo.containsKey(p)) {
+                    if (npc != null) {
 
-							if (p != null) {
-								if (!p.isDead()) {
-									p.damage(0.1D);
-								}
-							}
+                        if (!Main.version.startsWith("v1_8")) {
+                            // TODO:: hitting animation off hand.
+                            p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+                        }
 
-						}
-					} else {
-						cancel();
-						npc.destroy();
-					}
-				}
-			}.runTaskTimer(Main.instance, 20L, 10L);
+                        if (p != null) {
+                            if (!p.isDead()) {
+                                p.damage(0.1D);
+                            }
+                        }
 
-			new BukkitRunnable() {
+                    }
+                } else {
+                    cancel();
+                    npc.unlink();
+                }
+            }
+        }.runTaskTimer(Main.instance, 20L, 10L);
 
-				@Override
-				public void run() {
-					if (ArrayUtils.jojo.containsKey(p) && ArrayUtils.jojo2.containsKey(p)) {
-						if (npc != null) {
+        new BukkitRunnable() {
 
-							npc.playAnimation(NPCAnimation.SWING_MAINHAND);
+            @Override
+            public void run() {
+                if (ArrayUtils.jojo.containsKey(p)) {
+                    if (npc != null) {
 
-							if (p != null) {
-								if (!p.isDead()) {
-									p.damage(0.1D);
-									p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
-								}
-							}
+                        // TODO:: hitting animation main hand.
 
-						}
-					} else {
-						cancel();
-						npc.destroy();
-					}
-				}
-			}.runTaskTimer(Main.instance, 25L, 10L);
+                        if (p != null) {
+                            if (!p.isDead()) {
+                                p.damage(0.1D);
+                                p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+                            }
+                        }
 
-			Bukkit.getScheduler().runTask(Main.instance, () -> npc.show(p));
-		});
-	}
-
-	public static void teleportNPCToPlayer(NPC npc, Player p) {
-		npc.destroy();
-		npc.setLocation(p.getLocation());
-		npc.create();
-		npc.show(p);
-	}
-
-	public static void teleportNPCToLocation(NPC npc, Location t, Player p) {
-		npc.destroy();
-		npc.setLocation(t);
-		npc.create();
-		npc.show(p);
-	}
-
-	public static void teleportNPCToLocationWithLook(NPC npc, Location t, Location lookat, Player p) {
-		npc.destroy();
-		npc.setLocation(t);
-		npc.lookAt(lookat);
-		npc.create();
-		npc.show(p);
-	}
-
-	public static void destroyNPCsFromPlayer(Player p) {
-		if (ArrayUtils.jojo.containsKey(p)) {
-			ArrayUtils.jojo.get(p).destroy();
-			ArrayUtils.jojo.remove(p);
-		}
-
-		if (ArrayUtils.jojo2.containsKey(p)) {
-			ArrayUtils.jojo2.get(p).destroy();
-			ArrayUtils.jojo2.remove(p);
-		}
-	}
+                    }
+                } else {
+                    cancel();
+                    npc.unlink();
+                }
+            }
+        }.runTaskTimer(Main.instance, 25L, 10L);
+    }
+    public static void destroyNPCsFromPlayer(Player p) {
+        if (ArrayUtils.jojo.containsKey(p)) {
+            for (Npc npc : ArrayUtils.jojo.get(p)) {
+                npc.unlink();
+            }
+            ArrayUtils.jojo.remove(p);
+        }
+    }
 
 }

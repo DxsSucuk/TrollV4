@@ -2,6 +2,7 @@ package de.presti.trollv4.api;
 
 import java.io.File;
 
+import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.main.Main;
 import org.bukkit.entity.Player;
 
@@ -32,20 +33,20 @@ public class PlayMusic {
 			esp.setPlaying(true);
 		} else {
 			if (!new File("plugins/TrollV4/rick.nbs").exists()) {
-				Main.logger.info("Downloading Rick.nbs!");
+				Logger.info("Downloading Rick.nbs!");
 				Main.download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
 				if (new File("plugins/TrollV4/rick.nbs").exists()) {
-					Main.logger.info("Downloaded Rick.nbs!");
+					Logger.info("Downloaded Rick.nbs!");
 				} else {
-					Main.logger.info("Couldnt download Rick.nbs!");
+					Logger.info("Couldnt download Rick.nbs!");
 				}
 			} else if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
-				Main.logger.info("Downloading Giorno.nbs!");
+				Logger.info("Downloading Giorno.nbs!");
 				Main.download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
 				if (new File("plugins/TrollV4/giorno.nbs").exists()) {
-					Main.logger.info("Downloaded Giorno.nbs!");
+					Logger.info("Downloaded Giorno.nbs!");
 				} else {
-					Main.logger.info("Couldnt download Giorno.nbs!");
+					Logger.info("Couldnt download Giorno.nbs!");
 				}
 			}
 		}

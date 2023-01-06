@@ -7,6 +7,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
+import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.main.Main;
 import org.bukkit.entity.Player;
 
@@ -22,7 +23,7 @@ public class Titles {
         try {
             player.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
         } catch (Exception exception) {
-            Main.logger.error("We couldn't send a Title with the default player.sendTitle methode, trying Packets now!");
+            Logger.error("We couldn't send a Title with the default player.sendTitle methode, trying Packets now!");
             try {
                 Object chat = Packets.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke(null, new Object[]{"{\"text\":\"" + title + "\"}"});
                 Constructor<?> Constructor = Packets.getNMSClass("PacketPlayOutTitle").getConstructor(new Class[]{Packets.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], Packets.getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
@@ -36,7 +37,7 @@ public class Titles {
                 Packets.sendPacket(player, titlePacket);
                 Packets.sendPacket(player, subtitlePacket);
             } catch (Exception exception1) {
-                Main.logger.error("We couldn't send a Title over the player.sendTitle methode, and neither did the Packets work.");
+                Logger.error("We couldn't send a Title over the player.sendTitle methode, and neither did the Packets work.");
                 exception.printStackTrace();
                 exception1.printStackTrace();
             }

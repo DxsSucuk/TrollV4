@@ -8,6 +8,7 @@ import de.presti.trollv4.utils.server.versions.ServerVersions;
 public class ServerInfo {
 
 	public static ServerVersions v;
+	public static int versionId;
 	
 	public static String getMcVersion() {
 		return Bukkit.getVersion().split("MC:")[1].replaceAll(" ", "").replaceAll("\\)", "");
@@ -15,50 +16,19 @@ public class ServerInfo {
 	
 	public static void checkForServerSoftware() {
 		boolean found = false;
-		
-		try {
-			if(Class.forName("net.pl3x.purpur.PurpurConfig") != null && !found) {
-				v = ServerVersions.PURPUR;
+
+		String version = Bukkit.getVersion().split("\\(MC")[0].toLowerCase();
+
+		for (ServerVersions sv : ServerVersions.values()) {
+			if (version.contains(sv.name().toLowerCase())) {
+				v = sv;
 				found = true;
+				break;
 			}
-		} catch (ClassNotFoundException e) {
-		}
-		
-		
-		try {
-			if(Class.forName("com.tuinity.tuinity.config.TuinityConfig") != null && !found) {
-				v = ServerVersions.TUINITY;
-				found = true;
-			}
-		} catch (ClassNotFoundException e) {
-		}
-		
-		try {
-			if(Class.forName("dev.cobblesword.nachospigot.NachoConfig") != null && !found) {
-				v = ServerVersions.NACHO;
-				found = true;
-			}
-		} catch (ClassNotFoundException e) {
-		}
-		
-		try {
-			if((Class.forName("co.aikar.util.JSONUtil") != null || Class.forName("com.destroystokyo.paper.PaperConfig") != null) && !found) {
-				v = ServerVersions.PAPER;
-				found = true;
-			}
-		} catch (ClassNotFoundException e) {
-		}
-		
-		try {
-			if(Class.forName("org.spigotmc.SpigotConfig") != null && !found) {
-				v = ServerVersions.SPIGOT;
-				found = true;
-			}
-		} catch (ClassNotFoundException e) {
 		}
 		
 		if(!found) {
-			v = ServerVersions.BUKKIT;
+			v = ServerVersions.UNKNOWN;
 		}
 		
 	}
@@ -76,7 +46,17 @@ public class ServerInfo {
 	}
 	
 	public static boolean supportOldPackets() {
-		return !is116() && !is117() && !is118() && !is119();
+		if (versionId == 0) {
+			String[] split = getNMSVersion().split("v1_");
+			String version = split[1];
+			if (version.split("_").length > 1) {
+				version = version.split("_")[0];
+			}
+
+			versionId = Integer.parseInt(version);
+		}
+
+		return versionId < 16;
 	}
 	
 	public static boolean is18() {
@@ -87,15 +67,15 @@ public class ServerInfo {
 		return getNMSVersion().startsWith("v1_9");
 	}
 	
-	public static boolean is10() {
+	public static boolean is110() {
 		return getNMSVersion().startsWith("v1_10");
 	}
 
-	public static boolean is11() {
+	public static boolean is111() {
 		return getNMSVersion().startsWith("v1_10");
 	}
 	
-	public static boolean is12() {
+	public static boolean is112() {
 		return getNMSVersion().startsWith("v1_12");
 	}
 	

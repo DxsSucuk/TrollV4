@@ -1,149 +1,78 @@
 package de.presti.trollv4.api;
 
-import java.io.IOException;
-import javax.net.ssl.HttpsURLConnection;
-
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
 public class PlayerInfo {
-	
+
     public static String link = "https://playerdb.co/api/player/minecraft/";
 
-    public static void setInput(HttpsURLConnection input) {
-		PlayerInfo.input = input;
-	}
-
-	private static HttpsURLConnection input;
-
-    public static HttpsURLConnection getInput() {
-		return input;
-	}
-    
-	public static void openinput() {
-		try {
-			getInput().connect();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void closeInput() {
-		getInput().disconnect();
-	}
-	
     public static String getUUID(String uuid) {
 
-        JSONObject j = JSONApi.GetData(Requests.GET, link + uuid);
-        if (j.getBoolean("_success") && !j.toString().contains("Bad Request") && !j.toString().contains("Not Found")) {
+        JsonObject j = RequestUtility.getJSON(link + uuid).getAsJsonObject();
 
-            if (j.getInt("_http") == 200) {
-                try {
-                    JSONObject datas = j.getJSONObject("data");
+        if (j.has("data")) {
+            try {
+                JsonObject datas = j.getAsJsonObject("data");
 
-                    JSONObject player = datas.getJSONObject("player");
-                    
-                    String guuid = player.getString("id");
+                JsonObject player = datas.getAsJsonObject("player");
 
-                  return guuid;
+                String guuid = player.get("id").getAsString();
 
-                } catch (Exception e) {
-
-                	e.printStackTrace();
-                	
-                	return null;
-                	
-                }
-            } else {
-            	
-            	return null;
-            	
+                return guuid;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
         } else {
-        	
-        	return null;
-        	
+            return null;
         }
     }
-    
+
     public static String getName(String uuid) {
 
-        JSONObject j = JSONApi.GetData(Requests.GET, link + uuid);
-        if (j.getBoolean("_success") && !j.toString().contains("Bad Request") && !j.toString().contains("Not Found")) {
+        JsonObject j = RequestUtility.getJSON(link + uuid).getAsJsonObject();
 
-            if (j.getInt("_http") == 200) {
-                try {
-                    JSONObject datas = j.getJSONObject("data");
+        if (j.has("data")) {
+            try {
+                JsonObject datas = j.getAsJsonObject("data");
 
-                    JSONObject player = datas.getJSONObject("player");
-                    
-                    String guuid = player.getString("username");
+                JsonObject player = datas.getAsJsonObject("player");
 
-                  return guuid;
-
-                } catch (Exception e) {
-
-                	e.printStackTrace();
-                	
-                	return null;
-                	
-                }
-            } else {
-
-            	System.out.println("1");
-            	
-            	return null;
-            	
+                String guuid = player.get("username").getAsString();
+                return guuid;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
         } else {
-
-        	System.out.println("2");
-        	
-        	return null;
-        	
+            return null;
         }
     }
-    
+
     public static String getPicture(String uuid) {
-    	return "https://minotar.net/helm/" + (uuid.trim()) + "/100.png";
+        return "https://minotar.net/helm/" + (uuid.trim()) + "/100.png";
     }
-    
+
     public static String getUUIDtrim(String uuid) {
 
-        JSONObject j = JSONApi.GetData(Requests.GET, link + uuid);
-        if (j.getBoolean("_success") && !j.toString().contains("Bad Request") && !j.toString().contains("Not Found")) {
+        JsonObject j = RequestUtility.getJSON(link + uuid).getAsJsonObject();
 
-            if (j.getInt("_http") == 200) {
-                try {
-                    JSONObject datas = j.getJSONObject("data");
+        if (j.has("data")) {
+            try {
+                JsonObject datas = j.getAsJsonObject("data");
 
-                    JSONObject player = datas.getJSONObject("player");
-                    
-                    String guuid = player.getString("raw_id");
+                JsonObject player = datas.getAsJsonObject("player");
 
-                  return guuid;
+                String guuid = player.get("raw_id").getAsString();
 
-                } catch (Exception e) {
-
-                	e.printStackTrace();
-                	
-                	return null;
-                	
-                }
-            } else {
-
-            	System.out.println("1");
-            	
-            	return null;
-            	
+                return guuid;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
         } else {
-
-        	System.out.println("2");
-        	
-        	return null;
-        	
+            return null;
         }
     }
-	
+
 }

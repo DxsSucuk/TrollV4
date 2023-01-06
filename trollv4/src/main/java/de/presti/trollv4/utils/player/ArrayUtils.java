@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.github.juliarn.npclib.api.Npc;
 import de.presti.trollv4.utils.server.NPCUserContainer;
 import de.presti.trollv4.utils.server.NPCUtil;
 import org.bukkit.Bukkit;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.invs.InvSaver;
-import net.jitse.npclib.api.NPC;
 
 public class ArrayUtils {
 
@@ -44,8 +44,7 @@ public class ArrayUtils {
 	public static HashMap<Player, BukkitRunnable> anvils = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> jumping = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
-	public static HashMap<Player, NPC> jojo = new HashMap<>();
-	public static HashMap<Player, NPC> jojo2 = new HashMap<>();
+	public static HashMap<Player, Npc[]> jojo = new HashMap<>();
 	public static HashMap<Player, NPCUserContainer> spooky = new HashMap<>();
 	public static HashMap<Player, Location> spookylast = new HashMap<>();
 

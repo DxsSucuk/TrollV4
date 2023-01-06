@@ -2131,16 +2131,10 @@ public class GuiListener implements Listener {
 							return;
 						}
 
-						if (NPCUtil.npcLib == null) {
-							p.sendMessage(Data.prefix + "NPCLibPlugin does not support these versions!");
-							e.getView().close();
-							return;
-						}
-
 						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if (!ArrayUtils.jojo.containsKey(t) && !ArrayUtils.jojo2.containsKey(t)) {
+								if (!ArrayUtils.jojo.containsKey(t)) {
 									PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
 									p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
 
@@ -2158,7 +2152,7 @@ public class GuiListener implements Listener {
 												@Override
 												public void run() {
 
-													NPCUtil.createNPC(1718197637, t, front, t.getLocation(),
+													NPCUtil.createGiorno(1718197637, t, front, t.getLocation(),
 															new ItemStack(XMaterial.ARROW.parseMaterial()));
 
 													t.sendMessage("§6I Giorno Giovanna have a Dream!");
@@ -2228,12 +2222,6 @@ public class GuiListener implements Listener {
 
 						if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
 							p.sendMessage(Data.prefix + "NPCLibPlugin is not installed!");
-							e.getView().close();
-							return;
-						}
-
-						if (NPCUtil.npcLib == null) {
-							p.sendMessage(Data.prefix + "NPCLibPlugin does not support these versions!");
 							e.getView().close();
 							return;
 						}

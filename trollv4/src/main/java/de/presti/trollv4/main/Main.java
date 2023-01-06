@@ -1,5 +1,9 @@
 package de.presti.trollv4.main;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import de.presti.trollv4.api.RequestUtility;
 import de.presti.trollv4.cmd.Delete;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.cmd.TabCompleter;
@@ -24,23 +28,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Main extends JavaPlugin {
     public static Main instance;
-    public static Logger logger = new Logger();
     public UpdateChecker update;
     public static Controls control;
     public static String version;
+    public static Config config;
 
     public void onEnable() {
 
@@ -55,31 +56,22 @@ public class Main extends JavaPlugin {
         boolean need = ((Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) || (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) || (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) || (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) || (!new File("plugins/TrollV4/giorno.nbs").exists()) || (!new File("plugins/TrollV4/rick.nbs").exists()));
 
         if (need) {
-            logger.info("---------->");
-            logger.info("We have detected that there is at least one missing needed File, we will now start to download it.");
+            Logger.info("---------->");
+            Logger.info("We have detected that there is at least one missing needed File, we will now start to download it.");
             downloadAll();
 
-            logger.info("---------->");
+            Logger.info("---------->");
 
             try {
                 if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null && Bukkit.getPluginManager().getPlugin("LibsDisguises").isEnabled()) {
                     new Controls();
                 } else {
 
-                    logger.info(" ");
-                    logger.info("LibsDisguises is not installed or not enabled,");
-                    logger.info("please install it and restart the server.");
-                    logger.info(" ");
-                    logger.info("---------->");
-                }
-            } catch (Exception ignore) {
-            }
-
-            try {
-                if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") != null && Bukkit.getPluginManager().getPlugin("NPCLibPlugin").isEnabled()) {
-                    NPCUtil.init();
-                } else {
-                    logger.error("Please install the NPCLibPlugin for NPC support.");
+                    Logger.info(" ");
+                    Logger.info("LibsDisguises is not installed or not enabled,");
+                    Logger.info("please install it and restart the server.");
+                    Logger.info(" ");
+                    Logger.info("---------->");
                 }
             } catch (Exception ignore) {
             }
@@ -87,22 +79,21 @@ public class Main extends JavaPlugin {
 
         new Language();
         new Items();
-        new Config().init();
-        new Config().init2();
-        new Config().init3();
+        config = new Config();
+        config.init();
 
         try {
             Metrics metrics = new Metrics(this, 4690);
             metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
         } catch (Exception e) {
-            logger.error("Error Main Metrics Custom Chart: " + e.getMessage());
+            Logger.error("Error Main Metrics Custom Chart: " + e.getMessage());
         }
 
         Language.clearAll();
         Items.clearAll();
         new Language();
         new Items();
-        updateConfig();
+        config.updateConfig();
 
         if (Config.getconfig().getBoolean("UpdateChecker")) {
             update = new UpdateChecker(this);
@@ -122,9 +113,8 @@ public class Main extends JavaPlugin {
         Items.clearAll();
         new Language();
         new Items();
-        new Config().init();
-        new Config().init2();
-        new Config().init3();
+        config = new Config();
+        config.init();
         Language.clearAll();
         Items.clearAll();
         new Language();
@@ -137,142 +127,6 @@ public class Main extends JavaPlugin {
         instance.getCommand("delete").setExecutor(new Delete());
     }
 
-    public void downloadAll() {
-
-        if (!new File("plugins/TrollV4/rick.nbs").exists()) {
-            logger.info("Downloading Rick.nbs!");
-            download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
-        }
-
-        if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
-            logger.info("Downloading Giorno.nbs!");
-            download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
-            logger.info("Downloading ProtocolLib!");
-            download("https://cdn.azura.best/download/trollv4/uni/ProtocolLib.jar", "plugins/ProtocolLib.jar");
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
-            logger.info("Downloading NoteBlockAPI!");
-            download("https://cdn.azura.best/download/trollv4/uni/NoteBlockAPI.jar", "plugins/NoteBlockAPI.jar");
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-            logger.info("Downloading NPCLib!");
-            download("https://cdn.azura.best/download/trollv4/uni/npclib.jar", "plugins/npclib.jar");
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
-            logger.info("Downloading LibsDisguises!");
-            if (version.toLowerCase().startsWith("v1_8")) {
-                download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
-            } else {
-                download("https://cdn.azura.best/download/trollv4/1-12-x/LibsDisguises.jar", "plugins/LibsDisguises.jar");
-            }
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
-            if (new File("plugins/ProtocolLib.jar").exists()) {
-                logger.info("Trying to load ProtocolLib!");
-                try {
-                    PluginUtil.loadPlugin("ProtocolLib");
-                    logger.info("Loaded ProtocolLib!");
-                } catch (Exception e) {
-                    logger.error("Couldn't load ProtocolLib!");
-                }
-            }
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-
-            if (new File("plugins/npclib.jar").exists()) {
-                logger.info("Trying to load NPCLib!");
-                try {
-                    PluginUtil.loadPlugin("npclib");
-                    logger.info("Loaded NPCLib!");
-                } catch (Exception e) {
-                    logger.error("Couldn't load NPCLib!");
-                }
-            }
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
-            if (new File("plugins/LibsDisguises.jar").exists()) {
-                logger.info("Trying to load LibsDisguises!");
-                try {
-                    PluginUtil.loadPlugin("LibsDisguises");
-                    logger.info("Loaded LibsDisguises!");
-                } catch (Exception e) {
-                    logger.error("Couldn't load LibsDisguises!");
-                }
-            }
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
-            if (new File("plugins/NoteBlockAPI.jar").exists()) {
-                logger.info("Trying to load NoteBlockAPI!");
-                try {
-                    PluginUtil.loadPlugin("NoteBlockAPI");
-                    logger.info("Loaded NoteBlockAPI!");
-                } catch (Exception e) {
-                    logger.error("Couldn't load NoteBlockAPI!");
-                }
-            }
-        }
-    }
-
-    public void updateConfig() {
-        if (Config.cfg.getString("Plugin-Version") == null) {
-            Config.getFile().delete();
-            new Config().init();
-
-            logger.info("Config broken recreating!");
-
-        } else {
-
-            if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
-
-                double confv = Double.parseDouble((Config.cfg.getString("Plugin-Version").replace("4.", "")));
-
-                double pluginv = Double.parseDouble((Data.version.replace("4.", "")));
-
-                if (confv > pluginv) {
-
-                    logger.warning("Your Config is newer than the Plugin Version!");
-
-                } else {
-
-                    logger.info("Updating Config!");
-
-                    Language.getLanguage();
-                    String l = Language.getLanguage();
-                    boolean cin = (Config.getconfig().get("Custom-Item-Name") != null && Config.getconfig().getBoolean("Custom-Item-Name"));
-                    boolean uc = (Config.getconfig().get("AutoUpdate") != null && Config.getconfig().getBoolean("AutoUpdate"));
-                    boolean autoup = (Config.getconfig().get("UpdateChecker") == null || Config.getconfig().getBoolean("UpdateChecker"));
-                    boolean anim = (Config.getconfig().get("Animations") != null && Config.getconfig().getBoolean("Animations"));
-                    boolean async = (Config.getconfig().get("ASync") != null && Config.getconfig().getBoolean("ASync"));
-                    boolean cs = (Config.getconfig().get("Community-surprise") != null && Config.getconfig().getBoolean("Community-surprise"));
-                    int hack = (Config.getconfig().get("trolls.hack.time") != null ? Config.getconfig().getInt("trolls.hack.time") : 15);
-                    int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null ? Config.getconfig().getInt("trolls.fakeinv.time") : 5);
-                    int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null ? Config.getconfig().getInt("trolls.slipperyhands.time") : 1);
-
-                    int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null ? Config.getconfig().getInt("trolls.tnttrace.spawndelay") : 2);
-
-                    if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
-                        cs = true;
-                    }
-
-                    Config.getFile().delete();
-
-                    Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
-                    logger.info("Config updated!");
-                }
-            }
-        }
-    }
-
     public static void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new ControlListener(instance), instance);
         Bukkit.getPluginManager().registerEvents(new Event(), instance);
@@ -280,16 +134,16 @@ public class Main extends JavaPlugin {
     }
 
     public static void sendPluginMessage() {
-        logger.info("-----------------------------------");
-        logger.info("TrollV" + Data.version + " by Presti");
-        logger.info("In case of errors please report:");
-        logger.info("Email: presti@presti.me");
-        logger.info("YouTube: Not Memerinoto");
-        logger.info("Otherwise have fun!");
-        logger.info("------------------------------------");
-        logger.info("Plugin Version: " + Data.version);
-        logger.info("Server Version: " + version + " - " + ServerInfo.getMcVersion());
-        logger.info("Server Software: " + ServerInfo.getServerSoftware());
+        Logger.info("-----------------------------------");
+        Logger.info("TrollV" + Data.version + " by Presti");
+        Logger.info("In case of errors please report:");
+        Logger.info("Email: presti@presti.me");
+        Logger.info("YouTube: Not Memerinoto");
+        Logger.info("Otherwise have fun!");
+        Logger.info("------------------------------------");
+        Logger.info("Plugin Version: " + Data.version);
+        Logger.info("Server Version: " + version + " - " + ServerInfo.getMcVersion());
+        Logger.info("Server Software: " + ServerInfo.getServerSoftware());
     }
 
     public static void startUp() {
@@ -298,25 +152,25 @@ public class Main extends JavaPlugin {
         registerCommands();
 
         if (Config.getconfig().getBoolean("Community-surprise")) {
-            logger.info("Community Surprise is enabled!\n" + "This means your Server address will be shared with us!\n" + "If you do not want this, please disable it in the config!");
+            Logger.info("Community Surprise is enabled!\n" + "This means your Server address will be shared with us!\n" + "If you do not want this, please disable it in the config!");
             try {
                 URLConnection con = new URL("https://cdn.azura.best/trollv4/community").openConnection();
                 con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0 Port/" + Bukkit.getPort());
                 con.getInputStream();
             } catch (Exception exception) {
                 if (exception instanceof FileNotFoundException) {
-                    logger.info("Connection with the Server was successful!\n" +
+                    Logger.info("Connection with the Server was successful!\n" +
                             "This means your Server address will be shared with us!\n" +
                             "If you do not want this, please disable it in the config!\n");
                 } else {
-                    logger.warning("Couldn't send a Request to the Community Server!\n" +
+                    Logger.warning("Couldn't send a Request to the Community Server!\n" +
                             "This means your Server address will not be shared with us!\n" +
                             "If you do not want this, please disable it in the config!\n" +
                             "Error: " + exception.getMessage());
                 }
             }
         } else {
-            logger.info("Community Surprise is disabled!");
+            Logger.info("Community Surprise is disabled!");
         }
 
         if (Bukkit.getWorld("SpookyWorld") == null) {
@@ -355,19 +209,125 @@ public class Main extends JavaPlugin {
         control.stopControlling(v, c);
     }
 
-    public static boolean download(String url, String FileName) {
+    public void downloadAll() {
+
+        if (!new File("plugins/TrollV4/rick.nbs").exists()) {
+            Logger.info("Downloading Rick.nbs!");
+            download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
+        }
+
+        if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
+            Logger.info("Downloading Giorno.nbs!");
+            download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+            Logger.info("Downloading ProtocolLib!");
+            if (ServerInfo.is119()) {
+                download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
+            } else {
+                download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
+            }
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+            Logger.info("Downloading NoteBlockAPI!");
+            download("https://github.com/DxsSucuk/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+            Logger.info("Downloading LibsDisguises!");
+            if (ServerInfo.is18()) {
+                download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
+            } else {
+                download("https://github.com/libraryaddict/LibsDisguises/releases/latest", "plugins/LibsDisguises.jar");
+            }
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+            if (new File("plugins/ProtocolLib.jar").exists()) {
+                Logger.info("Trying to load ProtocolLib!");
+                try {
+                    PluginUtil.loadPlugin("ProtocolLib");
+                    Logger.info("Loaded ProtocolLib!");
+                } catch (Exception e) {
+                    Logger.error("Couldn't load ProtocolLib!");
+                }
+            }
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
+
+            if (new File("plugins/npclib.jar").exists()) {
+                Logger.info("Trying to load NPCLib!");
+                try {
+                    PluginUtil.loadPlugin("npclib");
+                    Logger.info("Loaded NPCLib!");
+                } catch (Exception e) {
+                    Logger.error("Couldn't load NPCLib!");
+                }
+            }
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+            if (new File("plugins/LibsDisguises.jar").exists()) {
+                Logger.info("Trying to load LibsDisguises!");
+                try {
+                    PluginUtil.loadPlugin("LibsDisguises");
+                    Logger.info("Loaded LibsDisguises!");
+                } catch (Exception e) {
+                    Logger.error("Couldn't load LibsDisguises!");
+                }
+            }
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+            if (new File("plugins/NoteBlockAPI.jar").exists()) {
+                Logger.info("Trying to load NoteBlockAPI!");
+                try {
+                    PluginUtil.loadPlugin("NoteBlockAPI");
+                    Logger.info("Loaded NoteBlockAPI!");
+                } catch (Exception e) {
+                    Logger.error("Couldn't load NoteBlockAPI!");
+                }
+            }
+        }
+    }
+
+    public static boolean download(String url, String fileName) {
+        if (url == null || fileName == null) {
+            return false;
+        }
+
+        if (url.toLowerCase().startsWith("https://github.com")) {
+            return downloadGithub(url, fileName);
+        } else {
+            return downloadDirect(url, fileName);
+        }
+    }
+
+    public static boolean downloadGithub(String url, String fileName) {
+        String cleaned = url.replaceAll("https://github.com/", "")
+                .replace("releases/tag/", "releases/tags/");
+
+        JsonObject jsonObject = RequestUtility.getJSON("https://api.github.com/repos/" + cleaned).getAsJsonObject();
+        if (jsonObject.has("assets")) {
+            JsonArray assets = jsonObject.getAsJsonArray("assets");
+            for (JsonElement jsonElement : assets) {
+                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+
+                if (jsonObject1.has("name") && jsonObject1.get("name").getAsString().endsWith(".jar")) {
+                    return downloadDirect(assets.get(0).getAsJsonObject().get("browser_download_url").getAsString(), fileName);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean downloadDirect(String url, String fileName) {
         try {
-            URLConnection con = new URL(url).openConnection();
-            con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
-            InputStream in = con.getInputStream();
-            ReadableByteChannel readableByteChannel = Channels.newChannel(in);
-            FileOutputStream fileOutputStream = new FileOutputStream(FileName);
-            FileChannel fileChannel = fileOutputStream.getChannel();
-            fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
-            fileChannel.close();
-            fileOutputStream.close();
-            readableByteChannel.close();
-            in.close();
+            Files.write(Paths.get(fileName), RequestUtility.getBytes(url));
             return true;
         } catch (Exception e) {
             return false;
