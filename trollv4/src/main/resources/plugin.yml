@@ -7,7 +7,6 @@ depend:
 softdepend:
    - LibsDisguises
    - NoteBlockAPI
-   - NPCLibPlugin
 loadbefore: [TrollV4Updater]
 website: https://presti.me
 api-version: 1.13
