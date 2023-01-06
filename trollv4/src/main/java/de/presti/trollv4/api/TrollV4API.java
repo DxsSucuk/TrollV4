@@ -987,7 +987,7 @@ public class TrollV4API {
 
                         for (int x = 0; x < 30; x++) {
                             Npc npc = NPCUtil.createNPC(getRandomSkinName(),LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
-                                    victim.getLocation(), null);
+                                    victim.getLocation(), null, victim);
 
                             container.addNPC(npc);
 

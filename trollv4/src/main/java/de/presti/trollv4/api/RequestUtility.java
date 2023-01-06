@@ -2,44 +2,40 @@ package de.presti.trollv4.api;
 
 import com.google.gson.*;
 import de.presti.trollv4.main.Data;
-import org.apache.hc.client5.http.classic.HttpClient;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
-import org.apache.hc.core5.http.HttpRequest;
-import org.apache.hc.core5.http.HttpResponse;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-import java.io.InputStream;
 
 public class RequestUtility {
 
-    static HttpClient httpClient = HttpClientBuilder
-            .create()
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36 TrollV4/" + Data.version)
-            .build();
+    static OkHttpClient httpClient = new OkHttpClient();
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static JsonElement getJSON(String url) {
-        HttpGet request = new HttpGet(url);
+    static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36 TrollV4/" + Data.version;
 
-        try {
-            return httpClient.execute(request, (c) -> new JsonParser().parse(EntityUtils.toString(c.getEntity())));
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static JsonElement getJSON(String url) {
+        Request request = new Request.Builder().url(url).addHeader("User-Agent", USER_AGENT).build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (response.body() == null) return new JsonObject();
+            return new JsonParser().parse(response.body().string());
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
 
         return new JsonObject();
     }
 
     public static byte[] getBytes(String url) {
-        HttpGet request = new HttpGet(url);
+        Request request = new Request.Builder().url(url).addHeader("User-Agent", USER_AGENT).build();
 
-        try {
-            return httpClient.execute(request, (c) -> EntityUtils.toByteArray(c.getEntity()));
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (response.body() == null) return new byte[0];
+            return response.body().bytes();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
 
         return new byte[0];

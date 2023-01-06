@@ -2147,7 +2147,7 @@ public class GuiListener implements Listener {
 												@Override
 												public void run() {
 
-													NPCUtil.createGiorno(t, front, t.getLocation(),
+													NPCUtil.createGiorno(p, t, front, t.getLocation(),
 															new ItemStack(XMaterial.ARROW.parseMaterial()));
 
 													t.sendMessage("§6I Giorno Giovanna have a Dream!");
@@ -2157,7 +2157,7 @@ public class GuiListener implements Listener {
 														@Override
 														public void run() {
 
-															NPCUtil.createGoldenWind(t, front2,
+															NPCUtil.createGoldenWind(p, t, front2,
 																	t.getLocation(), null);
 														}
 													}.runTaskLater(Main.instance, 60L);
