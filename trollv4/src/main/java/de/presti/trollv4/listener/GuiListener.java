@@ -536,7 +536,7 @@ public class GuiListener implements Listener {
 				e.setResult(Result.DENY);
 				if (e.getCurrentItem() == null && e.getCurrentItem().getItemMeta() == null) {
 				} else {
-					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cRechoice")) {
+					if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReselect")) {
 						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 							ArrayUtils.trolling.remove(p.getName());
 							e.getView().close();
@@ -2152,7 +2152,7 @@ public class GuiListener implements Listener {
 												@Override
 												public void run() {
 
-													NPCUtil.createGiorno(1718197637, t, front, t.getLocation(),
+													NPCUtil.createGiorno(t, front, t.getLocation(),
 															new ItemStack(XMaterial.ARROW.parseMaterial()));
 
 													t.sendMessage("§6I Giorno Giovanna have a Dream!");
@@ -2162,7 +2162,7 @@ public class GuiListener implements Listener {
 														@Override
 														public void run() {
 
-															NPCUtil.createGoldenWind(1831521135, t, front2,
+															NPCUtil.createGoldenWind(t, front2,
 																	t.getLocation(), null);
 														}
 													}.runTaskLater(Main.instance, 60L);

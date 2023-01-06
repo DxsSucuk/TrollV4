@@ -446,7 +446,7 @@ public class InvManager {
 
 		ItemStack gl2 = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
 		ItemMeta gl2m = gl2.getItemMeta();
-		gl2m.setDisplayName("§cRechoice");
+		gl2m.setDisplayName("§cReselect");
 		gl2.setItemMeta(gl2m);
 
 		inv.setItem(inv.getSize() - 1, gl2);

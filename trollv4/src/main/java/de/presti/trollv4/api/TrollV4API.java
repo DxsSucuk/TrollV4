@@ -986,7 +986,7 @@ public class TrollV4API {
                         NPCUserContainer container = new NPCUserContainer(victim);
 
                         for (int x = 0; x < 30; x++) {
-                            Npc npc = NPCUtil.createNPC(LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
+                            Npc npc = NPCUtil.createNPC(getRandomSkinName(),LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
                                     victim.getLocation(), null);
 
                             container.addNPC(npc);
@@ -1051,14 +1051,14 @@ public class TrollV4API {
 
     /**
      * Get a Random Creppy Skin ID
-     * by Mineskin.
+     * by random users.
      *
      * @return int it returns a SkinID from MineSkin.
      * @since 4.4.4
      */
-    public static int getRandomSkinID() {
+    public static String getRandomSkinName() {
 
-        int[] ids = new int[]{536534506, 205466795, 1598883677, 922817251};
+        String[] ids = new String[]{ "notenough", "FKJJJJJJJJJJJJJJ", "My_Te", PlayerInfo.getName("1c32b55bd4584347a5798754f4510081")};
 
         return ids[new Random().nextInt(ids.length)];
     }
