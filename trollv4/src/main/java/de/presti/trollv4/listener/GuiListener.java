@@ -2125,11 +2125,6 @@ public class GuiListener implements Listener {
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.giorno"))) {
-						if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-							p.sendMessage(Data.prefix + "NPCLibPlugin is not installed!");
-							e.getView().close();
-							return;
-						}
 
 						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -2219,12 +2214,6 @@ public class GuiListener implements Listener {
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.spookyworld"))) {
-
-						if (Bukkit.getPluginManager().getPlugin("NPCLibPlugin") == null) {
-							p.sendMessage(Data.prefix + "NPCLibPlugin is not installed!");
-							e.getView().close();
-							return;
-						}
 
 						if (p.hasPermission("troll.spooky") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
