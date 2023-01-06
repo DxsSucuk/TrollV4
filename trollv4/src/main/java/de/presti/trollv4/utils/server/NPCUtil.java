@@ -2,7 +2,6 @@ package de.presti.trollv4.utils.server;
 
 import com.github.juliarn.npclib.api.Npc;
 import com.github.juliarn.npclib.api.Platform;
-import com.github.juliarn.npclib.api.flag.NpcFlag;
 import com.github.juliarn.npclib.api.profile.Profile;
 import com.github.juliarn.npclib.api.protocol.enums.ItemSlot;
 import com.github.juliarn.npclib.bukkit.BukkitPlatform;
@@ -10,7 +9,6 @@ import com.github.juliarn.npclib.bukkit.BukkitWorldAccessor;
 import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
 import com.github.juliarn.npclib.common.CommonNpcTracker;
 import com.github.juliarn.npclib.common.npc.CommonNpcBuilder;
-import com.sun.istack.internal.NotNull;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,13 +20,11 @@ import com.cryptomorin.xseries.particles.XParticle;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.UUID;
 
 public class NPCUtil {
 
-    public static @NotNull Platform<World, Player, ItemStack, Plugin> platform = BukkitPlatform.bukkitNpcPlatformBuilder()
+    public static Platform<World, Player, ItemStack, Plugin> platform = BukkitPlatform.bukkitNpcPlatformBuilder()
             .extension(Main.instance)
             .debug(true)
             .worldAccessor(BukkitWorldAccessor.nameBasedAccessor())
