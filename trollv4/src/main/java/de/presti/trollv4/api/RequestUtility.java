@@ -12,8 +12,6 @@ import java.net.URL;
 
 public class RequestUtility {
 
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36 TrollV4/" + Data.version;
 
     private static InputStream GET(String url) {
