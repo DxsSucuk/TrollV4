@@ -89,6 +89,12 @@
             <version>1.13-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -117,6 +123,10 @@
                         <relocation>
                             <pattern>com.cryptomorin</pattern>
                             <shadedPattern>de.presti.trollv4.shaded.com.cryptomorin</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.apache.commons.io</pattern>
+                            <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
                         </relocation>
                     </relocations>
                     <createDependencyReducedPom>true</createDependencyReducedPom>
