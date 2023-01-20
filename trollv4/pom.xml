@@ -73,14 +73,14 @@
         </dependency>
         <dependency>
             <groupId>com.github.juliarn.NPC-Lib</groupId>
-            <artifactId>api</artifactId>
-            <version>3.0.0-beta2</version>
+            <artifactId>npc-lib-api</artifactId>
+            <version>3.0.0-beta3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.github.juliarn.NPC-Lib</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>3.0.0-beta2</version>
+            <artifactId>npc-lib-bukkit</artifactId>
+            <version>3.0.0-beta3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
