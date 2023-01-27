@@ -128,6 +128,13 @@ public class Changelog {
                         }
                 ));
 
+        inv.setItem(34,
+                SetItems.buildItem("§2Version » §c4.5.9", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogRemove + "Fixed a bug related to the Selection GUI."
+                        }
+                ));
+
 
         inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 

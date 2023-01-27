@@ -5,9 +5,9 @@ import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import org.apache.commons.io.IOUtils;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RequestUtility {
@@ -17,11 +17,11 @@ public class RequestUtility {
     private static InputStream GET(String url) {
         try {
             URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", USER_AGENT);
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            if (responseCode == HttpsURLConnection.HTTP_OK) { // success
                 return con.getInputStream();
             } else {
                 Main.getPlugin().getLogger().warning("GET request not worked");
