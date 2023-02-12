@@ -79,11 +79,11 @@ public class UpdateChecker {
         if (compareVersion.equals(version)) return false;
 
         String[] split = version.split("\\.");
-        if (split.length != 3) return true;
+        if (split.length != 2) return true;
 
         String[] split2 = compareVersion.split("\\.");
 
-        if (split2.length != 3) return false;
+        if (split2.length != 2) return false;
 
         int mayor = Integer.parseInt(split[0]);
         int minor = Integer.parseInt(split[1]);
