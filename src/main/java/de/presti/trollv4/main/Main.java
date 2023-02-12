@@ -156,8 +156,10 @@ public class Main extends JavaPlugin {
         if (Config.getconfig().getBoolean("Community-surprise")) {
             Logger.info("Community Surprise is enabled!\n" + "This means your Server address will be shared with us!\n" + "If you do not want this, please disable it in the config!");
             try {
-                URLConnection con = new URL("https://cdn.azura.best/trollv4/community").openConnection();
-                con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0 Port/" + Bukkit.getPort());
+                URLConnection con = new URL("https://presti.me/trollv4/community").openConnection();
+                con.addRequestProperty("User-Agent",
+                        "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0 Port/" + Bukkit.getPort() +
+                                " Version/" + ServerInfo.getMcVersion());
                 con.getInputStream();
             } catch (Exception exception) {
                 if (exception instanceof FileNotFoundException) {
@@ -217,12 +219,12 @@ public class Main extends JavaPlugin {
 
         if (!Files.exists(Paths.get("plugins/TrollV4/rick.nbs"))) {
             Logger.info("Downloading rick.nbs!");
-            download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
+            download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/rick.nbs", "plugins/TrollV4/rick.nbs");
         }
 
         if (!Files.exists(Paths.get("plugins/TrollV4/giorno.nbs"))) {
             Logger.info("Downloading giorno.nbs!");
-            download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+            download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/giorno.nbs", "plugins/TrollV4/giorno.nbs");
         }
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
@@ -242,6 +244,7 @@ public class Main extends JavaPlugin {
         if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
             Logger.info("Downloading LibsDisguises!");
             if (ServerInfo.is18()) {
+                // TODO:: why dont they have this on their fucking Github WHY!
                 download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
             } else {
                 download("https://github.com/libraryaddict/LibsDisguises/releases/latest", "plugins/LibsDisguises.jar");
