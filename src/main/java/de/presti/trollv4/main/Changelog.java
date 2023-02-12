@@ -134,6 +134,12 @@ public class Changelog {
                                 Data.changelogRemove + "Fixed a bug related to the Selection GUI."
                         }
                 ));
+        inv.setItem(35,
+                SetItems.buildItem("§2Version » §c4.5.10", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Adding a config value for the spooky world generation."
+                        }
+                ));
 
 
         inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
@@ -266,26 +272,21 @@ public class Changelog {
 
         inv.setItem(33, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("13fe75ebf9b74e23a44ee3ed342bdec2")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§2" + PlayerInfo.getName("13fe75ebf9b74e23a44ee3ed342bdec2") + " §8(§c<3§8)");
-        skull.setItemMeta(skullm);
 
-        inv.setItem(48, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + " §8(§c<3§8)");
-        skull.setItemMeta(skullm);
-
-        inv.setItem(49, skull);
         skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
         skullm = (SkullMeta) skull.getItemMeta();
         skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
         skull.setItemMeta(skullm);
 
-        inv.setItem(50, skull);
+        inv.setItem(48, skull);
 
+        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4414a12b4a3e4914834647389dc00a24")));
+        skullm = (SkullMeta) skull.getItemMeta();
+        skullm.setDisplayName("§2" + PlayerInfo.getName("4414a12b4a3e4914834647389dc00a24") + " §8(§c<3§8)");
+        skull.setItemMeta(skullm);
+
+        inv.setItem(49, skull);
         skull = XMaterial.PLAYER_HEAD.parseItem();
         skullm = (SkullMeta) skull.getItemMeta();
         skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
