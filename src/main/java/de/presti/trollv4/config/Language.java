@@ -183,6 +183,7 @@ public class Language {
 		addMessage("de", "gui.giorno.off", "Giorno Giovanna lässt nun &c[PLAYER] &2in Ruhe!");
 		addMessage("de", "gui.spooky.on", "Der Spieler &c[PLAYER] &2ist nun im Schattenreich!");
 		addMessage("de", "gui.spooky.off", "Der Spieler &c[PLAYER] &2ist nun nicht mehr im Schattenreich!");
+		addMessage("de", "gui.spooky.world", "Die Welt \"SpookyWorld\" existiert nicht!");
 		addMessage("de", "gui.endcredits", "Der Spieler &c[PLAYER] &2sieht nun die End Credits!");
 		addMessage("de", "gui.tpall", "Alle Spieler wurden zu dir teleportiert");
 		addMessage("de", "gui.fakeleave.default", "Eine FakeLeave Message wurde in den Chat geschickt!");
@@ -290,6 +291,7 @@ public class Language {
 		addMessage("us", "gui.giorno.off", "Giorno Giovanna now leaves &c[PLAYER] &2alone!");
 		addMessage("us", "gui.spooky.on", "The player &c[PLAYER] &2is now in the Shadow Realm!");
 		addMessage("us", "gui.spooky.off", "The player &c[PLAYER] &2is no longer in the Shadow realm!");
+		addMessage("us", "gui.spooky.world", "There is no world called \"SpookyWorld\"!");
 		addMessage("us", "gui.endcredits", "The player &c[PLAYER] &2now sees the end credits!");
 		addMessage("us", "gui.tpall", "All players were teleported to you!");
 		addMessage("us", "gui.fakeleave.default", "A Fake Message has been Posted in the Chat!");
@@ -397,6 +399,7 @@ public class Language {
 		addMessage("ru", "gui.giorno.off", "Джорно Джованна теперь оставляет игрока &c[PLAYER] &2в покое!");
 		addMessage("ru", "gui.spooky.on", "Игрок &c[PLAYER] &2теперь находится в царстве теней!");
 		addMessage("ru", "gui.spooky.off", "Игрок &c[PLAYER] &2больше не находится в царстве теней!");
+		addMessage("ru", "gui.spooky.world", "Не существует мира под названием \"SpookyWorld\"!");
 		addMessage("ru", "gui.endcredits", "Игрок &c[PLAYER] &2теперь может видеть кредиты!");
 		addMessage("ru", "gui.tpall", "Все игроки были телепортированы к вам!");
 		addMessage("ru", "gui.fakeleave.default", "В чат отправлено сообщение FakeLeave!");
@@ -504,6 +507,7 @@ public class Language {
 		addMessage("indo", "gui.giorno.off", "Giorno Giovanna sekarang pergi &c[PLAYER] &2sendirian!");
 		addMessage("indo", "gui.spooky.on", "Pemain &c[PLAYER] &2sekarang ada di Alam Bayangan!");
 		addMessage("indo", "gui.spooky.off", "Pemain &c[PLAYER] &2tidak lagi berada di alam Bayangan!");
+		addMessage("indo", "gui.spooky.world", "Tidak ada dunia yang disebut \"SpookyWorld\"!");
 		addMessage("indo", "gui.endcredits", "Pemain &c[PLAYER] &2sekarang melihat kredit akhir!");
 		addMessage("indo", "gui.tpall", "semua player teleport ke kamu!");
 		addMessage("indo", "gui.fakeleave.default", "fake message sudah di jabarkan di chat!");
@@ -611,6 +615,7 @@ public class Language {
 		addMessage("es", "gui.giorno.off", "Giorno Giovanna ahora deja &c[PLAYER] &2solo!");
 		addMessage("es", "gui.spooky.on", "¡El jugador &c[PLAYER] &2está ahora en el Reino Sombría!");
 		addMessage("es", "gui.spooky.off", "¡El jugador &c[PLAYER] &2ya no está en el reino Sombría!");
+		addMessage("es", "gui.spooky.world", "No hay ningún mundo llamado \"SpookyWorld\"!");
 		addMessage("es", "gui.endcredits", "¡El jugador &c[PLAYER] &2ahora ve los créditos finales!");
 		addMessage("es", "gui.tpall", "¡Todos los jugadores fueron teletransportados a ti!");
 		addMessage("es", "gui.fakeleave.default", "¡Se ha publicado un mensaje falso en el chat!");

@@ -51,18 +51,50 @@ public class UpdateChecker {
                         return;
                     }
 
-                    if (localPluginVersion.equals(spigotPluginVersion)) {
-                        Logger.info("TrollV4 Has no Update");
+                    if (compareVersion(localPluginVersion, spigotPluginVersion)) {
+                        Logger.info("TrollV4 has no update");
                     } else {
-                        Logger.warning("TrollV4 has a Update!");
+                        Logger.warning("TrollV4 has a update!");
                         Logger.warning("New Version: " + spigotPluginVersion);
-                        Logger.warning("Your Version: " + Data.version);
-                        Logger
-                                .warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
+                        Logger.warning("Your Version: " + localPluginVersion);
+                        Logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
                     }
                     cancel(); // Cancel the runnable as an update has been found.
                 });
             }
         }.runTaskTimer(javaPlugin, 20, CHECK_INTERVAL);
+    }
+
+    // TODO:: make a utility class for this PLEASE FOR THE LOVE OF GOD.
+
+    /**
+     * Compare two strings based on the x.y.z version format with each other
+     * @param version The base version
+     * @param compareVersion the version that should be used to compare
+     * @return The result of the comparison. True, if the compare version is higher | False, if the base version is higher
+     */
+    public boolean compareVersion(String version, String compareVersion) {
+        if (compareVersion == null) return false;
+        if (version == null) return true;
+        if (compareVersion.equals(version)) return false;
+
+        String[] split = version.split("\\.");
+        if (split.length != 3) return true;
+
+        String[] split2 = compareVersion.split("\\.");
+
+        if (split2.length != 3) return false;
+
+        int mayor = Integer.parseInt(split[0]);
+        int minor = Integer.parseInt(split[1]);
+        int patch = Integer.parseInt(split[2]);
+
+        int otherMayor = Integer.parseInt(split2[0]);
+        int otherMinor = Integer.parseInt(split2[1]);
+        int otherPatch = Integer.parseInt(split2[2]);
+
+        if (otherMayor > mayor) return true;
+        if (otherMayor == mayor && otherMinor > minor) return true;
+        return otherMayor == mayor && otherMinor == minor && otherPatch > patch;
     }
 }

@@ -2216,6 +2216,10 @@ public class GuiListener implements Listener {
 							.equalsIgnoreCase(Items.getItem("gui.trolls.spookyworld"))) {
 
 						if (p.hasPermission("troll.spooky") || p.hasPermission("troll.*")) {
+							if (Bukkit.getWorld("SpookyWorld") == null) {
+								p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.world"));
+								return;
+							}
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
 								if (!ArrayUtils.spooky.containsKey(t)) {

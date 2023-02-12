@@ -38,7 +38,8 @@ public class Config {
 			cfg.addDefault("trolls.fakeinv.time", 5);
 			cfg.addDefault("trolls.slipperyhands.time", 1);
 			cfg.addDefault("trolls.tnttrace.spawndelay", 2);
-			
+			cfg.addDefault("trolls.spookyWorld.generate", false);
+
 			try {
                 cfg.save(getFile());
             } catch (IOException e) {
@@ -49,7 +50,8 @@ public class Config {
 			init3();
 		}
 	}
-	
+
+	// TODO:: awful code create a migration system instead.
 	public static void createFirstConfigWithValue(String lang, boolean cin, boolean uc, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
 		cfg = getconfig();
 		if(!getFile().exists()) {
@@ -74,7 +76,8 @@ public class Config {
 			cfg.addDefault("trolls.fakeinv.time", tf);
 			cfg.addDefault("trolls.slipperyhands.time", ts);
 			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
-			
+			cfg.addDefault("trolls.spookyWorld.generate", false);
+
 			try {
                 cfg.save(getFile());
             } catch (IOException e) {
@@ -83,7 +86,8 @@ public class Config {
 		}
 			
 	}
-	
+
+	// TODO:: Why creating all the languages?
 	public void init2() {
 		cfg2 = getconfig2();
 		if(!getFile2().exists()) {
@@ -109,7 +113,8 @@ public class Config {
 			
 		}
 	}
-	
+
+	//TODO:: why not include in the language file? Its basically just a localization string?
 	public void init3() {
 		cfg3 = getconfig3();
 		if(!getFile3().exists()) {
@@ -136,6 +141,7 @@ public class Config {
 		}
 	}
 
+	// TODO:: use this to migrate the config instead of recreating it with input values? Also please fix my grammar shit I was 14 or 15 when I made this code.
 	public void updateConfig() {
 		if (Config.cfg.getString("Plugin-Version") == null) {
 			Config.getFile().delete();
