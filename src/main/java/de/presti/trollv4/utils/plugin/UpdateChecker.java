@@ -52,12 +52,12 @@ public class UpdateChecker {
                     }
 
                     if (compareVersion(localPluginVersion, spigotPluginVersion)) {
-                        Logger.info("TrollV4 has no update");
-                    } else {
                         Logger.warning("TrollV4 has a update!");
                         Logger.warning("New Version: " + spigotPluginVersion);
                         Logger.warning("Your Version: " + localPluginVersion);
                         Logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
+                    } else {
+                        Logger.info("TrollV4 has no update");
                     }
                     cancel(); // Cancel the runnable as an update has been found.
                 });
