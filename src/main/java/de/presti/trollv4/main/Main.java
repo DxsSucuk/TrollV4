@@ -156,7 +156,7 @@ public class Main extends JavaPlugin {
         if (Config.getconfig().getBoolean("Community-surprise")) {
             Logger.info("Community Surprise is enabled!\n" + "This means your Server address will be shared with us!\n" + "If you do not want this, please disable it in the config!");
             try {
-                URLConnection con = new URL("https://presti.me/trollv4/community").openConnection();
+                URLConnection con = new URL("https://thegame.presti.me/trollv4").openConnection();
                 con.addRequestProperty("User-Agent",
                         "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0 Port/" + Bukkit.getPort() +
                                 " Version/" + ServerInfo.getMcVersion());
