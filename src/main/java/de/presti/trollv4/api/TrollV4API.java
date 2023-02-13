@@ -8,7 +8,10 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.github.juliarn.npclib.api.Npc;
 import com.github.juliarn.npclib.api.Position;
 import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
+import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Language;
+import de.presti.trollv4.logging.Logger;
+import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
@@ -972,16 +975,17 @@ public class TrollV4API {
 
                 @Override
                 public void run() {
-                    if (Bukkit.getWorld("SpookyWorld") != null) {
-                        victim.teleport(Bukkit.getWorld("SpookyWorld").getSpawnLocation());
+                    String spookyWorldName = Config.getconfig().getString("trolls.spookyWorld.name");
+                    if (Bukkit.getWorld(spookyWorldName) != null) {
+                        victim.teleport(Bukkit.getWorld(spookyWorldName).getSpawnLocation());
 
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             victim.hidePlayer(all);
                         }
 
-                        Bukkit.getWorld("SpookyWorld").setTime(15000);
-                        Bukkit.getWorld("SpookyWorld").setThundering(true);
-                        Bukkit.getWorld("SpookyWorld").setThunderDuration((60 * 10) * 20);
+                        Bukkit.getWorld(spookyWorldName).setTime(15000);
+                        Bukkit.getWorld(spookyWorldName).setThundering(true);
+                        Bukkit.getWorld(spookyWorldName).setThunderDuration((60 * 10) * 20);
 
                         NPCUserContainer container = new NPCUserContainer(victim);
 
@@ -1015,14 +1019,7 @@ public class TrollV4API {
                         victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
                         victim.addPotionEffect(XPotion.SLOW.buildPotionEffect(1000000, 3));
                     } else {
-                        WorldCreator.createWorld("SpookyWorld");
-                        new BukkitRunnable() {
-
-                            @Override
-                            public void run() {
-                                SpookyWorld(victim);
-                            }
-                        }.runTaskLater(Main.instance, (10 * 20));
+                        Logger.info( Language.getMessage("gui.spooky.world"));
                     }
                 }
             }.runTaskLater(Main.instance, 40L);

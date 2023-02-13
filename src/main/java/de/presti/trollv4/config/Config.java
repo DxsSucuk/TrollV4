@@ -39,6 +39,7 @@ public class Config {
 			cfg.addDefault("trolls.slipperyhands.time", 1);
 			cfg.addDefault("trolls.tnttrace.spawndelay", 2);
 			cfg.addDefault("trolls.spookyWorld.generate", false);
+			cfg.addDefault("trolls.spookyWorld.name", "SpookyWorld");
 
 			try {
                 cfg.save(getFile());
@@ -77,6 +78,7 @@ public class Config {
 			cfg.addDefault("trolls.slipperyhands.time", ts);
 			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
 			cfg.addDefault("trolls.spookyWorld.generate", false);
+			cfg.addDefault("trolls.spookyWorld.name", "SpookyWorld");
 
 			try {
                 cfg.save(getFile());

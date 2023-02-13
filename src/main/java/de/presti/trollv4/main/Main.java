@@ -177,8 +177,9 @@ public class Main extends JavaPlugin {
             Logger.info("Community Surprise is disabled!");
         }
 
-        if (Config.getconfig().getBoolean("trolls.spookyWorld.generate") && Bukkit.getWorld("SpookyWorld") == null) {
-            WorldCreator.createWorld("SpookyWorld");
+        String spookyWorldName = Config.getconfig().getString("trolls.spookyWorld.name");
+        if (Config.getconfig().getBoolean("trolls.spookyWorld.generate") && Bukkit.getWorld(spookyWorldName) == null) {
+            WorldCreator.createWorld(spookyWorldName);
         }
     }
 
