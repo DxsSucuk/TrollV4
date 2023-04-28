@@ -65,20 +65,14 @@
         </dependency>
         <dependency>
             <groupId>com.github.juliarn.NPC-Lib</groupId>
-            <artifactId>npc-lib-api</artifactId>
-            <version>3.0.0-beta3</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.juliarn.NPC-Lib</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta3</version>
+            <version>3.0.0-beta4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>4.6.0-SNAPSHOT</version>
+            <version>4.8.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

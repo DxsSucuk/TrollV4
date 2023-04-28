@@ -942,6 +942,8 @@ public class TrollV4API {
                             .getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
                             .newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class)
                                     .newInstance(type), state);
+                } else {
+                    // TODO:: find a way to make this still possible.
                 }
             }
 

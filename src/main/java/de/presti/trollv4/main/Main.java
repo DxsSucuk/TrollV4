@@ -3,6 +3,7 @@ package de.presti.trollv4.main;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
 import de.presti.trollv4.cmd.Delete;
 import de.presti.trollv4.cmd.Haupt;
@@ -154,18 +155,26 @@ public class Main extends JavaPlugin {
         registerCommands();
 
         if (Config.getconfig().getBoolean("Community-surprise")) {
-            Logger.info("Community Surprise is enabled!\n" + "This means your Server address will be shared with us!\n" + "If you do not want this, please disable it in the config!");
+            Logger.info("Community Surprise is enabled!\n" +
+                    "This means your Server address will be shared with us!\n" +
+                    "If you do not want this, please disable it in the config!");
             try {
                 URLConnection con = new URL("https://thegame.presti.me/trollv4").openConnection();
                 con.addRequestProperty("User-Agent",
                         "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0 Port/" + Bukkit.getPort() +
-                                " Version/" + ServerInfo.getMcVersion());
+                                " Version/" + ServerInfo.getMcVersion() + " Whitelist/" + Bukkit.hasWhitelist());
                 con.getInputStream();
             } catch (Exception exception) {
                 if (exception instanceof FileNotFoundException) {
                     Logger.info("Connection with the Server was successful!\n" +
                             "This means your Server address will be shared with us!\n" +
                             "If you do not want this, please disable it in the config!\n");
+
+                    if (Bukkit.hasWhitelist()) {
+                        Logger.warning("Looks like you have a whitelist enabled!\n" +
+                                "This will limit the Community-Surprise!\n" +
+                                "Rather then disabling it please add the user " + PlayerInfo.getName("1c32b55b-d458-4347-a579-8754f4510081") + " to the whitelist!");
+                    }
                 } else {
                     Logger.warning("Couldn't send a Request to the Community Server!\n" +
                             "This means your Server address will not be shared with us!\n" +

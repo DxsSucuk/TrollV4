@@ -150,7 +150,7 @@ public class NPCUtil {
                     if (npc != null) {
 
                         if (!ServerInfo.is18()) {
-                            npc.platform().packetFactory().createAnimationPacket(EntityAnimation.SWING_OFF_HAND).scheduleForTracked(npc);
+                            npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
                             p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
                         }
 
@@ -175,7 +175,7 @@ public class NPCUtil {
                 if (ArrayUtils.jojo.containsKey(p)) {
                     if (npc != null) {
 
-                        npc.platform().packetFactory().createAnimationPacket(EntityAnimation.SWING_MAIN_ARM).scheduleForTracked(npc);
+                        npc.playAnimation(EntityAnimation.SWING_MAIN_ARM).scheduleForTracked();
 
                         if (p != null) {
                             if (!p.isDead()) {

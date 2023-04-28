@@ -102,4 +102,6 @@ public class ServerInfo {
 	public static boolean is118() { return getNMSVersion().startsWith("v1_18"); }
 
 	public static boolean is119() { return getNMSVersion().startsWith("v1_19"); }
+
+	public static boolean is120() { return getNMSVersion().startsWith("v1_20"); }
 }
