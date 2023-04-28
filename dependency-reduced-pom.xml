@@ -4,7 +4,7 @@
   <groupId>de.presti</groupId>
   <artifactId>trollv4</artifactId>
   <name>TrollV4</name>
-  <version>4.5.10</version>
+  <version>4.5.13</version>
   <build>
     <resources>
       <resource>
@@ -104,7 +104,7 @@
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib</artifactId>
-      <version>4.6.0-SNAPSHOT</version>
+      <version>4.8.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

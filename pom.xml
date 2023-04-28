@@ -6,7 +6,7 @@
 
     <groupId>de.presti</groupId>
     <artifactId>trollv4</artifactId>
-    <version>4.5.12</version>
+    <version>4.5.13</version>
     <packaging>jar</packaging>
 
     <name>TrollV4</name>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>9.2.0</version>
+            <version>9.3.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -63,6 +63,8 @@
             <version>3.0.0</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Find a way to make this one provided because the dependency as a size of 4MB
+            Or at least find a way to make the file itself smaller.-->
         <dependency>
             <groupId>com.github.juliarn.NPC-Lib</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
