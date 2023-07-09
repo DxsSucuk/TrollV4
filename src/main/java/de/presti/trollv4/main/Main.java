@@ -224,7 +224,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
             Logger.info("Downloading ProtocolLib!");
-            if (ServerInfo.above(20)) {
+            if (ServerInfo.aboveOrEqual(20)) {
                 download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
             } else {
                 download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
