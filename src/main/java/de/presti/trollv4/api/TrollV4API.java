@@ -880,7 +880,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void LSD(Player victim) {
-        Packets.sendPacket(victim, 7, 15);
+        Packets.sendPacket(victim, 7, ServerInfo.supportOldPackets() ? 15 : 21);
     }
 
     /**
