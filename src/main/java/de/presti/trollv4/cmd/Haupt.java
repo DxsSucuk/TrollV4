@@ -112,7 +112,7 @@ public class Haupt implements CommandExecutor {
 
             if (args.length == 0) {
                 if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                    new InvManager().choicePlayer(p);
+                    InvManager.choicePlayer(p);
                     p.sendMessage(Data.prefix + Language.getMessage("command.troll.default"));
                 } else {
                     p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
@@ -192,7 +192,7 @@ public class Haupt implements CommandExecutor {
                     }
                 } else if (args[0].equalsIgnoreCase("items")) {
                     if (p.hasPermission("troll.items") || p.hasPermission("troll.*")) {
-                        new InvManager().openItemInv(p);
+                        InvManager.openItemInv(p);
                         p.playSound(p.getLocation(), XSound.BLOCK_CHEST_OPEN.parseSound(), 3, 1);
                         p.sendMessage(Data.prefix + Language.getMessage("command.troll.items"));
                     } else {
@@ -200,7 +200,7 @@ public class Haupt implements CommandExecutor {
                     }
                 } else if (args[0].equalsIgnoreCase("server")) {
                     if (p.hasPermission("troll.server") || p.hasPermission("troll.*")) {
-                        new InvManager().openServerInv(p);
+                        InvManager.openServerInv(p);
                         p.playSound(p.getLocation(), XSound.BLOCK_CHEST_OPEN.parseSound(), 3, 1);
                         p.sendMessage(Data.prefix + Language.getMessage("command.troll.server"));
                     } else {
@@ -209,7 +209,7 @@ public class Haupt implements CommandExecutor {
                 } else if (Bukkit.getPlayer(args[0]) != null) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(args[0]);
-                        new InvManager().openTrollInv(p, t);
+                        InvManager.openTrollInv(p, t);
                         p.sendMessage(Data.prefix + Language.getMessage("command.troll.default"));
                     } else {
                         p.sendMessage(Data.prefix + Language.getMessage("nopermission"));

@@ -189,6 +189,7 @@ public class Language {
 		addMessage("de", "gui.fakeleave.default", "Eine FakeLeave Message wurde in den Chat geschickt!");
 		addMessage("de", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("de", "gui.hackserver", "Der Hackvorgang startet!");
+		addMessage("de", "gui.loading", "Der Spieler &c[PLAYER] &2sieht nun den Ladebildschirm bis er neu startet!");
 		addMessage("de", "control.world", "&cWelt wurde geweschelt!");
 		addMessage("de", "control.distance", "&cZuweit entfernt");
 	}
@@ -297,6 +298,7 @@ public class Language {
 		addMessage("us", "gui.fakeleave.default", "A Fake Message has been Posted in the Chat!");
 		addMessage("us", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("us", "gui.hackserver", "The hacking process starts!");
+		addMessage("us", "gui.loading", "The player &c[PLAYER] &2is now seeing the loading screen till they restart!");
 		addMessage("us", "control.world", "&4SWITCHED WORLDS");
 		addMessage("us", "control.distance", "&4TOO FAR AWAY");
 	}

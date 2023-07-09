@@ -106,6 +106,7 @@ public class Items {
 		addItem("default", "gui.trolls.giorno", "§6Giorno Giovanna");
 		addItem("default", "gui.trolls.johncena", "§2Everything is JOHN CENA");
 		addItem("default", "gui.trolls.spookyworld", "§6Spooky §eWorld §2;D");
+		addItem("default", "gui.trolls.loading", "§cInfinite Loading");
 		addItem("default", "gui.trolls.endcredits", "§dEnd Credits");
 		addItem("default", "gui.servertrolls.tpall", "§6Tpall");
 		addItem("default", "gui.servertrolls.hackmessage", "§8Hack Message");

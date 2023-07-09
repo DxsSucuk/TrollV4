@@ -6,11 +6,14 @@ softdepend:
    - ProtocolLib
    - LibsDisguises
    - NoteBlockAPI
-loadbefore: [TrollV4Updater]
 website: https://presti.me
 api-version: 1.13
 commands:
-   delete:
-      description: Delete command for the automatic Updater.
+   trollv4test:
+      description: Just a test command!
    troll:
       description: The Troll command.
+      aliases:
+         - trollv4
+         - prank
+         - prankv4

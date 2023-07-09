@@ -1,6 +1,7 @@
 package de.presti.trollv4.listener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.presti.trollv4.api.PlayMusic;
@@ -24,12 +25,7 @@ import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -205,7 +201,7 @@ public class GuiListener implements Listener {
 								if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 									ArrayUtils.trolling.put(p.getName(), all.getName());
 									e.getView().close();
-									new InvManager().openPlayerInv(p);
+									InvManager.openPlayerInv(p);
 								} else {
 									p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 									e.getView().close();
@@ -310,7 +306,7 @@ public class GuiListener implements Listener {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cBack")) {
 					if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 						e.getView().close();
-						new InvManager().choicePlayer(p);
+						InvManager.choicePlayer(p);
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
@@ -416,7 +412,7 @@ public class GuiListener implements Listener {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cBack")) {
 					if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
 						e.getView().close();
-						new InvManager().openPlayerInv(p);
+						InvManager.openPlayerInv(p);
 					} else {
 						p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 						e.getView().close();
@@ -540,7 +536,7 @@ public class GuiListener implements Listener {
 						if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
 							ArrayUtils.trolling.remove(p.getName());
 							e.getView().close();
-							new InvManager().choicePlayer(p);
+							InvManager.choicePlayer(p);
 						} else {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
@@ -598,11 +594,6 @@ public class GuiListener implements Listener {
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.demo"))) {
-						if (ServerInfo.is117() || ServerInfo.is118() || ServerInfo.is119()) {
-							p.sendMessage(Data.prefix + "Not supported in your current Version!");
-							e.getView().close();
-							return;
-						}
 
 						Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 						if (p.hasPermission("troll.demo") || p.hasPermission("troll.*")) {
@@ -722,7 +713,7 @@ public class GuiListener implements Listener {
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.mlg"))) {
 						if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
-							new InvManager().openMLGchoiceInv(p);
+							InvManager.openMLGchoiceInv(p);
 						} else {
 							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
 							e.getView().close();
@@ -1474,253 +1465,9 @@ public class GuiListener implements Listener {
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.tornado"))) {
 						if (p.hasPermission("troll.tornado") || p.hasPermission("troll.*")) {
-
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if (ArrayUtils.tornado.contains(t)) {
-									p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.off", t));
-									e.getView().close();
-									ArrayUtils.tornador.get(t).cancel();
-									ArrayUtils.tornado.remove(t);
-								} else {
-									p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.on", t));
-									e.getView().close();
-									ArrayUtils.tornado.add(t);
-									ArrayUtils.tornador.put(t, new BukkitRunnable() {
-
-										Random r = new Random();
-
-										int rix = r.nextBoolean() ? -1 : 1;
-										int riz = r.nextBoolean() ? -1 : 1;
-
-										@Override
-										public void run() {
-											Location location1 = t.getLocation();
-											FallingBlock o;
-											Location location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ());
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ() - 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() - 1,
-													location1.getY() - 1, location1.getZ() - 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() + 1,
-													location1.getY() - 1, location1.getZ() + 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() - 1,
-													location1.getY() - 1, location1.getZ() + 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() + 1,
-													location1.getY() - 1, location1.getZ() - 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() - 1,
-													location1.getY() - 1, location1.getZ());
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX() + 1,
-													location1.getY() - 1, location1.getZ());
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) / 4.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ() + 1);
-
-											if ((location3 != null) && location3.getBlock() != null && location3
-													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
-												o = location3.getWorld().spawnFallingBlock(
-														location3.getBlock().getLocation(),
-														location3.getBlock().getType(), (byte) 0);
-												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-												o.setFallDistance(0.0F);
-												o.setVelocity(new Vector(
-														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-														0.6D + r.nextInt(2) * 2.5D,
-														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											}
-
-											location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ());
-
-											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
-											o = location1.getWorld().spawnFallingBlock(
-													location3.getBlock().getLocation(), location3.getBlock().getType(),
-													(byte) 0);
-											o.setFallDistance(0.0F);
-											o.setVelocity(new Vector(
-													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-													0.6D + r.nextInt(2) * 2.5D,
-													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-
-											location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ() + 1);
-
-											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
-											o = location1.getWorld().spawnFallingBlock(
-													location3.getBlock().getLocation(), location3.getBlock().getType(),
-													(byte) 0);
-											o.setFallDistance(0.0F);
-											o.setVelocity(new Vector(
-													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-													0.6D + r.nextInt(2) * 2.5D,
-													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-
-											location3 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() - 1, location1.getZ() - 1);
-
-											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
-											o = location1.getWorld().spawnFallingBlock(
-													location3.getBlock().getLocation(), location3.getBlock().getType(),
-													(byte) 0);
-											o.setFallDistance(0.0F);
-											o.setVelocity(new Vector(
-													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-													0.6D + r.nextInt(2) * 2.5D,
-													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-
-											location3 = new Location(location1.getWorld(), location1.getX() + 1,
-													location1.getY() - 1, location1.getZ());
-
-											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
-											o = location1.getWorld().spawnFallingBlock(
-													location3.getBlock().getLocation(), location3.getBlock().getType(),
-													(byte) 0);
-											o.setFallDistance(0.0F);
-											o.setVelocity(new Vector(
-													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-													0.6D + r.nextInt(2) * 2.5D,
-													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-
-											location3 = new Location(location1.getWorld(), location1.getX() - 1,
-													location1.getY() - 1, location1.getZ());
-
-											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
-											o = location1.getWorld().spawnFallingBlock(
-													location3.getBlock().getLocation(), location3.getBlock().getType(),
-													(byte) 0);
-											o.setFallDistance(0.0F);
-											o.setVelocity(new Vector(
-													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
-													0.6D + r.nextInt(2) * 2.5D,
-													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
-											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
-
-											Location location2 = new Location(location1.getWorld(), location1.getX(),
-													location1.getY() + 3.0D, location1.getZ(),
-													location1.getYaw() + 15.0F, location1.getPitch());
-											t.teleport(location2);
-
-										}
-									});
-									ArrayUtils.tornador.get(t).runTaskTimer(Main.getPlugin(), 0, 8);
-								}
-								e.getView().close();
+								InvManager.openConfirmationInv(p, e.getCurrentItem());
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -2193,11 +1940,6 @@ public class GuiListener implements Listener {
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.endcredits"))) {
-						if (ServerInfo.is117() || ServerInfo.is118() || ServerInfo.is119()) {
-							p.sendMessage(Data.prefix + "Not supported in your current Version!");
-							e.getView().close();
-							return;
-						}
 
 						if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
@@ -2228,6 +1970,77 @@ public class GuiListener implements Listener {
 									p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.off", t));
 								}
 								TrollV4API.SpookyWorld(t);
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.loading"))) {
+						if (p.hasPermission("troll.loading") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								InvManager.openConfirmationInv(p, e.getCurrentItem());
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
+							.equalsIgnoreCase(Items.getItem("gui.trolls.vomit"))) {
+						if (p.hasPermission("troll.vomit") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (!ArrayUtils.vomit.contains(t)) {
+									Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
+
+										List<Item> toBeDelete = new ArrayList<>();
+
+										@Override
+										public void run() {
+											if (!toBeDelete.isEmpty()) {
+												for (Item item : toBeDelete) {
+													item.remove();
+												}
+											}
+
+											if (ArrayUtils.vomit.contains(t)) {
+												ItemStack[] vomitItems = new ItemStack[] { SetItems.buildItem("§6VOMIT", XMaterial.BLACK_WOOL),
+												SetItems.buildItem("§6VOMIT", XMaterial.BLUE_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.BROWN_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.CYAN_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.GRAY_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.GREEN_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.LIME_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.MAGENTA_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.ORANGE_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.PINK_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.PURPLE_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.RED_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.WHITE_WOOL),
+														SetItems.buildItem("§6VOMIT", XMaterial.YELLOW_WOOL) };
+
+												for (ItemStack item : vomitItems) {
+													Item drop = p.getWorld().dropItem(p.getEyeLocation(), item);
+													drop.setVelocity(p.getEyeLocation().getDirection().normalize().multiply(0.5D));
+													toBeDelete.add(drop);
+												}
+											} else {
+												cancel();
+											}
+										}
+									}, 5L, 20L);
+									ArrayUtils.vomit.add(t);
+									p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.on", t));
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.off", t));
+								}
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -2312,6 +2125,287 @@ public class GuiListener implements Listener {
 				e.setCancelled(true);
 				e.getResult();
 				e.setResult(Result.DENY);
+			} else if (e.getView().getTitle().equalsIgnoreCase("§2Troll Confirmation Menu")) {
+				e.setCancelled(true);
+				e.getResult();
+				e.setResult(Result.DENY);
+
+				if (e.getCurrentItem().getType() == XMaterial.LIME_STAINED_GLASS_PANE.parseMaterial()) {
+					ItemStack trollItem = e.getView().getItem(13);
+					if (trollItem == null || !trollItem.hasItemMeta() || !trollItem.getItemMeta().hasDisplayName()) return;
+
+					if (trollItem.getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.trolls.loading"))) {
+						if (p.hasPermission("troll.loading") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								TrollV4API.InfiniteLoading(t);
+								p.sendMessage(Data.prefix + Language.getMessage("gui.loading"));
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (trollItem.getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.trolls.tornado"))) {
+						if (p.hasPermission("troll.tornado") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (ArrayUtils.tornado.contains(t)) {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.off", t));
+									e.getView().close();
+									ArrayUtils.tornador.get(t).cancel();
+									ArrayUtils.tornado.remove(t);
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.on", t));
+									e.getView().close();
+									ArrayUtils.tornado.add(t);
+									ArrayUtils.tornador.put(t, new BukkitRunnable() {
+
+										Random r = new Random();
+
+										int rix = r.nextBoolean() ? -1 : 1;
+										int riz = r.nextBoolean() ? -1 : 1;
+
+										@Override
+										public void run() {
+											Location location1 = t.getLocation();
+											FallingBlock o;
+											Location location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ());
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ() - 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() - 1,
+													location1.getY() - 1, location1.getZ() - 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() + 1,
+													location1.getY() - 1, location1.getZ() + 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() - 1,
+													location1.getY() - 1, location1.getZ() + 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() + 1,
+													location1.getY() - 1, location1.getZ() - 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() - 1,
+													location1.getY() - 1, location1.getZ());
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX() + 1,
+													location1.getY() - 1, location1.getZ());
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) / 4.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ() + 1);
+
+											if ((location3 != null) && location3.getBlock() != null && location3
+													.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
+												o = location3.getWorld().spawnFallingBlock(
+														location3.getBlock().getLocation(),
+														location3.getBlock().getType(), (byte) 0);
+												location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+												o.setFallDistance(0.0F);
+												o.setVelocity(new Vector(
+														r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+														0.6D + r.nextInt(2) * 2.5D,
+														r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											}
+
+											location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ());
+
+											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
+											o = location1.getWorld().spawnFallingBlock(
+													location3.getBlock().getLocation(), location3.getBlock().getType(),
+													(byte) 0);
+											o.setFallDistance(0.0F);
+											o.setVelocity(new Vector(
+													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+													0.6D + r.nextInt(2) * 2.5D,
+													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+
+											location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ() + 1);
+
+											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
+											o = location1.getWorld().spawnFallingBlock(
+													location3.getBlock().getLocation(), location3.getBlock().getType(),
+													(byte) 0);
+											o.setFallDistance(0.0F);
+											o.setVelocity(new Vector(
+													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+													0.6D + r.nextInt(2) * 2.5D,
+													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+
+											location3 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() - 1, location1.getZ() - 1);
+
+											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
+											o = location1.getWorld().spawnFallingBlock(
+													location3.getBlock().getLocation(), location3.getBlock().getType(),
+													(byte) 0);
+											o.setFallDistance(0.0F);
+											o.setVelocity(new Vector(
+													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+													0.6D + r.nextInt(2) * 2.5D,
+													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+
+											location3 = new Location(location1.getWorld(), location1.getX() + 1,
+													location1.getY() - 1, location1.getZ());
+
+											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
+											o = location1.getWorld().spawnFallingBlock(
+													location3.getBlock().getLocation(), location3.getBlock().getType(),
+													(byte) 0);
+											o.setFallDistance(0.0F);
+											o.setVelocity(new Vector(
+													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+													0.6D + r.nextInt(2) * 2.5D,
+													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+
+											location3 = new Location(location1.getWorld(), location1.getX() - 1,
+													location1.getY() - 1, location1.getZ());
+
+											location3.getBlock().setType(XMaterial.STONE.parseMaterial());
+											o = location1.getWorld().spawnFallingBlock(
+													location3.getBlock().getLocation(), location3.getBlock().getType(),
+													(byte) 0);
+											o.setFallDistance(0.0F);
+											o.setVelocity(new Vector(
+													r.nextBoolean() ? (rix * (0.25D + (r.nextInt(3) / 5))) : 0.0D,
+													0.6D + r.nextInt(2) * 2.5D,
+													r.nextBoolean() ? (riz * (0.25D + (r.nextInt(3) / 5))) : 0.0D));
+											location3.getBlock().setType(XMaterial.AIR.parseMaterial());
+
+											Location location2 = new Location(location1.getWorld(), location1.getX(),
+													location1.getY() + 3.0D, location1.getZ(),
+													location1.getYaw() + 15.0F, location1.getPitch());
+											t.teleport(location2);
+
+										}
+									});
+									ArrayUtils.tornador.get(t).runTaskTimer(Main.getPlugin(), 0, 8);
+								}
+								e.getView().close();
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					}
+				}
 			}
 		} catch (Exception e2) {
 			e2.printStackTrace();

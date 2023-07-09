@@ -60,26 +60,11 @@ public class SetItems {
 	}
 
 	public static ItemStack buildItem(String name, XMaterial m) {
-		ItemStack item = new ItemStack(m.parseItem());
-		ItemMeta itemm = item.getItemMeta();
-		itemm.setDisplayName(name);
-		item.setItemMeta(itemm);
-		return item;
+		return buildItem(name, m.parseMaterial());
 	}
 
 	public static ItemStack buildItem(String name, XMaterial m, String[] lores) {
-		ArrayList<String> lore = new ArrayList<String>();
-
-		for (String s : lores) {
-			lore.add(s);
-		}
-
-		ItemStack item = new ItemStack(m.parseItem());
-		ItemMeta itemm = item.getItemMeta();
-		itemm.setLore(lore);
-		itemm.setDisplayName(name);
-		item.setItemMeta(itemm);
-		return item;
+		return buildItem(name, m.parseMaterial(), lores);
 	}
 
 	public static ItemStack buildItem(String name, Material m, String[] lores) {
@@ -111,16 +96,7 @@ public class SetItems {
 	}
 	
 	public static ItemStack buildItem(String name, XMaterial m, String lores) {
-		ArrayList<String> lore = new ArrayList<String>();
-
-		lore.add(lores);
-
-		ItemStack item = new ItemStack(m.parseItem());
-		ItemMeta itemm = item.getItemMeta();
-		itemm.setLore(lore);
-		itemm.setDisplayName(name);
-		item.setItemMeta(itemm);
-		return item;
+		return buildItem(name, m.parseMaterial(), lores);
 	}
 
 	@SuppressWarnings("deprecation")

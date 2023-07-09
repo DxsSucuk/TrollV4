@@ -43,10 +43,10 @@ public class TrollV4API {
     private static int taskID;
 
     /**
-     * Lets an player control an other player. This will be stopped after the player
+     * Lets a player control another player. This will be stopped after the player
      * leaves or the control stops.
      *
-     * @param user   the player thats should control.
+     * @param user   the player that should be in control.
      * @param victim the player that should be controlled.
      * @since 4.4.4
      */
@@ -55,9 +55,9 @@ public class TrollV4API {
     }
 
     /**
-     * Stops the control of an user. This will stop the control of an player.
+     * Stops the control of a user. This will stop the control of a player.
      *
-     * @param user   the player thats should release the victim.
+     * @param user   the player that should release the victim.
      * @param victim the player that should be released.
      * @since 4.4.4
      */
@@ -905,6 +905,14 @@ public class TrollV4API {
     }
 
     /**
+     * Lets the player see an infinite loading screen.
+     * @param victim that should see the loading screen.
+     */
+    public static void InfiniteLoading(Player victim) {
+        sendGameStateChange(victim, 4, 0);
+    }
+
+    /**
      * Shows the EndCredits
      * simple.
      *
@@ -923,35 +931,27 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void sendGameStateChange(Player victim, int type, float state) {
-
-        if (ServerInfo.is117() || ServerInfo.is118() || ServerInfo.is119()) {
-            return;
-        }
-
         try {
-            Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
-            Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
-            Object packet = null;
-
-            if (ServerInfo.supportOldPackets()) {
-                packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
-                        .newInstance(type, state);
+            if (!ServerInfo.supportOldPackets()) {
+                final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
+                System.out.println(PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].getName());
+                packet.getModifier().write(0,
+                        PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
+                packet.getFloat().write(0, state);
+                ProtocolLibrary.getProtocolManager().sendServerPacket(victim, packet);
             } else {
-                if (!ServerInfo.is118() && !ServerInfo.is119()) {
-                    packet = Packets.getNMSClass("PacketPlayOutGameStateChange")
-                            .getConstructor(Packets.getNMSClass("PacketPlayOutGameStateChange$a"), float.class)
-                            .newInstance(Packets.getNMSClass("PacketPlayOutGameStateChange$a").getConstructor(int.class)
-                                    .newInstance(type), state);
-                } else {
-                    // TODO:: find a way to make this still possible.
-                }
-            }
 
-            if (packet != null)
+                Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
+                Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
+
+                Object packet = Packets.getNMSClass("PacketPlayOutGameStateChange").getConstructor(int.class, float.class)
+                        .newInstance(type, state);
+
                 playerConnection.getClass().getMethod("sendPacket", Packets.getNMSClass("Packet")).invoke(playerConnection,
                         packet);
+            }
         } catch (Exception e) {
-            System.out.println("Your Server Version isnt Supporting this Packet! (PacketPlayOutGameStateChange)");
+            System.out.println("Your Server Version isn't Supporting this Packet! (PacketPlayOutGameStateChange)");
             System.out.println("Return Exception: " + e.getMessage());
             e.printStackTrace();
         }
@@ -992,7 +992,7 @@ public class TrollV4API {
                         NPCUserContainer container = new NPCUserContainer(victim);
 
                         for (int x = 0; x < 30; x++) {
-                            Npc npc = NPCUtil.createNPC(getRandomSkinName(),LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
+                            Npc npc = NPCUtil.createNPC(getRandomSkinName(), LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
                                     victim.getLocation(), null, victim);
 
                             container.addNPC(npc);
@@ -1021,7 +1021,7 @@ public class TrollV4API {
                         victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
                         victim.addPotionEffect(XPotion.SLOW.buildPotionEffect(1000000, 3));
                     } else {
-                        Logger.info( Language.getMessage("gui.spooky.world"));
+                        Logger.info(Language.getMessage("gui.spooky.world"));
                     }
                 }
             }.runTaskLater(Main.instance, 40L);
@@ -1057,7 +1057,7 @@ public class TrollV4API {
      */
     public static String getRandomSkinName() {
 
-        String[] ids = new String[]{ "notenough", "FKJJJJJJJJJJJJJJ", "My_Te", PlayerInfo.getName("1c32b55bd4584347a5798754f4510081")};
+        String[] ids = new String[]{"notenough", "FKJJJJJJJJJJJJJJ", "My_Te", PlayerInfo.getName("1c32b55bd4584347a5798754f4510081")};
 
         return ids[new Random().nextInt(ids.length)];
     }

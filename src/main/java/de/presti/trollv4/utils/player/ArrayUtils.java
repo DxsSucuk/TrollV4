@@ -33,6 +33,8 @@ public class ArrayUtils {
 	public static ArrayList<Player> deaf = new ArrayList<>();
 	public static ArrayList<Player> confus = new ArrayList<>();
 
+	public static ArrayList<Player> vomit = new ArrayList<>();
+
 	// HashMaps
 	public static HashMap<String, String> trolling = new HashMap<>();
 	public static HashMap<Player, BukkitRunnable> anim = new HashMap<>();
@@ -67,7 +69,7 @@ public class ArrayUtils {
 			if (spookylast.containsKey(p)) {
 				try {
 					p.teleport(spookylast.get(p));
-				} catch (Exception ex) {}
+				} catch (Exception ignore) {}
 				
 				spookylast.remove(p);
 			}
@@ -81,9 +83,7 @@ public class ArrayUtils {
 			freeze.remove(p);
 		}
 
-		if (herobrine.contains(p)) {
-			herobrine.remove(p);
-		}
+		herobrine.remove(p);
 
 		if (userbowspam.contains(p)) {
 			arrowspam.get(p).cancel();
@@ -94,13 +94,9 @@ public class ArrayUtils {
 			hackuser.get(p).cancel();
 		}
 
-		if (tntp.contains(p)) {
-			tntp.remove(p);
-		}
+		tntp.remove(p);
 
-		if (rotateplayer.contains(p)) {
-			rotateplayer.remove(p);
-		}
+		rotateplayer.remove(p);
 
 		if (fakeinv.containsKey(p)) {
 			InvSaver is = fakeinv.get(p);
@@ -116,33 +112,19 @@ public class ArrayUtils {
 			NPCUtil.destroyNPCsFromPlayer(p);
 		}
 
-		if (fc.contains(p)) {
-			fc.remove(p);
-		}
+		fc.remove(p);
 
-		if (lagging.contains(p)) {
-			lagging.remove(p);
-		}
+		lagging.remove(p);
 
-		if (randomtp.contains(p)) {
-			randomtp.remove(p);
-		}
+		randomtp.remove(p);
 
-		if (noinv.contains(p)) {
-			noinv.remove(p);
-		}
+		noinv.remove(p);
 
-		if (deaf.contains(p)) {
-			deaf.remove(p);
-		}
+		deaf.remove(p);
 
-		if (confus.contains(p)) {
-			confus.remove(p);
-		}
+		confus.remove(p);
 
-		if (randomtp.contains(p)) {
-			randomtp.remove(p);
-		}
+		randomtp.remove(p);
 
 		if (tornado.contains(p)) {
 			tornador.get(p).cancel();
@@ -154,6 +136,13 @@ public class ArrayUtils {
 			anvils.get(p).cancel();
 			anvils.remove(p);
 		}
+
+		if(jumping.containsKey(p)) {
+			jumping.get(p).cancel();
+			jumping.remove(p);
+		}
+
+		vomit.remove(p);
 	}
 
 }

@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
-import de.presti.trollv4.cmd.Delete;
+import de.presti.trollv4.cmd.TestCommand;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.cmd.TabCompleter;
 import de.presti.trollv4.config.Config;
@@ -127,7 +127,7 @@ public class Main extends JavaPlugin {
     public static void registerCommands() {
         instance.getCommand("troll").setExecutor(new Haupt());
         instance.getCommand("troll").setTabCompleter(new TabCompleter());
-        instance.getCommand("delete").setExecutor(new Delete());
+        instance.getCommand("trollv4test").setExecutor(new TestCommand());
     }
 
     public static void registerListeners() {

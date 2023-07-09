@@ -1,5 +1,7 @@
 package de.presti.trollv4.main;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import de.presti.trollv4.invs.SetItems;
@@ -14,6 +16,7 @@ import com.cryptomorin.xseries.SkullUtils;
 import com.cryptomorin.xseries.XMaterial;
 
 import de.presti.trollv4.api.PlayerInfo;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class Changelog {
 
@@ -223,77 +226,95 @@ public class Changelog {
         inv.setItem(27, darkblue);
         inv.setItem(9, blue);
 
-        ItemStack skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("1c32b55bd4584347a5798754f4510081")));
-        SkullMeta skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§bPresti §8(§2" + PlayerInfo.getName("1c32b55bd4584347a5798754f4510081") + "§8)");
-        skull.setItemMeta(skullm);
+        HashMap<Integer, ItemStack> items = new HashMap<>();
 
-        inv.setItem(13, skull);
+        new BukkitRunnable() {
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§bDavid §8(§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + "§8)");
-        skull.setItemMeta(skullm);
+            @Override
+            public void run() {
+                ItemStack skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("1c32b55bd4584347a5798754f4510081")));
+                SkullMeta skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§bPresti §8(§2" + PlayerInfo.getName("1c32b55bd4584347a5798754f4510081") + "§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(14, skull);
+                items.put(13, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("d05d95d592ed45cd9320ee2e2e491d78")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§3RyTheFirst §8(§3Code Support§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("0c44ffe63efc4c01a430e1104945abfd")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§bDavid §8(§2" + PlayerInfo.getName("0c44ffe63efc4c01a430e1104945abfd") + "§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(29, skull);
+                items.put(14, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("964e966639cd474493134ef0bf430635")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§3CryptoMorin §8(§3Code Support§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("d05d95d592ed45cd9320ee2e2e491d78")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§3RyTheFirst §8(§3Code Support§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(30, skull);
+                items.put(29, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("fdeb5f5ec4984d5380b325e430513db2")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§3Garkolym §8(§3Ideas§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("964e966639cd474493134ef0bf430635")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§3CryptoMorin §8(§3Code Support§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(31, skull);
+                items.put(30, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("f81a5c1be0a74a359181a1b3ce527340")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§3CrashedLife §8(§3Ideas§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("fdeb5f5ec4984d5380b325e430513db2")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§3Garkolym §8(§3Ideas§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(32, skull);
+                items.put(31, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("b864637e34734abb9f76d07689a0309e")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§3Minesuchtiiii §8(§3Ideas§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("f81a5c1be0a74a359181a1b3ce527340")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§3CrashedLife §8(§3Ideas§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(33, skull);
+                items.put(32, skull);
 
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("b864637e34734abb9f76d07689a0309e")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§3Minesuchtiiii §8(§3Ideas§8)");
+                skull.setItemMeta(skullm);
 
+                items.put(33, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(48, skull);
+                items.put(48, skull);
 
-        skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4414a12b4a3e4914834647389dc00a24")));
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§2" + PlayerInfo.getName("4414a12b4a3e4914834647389dc00a24") + " §8(§c<3§8)");
-        skull.setItemMeta(skullm);
+                skull = SkullUtils.getSkull(UUID.fromString(PlayerInfo.getUUID("4414a12b4a3e4914834647389dc00a24")));
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§2" + PlayerInfo.getName("4414a12b4a3e4914834647389dc00a24") + " §8(§c<3§8)");
+                skull.setItemMeta(skullm);
 
-        inv.setItem(49, skull);
-        skull = XMaterial.PLAYER_HEAD.parseItem();
-        skullm = (SkullMeta) skull.getItemMeta();
-        skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
-        skullm.setOwner(p.getName());
-        skull.setItemMeta(skullm);
+                items.put(49, skull);
+                skull = XMaterial.PLAYER_HEAD.parseItem();
+                skullm = (SkullMeta) skull.getItemMeta();
+                skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
+                skullm.setOwner(p.getName());
+                skull.setItemMeta(skullm);
 
-        inv.setItem(51, skull);
+                items.put(51, skull);
+
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+
+                        for (Map.Entry<Integer, ItemStack> it : items.entrySet()) {
+                            inv.setItem(it.getKey(), it.getValue());
+                        }
+
+                    }
+                }.runTask(Main.instance);
+            }
+        }.runTaskAsynchronously(Main.instance);
 
         inv.setItem(17, blue);
         inv.setItem(35, darkblue);
