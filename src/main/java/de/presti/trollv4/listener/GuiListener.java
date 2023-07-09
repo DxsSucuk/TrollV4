@@ -2124,7 +2124,7 @@ public class GuiListener implements Listener {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
 								TrollV4API.InfiniteLoading(t);
-								p.sendMessage(Data.prefix + Language.getMessage("gui.loading"));
+								p.sendMessage(Data.prefix + Language.getMessage("gui.loading", t));
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
