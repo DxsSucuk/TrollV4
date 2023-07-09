@@ -975,18 +975,10 @@ public class GuiListener implements Listener {
 						}
 					} else if (e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(Items.getItem("gui.trolls.tnttrace"))) {
-						if (p.hasPermission("troll.tnttrain") || p.hasPermission("troll.*")) {
+						if (p.hasPermission("troll.tnttrace") || p.hasPermission("troll.*")) {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
-								if (ArrayUtils.tntp.contains(t)) {
-									p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.off", t));
-									ArrayUtils.tntp.remove(t);
-								} else {
-									p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.on", t));
-									new Haupt().spawnTnTAtPlayer(t);
-									ArrayUtils.tntp.add(t);
-								}
-								e.getView().close();
+								InvManager.openConfirmationInv(p, e.getCurrentItem());
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -1998,7 +1990,7 @@ public class GuiListener implements Listener {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
 								if (!ArrayUtils.vomit.contains(t)) {
-									Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
+									Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
 
 										List<Item> toBeDelete = new ArrayList<>();
 
@@ -2028,17 +2020,16 @@ public class GuiListener implements Listener {
 
 												for (ItemStack item : vomitItems) {
 													Item drop = p.getWorld().dropItem(p.getEyeLocation(), item);
-													drop.setVelocity(p.getEyeLocation().getDirection().normalize().multiply(0.5D));
+													drop.setVelocity(p.getEyeLocation().getDirection().normalize().multiply(0.3D));
 													toBeDelete.add(drop);
 												}
-											} else {
-												cancel();
 											}
 										}
-									}, 5L, 20L);
+									}, 5L, 5L);
 									ArrayUtils.vomit.add(t);
 									p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.on", t));
 								} else {
+									ArrayUtils.vomit.remove(t);
 									p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.off", t));
 								}
 							} else {
@@ -2140,6 +2131,27 @@ public class GuiListener implements Listener {
 							if (t != null) {
 								TrollV4API.InfiniteLoading(t);
 								p.sendMessage(Data.prefix + Language.getMessage("gui.loading"));
+							} else {
+								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+								e.getView().close();
+							}
+						} else {
+							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							e.getView().close();
+						}
+					} else if (trollItem.getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.trolls.tnttrace"))) {
+						if (p.hasPermission("troll.tnttrace") || p.hasPermission("troll.*")) {
+							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
+							if (t != null) {
+								if (ArrayUtils.tntp.contains(t)) {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.off", t));
+									ArrayUtils.tntp.remove(t);
+								} else {
+									p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.on", t));
+									new Haupt().spawnTnTAtPlayer(t);
+									ArrayUtils.tntp.add(t);
+								}
+								e.getView().close();
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();

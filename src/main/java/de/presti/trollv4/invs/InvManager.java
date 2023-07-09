@@ -429,6 +429,7 @@ public class InvManager {
         inv.setItem(20, SetItems.buildItem(Items.getItem("gui.trolls.spookyworld"), XMaterial.JACK_O_LANTERN));
         inv.setItem(21, SetItems.buildItem(Items.getItem("gui.trolls.endcredits"), XMaterial.DRAGON_EGG.parseMaterial()));
         inv.setItem(22, SetItems.buildItem(Items.getItem("gui.trolls.loading"), XMaterial.DIRT.parseMaterial()));
+        inv.setItem(23, SetItems.buildItem(Items.getItem("gui.trolls.vomit"), XMaterial.YELLOW_WOOL.parseMaterial()));
         setOverallTrollMenu(inv);
     }
 

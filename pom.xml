@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.github.juliarn.NPC-Lib</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta4</version>
+            <version>3.0.0-beta5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

@@ -190,6 +190,8 @@ public class Language {
 		addMessage("de", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("de", "gui.hackserver", "Der Hackvorgang startet!");
 		addMessage("de", "gui.loading", "Der Spieler &c[PLAYER] &2sieht nun den Ladebildschirm bis er neu startet!");
+		addMessage("de", "gui.vomit.on", "Der Spieler &c[PLAYER] &2kann nicht mehr aufhören zu kotzen!");
+		addMessage("de", "gui.vomit.off", "Der Spieler &c[PLAYER] &2kann hat aufgehört zu kotzen!");
 		addMessage("de", "control.world", "&cWelt wurde geweschelt!");
 		addMessage("de", "control.distance", "&cZuweit entfernt");
 	}
@@ -299,6 +301,8 @@ public class Language {
 		addMessage("us", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("us", "gui.hackserver", "The hacking process starts!");
 		addMessage("us", "gui.loading", "The player &c[PLAYER] &2is now seeing the loading screen till they restart!");
+		addMessage("us", "gui.vomit.on", "The player &c[PLAYER] &2can't stop vomiting!");
+		addMessage("us", "gui.vomit.off", "The player &c[PLAYER] &2stopped vomiting!");
 		addMessage("us", "control.world", "&4SWITCHED WORLDS");
 		addMessage("us", "control.distance", "&4TOO FAR AWAY");
 	}
@@ -407,6 +411,9 @@ public class Language {
 		addMessage("ru", "gui.fakeleave.default", "В чат отправлено сообщение FakeLeave!");
 		addMessage("ru", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("ru", "gui.hackserver", "Начинается чит-процесс!");
+		addMessage("ru", "gui.loading", "Игрок &c[PLAYER] &2 теперь видит экран загрузки до перезапуска!");
+		addMessage("ru", "gui.vomit.on", "Игрок &c[PLAYER] &2 не может остановить рвоту!");
+		addMessage("ru", "gui.vomit.off", "Игрок &c[PLAYER] &2остановил рвоту!");
 		addMessage("ru", "control.world", "&cМир изменился!");
 		addMessage("ru", "control.distance", "&cСлишком далеко!");
 	}
@@ -515,6 +522,9 @@ public class Language {
 		addMessage("indo", "gui.fakeleave.default", "fake message sudah di jabarkan di chat!");
 		addMessage("indo", "gui.fakeleave.message", "&6[PLAYER] left the Game.");
 		addMessage("indo", "gui.hackserver", "proses hack di mulai!");
+		addMessage("indo", "gui.loading", "Pemain &c[PLAYER] &2 sekarang melihat layar pemuatan hingga mereka memulai ulang!");
+		addMessage("indo", "gui.vomit.on", "Pemain &c[PLAYER] &2tidak bisa berhenti muntah!");
+		addMessage("indo", "gui.vomit.off", "Pemain &c[PLAYER] &2berhenti muntah!");
 		addMessage("indo", "control.world", "&4Mengganti dunia");
 		addMessage("indo", "control.distance", "&4TERLALU JAUH");
 	}
@@ -623,6 +633,9 @@ public class Language {
 		addMessage("es", "gui.fakeleave.default", "¡Se ha publicado un mensaje falso en el chat!");
 		addMessage("es", "gui.fakeleave.message", "&6[PLAYER] ha salido del juego.");
 		addMessage("es", "gui.hackserver", "¡El proceso de piratería comienza ahora!");
+		addMessage("es", "gui.loading", "¡El jugador &c[PLAYER] &2está viendo ahora la pantalla de carga hasta que reinicie!");
+		addMessage("es", "gui.vomit.on", "El jugador &c[PLAYER] &2¡no puede parar de vomitar!");
+		addMessage("es", "gui.vomit.off", "¡El jugador &c[PLAYER] &2dejó de vomitar!");
 		addMessage("es", "control.world", "&4MUNDO CHED");
 		addMessage("es", "control.distance", "&4DEMASIADO LEJOS");
 	}
