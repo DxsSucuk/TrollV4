@@ -6,7 +6,7 @@
 
     <groupId>de.presti</groupId>
     <artifactId>trollv4</artifactId>
-    <version>4.5.14</version>
+    <version>4.5.15</version>
     <packaging>jar</packaging>
 
     <name>TrollV4</name>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.2</version>
             <scope>compile</scope>
         </dependency>
         <!-- Find a way to make this one provided because the dependency as a size of 4MB
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>4.8.0-SNAPSHOT</version>
+            <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
