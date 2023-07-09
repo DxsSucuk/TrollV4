@@ -15,14 +15,14 @@ public class Logger {
 	}
 	
 	public static void info(String msg) {
-		Main.instance.getLogger().info(msg);
+		Main.getInstance().getLogger().info(msg);
 	}
 	
 	public static void warning(String msg) {
-		Main.instance.getLogger().warning(msg);
+		Main.getInstance().getLogger().warning(msg);
 	}
 	
 	public static void error(String msg) {
-		Main.instance.getLogger().severe(msg);
+		Main.getInstance().getLogger().severe(msg);
 	}
 }

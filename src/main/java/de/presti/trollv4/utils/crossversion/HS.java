@@ -1,10 +1,9 @@
 package de.presti.trollv4.utils.crossversion;
 
+import de.presti.trollv4.utils.plugin.RandomUtility;
 import org.bukkit.entity.Player;
 
 import com.cryptomorin.xseries.XSound;
-
-import de.presti.trollv4.main.Main;
 
 
 public class HS {
@@ -22,7 +21,7 @@ public class HS {
 	public static void Hack2(Player player) {
 		player.damage(0.5D);
         player.playSound(player.getLocation(), XSound.ENTITY_HORSE_DEATH.parseSound(), 1.0F, 1.0F);
-		player.sendMessage("§c" + Main.getRandomID());
+		player.sendMessage("§c" + RandomUtility.getRandomID());
 	}
 
 }

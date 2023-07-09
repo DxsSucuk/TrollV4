@@ -32,7 +32,7 @@ import java.util.*;
 public class NPCUtil {
 
     public static Platform<World, Player, ItemStack, Plugin> platform = BukkitPlatform.bukkitNpcPlatformBuilder()
-            .extension(Main.instance)
+            .extension(Main.getInstance())
             .debug(true)
             .worldAccessor(BukkitWorldAccessor.nameBasedAccessor())
             .npcTracker(CommonNpcTracker.newNpcTracker())
@@ -74,7 +74,7 @@ public class NPCUtil {
                     .position(BukkitPlatformUtil.positionFromBukkitLegacy(loc))
                     .profile(profile.withName("§7"));
 
-            if (ServerInfo.is18() && lookat != null) {
+            if (ServerInfo.is(8) && lookat != null) {
                 commonNpcBuilder.flag(Npc.LOOK_AT_PLAYER, true);
             }
 
@@ -149,7 +149,7 @@ public class NPCUtil {
                 if (ArrayUtils.jojo.containsKey(p)) {
                     if (npc != null) {
 
-                        if (!ServerInfo.is18()) {
+                        if (ServerInfo.above(8)) {
                             npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
                             p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
                         }
@@ -166,7 +166,7 @@ public class NPCUtil {
                     npc.unlink();
                 }
             }
-        }.runTaskTimer(Main.instance, 20L, 10L);
+        }.runTaskTimer(Main.getInstance(), 20L, 10L);
 
         new BukkitRunnable() {
 
@@ -190,7 +190,7 @@ public class NPCUtil {
                     npc.unlink();
                 }
             }
-        }.runTaskTimer(Main.instance, 25L, 10L);
+        }.runTaskTimer(Main.getInstance(), 25L, 10L);
     }
 
     public static void destroyNPCsFromPlayer(Player p) {

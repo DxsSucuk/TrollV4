@@ -21,6 +21,7 @@ import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
+import de.presti.trollv4.utils.plugin.RandomUtility;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
 import org.bukkit.Bukkit;
@@ -37,13 +38,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.cryptomorin.xseries.*;
-
-import de.presti.trollv4.api.*;
-import de.presti.trollv4.config.*;
-import de.presti.trollv4.invs.*;
-import de.presti.trollv4.main.*;
-import de.presti.trollv4.utils.crossversion.*;
-import de.presti.trollv4.utils.player.*;
 
 public class GuiListener implements Listener {
 	public int taskID;
@@ -267,9 +261,9 @@ public class GuiListener implements Listener {
 												}
 
 											}
-										}.runTask(Main.instance);
+										}.runTask(Main.getInstance());
 									}
-								}.runTaskAsynchronously(Main.instance);
+								}.runTaskAsynchronously(Main.getInstance());
 							} else {
 								int i = 0;
 								for (Player all : Bukkit.getOnlinePlayers()) {
@@ -642,20 +636,20 @@ public class GuiListener implements Listener {
 										public void run() {
 											if (countdown <= 0) {
 												HS.Hack(t);
-												Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + Main.getRandomID());
+												Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
 												ArrayUtils.hackuser.get(t).cancel();
 
 												return;
 											}
 											HS.Hack2(t);
 											Titles.send(t, 1, 20, 1, "§cHacking in " + countdown,
-													"§4" + Main.getRandomID());
+													"§4" + RandomUtility.getRandomID());
 											t.damage(0.1D);
 											countdown--;
 										}
 
 									});
-									ArrayUtils.hackuser.get(t).runTaskTimer(Main.getPlugin(), 0, 20);
+									ArrayUtils.hackuser.get(t).runTaskTimer(Main.getInstance(), 0, 20);
 
 								} else {
 									ArrayUtils.hackuser.put(t, new BukkitRunnable() {
@@ -665,20 +659,20 @@ public class GuiListener implements Listener {
 										public void run() {
 											if (countdown <= 0) {
 												HS.Hack(t);
-												Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + Main.getRandomID());
+												Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
 												ArrayUtils.hackuser.get(t).cancel();
 
 												return;
 											}
 											HS.Hack2(t);
 											Titles.send(t, 1, 20, 1, "§cHacking in " + countdown,
-													"§4" + Main.getRandomID());
+													"§4" + RandomUtility.getRandomID());
 											t.damage(0.1D);
 											countdown--;
 										}
 
 									});
-									ArrayUtils.hackuser.get(t).runTaskTimer(Main.getPlugin(), 0, 20);
+									ArrayUtils.hackuser.get(t).runTaskTimer(Main.getInstance(), 0, 20);
 								}
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
@@ -733,7 +727,7 @@ public class GuiListener implements Listener {
 											t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
 										}
 									}
-								}.runTaskAsynchronously(Main.instance);
+								}.runTaskAsynchronously(Main.getInstance());
 							} else {
 								p.sendMessage(Data.prefix + Language.getMessage("noonline"));
 								e.getView().close();
@@ -1171,7 +1165,7 @@ public class GuiListener implements Listener {
 										countdown--;
 									}
 								});
-								ArrayUtils.wtf.get(p).runTaskTimer(Main.instance, 0L, 20L);
+								ArrayUtils.wtf.get(p).runTaskTimer(Main.getInstance(), 0L, 20L);
 
 								p.sendMessage(Data.prefix + Language.getMessage("gui.wtf", t));
 								e.getView().close();
@@ -1397,45 +1391,45 @@ public class GuiListener implements Listener {
 											Location loc = t.getLocation().clone();
 
 											Arrow arrow = (Arrow) t.getWorld()
-													.spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-															Main.getPlugin().getRandom(5, 10),
-															Main.getPlugin().getRandom(-10, 10)), Arrow.class);
+													.spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+															Main.getInstance().getRandom(5, 10),
+															Main.getInstance().getRandom(-10, 10)), Arrow.class);
 											Location aloc = arrow.getLocation();
 											Vector angle = new Vector(loc.getX() - aloc.getX(),
 													loc.getY() - aloc.getBlockY(), loc.getZ() - aloc.getBlockZ());
 											arrow.setVelocity(angle.normalize().multiply(2.0D));
 
 											Arrow arrow2 = (Arrow) t.getWorld()
-													.spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-															Main.getPlugin().getRandom(5, 10),
-															Main.getPlugin().getRandom(-10, 10)), Arrow.class);
+													.spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+															Main.getInstance().getRandom(5, 10),
+															Main.getInstance().getRandom(-10, 10)), Arrow.class);
 											Location aloc2 = arrow2.getLocation();
 											Vector angle2 = new Vector(loc.getX() - aloc2.getX(),
 													loc.getY() - aloc2.getBlockY(), loc.getZ() - aloc2.getBlockZ());
 											arrow2.setVelocity(angle2.normalize().multiply(2.0D));
 
 											Arrow arrow3 = (Arrow) t.getWorld()
-													.spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-															Main.getPlugin().getRandom(5, 10),
-															Main.getPlugin().getRandom(-10, 10)), Arrow.class);
+													.spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+															Main.getInstance().getRandom(5, 10),
+															Main.getInstance().getRandom(-10, 10)), Arrow.class);
 											Location aloc3 = arrow3.getLocation();
 											Vector angle3 = new Vector(loc.getX() - aloc3.getX(),
 													loc.getY() - aloc3.getBlockY(), loc.getZ() - aloc3.getBlockZ());
 											arrow3.setVelocity(angle3.normalize().multiply(2.0D));
 
 											Arrow arrow4 = (Arrow) t.getWorld()
-													.spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-															Main.getPlugin().getRandom(5, 10),
-															Main.getPlugin().getRandom(-10, 10)), Arrow.class);
+													.spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+															Main.getInstance().getRandom(5, 10),
+															Main.getInstance().getRandom(-10, 10)), Arrow.class);
 											Location aloc4 = arrow4.getLocation();
 											Vector angle4 = new Vector(loc.getX() - aloc4.getX(),
 													loc.getY() - aloc4.getBlockY(), loc.getZ() - aloc4.getBlockZ());
 											arrow4.setVelocity(angle4.normalize().multiply(2.0D));
 
 											Arrow arrow5 = (Arrow) t.getWorld()
-													.spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-															Main.getPlugin().getRandom(5, 10),
-															Main.getPlugin().getRandom(-10, 10)), Arrow.class);
+													.spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+															Main.getInstance().getRandom(5, 10),
+															Main.getInstance().getRandom(-10, 10)), Arrow.class);
 											Location aloc5 = arrow5.getLocation();
 											Vector angle5 = new Vector(loc.getX() - aloc5.getX(),
 													loc.getY() - aloc5.getBlockY(), loc.getZ() - aloc5.getBlockZ());
@@ -1443,7 +1437,7 @@ public class GuiListener implements Listener {
 
 										}
 									});
-									ArrayUtils.arrowspam.get(t).runTaskTimer(Main.getPlugin(), 0L, 10L);
+									ArrayUtils.arrowspam.get(t).runTaskTimer(Main.getInstance(), 0L, 10L);
 								}
 								e.getView().close();
 							} else {
@@ -1487,7 +1481,7 @@ public class GuiListener implements Listener {
 								} else {
 									InvSaver is;
 
-									if (Main.version.startsWith("v1_8")) {
+									if (ServerInfo.belowOrEqual(8)) {
 										is = new InvSaver(t.getName(), t.getInventory().getContents(),
 												t.getInventory().getArmorContents());
 									} else {
@@ -1510,7 +1504,7 @@ public class GuiListener implements Listener {
 											if (ArrayUtils.fakeinv.containsKey(t)) {
 												InvSaver is = ArrayUtils.fakeinv.get(t);
 												t.getInventory().setArmorContents(is.getArmor());
-												if (!Main.version.startsWith("v1_8")) {
+												if (ServerInfo.above(8)) {
 													t.getInventory().setExtraContents(is.getExtracont());
 												}
 												t.getInventory().setContents(is.getContent());
@@ -1518,7 +1512,7 @@ public class GuiListener implements Listener {
 											}
 											cancel();
 										}
-									}.runTaskLater(Main.instance, (Config.cfg.getInt("trolls.fakeinv.time") * 20L));
+									}.runTaskLater(Main.getInstance(), (Config.cfg.getInt("trolls.fakeinv.time") * 20L));
 
 								}
 							} else {
@@ -1602,7 +1596,7 @@ public class GuiListener implements Listener {
 												cancel();
 											}
 										}
-									}.runTaskTimer(Main.instance, 0L,
+									}.runTaskTimer(Main.getInstance(), 0L,
 											(Config.cfg.getInt("trolls.slipperyhands.time") * 20L));
 
 									ArrayUtils.noitem.add(t);
@@ -1642,7 +1636,7 @@ public class GuiListener implements Listener {
 											}
 										}
 									}
-								}.runTaskAsynchronously(Main.instance);
+								}.runTaskAsynchronously(Main.getInstance());
 								p.sendMessage(Data.prefix + Language.getMessage("gui.tntworld.default", t));
 								e.getView().close();
 							} else {
@@ -1704,7 +1698,7 @@ public class GuiListener implements Listener {
 										}
 									});
 
-									ArrayUtils.jumping.get(t).runTaskTimer(Main.instance, 0L, 12L);
+									ArrayUtils.jumping.get(t).runTaskTimer(Main.getInstance(), 0L, 12L);
 									e.getView().close();
 
 								}
@@ -1796,7 +1790,7 @@ public class GuiListener implements Listener {
 										}
 									});
 
-									ArrayUtils.anvils.get(t).runTaskTimer(Main.instance, 20L,
+									ArrayUtils.anvils.get(t).runTaskTimer(Main.getInstance(), 20L,
 											(Config.cfg.getInt("trolls.anvils.time") * 20L));
 
 									e.getView().close();
@@ -1899,11 +1893,11 @@ public class GuiListener implements Listener {
 															NPCUtil.createGoldenWind(p, t, front2,
 																	t.getLocation(), null);
 														}
-													}.runTaskLater(Main.instance, 60L);
+													}.runTaskLater(Main.getInstance(), 60L);
 												}
-											}.runTaskLater(Main.instance, 20L);
+											}.runTaskLater(Main.getInstance(), 20L);
 										}
-									}.runTaskLater(Main.instance, 10L);
+									}.runTaskLater(Main.getInstance(), 10L);
 
 									e.getView().close();
 								} else {
@@ -1918,7 +1912,7 @@ public class GuiListener implements Listener {
 											NPCUtil.destroyNPCsFromPlayer(t);
 										}
 
-									}.runTaskLater(Main.instance, 20L);
+									}.runTaskLater(Main.getInstance(), 20L);
 
 									e.getView().close();
 								}
@@ -1990,7 +1984,7 @@ public class GuiListener implements Listener {
 							Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
 							if (t != null) {
 								if (!ArrayUtils.vomit.contains(t)) {
-									Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() {
+									Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
 
 										List<Item> toBeDelete = new ArrayList<>();
 
@@ -2076,7 +2070,7 @@ public class GuiListener implements Listener {
 
 						e.getView().close();
 
-						taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
+						taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
 							int countdown = Config.cfg.getInt("trolls.hack.time");
 
 							@Override
@@ -2084,14 +2078,14 @@ public class GuiListener implements Listener {
 								if (countdown <= 0) {
 									for (Player all : Bukkit.getOnlinePlayers()) {
 										HS.Hack(all);
-										Titles.send(all, 1, 20, 1, "§cHACKED", "§4" + Main.getRandomID());
+										Titles.send(all, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
 										Bukkit.getScheduler().cancelTask(taskID2);
 									}
 									return;
 								}
 								for (Player all : Bukkit.getOnlinePlayers()) {
 									HS.Hack2(all);
-									Titles.send(all, 1, 20, 1, "§cHacking in " + countdown, "§4" + Main.getRandomID());
+									Titles.send(all, 1, 20, 1, "§cHacking in " + countdown, "§4" + RandomUtility.getRandomID());
 									all.damage(0.1D);
 									countdown--;
 								}
@@ -2405,7 +2399,7 @@ public class GuiListener implements Listener {
 
 										}
 									});
-									ArrayUtils.tornador.get(t).runTaskTimer(Main.getPlugin(), 0, 8);
+									ArrayUtils.tornador.get(t).runTaskTimer(Main.getInstance(), 0, 8);
 								}
 								e.getView().close();
 							} else {

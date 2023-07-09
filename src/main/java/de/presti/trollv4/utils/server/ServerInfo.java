@@ -3,105 +3,76 @@ package de.presti.trollv4.utils.server;
 import org.bukkit.Bukkit;
 
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.server.versions.ServerVersions;
+import de.presti.trollv4.utils.server.versions.ServerSoftware;
 
 public class ServerInfo {
 
-	public static ServerVersions v;
-	public static int versionId;
-	
-	public static String getMcVersion() {
-		return Bukkit.getVersion().split("MC:")[1].replaceAll(" ", "").replaceAll("\\)", "");
-	}
-	
-	public static void checkForServerSoftware() {
-		boolean found = false;
+    public static ServerSoftware serverSoftware = ServerSoftware.UNKNOWN;
+    public static int versionId;
 
-		String version = Bukkit.getVersion().split("\\(MC")[0].toLowerCase();
+    public static String getMcVersion() {
+        return Bukkit.getVersion().split("MC:")[1].replaceAll(" ", "").replaceAll("\\)", "");
+    }
 
-		for (ServerVersions sv : ServerVersions.values()) {
-			if (version.contains(sv.name().toLowerCase())) {
-				v = sv;
-				found = true;
-				break;
-			}
-		}
-		
-		if(!found) {
-			v = ServerVersions.UNKNOWN;
-		}
-		
-	}
-	
-	public static String getServerSoftware() {
-		return v.name();
-	}
-	
-	public static ServerVersions getServerSoftwareEnum() {
-		return v;
-	}
-	
-	public static String getNMSVersion() {
-		return Main.version;
-	}
-	
-	public static boolean supportOldPackets() {
-		if (versionId == 0) {
-			String[] split = getNMSVersion().split("v1_");
-			String version = split[1];
-			if (version.split("_").length > 1) {
-				version = version.split("_")[0];
-			}
+    public static void checkForServerSoftware() {
 
-			versionId = Integer.parseInt(version);
-		}
+        String version = Bukkit.getVersion().split("\\(MC")[0].toLowerCase();
 
-		return versionId < 16;
-	}
-	
-	public static boolean is18() {
-		return getNMSVersion().startsWith("v1_8");
-	}
-	
-	public static boolean is19() {
-		return getNMSVersion().startsWith("v1_9");
-	}
-	
-	public static boolean is110() {
-		return getNMSVersion().startsWith("v1_10");
-	}
+        for (ServerSoftware sv : ServerSoftware.values()) {
+            if (version.contains(sv.name().toLowerCase())) {
+                serverSoftware = sv;
+                break;
+            }
+        }
+    }
 
-	public static boolean is111() {
-		return getNMSVersion().startsWith("v1_10");
-	}
-	
-	public static boolean is112() {
-		return getNMSVersion().startsWith("v1_12");
-	}
-	
-	public static boolean is113() {
-		return getNMSVersion().startsWith("v1_13");
-	}
-	
-	public static boolean is114() {
-		return getNMSVersion().startsWith("v1_14");
-	}
-	
-	public static boolean is115() {
-		return getNMSVersion().startsWith("v1_15");
-	}
-	
-	public static boolean is116() {
-		return getNMSVersion().startsWith("v1_16");
-	}
-	
-	public static boolean is117() {
-		return getNMSVersion().startsWith("v1_17");
-	}
+    public static String getServerSoftware() {
+        return getServerSoftwareEnum().name();
+    }
 
-	public static boolean is118() { return getNMSVersion().startsWith("v1_18"); }
+    public static ServerSoftware getServerSoftwareEnum() {
+        return serverSoftware;
+    }
 
-	public static boolean is119() { return getNMSVersion().startsWith("v1_19"); }
+    public static String getNMSVersion() {
+        return Main.getInstance().version;
+    }
 
-	public static boolean is120() { return getNMSVersion().startsWith("v1_20"); }
+    public static int getVersionId() {
+        if (versionId == 0) {
+            String[] split = getNMSVersion().split("v1_");
+            String version = split[1];
+            if (version.split("_").length > 1) {
+                version = version.split("_")[0];
+            }
+
+            versionId = Integer.parseInt(version);
+        }
+
+        return versionId;
+    }
+
+    public static boolean supportOldPackets() {
+        return getVersionId() < 16;
+    }
+
+    public static boolean is(int version) {
+        return getVersionId() == version;
+    }
+
+    public static boolean belowOrEqual(int version) {
+        return getVersionId() <= version;
+    }
+
+    public static boolean aboveOrEqual(int version) {
+        return getVersionId() >= version;
+    }
+
+    public static boolean below(int version) {
+        return getVersionId() < version;
+    }
+
+    public static boolean above(int version) {
+        return getVersionId() > version;
+    }
 }

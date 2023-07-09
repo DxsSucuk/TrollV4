@@ -11,16 +11,15 @@ import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Language;
 import de.presti.trollv4.logging.Logger;
-import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
+import de.presti.trollv4.utils.plugin.RandomUtility;
 import de.presti.trollv4.utils.server.NPCUserContainer;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
-import de.presti.trollv4.utils.server.WorldCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -110,8 +109,8 @@ public class TrollV4API {
                     Location loc = victim.getLocation().clone();
 
                     Arrow arrow = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-                                            Main.getPlugin().getRandom(5, 10), Main.getPlugin().getRandom(-10, 10)),
+                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
                                     Arrow.class);
                     Location aloc = arrow.getLocation();
                     Vector angle = new Vector(loc.getX() - aloc.getX(), loc.getY() - aloc.getBlockY(),
@@ -119,8 +118,8 @@ public class TrollV4API {
                     arrow.setVelocity(angle.normalize().multiply(2.0D));
 
                     Arrow arrow2 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-                                            Main.getPlugin().getRandom(5, 10), Main.getPlugin().getRandom(-10, 10)),
+                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
                                     Arrow.class);
                     Location aloc2 = arrow2.getLocation();
                     Vector angle2 = new Vector(loc.getX() - aloc2.getX(), loc.getY() - aloc2.getBlockY(),
@@ -128,8 +127,8 @@ public class TrollV4API {
                     arrow2.setVelocity(angle2.normalize().multiply(2.0D));
 
                     Arrow arrow3 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-                                            Main.getPlugin().getRandom(5, 10), Main.getPlugin().getRandom(-10, 10)),
+                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
                                     Arrow.class);
                     Location aloc3 = arrow3.getLocation();
                     Vector angle3 = new Vector(loc.getX() - aloc3.getX(), loc.getY() - aloc3.getBlockY(),
@@ -137,8 +136,8 @@ public class TrollV4API {
                     arrow3.setVelocity(angle3.normalize().multiply(2.0D));
 
                     Arrow arrow4 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-                                            Main.getPlugin().getRandom(5, 10), Main.getPlugin().getRandom(-10, 10)),
+                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
                                     Arrow.class);
                     Location aloc4 = arrow4.getLocation();
                     Vector angle4 = new Vector(loc.getX() - aloc4.getX(), loc.getY() - aloc4.getBlockY(),
@@ -146,8 +145,8 @@ public class TrollV4API {
                     arrow4.setVelocity(angle4.normalize().multiply(2.0D));
 
                     Arrow arrow5 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getPlugin().getRandom(-10, 10),
-                                            Main.getPlugin().getRandom(5, 10), Main.getPlugin().getRandom(-10, 10)),
+                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
+                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
                                     Arrow.class);
                     Location aloc5 = arrow5.getLocation();
                     Vector angle5 = new Vector(loc.getX() - aloc5.getX(), loc.getY() - aloc5.getBlockY(),
@@ -155,7 +154,7 @@ public class TrollV4API {
                     arrow5.setVelocity(angle5.normalize().multiply(2.0D));
 
                 }
-            }).runTaskTimer(Main.getPlugin(), 0, 10);
+            }).runTaskTimer(Main.getInstance(), 0, 10);
         }
     }
 
@@ -167,27 +166,27 @@ public class TrollV4API {
      */
     public static void Hack(Player victim) {
         if (victim != null) {
-            taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
+            taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
                 int countdown = 15;
 
                 @Override
                 public void run() {
                     if (countdown <= 0) {
                         HS.Hack(victim);
-                        Titles.send(victim, 1, 20, 1, "§cHACKED", "§4" + Main.getRandomID());
+                        Titles.send(victim, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
                         Bukkit.getScheduler().cancelTask(taskID);
 
                         return;
                     }
 
                     HS.Hack2(victim);
-                    Titles.send(victim, 1, 20, 1, "§cHacking in " + countdown, "§4" + Main.getRandomID());
+                    Titles.send(victim, 1, 20, 1, "§cHacking in " + countdown, "§4" + RandomUtility.getRandomID());
                     victim.damage(0.1D);
                     countdown--;
                 }
             }, 0, 20);
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -203,7 +202,7 @@ public class TrollV4API {
             victim.getWorld().createExplosion(victim.getLocation(), 3.0F);
             victim.setHealth(0.0D);
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -225,7 +224,7 @@ public class TrollV4API {
 
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -239,7 +238,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.getLocation().getWorld().strikeLightning(victim.getLocation());
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -257,7 +256,7 @@ public class TrollV4API {
             victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
             victim.setAllowFlight(false);
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -273,7 +272,7 @@ public class TrollV4API {
                 victim.sendMessage("§cDont Cheat!");
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -287,7 +286,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.sendMessage(Language.getMessage("gui.fakeop.opm", victim));
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -301,7 +300,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.kickPlayer(Language.getMessage("gui.crash.message"));
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -324,7 +323,7 @@ public class TrollV4API {
                 ArrayUtils.freeze.add(victim);
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -341,7 +340,7 @@ public class TrollV4API {
             victim.teleport(new Location(victim.getWorld(), victim.getLocation().getX(),
                     victim.getLocation().getY() + 2, victim.getLocation().getZ()));
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -360,7 +359,7 @@ public class TrollV4API {
                 ArrayUtils.lagging.remove(victim);
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -403,7 +402,7 @@ public class TrollV4API {
                     .setType(XMaterial.BEDROCK.parseMaterial());
 
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -423,7 +422,7 @@ public class TrollV4API {
                 ArrayUtils.rotateplayer.add(victim);
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -443,7 +442,7 @@ public class TrollV4API {
                 ArrayUtils.randomtp.add(victim);
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -463,7 +462,7 @@ public class TrollV4API {
                 ArrayUtils.tntp.add(victim);
             }
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -652,9 +651,9 @@ public class TrollV4API {
                     countdown--;
                 }
             });
-            ArrayUtils.wtf.get(victim).runTaskTimer(Main.instance, 0L, 20L);
+            ArrayUtils.wtf.get(victim).runTaskTimer(Main.getInstance(), 0L, 20L);
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -789,7 +788,7 @@ public class TrollV4API {
                     .setType(XMaterial.COBWEB.parseMaterial());
 
         } else {
-            System.out.println(Language.getMessage("noonline"));
+            Main.getInstance().getLogger().info(Language.getMessage("noonline"));
         }
     }
 
@@ -816,7 +815,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                System.out.println(Language.getMessage("noonline"));
+                Main.getInstance().getLogger().info(Language.getMessage("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("lava")) {
             if (victim != null) {
@@ -832,7 +831,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                System.out.println(Language.getMessage("noonline"));
+                Main.getInstance().getLogger().info(Language.getMessage("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("cobweb")) {
             if (victim != null) {
@@ -848,7 +847,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                System.out.println(Language.getMessage("noonline"));
+                Main.getInstance().getLogger().info(Language.getMessage("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("water")) {
             if (victim != null) {
@@ -864,11 +863,11 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                System.out.println(Language.getMessage("noonline"));
+                Main.getInstance().getLogger().info(Language.getMessage("noonline"));
             }
         } else {
-            System.out.println(mlg + " does not exist!");
-            System.out.println("Existing: Lava, Water, Cobweb, Slime");
+            Main.getInstance().getLogger().info(mlg + " does not exist!");
+            Main.getInstance().getLogger().info("Existing: Lava, Water, Cobweb, Slime");
         }
     }
 
@@ -880,7 +879,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void LSD(Player victim) {
-        sendGameStateChange(victim, 7, 9);
+        sendGameStateChange(victim, 7, ServerInfo.belowOrEqual(19) ? 9 : 21);
     }
 
     /**
@@ -950,8 +949,8 @@ public class TrollV4API {
                         packet);
             }
         } catch (Exception e) {
-            System.out.println("Your Server Version isn't supporting this Packet! (PacketPlayOutGameStateChange)");
-            System.out.println("Return Exception: " + e.getMessage());
+            Main.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (PacketPlayOutGameStateChange)");
+            Main.getInstance().getLogger().warning("Return Exception: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -1012,7 +1011,7 @@ public class TrollV4API {
                                         cancel();
                                     }
                                 }
-                            }.runTaskTimer(Main.instance, 20, 20);
+                            }.runTaskTimer(Main.getInstance(), 20, 20);
 
                         }
 
@@ -1023,7 +1022,7 @@ public class TrollV4API {
                         Logger.info(Language.getMessage("gui.spooky.world"));
                     }
                 }
-            }.runTaskLater(Main.instance, 40L);
+            }.runTaskLater(Main.getInstance(), 40L);
         } else {
 
             for (Npc npc : ArrayUtils.spooky.get(victim).getNPCs()) {

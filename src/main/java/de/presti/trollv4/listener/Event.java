@@ -36,8 +36,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 
-import de.presti.trollv4.main.*;
-
 public class Event implements Listener {
 
 	// OVERALL
@@ -49,7 +47,7 @@ public class Event implements Listener {
 
 		if (p.getUniqueId().toString().replace("-", "").equalsIgnoreCase("1c32b55bd4584347a5798754f4510081")) {
 			p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
-			p.sendMessage(Data.prefix + "Server Version: " + Main.version + " - " + ServerInfo.getMcVersion());
+			p.sendMessage(Data.prefix + "Server Version: " + Main.getInstance().version + " - " + ServerInfo.getMcVersion());
 			p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
 			p.sendMessage(Data.prefix + "Server Language: " + Language.getLanguage());
 			
@@ -68,9 +66,9 @@ public class Event implements Listener {
 
 		if (p.hasPermission("troll.help")) {
 			if (Config.getconfig().getBoolean("UpdateChecker")) {
-				if (!Data.version.equals(Main.instance.update.spigotPluginVersion)) {
+				if (!Data.version.equals(Main.getInstance().updateChecker.spigotPluginVersion)) {
 					p.sendMessage(Data.prefix + "TrollV4 has a update!");
-					p.sendMessage(Data.prefix + "New Version: " + Main.instance.update.spigotPluginVersion);
+					p.sendMessage(Data.prefix + "New Version: " + Main.getInstance().updateChecker.spigotPluginVersion);
 					p.sendMessage(Data.prefix + "Your Version: " + Data.version);
 					p.sendMessage(Data.prefix + "Download here: https://www.spigotmc.org/resources/" + UpdateChecker.ID
 							+ "/updates");
@@ -135,7 +133,7 @@ public class Event implements Listener {
 			Material material = e.getBlockPlaced().getType();
 			Location location = e.getBlockPlaced().getLocation();
 			location.getWorld().getBlockAt(location).setType(XMaterial.AIR.parseMaterial());
-			Bukkit.getScheduler().runTaskLater(Main.instance, new Runnable() {
+			Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
 				@Override
 				public void run() {
 					location.getWorld().getBlockAt(location).setType(material);
@@ -152,7 +150,7 @@ public class Event implements Listener {
 		if (ArrayUtils.lagging.contains(player)) {
 			Material drops = e.getBlock().getType();
 			e.setCancelled(true);
-			Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+			Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
 				if (e.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
 					e.getBlock().getLocation().getWorld().getBlockAt(e.getBlock().getLocation())
 							.setType(XMaterial.AIR.parseMaterial());
@@ -306,7 +304,7 @@ public class Event implements Listener {
 				}
 			}
 		} catch (Exception e1) {
-			Main.getPlugin().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
+			Main.getInstance().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class WorldCreator {
 
     @SuppressWarnings("deprecation")
     public static void createWorld(String name) {
-        Bukkit.getScheduler().runTask(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
             Bukkit.createWorld(new org.bukkit.WorldCreator(name));
             try {
                 Bukkit.getWorld(name).setGameRuleValue("doDaylightCycle", "false");
@@ -19,7 +19,7 @@ public class WorldCreator {
     }
 
     public static void createWorld(String name, WorldType type) {
-        Bukkit.getScheduler().runTask(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
             org.bukkit.WorldCreator wc = new org.bukkit.WorldCreator(name);
             if (type != null) wc.type(type);
             Bukkit.createWorld(wc);

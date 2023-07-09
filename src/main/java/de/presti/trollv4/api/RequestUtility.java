@@ -24,10 +24,10 @@ public class RequestUtility {
             if (responseCode == HttpsURLConnection.HTTP_OK) { // success
                 return con.getInputStream();
             } else {
-                Main.getPlugin().getLogger().warning("GET request not worked");
+                Main.getInstance().getLogger().warning("GET request not worked");
             }
         } catch (Exception exception) {
-            Main.getPlugin().getLogger().warning("Error while sending GET request to " + url);
+            Main.getInstance().getLogger().warning("Error while sending GET request to " + url);
         }
 
         return null;
@@ -38,7 +38,7 @@ public class RequestUtility {
             if (inputStream == null) return new JsonObject();
             return new JsonParser().parse(new InputStreamReader(inputStream));
         } catch (Exception exception) {
-            Main.getPlugin().getLogger().warning("Error while getting JSON from " + url);
+            Main.getInstance().getLogger().warning("Error while getting JSON from " + url);
         }
 
         return new JsonObject();
@@ -51,7 +51,7 @@ public class RequestUtility {
 
             return IOUtils.toByteArray(inputStream);
         } catch (Exception exception) {
-            Main.getPlugin().getLogger().warning("Error while getting JSON from " + url);
+            Main.getInstance().getLogger().warning("Error while getting JSON from " + url);
         }
 
         return new byte[0];

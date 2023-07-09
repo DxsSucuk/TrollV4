@@ -62,12 +62,12 @@ public class Items {
 		return Config.cfg.getBoolean("Custom-Item-Name") ? "custome" : "default";
 	}
 
-	public Items() {
+	public static void loadAll() {
 		loadDefault();
 		loadCustome();
 	}
-
-	public static void loadDefault() {
+	
+	private static void loadDefault() {
 		addItem("default", "gui.trolls.freeze", "§bUn/Freeze");
 		addItem("default", "gui.trolls.fakeop", "§7FakeOP");
 		addItem("default", "gui.trolls.crash", "§cCrash");
@@ -133,7 +133,7 @@ public class Items {
 		addItem("default", "gui.control.stopcontrol", "§cStopControl");
 	}
 
-	public static void loadCustome() {
+	private static void loadCustome() {
 		if (Config.getFile3().exists()) {
 			for (String paths : path) {
 				if (Config.getconfig3().get(paths) != null) {

@@ -5,8 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
-import de.presti.trollv4.cmd.TestCommand;
-import de.presti.trollv4.cmd.Haupt;
+ import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.cmd.TabCompleter;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
@@ -37,11 +36,12 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Main extends JavaPlugin {
-    public static Main instance;
-    public UpdateChecker update;
-    public static Controls control;
-    public static String version;
-    public static Config config;
+
+    private static Main instance;
+    public UpdateChecker updateChecker;
+    public Controls control;
+    public String version;
+    public Config config;
 
     public void onEnable() {
         instance = this;
@@ -80,8 +80,8 @@ public class Main extends JavaPlugin {
             }
         }
 
-        new Language();
-        new Items();
+        Language.loadAll();
+        Items.loadAll();
         config = new Config();
         config.init();
 
@@ -94,13 +94,13 @@ public class Main extends JavaPlugin {
 
         Language.clearAll();
         Items.clearAll();
-        new Language();
-        new Items();
+        Language.loadAll();
+        Items.loadAll();
         config.updateConfig();
 
         if (Config.getconfig().getBoolean("UpdateChecker")) {
-            update = new UpdateChecker(this);
-            update.checkForUpdate();
+            updateChecker = new UpdateChecker(this);
+            updateChecker.checkForUpdate();
         }
 
         startUp();
@@ -114,14 +114,14 @@ public class Main extends JavaPlugin {
     public static void reloadConfigurations() {
         Language.clearAll();
         Items.clearAll();
-        new Language();
-        new Items();
-        config = new Config();
-        config.init();
+        Language.loadAll();
+        Items.loadAll();
+        getInstance().config = new Config();
+        getInstance().config.init();
         Language.clearAll();
         Items.clearAll();
-        new Language();
-        new Items();
+        Language.loadAll();
+        Items.loadAll();
     }
 
     public static void registerCommands() {
@@ -145,7 +145,7 @@ public class Main extends JavaPlugin {
         Logger.info("Otherwise have fun!");
         Logger.info("------------------------------------");
         Logger.info("Plugin Version: " + Data.version);
-        Logger.info("Server Version: " + version + " - " + ServerInfo.getMcVersion());
+        Logger.info("Server Version: " + getInstance().version + " - " + ServerInfo.getMcVersion());
         Logger.info("Server Software: " + ServerInfo.getServerSoftware());
     }
 
@@ -196,33 +196,18 @@ public class Main extends JavaPlugin {
         return new Random().nextInt(upper - lower + 1) + lower;
     }
 
-    public static String getRandomID() {
-        StringBuilder str = new StringBuilder();
-        int lastrandom = 0;
-        for (int i = 0; i < 9; i++) {
-            Random r = new Random();
-            int rand = r.nextInt(9);
-            while (rand == lastrandom) {
-                rand = r.nextInt(9);
-            }
-            lastrandom = rand;
-            str.append(rand);
-        }
-        return str.toString();
-    }
-
-    public static Main getPlugin() {
+    public static Main getInstance() {
         return instance;
     }
 
     public static void startControlling(Player v, Player c) {
-        if (control == null)
-            control = new Controls();
-        control.startControlling(v, c);
+        if (getInstance().control == null)
+            getInstance().control = new Controls();
+        getInstance().control.startControlling(v, c);
     }
 
     public static void stopControlling(Player v, Player c) {
-        control.stopControlling(v, c);
+        getInstance().control.stopControlling(v, c);
     }
 
     public void downloadAll() {
@@ -239,7 +224,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
             Logger.info("Downloading ProtocolLib!");
-            if (ServerInfo.is120()) {
+            if (ServerInfo.above(20)) {
                 download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
             } else {
                 download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
@@ -253,7 +238,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
             Logger.info("Downloading LibsDisguises!");
-            if (ServerInfo.is18()) {
+            if (ServerInfo.is(8)) {
                 // TODO:: why dont they have this on their fucking Github WHY!
                 download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
             } else {

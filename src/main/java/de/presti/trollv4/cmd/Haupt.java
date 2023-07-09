@@ -30,7 +30,7 @@ public class Haupt implements CommandExecutor {
     @SuppressWarnings("deprecation")
     public void rop(final Player p) {
         if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new BukkitRunnable() {
                 public void run() {
                     if (ArrayUtils.rotateplayer.contains(p)) {
                         p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
@@ -48,14 +48,14 @@ public class Haupt implements CommandExecutor {
                         cancel();
                     }
                 }
-            }.runTaskTimer(Main.instance, 0L, 2L);
+            }.runTaskTimer(Main.getInstance(), 0L, 2L);
         }
     }
 
     @SuppressWarnings("deprecation")
     public void rtp(final Player p) {
         if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new BukkitRunnable() {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new BukkitRunnable() {
                 public void run() {
                     if (ArrayUtils.randomtp.contains(p)) {
                         p.teleport(LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
@@ -73,14 +73,14 @@ public class Haupt implements CommandExecutor {
                         cancel();
                     }
                 }
-            }.runTaskTimer(Main.instance, 0L, 5L);
+            }.runTaskTimer(Main.getInstance(), 0L, 5L);
         }
     }
 
     @SuppressWarnings("deprecation")
     public void spawnTnTAtPlayer(final Player p) {
         if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().runTaskTimer(Main.instance, new BukkitRunnable() {
+            Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new BukkitRunnable() {
                 public void run() {
                     if (ArrayUtils.tntp.contains(p)) {
                         TNTPrimed tnt = p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
@@ -100,7 +100,7 @@ public class Haupt implements CommandExecutor {
                         cancel();
                     }
                 }
-            }.runTaskTimer(Main.instance, 0L, (long) (Config.cfg.getInt("trolls.tnttrace.spawndelay")));
+            }.runTaskTimer(Main.getInstance(), 0L, (long) (Config.cfg.getInt("trolls.tnttrace.spawndelay")));
         }
     }
 

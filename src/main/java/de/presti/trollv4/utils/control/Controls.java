@@ -16,17 +16,17 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 public class Controls {
 
 	public Controls() {
-		Main.control = this;
+		Main.getInstance().control = this;
 	}
 
 	public void stopControlling(Player v, Player c) {
 		// Call ONLY when both players are online
 		c.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
 
-		v.removeMetadata("C_P", Main.getPlugin());
+		v.removeMetadata("C_P", Main.getInstance());
 		v.setGameMode(GameMode.SURVIVAL);
 
-		c.removeMetadata("C_H", Main.getPlugin());
+		c.removeMetadata("C_H", Main.getInstance());
 		DisguiseAPI.undisguiseToAll(c);
 
 		// Give victim their "new" inventory
@@ -44,8 +44,8 @@ public class Controls {
 	}
 
 	public void startControlling(Player v, Player c) {
-		v.setMetadata("C_P", new FixedMetadataValue(Main.getPlugin(), c.getName()));
-		c.setMetadata("C_H", new FixedMetadataValue(Main.getPlugin(), v.getName()));
+		v.setMetadata("C_P", new FixedMetadataValue(Main.getInstance(), c.getName()));
+		c.setMetadata("C_H", new FixedMetadataValue(Main.getInstance(), v.getName()));
 
 		ArrayUtils.inventory.put(c.getName(), c.getInventory().getContents());
 		ArrayUtils.armor.put(c.getName(), c.getInventory().getArmorContents());
@@ -64,7 +64,7 @@ public class Controls {
 
 		// Start a handling task
 		CheckVictim check = new CheckVictim(v, c);
-		check.runTaskTimer(Main.getPlugin(), 0L, 20L);
+		check.runTaskTimer(Main.getInstance(), 0L, 20L);
 		c.sendMessage(Data.prefix + Language.getMessage("gui.startcontrol.start", v));
 	}
 

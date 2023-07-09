@@ -312,9 +312,9 @@ public class Changelog {
                         }
 
                     }
-                }.runTask(Main.instance);
+                }.runTask(Main.getInstance());
             }
-        }.runTaskAsynchronously(Main.instance);
+        }.runTaskAsynchronously(Main.getInstance());
 
         inv.setItem(17, blue);
         inv.setItem(35, darkblue);

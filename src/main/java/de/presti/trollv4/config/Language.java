@@ -9,7 +9,10 @@ import de.presti.trollv4.main.Data;
 
 public class Language {
 
-	public Language() {
+	public static HashMap<String, String> messages = new HashMap<>();
+	public static ArrayList<String> lang = new ArrayList<>();
+
+	public static void loadAll() {
 		loadGerman();
 		loadEnglish();
 		loadRussian();
@@ -17,9 +20,6 @@ public class Language {
 		loadSpanish();
 		loadCustom();
 	}
-
-	public static HashMap<String, String> messages = new HashMap<>();
-	public static ArrayList<String> lang = new ArrayList<>();
 
 	public static String getMessage(String path) {
 		String m = "Couldnt find " + path + "! (Regenerate message.yml)";
@@ -83,7 +83,7 @@ public class Language {
 		return Config.getconfig().getString("Language").toLowerCase();
 	}
 
-	public void loadGerman() {
+	private static void loadGerman() {
 		addMessage("de", "nopermission", "Du hast keine Rechte für diesen Command!");
 		addMessage("de", "noonline", "Dieser Spieler ist nicht online!");
 		addMessage("de", "command.troll.default", "Troll Menu wurde geoeffnet!");
@@ -196,7 +196,7 @@ public class Language {
 		addMessage("de", "control.distance", "&cZuweit entfernt");
 	}
 
-	public void loadEnglish() {
+	private static void loadEnglish() {
 		addMessage("us", "nopermission", "You do not have the permission for this command!");
 		addMessage("us", "noonline", "This Player is not online!");
 		addMessage("us", "command.troll.default", "Troll Menu has been opened!");
@@ -307,7 +307,7 @@ public class Language {
 		addMessage("us", "control.distance", "&4TOO FAR AWAY");
 	}
 
-	public void loadRussian() {
+	private static void loadRussian() {
 		addMessage("ru", "nopermission", "У вас нет прав на эту команду!");
 		addMessage("ru", "noonline", "Этот игрок не в сети!");
 		addMessage("ru", "command.troll.default", "Открылось меню троллей!");
@@ -418,7 +418,7 @@ public class Language {
 		addMessage("ru", "control.distance", "&cСлишком далеко!");
 	}
 	
-	public void loadIndo() {
+	private static void loadIndo() {
 		addMessage("indo", "nopermission", "Anda tidak memiliki izin untuk perintah ini!");
 		addMessage("indo", "noonline", "Pemain ini tidak online!");
 		addMessage("indo", "command.troll.default", "Menu Troll telah dibuka!");
@@ -529,7 +529,7 @@ public class Language {
 		addMessage("indo", "control.distance", "&4TERLALU JAUH");
 	}
 	
-	public void loadSpanish() {
+	private static void loadSpanish() {
 		addMessage("es", "nopermission", "¡No tienes permiso para este comando!");
 		addMessage("es", "noonline", "¡Este jugador no está conectado!");
 		addMessage("es", "command.troll.default", "¡El Menú Troll ha sido abierto!");
@@ -640,7 +640,7 @@ public class Language {
 		addMessage("es", "control.distance", "&4DEMASIADO LEJOS");
 	}
 
-	public void loadCustom() {
+	private static void loadCustom() {
 		if (Config.getFile2().exists()) {
 			for (String s : lang) {
 				if (Config.getconfig2().get(s) != null) {

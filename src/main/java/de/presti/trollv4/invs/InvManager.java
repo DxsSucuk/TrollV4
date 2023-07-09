@@ -167,10 +167,10 @@ public class InvManager {
                                         inv.setItem(0, items.get(0));
 
                                     }
-                                }.runTask(Main.instance);
+                                }.runTask(Main.getInstance());
 
                             }
-                        }.runTaskAsynchronously(Main.instance);
+                        }.runTaskAsynchronously(Main.getInstance());
 
                         setPageOneTrolls(inv);
 
@@ -320,7 +320,7 @@ public class InvManager {
                     countdown--;
                 }
             });
-            ArrayUtils.anim.get(p).runTaskTimer(Main.instance, 0L, 20L);
+            ArrayUtils.anim.get(p).runTaskTimer(Main.getInstance(), 0L, 20L);
 
         } else {
             new BukkitRunnable() {
@@ -338,10 +338,10 @@ public class InvManager {
                             inv.setItem(0, items.get(0));
 
                         }
-                    }.runTask(Main.instance);
+                    }.runTask(Main.getInstance());
 
                 }
-            }.runTaskAsynchronously(Main.instance);
+            }.runTaskAsynchronously(Main.getInstance());
 
             setPageOneTrolls(inv);
 
@@ -412,10 +412,10 @@ public class InvManager {
                         inv.setItem(0, items.get(0));
 
                     }
-                }.runTask(Main.instance);
+                }.runTask(Main.getInstance());
 
             }
-        }.runTaskAsynchronously(Main.instance);
+        }.runTaskAsynchronously(Main.getInstance());
 
         inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
         inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "§cCant be stopped!"));
@@ -483,9 +483,9 @@ public class InvManager {
                             }
 
                         }
-                    }.runTask(Main.instance);
+                    }.runTask(Main.getInstance());
                 }
-            }.runTaskAsynchronously(Main.instance);
+            }.runTaskAsynchronously(Main.getInstance());
         } else {
 
             int i = 0;

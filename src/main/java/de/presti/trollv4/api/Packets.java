@@ -1,5 +1,7 @@
 package de.presti.trollv4.api;
 
+import de.presti.trollv4.main.Main;
+
 public class Packets {
 
 	public static Class<?> getNMSClass(String name) {
@@ -7,7 +9,7 @@ public class Packets {
 		try {
 			return Class.forName("net.minecraft.server." + version + "." + name);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Your Server Version isn't supporting this Packet! (" + name + ")");
+			Main.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (" + name + ")");
 		}
 		return null;
 	}

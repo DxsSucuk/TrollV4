@@ -28,7 +28,7 @@ public class UpdateChecker {
     public UpdateChecker(final JavaPlugin javaPlugin) {
         this.javaPlugin = javaPlugin;
         this.localPluginVersion = Data.version;
-        Main.instance.update = this;
+        Main.getInstance().updateChecker = this;
         ERR_MSG = "Update checker failed!";
     }
 
