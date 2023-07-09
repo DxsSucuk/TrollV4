@@ -880,7 +880,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void LSD(Player victim) {
-        Packets.sendPacket(victim, 7, ServerInfo.supportOldPackets() ? 15 : 21);
+        sendGameStateChange(victim, 7, 9);
     }
 
     /**
@@ -951,7 +951,7 @@ public class TrollV4API {
                         packet);
             }
         } catch (Exception e) {
-            System.out.println("Your Server Version isn't Supporting this Packet! (PacketPlayOutGameStateChange)");
+            System.out.println("Your Server Version isn't supporting this Packet! (PacketPlayOutGameStateChange)");
             System.out.println("Return Exception: " + e.getMessage());
             e.printStackTrace();
         }
