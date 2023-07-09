@@ -238,12 +238,7 @@ public class Main extends JavaPlugin {
         }
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
-            Logger.info("Downloading ProtocolLib!");
-            if (ServerInfo.is119()) {
-                download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
-            } else {
-                download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
-            }
+            download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
         }
 
         if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
