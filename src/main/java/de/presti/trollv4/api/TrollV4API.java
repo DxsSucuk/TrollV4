@@ -934,7 +934,6 @@ public class TrollV4API {
         try {
             if (!ServerInfo.supportOldPackets()) {
                 final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
-                System.out.println(PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].getName());
                 packet.getModifier().write(0,
                         PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
                 packet.getFloat().write(0, state);
