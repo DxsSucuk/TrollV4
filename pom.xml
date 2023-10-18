@@ -66,7 +66,7 @@
         <!-- Find a way to make this one provided because the dependency as a size of 4MB
             Or at least find a way to make the file itself smaller.-->
         <dependency>
-            <groupId>com.github.juliarn.NPC-Lib</groupId>
+            <groupId>com.github.juliarn.npc-lib</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
             <version>3.0.0-beta5</version>
             <scope>compile</scope>
