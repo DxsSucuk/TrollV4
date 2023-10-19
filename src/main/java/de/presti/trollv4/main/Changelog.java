@@ -171,7 +171,7 @@ public class Changelog {
                 ));
 
         inv.setItem(42,
-                SetItems.buildItem("§2Version » §c4.5.15 §a", XMaterial.PAPER,
+                SetItems.buildItem("§2Version » §c4.5.15", XMaterial.PAPER,
                         new String[]{
                                 Data.changelogAdd + "1.20 Support.",
                                 Data.changelogChange + "A lot of code cleanup and dependency fixing."
