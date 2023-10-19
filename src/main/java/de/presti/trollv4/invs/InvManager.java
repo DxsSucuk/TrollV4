@@ -157,7 +157,7 @@ public class InvManager {
                             @Override
                             public void run() {
                                 items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                                        "§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+                                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
                                 new BukkitRunnable() {
 
@@ -328,7 +328,7 @@ public class InvManager {
                 @Override
                 public void run() {
                     items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                            "§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+                            "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
                     new BukkitRunnable() {
 
@@ -380,7 +380,7 @@ public class InvManager {
         inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial(), "§cLag out the Game of the Player!"));
         inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
         inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
-        inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine")));
+        inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine"), true));
         inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial(), "§cDestroys the Map!"));
         inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
         inv.setItem(42,
@@ -402,7 +402,7 @@ public class InvManager {
             @Override
             public void run() {
                 items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                        "§2Youre Trolling §c" + ArrayUtils.trolling.get(p.getName())));
+                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
                 new BukkitRunnable() {
 
@@ -465,7 +465,7 @@ public class InvManager {
                     for (Player all : Bukkit.getOnlinePlayers()) {
                         if (i != 45) {
                             try {
-                                items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+                                items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -492,7 +492,7 @@ public class InvManager {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (i != 45) {
                     try {
-                        cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName()));
+                        cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
 
                     } catch (Exception e) {
                         e.printStackTrace();

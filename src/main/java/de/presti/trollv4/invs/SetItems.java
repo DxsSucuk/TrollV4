@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import com.cryptomorin.xseries.SkullUtils;
@@ -14,36 +15,40 @@ import de.presti.trollv4.api.PlayerInfo;
 
 public class SetItems {
 
-	public static ItemStack buildSkull(String p, String name) {
+	public static ItemStack buildSkull(String p, String name, boolean forceOnlineLookup) {
 		ArrayList<String> lore = new ArrayList<String>();
 
-		String uuid = "";
+		UUID uuid = null;
 
-		try {
-			uuid = PlayerInfo.getUUID(p);
-		} catch (Exception e) {
-			uuid = "cracked";
+		Player player = Bukkit.getPlayer(p);
+
+		if (forceOnlineLookup) {
+			try {
+				String infoUUID = PlayerInfo.getUUID(p);
+				if (infoUUID != null)
+					uuid = UUID.fromString(infoUUID);
+			} catch (Exception ignore) {}
+		} else {
+			if (player != null) {
+				uuid = player.getUniqueId();
+			}
 		}
 
-		if (uuid == null || uuid.equalsIgnoreCase("") || uuid.isEmpty()) {
-			uuid = "cracked";
-		}
+		ItemStack skull = uuid == null ? new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial())
+				: SkullUtils.getSkull(uuid);
 
-		ItemStack skull = (uuid.equalsIgnoreCase("cracked") ? new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial())
-				: SkullUtils.getSkull(UUID.fromString(uuid)));
 		ItemMeta skullm = skull.getItemMeta();
 
-		if (Bukkit.getPlayer(p) != null) {
-			if (Bukkit.getPlayer(p).isOp()) {
+		if (player != null) {
+			if (player.isOp()) {
 				lore.add("§cThis User has OP!");
 			}
 
-			if (Bukkit.getPlayer(p).hasPermission("troll.player")) {
+			if (player.hasPermission("troll.player")) {
 				lore.add("§cThis User can acces the Troll Gui!");
 			}
 
 			skullm.setLore(lore);
-
 		}
 
 		skullm.setDisplayName(name);

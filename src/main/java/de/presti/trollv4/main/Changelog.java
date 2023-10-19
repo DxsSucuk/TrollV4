@@ -137,10 +137,52 @@ public class Changelog {
                                 Data.changelogRemove + "Fixed a bug related to the Selection GUI."
                         }
                 ));
-        inv.setItem(35,
+
+        inv.setItem(37,
                 SetItems.buildItem("§2Version » §c4.5.10", XMaterial.PAPER,
                         new String[]{
                                 Data.changelogAdd + "Adding a config value for the spooky world generation."
+                        }
+                ));
+
+        inv.setItem(38,
+                SetItems.buildItem("§2Version » §c4.5.11", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogChange + "NPC based trolls should work on every version now."
+                        }
+                ));
+
+        inv.setItem(40,
+                SetItems.buildItem("§2Version » §c4.5.12 §a+ §c4.5.13", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added a warning if the whitelist is on while having community-surprise active.",
+                                Data.changelogAdd + "Option for custom spookyworld name.",
+                                Data.changelogChange + "Spooky world will now ONLY be created on start."
+                        }
+                ));
+
+        inv.setItem(41,
+                SetItems.buildItem("§2Version » §c4.5.14", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added confirmation menu for desturctiv trolls.",
+                                Data.changelogAdd + "Added vomit troll.",
+                                Data.changelogAdd + "Added infinite loading screen troll."
+                        }
+                ));
+
+        inv.setItem(42,
+                SetItems.buildItem("§2Version » §c4.5.15 §a", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "1.20 Support.",
+                                Data.changelogChange + "A lot of code cleanup and dependency fixing."
+                        }
+                ));
+
+        inv.setItem(43,
+                SetItems.buildItem("§2Version » §c4.5.16", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogChange + "Bug fixing for cracked servers.",
+                                Data.changelogChange + "Reducing console spamming."
                         }
                 ));
 
