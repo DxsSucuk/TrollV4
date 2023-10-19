@@ -380,7 +380,7 @@ public class InvManager {
         inv.setItem(34, SetItems.buildItem(Items.getItem("gui.trolls.lsd"), XMaterial.RED_MUSHROOM.parseMaterial(), "§cLag out the Game of the Player!"));
         inv.setItem(37, SetItems.buildItem(Items.getItem("gui.trolls.guardian"), XMaterial.BLAZE_ROD.parseMaterial()));
         inv.setItem(38, SetItems.buildItem(Items.getItem("gui.trolls.arrowspam"), XMaterial.BOW.parseMaterial()));
-        inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine"), true));
+        inv.setItem(39, SetItems.buildSkull("Herobrine", Items.getItem("gui.trolls.herobrine"), false));
         inv.setItem(40, SetItems.buildItem(Items.getItem("gui.trolls.tornado"), XMaterial.WHITE_WOOL.parseMaterial(), "§cDestroys the Map!"));
         inv.setItem(41, SetItems.buildItem(Items.getItem("gui.trolls.fakeinv"), XMaterial.CHEST.parseMaterial()));
         inv.setItem(42,
