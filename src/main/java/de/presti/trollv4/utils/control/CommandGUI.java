@@ -3,6 +3,7 @@ package de.presti.trollv4.utils.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -100,7 +101,7 @@ public class CommandGUI implements Listener {
 				}
 			}
 		} catch (Exception e2) {
-
+			Sentry.captureException(e2);
 		}
 	}
 

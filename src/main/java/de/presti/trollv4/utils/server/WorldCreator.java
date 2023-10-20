@@ -13,7 +13,7 @@ public class WorldCreator {
             try {
                 Bukkit.getWorld(name).setGameRuleValue("doDaylightCycle", "false");
                 Bukkit.getWorld(name).setGameRuleValue("doMobSpawning", "false");
-            } catch (Exception ex) {
+            } catch (Exception ignore) {
             }
         });
     }

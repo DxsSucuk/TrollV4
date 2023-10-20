@@ -21,6 +21,7 @@ import de.presti.trollv4.utils.plugin.PluginUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
 import de.presti.trollv4.utils.server.ServerInfo;
 import de.presti.trollv4.utils.server.WorldCreator;
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,6 +46,11 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
+
+        Sentry.init(options -> {
+            options.setDsn("https://b93efd304ec3103daa3e0585983400b8@o4503927742529536.ingest.sentry.io/4506083039969280");
+        });
+
         version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         ArrayUtils.armor = new HashMap<>();
         ArrayUtils.inventory = new HashMap<>();
@@ -89,6 +95,7 @@ public class Main extends JavaPlugin {
             Metrics metrics = new Metrics(this, 4690);
             metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
         } catch (Exception e) {
+            Sentry.captureException(e);
             Logger.error("Error Main Metrics Custom Chart: " + e.getMessage());
         }
 

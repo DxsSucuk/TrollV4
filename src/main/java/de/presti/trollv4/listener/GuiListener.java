@@ -24,6 +24,7 @@ import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.RandomUtility;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
@@ -173,6 +174,7 @@ public class GuiListener implements Listener {
 				}
 			}
 		} catch (Exception e1) {
+			Sentry.captureException(e1);
 			e1.printStackTrace();
 		}
 	}
@@ -2414,6 +2416,7 @@ public class GuiListener implements Listener {
 				}
 			}
 		} catch (Exception e2) {
+			Sentry.captureException(e2);
 			e2.printStackTrace();
 		}
 	}

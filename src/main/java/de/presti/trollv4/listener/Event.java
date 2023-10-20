@@ -11,6 +11,7 @@ import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
 import de.presti.trollv4.utils.server.ServerInfo;
+import io.sentry.Sentry;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
@@ -327,6 +328,7 @@ public class Event implements Listener {
                 }
             }
         } catch (Exception e1) {
+            Sentry.captureException(e1);
             Main.getInstance().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
         }
     }

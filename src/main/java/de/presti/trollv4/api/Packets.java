@@ -1,6 +1,7 @@
 package de.presti.trollv4.api;
 
 import de.presti.trollv4.main.Main;
+import io.sentry.Sentry;
 
 public class Packets {
 
@@ -9,6 +10,7 @@ public class Packets {
 		try {
 			return Class.forName("net.minecraft.server." + version + "." + name);
 		} catch (ClassNotFoundException e) {
+			Sentry.captureException(e);
 			Main.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (" + name + ")");
 		}
 		return null;

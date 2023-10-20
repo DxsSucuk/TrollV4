@@ -1,6 +1,8 @@
 package de.presti.trollv4.api;
 
 import com.google.gson.JsonObject;
+import de.presti.trollv4.main.Main;
+import io.sentry.Sentry;
 
 public class PlayerInfo {
 
@@ -20,7 +22,7 @@ public class PlayerInfo {
 
                 return guuid;
             } catch (Exception e) {
-                e.printStackTrace();
+                Sentry.captureException(e);
                 return null;
             }
         } else {
@@ -41,7 +43,7 @@ public class PlayerInfo {
                 String guuid = player.get("username").getAsString();
                 return guuid;
             } catch (Exception e) {
-                e.printStackTrace();
+                Sentry.captureException(e);
                 return null;
             }
         } else {
@@ -67,7 +69,7 @@ public class PlayerInfo {
 
                 return guuid;
             } catch (Exception e) {
-                e.printStackTrace();
+                Sentry.captureException(e);
                 return null;
             }
         } else {

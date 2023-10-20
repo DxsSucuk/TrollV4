@@ -20,6 +20,7 @@ import de.presti.trollv4.utils.plugin.RandomUtility;
 import de.presti.trollv4.utils.server.NPCUserContainer;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -949,9 +950,9 @@ public class TrollV4API {
                         packet);
             }
         } catch (Exception e) {
+            Sentry.captureException(e);
             Main.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (PacketPlayOutGameStateChange)");
             Main.getInstance().getLogger().warning("Return Exception: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

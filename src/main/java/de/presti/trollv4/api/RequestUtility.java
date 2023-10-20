@@ -3,6 +3,7 @@ package de.presti.trollv4.api;
 import com.google.gson.*;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
+import io.sentry.Sentry;
 import org.apache.commons.io.IOUtils;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -25,6 +26,7 @@ public class RequestUtility {
                 return con.getInputStream();
             }
         } catch (Exception exception) {
+            Sentry.captureException(exception);
             Main.getInstance().getLogger().warning("Error while sending GET request to " + url + "\nException: " + exception.getMessage());
         }
 
@@ -36,6 +38,7 @@ public class RequestUtility {
             if (inputStream == null) return new JsonObject();
             return new JsonParser().parse(new InputStreamReader(inputStream));
         } catch (Exception exception) {
+            Sentry.captureException(exception);
             Main.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
         }
 
@@ -49,6 +52,7 @@ public class RequestUtility {
 
             return IOUtils.toByteArray(inputStream);
         } catch (Exception exception) {
+            Sentry.captureException(exception);
             Main.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
         }
 

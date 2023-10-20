@@ -8,6 +8,7 @@ import de.presti.trollv4.config.Items;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.server.ServerInfo;
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -467,6 +468,7 @@ public class InvManager {
                             try {
                                 items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
                             } catch (Exception e) {
+                                Sentry.captureException(e);
                                 e.printStackTrace();
                             }
                             i++;
@@ -495,6 +497,7 @@ public class InvManager {
                         cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
 
                     } catch (Exception e) {
+                        Sentry.captureException(e);
                         e.printStackTrace();
                     }
                     i++;

@@ -15,6 +15,7 @@ import com.github.juliarn.npclib.common.npc.CommonNpcBuilder;
 import com.github.juliarn.npclib.common.settings.CommonNpcSettingsBuilder;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.logging.Logger;
+import io.sentry.Sentry;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -93,7 +94,8 @@ public class NPCUtil {
 
             return npc;
         } catch (Exception exception) {
-            exception.printStackTrace();
+            Sentry.captureException(exception);
+            Main.getInstance().getLogger().warning("Received an error in NPCUtil: " + exception.getMessage());
         }
 
         return null;

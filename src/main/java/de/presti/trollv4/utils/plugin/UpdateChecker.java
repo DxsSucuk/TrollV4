@@ -1,6 +1,7 @@
 package de.presti.trollv4.utils.plugin;
 
 import de.presti.trollv4.logging.Logger;
+import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -46,6 +47,7 @@ public class UpdateChecker {
                                 .readLine();
                     } catch (final IOException e) {
                         Logger.error(ERR_MSG);
+                        Sentry.captureException(e);
                         e.printStackTrace();
                         cancel();
                         return;
