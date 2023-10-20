@@ -164,22 +164,17 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>io.sentry</groupId>
                 <artifactId>sentry-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <!-- for showing output of sentry-cli -->
                     <debugSentryCli>true</debugSentryCli>
 
                     <org>ree6</org>
 
                     <project>trollv4</project>
 
-                    <!-- in case you're self hosting, provide the URL here -->
-                    <!--<url>http://localhost:8000/</url>-->
-
-                    <!-- provide your auth token via SENTRY_AUTH_TOKEN environment variable -->
                     <authToken>${env.SENTRY_AUTH_TOKEN}</authToken>
                 </configuration>
                 <executions>
@@ -190,7 +185,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
         <resources>
             <resource>
