@@ -229,7 +229,7 @@ public class Main extends JavaPlugin {
             download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/giorno.nbs", "plugins/TrollV4/giorno.nbs");
         }
 
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null && Config.getconfig().getBoolean("downloader.protocollib")) {
             Logger.info("Downloading ProtocolLib!");
             if (ServerInfo.aboveOrEqual(20)) {
                 download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
@@ -238,12 +238,12 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getconfig().getBoolean("downloader.noteblockapi")) {
             Logger.info("Downloading NoteBlockAPI!");
             download("https://github.com/DxsSucuk/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
         }
 
-        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null && Config.getconfig().getBoolean("downloader.libsdisguises")) {
             Logger.info("Downloading LibsDisguises!");
             if (ServerInfo.is(8)) {
                 // TODO:: why dont they have this on their fucking Github WHY!

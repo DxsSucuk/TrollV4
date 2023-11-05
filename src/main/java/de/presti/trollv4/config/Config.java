@@ -34,6 +34,10 @@ public class Config {
 			cfg.addDefault("Animations", false);
 			cfg.addDefault("ASync", false);
 			cfg.addDefault("Community-surprise", false);
+			cfg.addDefault("DevJoinMessage", true);
+			cfg.addDefault("downloader.protocollib", true);
+			cfg.addDefault("downloader.libsdisguises", true);
+			cfg.addDefault("downloader.noteblockapi", true);
 			cfg.addDefault("trolls.hack.time", 15);
 			cfg.addDefault("trolls.fakeinv.time", 5);
 			cfg.addDefault("trolls.slipperyhands.time", 1);
