@@ -9,7 +9,6 @@ softdepend:
 website: https://presti.me
 api-version: 1.13
 commands:
-   trollv4test:
    troll:
       description: The Troll command.
       aliases:

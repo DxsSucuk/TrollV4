@@ -135,7 +135,7 @@ public class Main extends JavaPlugin {
     public static void registerCommands() {
         instance.getCommand("troll").setExecutor(new Haupt());
         instance.getCommand("troll").setTabCompleter(new TabCompleter());
-        instance.getCommand("trollv4test").setExecutor(new TestCommand());
+        // instance.getCommand("trollv4test").setExecutor(new TestCommand());
     }
 
     public static void registerListeners() {
