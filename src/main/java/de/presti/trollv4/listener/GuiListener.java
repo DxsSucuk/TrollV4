@@ -407,7 +407,7 @@ public class GuiListener implements Listener {
             } else if (e.getView().getTitle().equalsIgnoreCase("§2Which MLG?")) {
                 e.getResult();
                 e.setResult(Result.DENY);
-                if (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() ==  null) return;
+                if (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
 
                 if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cBack")) {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
@@ -1339,7 +1339,7 @@ public class GuiListener implements Listener {
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase(Items.getItem("gui.trolls.guardian"))) {
-                    if (p.hasPermission("troll.lsd") || p.hasPermission("troll.*")) {
+                    if (p.hasPermission("troll.guardian") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             TrollV4API.GuardinShow(t, false);
@@ -2020,8 +2020,8 @@ public class GuiListener implements Listener {
                                                     SetItems.buildItem("§6VOMIT", XMaterial.YELLOW_WOOL)};
 
                                             for (ItemStack item : vomitItems) {
-                                                Item drop = p.getWorld().dropItem(p.getEyeLocation(), item);
-                                                drop.setVelocity(p.getEyeLocation().getDirection().normalize().multiply(0.3D));
+                                                Item drop = t.getWorld().dropItem(t.getEyeLocation(), item);
+                                                drop.setVelocity(t.getEyeLocation().getDirection().normalize().multiply(0.3D));
                                                 toBeDelete.add(drop);
                                             }
                                         }
@@ -2045,7 +2045,7 @@ public class GuiListener implements Listener {
             } else if (e.getView().getTitle().equalsIgnoreCase("§2Server Troll Menu")) {
                 e.getResult();
                 e.setResult(Result.DENY);
-                if (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() ==  null) return;
+                if (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
 
                 if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase(Items.getItem("gui.servertrolls.tpall"))) {

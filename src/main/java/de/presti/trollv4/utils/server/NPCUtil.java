@@ -142,24 +142,22 @@ public class NPCUtil {
         Npc[] npcs = ArrayUtils.jojo.get(p);
         npcs[1] = npc;
 
-        ArrayUtils.jojo.put(p, npcs);
+        ArrayUtils.jojo.put(t, npcs);
 
         new BukkitRunnable() {
 
             @Override
             public void run() {
-                if (ArrayUtils.jojo.containsKey(p)) {
+                if (ArrayUtils.jojo.containsKey(t)) {
                     if (npc != null) {
 
                         if (ServerInfo.above(8)) {
                             npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
-                            p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+                            t.spawnParticle(XParticle.getParticle("CRIT"), t.getLocation(), 3);
                         }
 
-                        if (p != null) {
-                            if (!p.isDead()) {
-                                p.damage(0.1D);
-                            }
+                        if (!t.isDead()) {
+                            t.damage(0.1D);
                         }
 
                     }
@@ -179,10 +177,10 @@ public class NPCUtil {
 
                         npc.playAnimation(EntityAnimation.SWING_MAIN_ARM).scheduleForTracked();
 
-                        if (p != null) {
-                            if (!p.isDead()) {
-                                p.damage(0.1D);
-                                p.spawnParticle(XParticle.getParticle("CRIT"), p.getLocation(), 3);
+                        if (t != null) {
+                            if (!t.isDead()) {
+                                t.damage(0.1D);
+                                t.spawnParticle(XParticle.getParticle("CRIT"), t.getLocation(), 3);
                             }
                         }
 
