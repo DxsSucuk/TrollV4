@@ -675,9 +675,9 @@ public class InvManager {
     public static void openConfirmationInv(Player p, ItemStack trollItem) {
         Inventory inv = Bukkit.createInventory(null, 9 * 4, "§2Troll Confirmation Menu");
         inv.setItem(13, trollItem);
-        inv.setItem(20, SetItems.buildItem("§aI understand!", XMaterial.LIME_STAINED_GLASS_PANE.parseMaterial(),
+        inv.setItem(20, SetItems.buildItem("§aI understand!", XMaterial.LIME_STAINED_GLASS_PANE.parseItem(),
                 new String[]{"§cI am aware that this troll is very destructive.", "§cAnd I am responsible for any damage caused by it!"}));
-        inv.setItem(24, SetItems.buildItem("§cI changed my mind!", XMaterial.RED_STAINED_GLASS_PANE.parseMaterial()));
+        inv.setItem(24, SetItems.buildItem("§cI changed my mind!", XMaterial.RED_STAINED_GLASS_PANE.parseItem()));
         p.openInventory(inv);
     }
 

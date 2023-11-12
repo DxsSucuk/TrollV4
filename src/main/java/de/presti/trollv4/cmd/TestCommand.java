@@ -12,7 +12,7 @@ public class TestCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			if (sender.hasPermission("troll.*")) {
-				TrollV4API.sendGameStateChange((Player) sender, 11, 1);
+				TrollV4API.sendGameStateChange((Player) sender, 11, 1, false);
 				sender.sendMessage("Pog");
 			}
 		}

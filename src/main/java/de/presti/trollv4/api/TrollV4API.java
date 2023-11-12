@@ -72,7 +72,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void DemoScreen(Player victim) {
-        sendGameStateChange(victim, 5, 0);
+        sendGameStateChange(victim, 5, 0, false);
     }
 
     /**
@@ -880,7 +880,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void LSD(Player victim) {
-        sendGameStateChange(victim, 7, ServerInfo.belowOrEqual(19) ? 9 : 21);
+        sendGameStateChange(victim, 7, ServerInfo.belowOrEqual(19) ? 9 : 21, false);
     }
 
     /**
@@ -892,7 +892,7 @@ public class TrollV4API {
      */
     public static void GuardinShow(Player victim, boolean packet) {
         if (packet) {
-            sendGameStateChange(victim, 10, 0);
+            sendGameStateChange(victim, 10, 0, false);
         } else {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                     "particle mobappearance " + victim.getLocation().getBlockX() + " "
@@ -909,7 +909,7 @@ public class TrollV4API {
      * @param victim that should see the loading screen.
      */
     public static void InfiniteLoading(Player victim) {
-        sendGameStateChange(victim, 4, 0);
+        sendGameStateChange(victim, 4, 0, false);
     }
 
     /**
@@ -920,7 +920,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void EndGame(Player victim) {
-        sendGameStateChange(victim, 4, 1);
+        sendGameStateChange(victim, 4, 1, false);
     }
 
     /**
@@ -930,9 +930,9 @@ public class TrollV4API {
      * @param victim that should get freezed.
      * @since 4.4.4
      */
-    public static void sendGameStateChange(Player victim, int type, float state) {
+    public static void sendGameStateChange(Player victim, int type, float state, boolean forceProtocolLib) {
         try {
-            if (!ServerInfo.supportOldPackets()) {
+            if (!ServerInfo.supportOldPackets() && !forceProtocolLib) {
                 final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
                 packet.getModifier().write(0,
                         PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
