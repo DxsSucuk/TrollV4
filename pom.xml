@@ -6,7 +6,7 @@
 
     <groupId>de.presti</groupId>
     <artifactId>trollv4</artifactId>
-    <version>4.5.18</version>
+    <version>4.5.19</version>
     <packaging>jar</packaging>
 
     <name>TrollV4</name>
