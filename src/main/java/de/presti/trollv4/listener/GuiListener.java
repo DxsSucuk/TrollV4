@@ -864,7 +864,7 @@ public class GuiListener implements Listener {
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase(Items.getItem("gui.trolls.lagging"))
-                        || e.getCurrentItem().getType() == XMaterial.GRASS.parseMaterial()) {
+                        || e.getCurrentItem().getType() == XMaterial.SHORT_GRASS.parseMaterial()) {
                     if (p.hasPermission("troll.lag") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {

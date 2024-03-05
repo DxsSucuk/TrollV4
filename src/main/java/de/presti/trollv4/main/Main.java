@@ -23,6 +23,7 @@ import de.presti.trollv4.utils.plugin.UpdateChecker;
 import de.presti.trollv4.utils.server.ServerInfo;
 import de.presti.trollv4.utils.server.WorldCreator;
 import io.sentry.Sentry;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,6 +40,7 @@ import java.util.Random;
 
 public class Main extends JavaPlugin {
 
+    @Getter
     private static Main instance;
     public UpdateChecker updateChecker;
     public Controls control;
@@ -204,10 +206,6 @@ public class Main extends JavaPlugin {
         return new Random().nextInt(upper - lower + 1) + lower;
     }
 
-    public static Main getInstance() {
-        return instance;
-    }
-
     public static void startControlling(Player v, Player c) {
         if (getInstance().control == null)
             getInstance().control = new Controls();
@@ -241,7 +239,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getconfig().getBoolean("downloader.noteblockapi")) {
             Logger.info("Downloading NoteBlockAPI!");
-            download("https://github.com/DxsSucuk/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
+            download("https://github.com/koca2000/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
         }
 
         if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null && Config.getconfig().getBoolean("downloader.libsdisguises")) {

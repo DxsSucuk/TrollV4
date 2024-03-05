@@ -53,13 +53,13 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>9.6.1.1</version>
+            <version>9.9.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.github.koca2000</groupId>
             <artifactId>NoteBlockAPI</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -71,9 +71,9 @@
         <!-- Find a way to make this one provided because the dependency as a size of 4MB
             Or at least find a way to make the file itself smaller.-->
         <dependency>
-            <groupId>com.github.juliarn.npc-lib</groupId>
+            <groupId>io.github.juliarn</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta5</version>
+            <version>3.0.0-beta6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

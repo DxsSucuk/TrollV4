@@ -369,7 +369,7 @@ public class InvManager {
         inv.setItem(23,
                 SetItems.buildItem(Items.getItem("gui.trolls.fakehack"), XMaterial.DIAMOND_SWORD.parseMaterial()));
         inv.setItem(24, SetItems.buildItem(Items.getItem("gui.trolls.anticheat"), XMaterial.IRON_AXE.parseMaterial()));
-        inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"), XMaterial.GRASS.parseMaterial()));
+        inv.setItem(25, SetItems.buildItem(Items.getItem("gui.trolls.lagging"), XMaterial.SHORT_GRASS.parseMaterial()));
         inv.setItem(28, SetItems.buildItem(Items.getItem("gui.trolls.arrest"), XMaterial.BEDROCK.parseMaterial(), "§cReplaces Blocks!"));
         inv.setItem(29, SetItems.buildItem(Items.getItem("gui.trolls.rotateplayer"), XMaterial.COOKIE.parseMaterial()));
         inv.setItem(30, SetItems.buildItem(Items.getItem("gui.trolls.randomteleport"),
