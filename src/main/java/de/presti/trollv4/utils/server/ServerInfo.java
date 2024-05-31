@@ -35,15 +35,15 @@ public class ServerInfo {
     }
 
     public static String getNMSVersion() {
-        return Main.getInstance().version;
+        return Bukkit.getVersion();
     }
 
     public static int getVersionId() {
         if (versionId == 0) {
-            String[] split = getNMSVersion().split("v1_");
+            String[] split = getMcVersion().split("\\.");
             String version = split[1];
-            if (version.split("_").length > 1) {
-                version = version.split("_")[0];
+            if (version.split("\\.").length > 1) {
+                version = version.split("\\.")[0];
             }
 
             versionId = Integer.parseInt(version);

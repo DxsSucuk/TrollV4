@@ -3,17 +3,17 @@ package de.presti.trollv4.main;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.MySQLDataException;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
- import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.cmd.TabCompleter;
-import de.presti.trollv4.cmd.TestCommand;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.Language;
+import de.presti.trollv4.listener.ControlListener;
 import de.presti.trollv4.listener.Event;
 import de.presti.trollv4.listener.GuiListener;
-import de.presti.trollv4.listener.ControlListener;
 import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.utils.control.Controls;
 import de.presti.trollv4.utils.player.ArrayUtils;
@@ -26,14 +26,17 @@ import io.sentry.Sentry;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -44,17 +47,21 @@ public class Main extends JavaPlugin {
     private static Main instance;
     public UpdateChecker updateChecker;
     public Controls control;
-    public String version;
     public Config config;
 
     public void onEnable() {
         instance = this;
 
         Sentry.init(options -> {
-            options.setDsn("https://b93efd304ec3103daa3e0585983400b8@o4503927742529536.ingest.sentry.io/4506083039969280");
+            options.setDsn("https://5eca0917287f22faf8b2726f07f4d460@o4503927742529536.ingest.us.sentry.io/4506083039969280");
+            options.setRelease(Data.version);
+            options.addInAppInclude("de.presti.trollv4");
+            options.addIgnoredExceptionForType(SQLException.class);
+            options.addIgnoredExceptionForType(MySQLDataException.class);
+            options.addIgnoredExceptionForType(IllegalPluginAccessException.class);
+            options.addIgnoredExceptionForType(SocketException.class);
         });
 
-        version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         ArrayUtils.armor = new HashMap<>();
         ArrayUtils.inventory = new HashMap<>();
         ArrayUtils.cd = new ArrayList<>();
@@ -68,11 +75,8 @@ public class Main extends JavaPlugin {
                 !Files.exists(Paths.get("plugins/TrollV4/rick.nbs"));
 
         if (need) {
-            Logger.info("---------->");
             Logger.info("We have detected that there is at least one missing needed File, we will now start to download it.");
             downloadAll();
-
-            Logger.info("---------->");
 
             try {
                 if (Bukkit.getPluginManager().getPlugin("LibsDisguises") != null && Bukkit.getPluginManager().getPlugin("LibsDisguises").isEnabled()) {
@@ -83,7 +87,6 @@ public class Main extends JavaPlugin {
                     Logger.info("LibsDisguises is not installed or not enabled,");
                     Logger.info("please install it and restart the server.");
                     Logger.info(" ");
-                    Logger.info("---------->");
                 }
             } catch (Exception ignore) {
             }
@@ -155,7 +158,7 @@ public class Main extends JavaPlugin {
         Logger.info("Otherwise have fun!");
         Logger.info("------------------------------------");
         Logger.info("Plugin Version: " + Data.version);
-        Logger.info("Server Version: " + getInstance().version + " - " + ServerInfo.getMcVersion());
+        Logger.info("Server Version: " + ServerInfo.getMcVersion());
         Logger.info("Server Software: " + ServerInfo.getServerSoftware());
     }
 

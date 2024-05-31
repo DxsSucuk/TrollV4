@@ -1018,7 +1018,7 @@ public class TrollV4API {
 
                         ArrayUtils.spooky.put(victim, container);
                         victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
-                        victim.addPotionEffect(XPotion.SLOW.buildPotionEffect(1000000, 3));
+                        victim.addPotionEffect(XPotion.SLOWNESS.buildPotionEffect(1000000, 3));
                     } else {
                         Logger.info(Language.getMessage("gui.spooky.world"));
                     }
@@ -1031,7 +1031,7 @@ public class TrollV4API {
             }
 
             victim.removePotionEffect(XPotion.BLINDNESS.getPotionEffectType());
-            victim.removePotionEffect(XPotion.SLOW.getPotionEffectType());
+            victim.removePotionEffect(XPotion.SLOWNESS.getPotionEffectType());
 
             for (Player all : Bukkit.getOnlinePlayers()) {
                 victim.showPlayer(all);

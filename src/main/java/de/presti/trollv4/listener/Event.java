@@ -48,7 +48,7 @@ public class Event implements Listener {
 
         if (p.getUniqueId().toString().replace("-", "").equalsIgnoreCase("1c32b55bd4584347a5798754f4510081") && Config.getconfig().getBoolean("DevJoinMessage")) {
             p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
-            p.sendMessage(Data.prefix + "Server Version: " + Main.getInstance().version + " - " + ServerInfo.getMcVersion());
+            p.sendMessage(Data.prefix + "Server Version: " + ServerInfo.getNMSVersion() + " - " + ServerInfo.getMcVersion());
             p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
             p.sendMessage(Data.prefix + "Server Language: " + Language.getLanguage());
 

@@ -153,7 +153,7 @@ public class NPCUtil {
 
                         if (ServerInfo.above(8)) {
                             npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
-                            t.spawnParticle(XParticle.getParticle("CRIT"), t.getLocation(), 3);
+                            t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
                         }
 
                         if (!t.isDead()) {
@@ -180,7 +180,7 @@ public class NPCUtil {
                         if (t != null) {
                             if (!t.isDead()) {
                                 t.damage(0.1D);
-                                t.spawnParticle(XParticle.getParticle("CRIT"), t.getLocation(), 3);
+                                t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
                             }
                         }
 

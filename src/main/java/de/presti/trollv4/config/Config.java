@@ -83,6 +83,9 @@ public class Config {
 			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
 			cfg.addDefault("trolls.spookyWorld.generate", false);
 			cfg.addDefault("trolls.spookyWorld.name", "SpookyWorld");
+			cfg.addDefault("downloader.protocollib", false);
+			cfg.addDefault("downloader.libsdisguises", false);
+			cfg.addDefault("downloader.noteblockapi", true);
 
 			try {
                 cfg.save(getFile());
