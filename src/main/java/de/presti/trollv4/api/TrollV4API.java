@@ -66,7 +66,7 @@ public class TrollV4API {
     }
 
     /**
-     * Shows an player the Minecraft Demoscreen. Currently this only works with 1.8.
+     * Shows a player the Minecraft Demoscreen. Currently, this only works with 1.8.
      *
      * @param victim the player that should be controlled.
      * @since 4.4.4
@@ -76,10 +76,10 @@ public class TrollV4API {
     }
 
     /**
-     * Lets an player be Herobrine. This spwanes Silvefishes and Thunder bolts
+     * Lets a player be Herobrine. This swaps Silverfishes and Thunderbolts
      * around him.
      *
-     * @param victim the player thats should be herobrine.
+     * @param victim the player that's should be herobrine.
      * @since 4.4.4
      */
     public static void Herobrine(Player victim) {
@@ -91,7 +91,7 @@ public class TrollV4API {
     }
 
     /**
-     * This spawnes Arrows around an player. Just Vibing in here.
+     * This spawns Arrows around a player. Just Vibing in here.
      *
      * @param victim that should get spammed.
      * @since 4.4.4
@@ -493,7 +493,7 @@ public class TrollV4API {
                                 .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
                                         victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
                                 .setType(XMaterial.GLASS.parseMaterial());
-                        victim.chat("Help me Pls im stucked ;-; I dont know where im pls help!!!");
+                        victim.chat("Help me pls Im stuck ;-; I dont know where Im pls help!!!");
                         Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(victim).getTaskId());
                         return;
                     }
@@ -1053,7 +1053,9 @@ public class TrollV4API {
      *
      * @return int it returns a SkinID from MineSkin.
      * @since 4.4.4
+     * @deprecated Use signature and texture instead of this.
      */
+    @Deprecated
     public static String getRandomSkinName() {
 
         String[] ids = new String[]{"notenough", "FKJJJJJJJJJJJJJJ", "My_Te", PlayerInfo.getName("1c32b55bd4584347a5798754f4510081")};
