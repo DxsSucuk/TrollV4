@@ -76,7 +76,7 @@ public class TrollV4API {
     }
 
     /**
-     * Lets a player be Herobrine. This swaps Silverfishes and Thunderbolts
+     * Lets a player be Herobrine. This spawns Silverfishes and Thunderbolts
      * around him.
      *
      * @param victim the player that's should be herobrine.
