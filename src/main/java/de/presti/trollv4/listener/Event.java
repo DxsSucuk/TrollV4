@@ -39,7 +39,7 @@ import com.cryptomorin.xseries.XSound;
 
 public class Event implements Listener {
 
-    // OVERALL
+    //region OVERALL
 
     @SuppressWarnings("deprecation")
     @EventHandler
@@ -80,18 +80,18 @@ public class Event implements Listener {
         }
     }
 
-    // OVERALL
-
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         ArrayUtils.removeFromAll(p);
     }
 
+    //endregion OVERALL
+
     // NoInv
 
     @EventHandler
-    public void onInvetoryOpen(InventoryOpenEvent e) {
+    public void onInventoryOpen(InventoryOpenEvent e) {
         if (e.getPlayer() instanceof Player) {
             Player p = (Player) e.getPlayer();
             if (ArrayUtils.noinv.contains(p)) {
