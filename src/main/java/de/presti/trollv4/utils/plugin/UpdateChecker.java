@@ -71,32 +71,32 @@ public class UpdateChecker {
 
     /**
      * Compare two strings based on the x.y.z version format with each other
-     * @param version The base version
-     * @param compareVersion the version that should be used to compare
-     * @return The result of the comparison. True, if the compare version is higher | False, if the base version is higher
+     * @param versionA Base Version
+     * @param versionB Version to compare to
+     * @return The result of the comparison. True, if the versionB is higher | False, if the versionA is higher
      */
-    public boolean compareVersion(String version, String compareVersion) {
-        if (compareVersion == null) return false;
-        if (version == null) return true;
-        if (compareVersion.equals(version)) return false;
+    public boolean compareVersion(String versionA, String versionB) {
+        if (versionB == null) return false;
+        if (versionA == null) return true;
+        if (versionB.equals(versionA)) return false;
 
-        String[] split = version.split("\\.");
-        if (split.length != 2) return true;
+        String[] versionASplit = versionA.split("\\.");
+        if (versionASplit.length != 3) return true;
 
-        String[] split2 = compareVersion.split("\\.");
+        String[] versionBSplit = versionB.split("\\.");
 
-        if (split2.length != 2) return false;
+        if (versionBSplit.length != 3) return false;
 
-        int mayor = Integer.parseInt(split[0]);
-        int minor = Integer.parseInt(split[1]);
-        int patch = Integer.parseInt(split[2]);
+        int versionAMayor = Integer.parseInt(versionASplit[0]);
+        int versionAMinor = Integer.parseInt(versionASplit[1]);
+        int versionAPatch = Integer.parseInt(versionASplit[2]);
 
-        int otherMayor = Integer.parseInt(split2[0]);
-        int otherMinor = Integer.parseInt(split2[1]);
-        int otherPatch = Integer.parseInt(split2[2]);
+        int versionBMayor = Integer.parseInt(versionBSplit[0]);
+        int versionBMinor = Integer.parseInt(versionBSplit[1]);
+        int versionBPatch = Integer.parseInt(versionBSplit[2]);
 
-        if (otherMayor > mayor) return true;
-        if (otherMayor == mayor && otherMinor > minor) return true;
-        return otherMayor == mayor && otherMinor == minor && otherPatch > patch;
+        if (versionBMayor > versionAMayor) return true;
+        if (versionBMayor == versionAMayor && versionBMinor > versionAMinor) return true;
+        return versionBMayor == versionAMayor && versionBMinor == versionAMinor && versionBPatch > versionAPatch;
     }
 }
