@@ -36,6 +36,11 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>minecraft-libraries</id>
+            <name>Minecraft Libraries</name>
+            <url>https://libraries.minecraft.net/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -57,6 +62,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>6.0.54</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.koca2000</groupId>
             <artifactId>NoteBlockAPI</artifactId>
             <version>1.6.2</version>
@@ -73,7 +84,7 @@
         <dependency>
             <groupId>io.github.juliarn</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta6</version>
+            <version>3.0.0-beta7</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
