@@ -3,8 +3,7 @@ package de.presti.trollv4.invs;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.cryptomorin.xseries.profiles.builder.XSkull;
-import com.cryptomorin.xseries.profiles.objects.Profileable;
+import de.presti.trollv4.utils.plugin.SkullUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,7 +36,7 @@ public class SetItems {
         }
 
         ItemStack skull = uuid == null ? new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial())
-                : XSkull.createItem().profile(Profileable.of(uuid)).apply();
+                : SkullUtil.getSkull(uuid);
 
         ItemMeta skullm = skull.getItemMeta();
 

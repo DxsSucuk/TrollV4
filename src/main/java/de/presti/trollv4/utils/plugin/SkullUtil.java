@@ -9,7 +9,11 @@ import java.util.UUID;
 public class SkullUtil {
 
     public static ItemStack getSkull(UUID uuid) {
-        return XSkull.createItem().profile(Profileable.of(uuid)).apply();
+        try {
+            return XSkull.createItem().profile(Profileable.of(uuid)).apply();
+        } catch (Exception e) {
+            return XSkull.createItem().apply();
+        }
     }
 
 }
