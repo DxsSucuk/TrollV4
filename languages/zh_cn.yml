@@ -1,6 +1,6 @@
 language:
   version: 4.5.25
-  locale: zh_CN
+  locale: zh_cn
   name: Simplified Chinese
   author: ItsDApples
 gui:
