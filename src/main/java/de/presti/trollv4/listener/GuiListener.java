@@ -9,7 +9,7 @@ import de.presti.trollv4.api.TrollV4API;
 import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
+import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.invs.InvManager;
 import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.invs.SetItems;
@@ -199,7 +199,7 @@ public class GuiListener implements Listener {
                                     e.getView().close();
                                     InvManager.openPlayerInv(p);
                                 } else {
-                                    p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                                    p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                                     e.getView().close();
                                 }
                             }
@@ -290,7 +290,7 @@ public class GuiListener implements Listener {
                             e.getView().close();
                             InvManager.openConfigInv(p);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                             e.getView().close();
                         }
                     }
@@ -306,7 +306,7 @@ public class GuiListener implements Listener {
                         e.getView().close();
                         InvManager.choicePlayer(p);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReload Config")) {
@@ -315,91 +315,91 @@ public class GuiListener implements Listener {
                         Main.reloadConfigurations();
                         p.sendMessage(Data.prefix + "§cReloaded!");
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase("§cCustom§7-§2Item§7-§2Name")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("Custom-Item-Name", !Config.cfg.getBoolean("Custom-Item-Name"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("Custom-Item-Name", !Config.config.getBoolean("Custom-Item-Name"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(0,
                                 SetItems.buildItem("§cCustom§7-§2Item§7-§2Name", XMaterial.PAPER,
                                         new String[]{"§cCurrent Value:",
-                                                (Config.cfg.getBoolean("Custom-Item-Name") ? "§ayes" : "§cno")}));
+                                                (Config.config.getBoolean("Custom-Item-Name") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bUpdateChecker")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("UpdateChecker", !Config.cfg.getBoolean("UpdateChecker"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("UpdateChecker", !Config.config.getBoolean("UpdateChecker"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(1,
                                 SetItems.buildItem("§bUpdateChecker", XMaterial.CLOCK,
                                         new String[]{"§cCurrent Value:",
-                                                (Config.cfg.getBoolean("UpdateChecker") ? "§ayes" : "§cno")}));
+                                                (Config.config.getBoolean("UpdateChecker") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cAuto§bUpdate")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("AutoUpdate", !Config.cfg.getBoolean("AutoUpdate"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("AutoUpdate", !Config.config.getBoolean("AutoUpdate"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(2,
                                 SetItems.buildItem("§cAuto§bUpdate", XMaterial.CAULDRON,
                                         new String[]{"§cCurrent Value:",
-                                                (Config.cfg.getBoolean("AutoUpdate") ? "§ayes" : "§cno")}));
+                                                (Config.config.getBoolean("AutoUpdate") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§2Animations")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("Animations", !Config.cfg.getBoolean("Animations"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("Animations", !Config.config.getBoolean("Animations"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(3,
                                 SetItems.buildItem("§2Animations", XMaterial.GLASS_PANE,
                                         new String[]{"§cCurrent Value:",
-                                                (Config.cfg.getBoolean("Animations") ? "§ayes" : "§cno")}));
+                                                (Config.config.getBoolean("Animations") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aASync")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("ASync", !Config.cfg.getBoolean("ASync"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("ASync", !Config.config.getBoolean("ASync"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(4, SetItems.buildItem("§aASync", XMaterial.PLAYER_HEAD, new String[]{
-                                "§cCurrent Value:", (Config.cfg.getBoolean("ASync") ? "§ayes" : "§cno")}));
+                                "§cCurrent Value:", (Config.config.getBoolean("ASync") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase("§2Community§7-§csurprise")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
-                        Config.cfg.set("Community-surprise", !Config.cfg.getBoolean("Community-surprise"));
-                        Config.cfg.save(Config.getFile());
+                        Config.config.set("Community-surprise", !Config.config.getBoolean("Community-surprise"));
+                        Config.config.save(Config.getFile());
 
                         e.getInventory().setItem(5,
                                 SetItems.buildItem("§2Community§7-§csurprise", XMaterial.CAKE,
                                         new String[]{"§cCurrent Value:",
-                                                (Config.cfg.getBoolean("Community-surprise") ? "§ayes" : "§cno")}));
+                                                (Config.config.getBoolean("Community-surprise") ? "§ayes" : "§cno")}));
 
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -414,7 +414,7 @@ public class GuiListener implements Listener {
                         e.getView().close();
                         InvManager.openPlayerInv(p);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -425,7 +425,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll*")) {
                         e.getView().close();
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.mlg", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.mlg", t));
                             e.getView().close();
                             t.setAllowFlight(true);
                             t.setVelocity(t.getLocation().getDirection().multiply(0.5D).setY(3.8D));
@@ -439,11 +439,11 @@ public class GuiListener implements Listener {
                             Titles.send(t, 1, 10, 1, "§2MAKE A §cMLG", "");
                             t.setAllowFlight(false);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -453,7 +453,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
                         e.getView().close();
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.mlg", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.mlg", t));
                             t.setAllowFlight(true);
                             t.setVelocity(t.getLocation().getDirection().multiply(0.5D).setY(3.8D));
                             t.playSound(t.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
@@ -466,11 +466,11 @@ public class GuiListener implements Listener {
                             Titles.send(t, 1, 10, 1, "§2MAKE A §cMLG", "");
                             t.setAllowFlight(false);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -480,7 +480,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
                         e.getView().close();
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.mlg", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.mlg", t));
                             t.setAllowFlight(true);
                             t.setVelocity(t.getLocation().getDirection().multiply(0.5D).setY(3.8D));
                             t.playSound(t.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
@@ -493,11 +493,11 @@ public class GuiListener implements Listener {
                             Titles.send(t, 1, 10, 1, "§2MAKE A §cMLG", "");
                             t.setAllowFlight(false);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -507,7 +507,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
                         e.getView().close();
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.mlg", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.mlg", t));
                             t.setAllowFlight(true);
                             t.setVelocity(t.getLocation().getDirection().multiply(0.5D).setY(3.8D));
                             t.playSound(t.getLocation(), XSound.ENTITY_PLAYER_BURP.parseSound(), 100.0F, 25.0F);
@@ -520,11 +520,11 @@ public class GuiListener implements Listener {
                             Titles.send(t, 1, 10, 1, "§2MAKE A §cMLG", "");
                             t.setAllowFlight(false);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -539,14 +539,14 @@ public class GuiListener implements Listener {
                         e.getView().close();
                         InvManager.choicePlayer(p);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cNext Page")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
                         InvManager.setPageTwoTrolls(e.getClickedInventory(), p);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -558,14 +558,14 @@ public class GuiListener implements Listener {
                                     200.0F);
                             t.getWorld().createExplosion(t.getLocation(), 3.0F);
                             t.setHealth(0.0D);
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.explode", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.explode", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -574,23 +574,23 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.fakehack") || p.hasPermission("troll.*")) {
                         if (t != null) {
                             if (ArrayUtils.fc.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.fakehack.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakehack.off", t));
                                 e.getView().close();
                                 t.setWalkSpeed(0.2F);
                                 t.setAllowFlight(false);
                                 ArrayUtils.fc.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.fakehack.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakehack.on", t));
                                 e.getView().close();
                                 ArrayUtils.fc.add(t);
 
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -599,15 +599,15 @@ public class GuiListener implements Listener {
                     Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                     if (p.hasPermission("troll.demo") || p.hasPermission("troll.*")) {
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.demo", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.demo", t));
                             e.getView().close();
                             DemoScreen.showDemoScreen(t);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -615,15 +615,15 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.strike") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.strike", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.strike", t));
                             e.getView().close();
                             t.getLocation().getWorld().strikeLightning(t.getLocation());
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -631,13 +631,13 @@ public class GuiListener implements Listener {
                     Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                     if (p.hasPermission("troll.hackuser") || p.hasPermission("troll.*")) {
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.hackuser", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.hackuser", t));
                             e.getView().close();
                             if (ArrayUtils.hackuser.containsKey(t)) {
                                 ArrayUtils.hackuser.get(t).cancel();
                                 ArrayUtils.hackuser.remove(t);
                                 ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-                                    int countdown = Config.cfg.getInt("trolls.hack.time");
+                                    int countdown = Config.config.getInt("trolls.hack.time");
 
                                     @Override
                                     public void run() {
@@ -660,7 +660,7 @@ public class GuiListener implements Listener {
 
                             } else {
                                 ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-                                    int countdown = Config.cfg.getInt("trolls.hack.time");
+                                    int countdown = Config.config.getInt("trolls.hack.time");
 
                                     @Override
                                     public void run() {
@@ -682,11 +682,11 @@ public class GuiListener implements Listener {
                                 ArrayUtils.hackuser.get(t).runTaskTimer(Main.getInstance(), 0, 20);
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -694,7 +694,7 @@ public class GuiListener implements Listener {
                     Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                     if (p.hasPermission("troll.rocket") || p.hasPermission("troll.*")) {
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.rocket", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rocket", t));
                             e.getView().close();
                             t.setAllowFlight(true);
                             t.setVelocity(t.getLocation().getDirection().multiply(0.5D).setY(3.8D));
@@ -703,11 +703,11 @@ public class GuiListener implements Listener {
                                     25.0F);
                             t.setAllowFlight(false);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
 
@@ -716,7 +716,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.mlg") || p.hasPermission("troll.*")) {
                         InvManager.openMLGchoiceInv(p);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -724,7 +724,7 @@ public class GuiListener implements Listener {
                     Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                     if (p.hasPermission("troll.spam") || p.hasPermission("troll.*")) {
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.spam", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spam", t));
                             e.getView().close();
                             new BukkitRunnable() {
 
@@ -736,11 +736,11 @@ public class GuiListener implements Listener {
                                 }
                             }.runTaskAsynchronously(Main.getInstance());
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -761,29 +761,29 @@ public class GuiListener implements Listener {
                                             Main.startControlling(t, p);
                                         } else {
                                             p.sendMessage(Data.prefix
-                                                    + Language.getMessage("gui.startcontrol.cantcontrol", t));
+                                                    + LanguageService.getDefault("gui.startcontrol.cantcontrol", t));
                                             e.getView().close();
                                         }
                                     } else {
                                         p.sendMessage(
-                                                Data.prefix + Language.getMessage("gui.startcontrol.yourself", t));
+                                                Data.prefix + LanguageService.getDefault("gui.startcontrol.yourself", t));
                                         e.getView().close();
                                     }
                                 } else {
                                     p.sendMessage(
-                                            Data.prefix + Language.getMessage("gui.startcontrol.iscontroled", t));
+                                            Data.prefix + LanguageService.getDefault("gui.startcontrol.iscontroled", t));
                                     e.getView().close();
                                 }
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.startcontrol.alreadyc", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.startcontrol.alreadyc", t));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -791,15 +791,15 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.fakeop") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.fakeop.default", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeop.default", t));
                             e.getView().close();
-                            t.sendMessage(Language.getMessage("gui.fakeop.opm", t));
+                            t.sendMessage(LanguageService.getDefault("gui.fakeop.opm", t));
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -807,15 +807,15 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.crash") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.crash.default", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.crash.default", t));
                             e.getView().close();
-                            t.kickPlayer(Language.getMessage("gui.crash.message"));
+                            t.kickPlayer(LanguageService.getDefault("gui.crash.message"));
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -824,24 +824,24 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (ArrayUtils.freeze.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.freeze.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.freeze.off", t));
                                 e.getView().close();
                                 t.setWalkSpeed(0.2F);
                                 t.setFlySpeed(0.1F);
                                 ArrayUtils.freeze.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.freeze.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.freeze.on", t));
                                 e.getView().close();
                                 t.setWalkSpeed(0F);
                                 t.setFlySpeed(0F);
                                 ArrayUtils.freeze.add(t);
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -849,17 +849,17 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.ac") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.anticheat.default", t));
-                            t.sendMessage(Language.getMessage("gui.anticheat.detected"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.anticheat.default", t));
+                            t.sendMessage(LanguageService.getDefault("gui.anticheat.detected"));
                             t.teleport(new Location(t.getWorld(), t.getLocation().getX(),
                                     t.getLocation().getY() + 2, t.getLocation().getZ()));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -869,19 +869,19 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (!ArrayUtils.lagging.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.lag.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.lag.on", t));
                                 ArrayUtils.lagging.add(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.lag.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.lag.off", t));
                                 ArrayUtils.lagging.remove(t);
                             }
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -920,14 +920,14 @@ public class GuiListener implements Listener {
                                             t.getLocation().getY(), t.getLocation().getZ() - 1))
                                     .setType(XMaterial.BEDROCK.parseMaterial());
 
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.arrest", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.arrest", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -936,20 +936,20 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (ArrayUtils.rotateplayer.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rotate.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rotate.off", t));
                                 ArrayUtils.rotateplayer.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rotate.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rotate.on", t));
                                 new Haupt().rop(t);
                                 ArrayUtils.rotateplayer.add(t);
                             }
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -958,20 +958,20 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (ArrayUtils.randomtp.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rndmtp.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rndmtp.off", t));
                                 ArrayUtils.randomtp.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rndmtp.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rndmtp.on", t));
                                 ArrayUtils.randomtp.add(t);
                                 new Haupt().rtp(t);
                             }
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -981,11 +981,11 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             InvManager.openConfirmationInv(p, e.getCurrentItem());
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1174,14 +1174,14 @@ public class GuiListener implements Listener {
                             });
                             ArrayUtils.wtf.get(p).runTaskTimer(Main.getInstance(), 0L, 20L);
 
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.wtf", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.wtf", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1190,7 +1190,7 @@ public class GuiListener implements Listener {
 
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.webtrap", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.webtrap", t));
                             e.getView().close();
 
                             // Oben
@@ -1314,11 +1314,11 @@ public class GuiListener implements Listener {
                                     .setType(XMaterial.COBWEB.parseMaterial());
 
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1327,14 +1327,14 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             TrollV4API.LSD(t);
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.lsd", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.lsd", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1343,14 +1343,14 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             TrollV4API.GuardinShow(t, false);
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.guardian", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.guardian", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1359,21 +1359,21 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (ArrayUtils.herobrine.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.herobrine.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.herobrine.off", t));
                                 e.getView().close();
                                 ArrayUtils.herobrine.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.herobrine.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.herobrine.on", t));
                                 e.getView().close();
                                 ArrayUtils.herobrine.add(t);
                             }
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1382,12 +1382,12 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (ArrayUtils.userbowspam.contains(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.arrowspam.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.arrowspam.off", t));
                                 e.getView().close();
                                 ArrayUtils.arrowspam.get(t).cancel();
                                 ArrayUtils.userbowspam.remove(t);
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.arrowspam.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.arrowspam.on", t));
                                 e.getView().close();
                                 ArrayUtils.userbowspam.add(t);
                                 ArrayUtils.arrowspam.put(t, new BukkitRunnable() {
@@ -1448,11 +1448,11 @@ public class GuiListener implements Listener {
                             }
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1462,11 +1462,11 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             InvManager.openConfirmationInv(p, e.getCurrentItem());
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1481,7 +1481,7 @@ public class GuiListener implements Listener {
                                 t.getInventory().setExtraContents(is.getExtracont());
                                 t.getInventory().setContents(is.getContent());
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.fakeinv.cancel", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeinv.cancel", t));
                                 e.getView().close();
 
                                 ArrayUtils.fakeinv.remove(t);
@@ -1501,7 +1501,7 @@ public class GuiListener implements Listener {
 
                                 ArrayUtils.fakeinv.put(t, is);
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.fakeinv.default", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeinv.default", t));
                                 e.getView().close();
 
                                 new BukkitRunnable() {
@@ -1519,15 +1519,15 @@ public class GuiListener implements Listener {
                                         }
                                         cancel();
                                     }
-                                }.runTaskLater(Main.getInstance(), (Config.cfg.getInt("trolls.fakeinv.time") * 20L));
+                                }.runTaskLater(Main.getInstance(), (Config.config.getInt("trolls.fakeinv.time") * 20L));
 
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1538,13 +1538,13 @@ public class GuiListener implements Listener {
 
                             if (ArrayUtils.noinv.contains(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.noinv.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.noinv.off", t));
                                 e.getView().close();
 
                                 ArrayUtils.noinv.remove(t);
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.noinv.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.noinv.on", t));
                                 e.getView().close();
 
                                 if (t.getOpenInventory() != null) {
@@ -1555,11 +1555,11 @@ public class GuiListener implements Listener {
                             }
 
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1570,13 +1570,13 @@ public class GuiListener implements Listener {
 
                             if (ArrayUtils.noitem.contains(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.slipperyhands.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.slipperyhands.off", t));
                                 e.getView().close();
 
                                 ArrayUtils.noitem.remove(t);
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.slipperyhands.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.slipperyhands.on", t));
                                 e.getView().close();
 
                                 if (t.getItemInHand() != null
@@ -1604,17 +1604,17 @@ public class GuiListener implements Listener {
                                         }
                                     }
                                 }.runTaskTimer(Main.getInstance(), 0L,
-                                        (Config.cfg.getInt("trolls.slipperyhands.time") * 20L));
+                                        (Config.config.getInt("trolls.slipperyhands.time") * 20L));
 
                                 ArrayUtils.noitem.add(t);
                             }
 
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1644,14 +1644,14 @@ public class GuiListener implements Listener {
                                     }
                                 }
                             }.runTaskAsynchronously(Main.getInstance());
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.tntworld.default", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tntworld.default", t));
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1661,18 +1661,18 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (!PlayMusic.isPlaying(t)) {
                                 PlayMusic.play(t, "plugins/TrollV4/rick.nbs");
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rickroll.default", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rickroll.default", t));
                                 e.getView().close();
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.rickroll.ishearing", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rickroll.ishearing", t));
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1682,14 +1682,14 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (ArrayUtils.jumping.containsKey(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.dontstopjumping.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.dontstopjumping.off", t));
 
                                 ArrayUtils.jumping.get(t).cancel();
                                 ArrayUtils.jumping.remove(t);
                                 e.getView().close();
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.dontstopjumping.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.dontstopjumping.on", t));
 
                                 ArrayUtils.jumping.put(t, new BukkitRunnable() {
 
@@ -1710,11 +1710,11 @@ public class GuiListener implements Listener {
 
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1724,23 +1724,23 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (ArrayUtils.deaf.contains(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.deaf.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.deaf.off", t));
 
                                 ArrayUtils.deaf.remove(t);
                                 e.getView().close();
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.deaf.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.deaf.on", t));
 
                                 ArrayUtils.deaf.add(t);
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1750,23 +1750,23 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (ArrayUtils.confus.contains(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.confused.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.confused.off", t));
 
                                 ArrayUtils.confus.remove(t);
                                 e.getView().close();
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.confused.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.confused.on", t));
 
                                 ArrayUtils.confus.add(t);
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1776,14 +1776,14 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (ArrayUtils.anvils.containsKey(t)) {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.anvils.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.anvils.off", t));
 
                                 ArrayUtils.anvils.get(t).cancel();
                                 ArrayUtils.anvils.remove(t);
                                 e.getView().close();
                             } else {
 
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.anvils.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.anvils.on", t));
 
                                 ArrayUtils.anvils.put(t, new BukkitRunnable() {
 
@@ -1798,16 +1798,16 @@ public class GuiListener implements Listener {
                                 });
 
                                 ArrayUtils.anvils.get(t).runTaskTimer(Main.getInstance(), 20L,
-                                        (Config.cfg.getInt("trolls.anvils.time") * 20L));
+                                        (Config.config.getInt("trolls.anvils.time") * 20L));
 
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1816,7 +1816,7 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
 
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.cows", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.cows", t));
 
                             Entity ent = t.getWorld().spawnEntity(
                                     t.getLocation().add(t.getLocation().getDirection().multiply(2)),
@@ -1856,11 +1856,11 @@ public class GuiListener implements Listener {
 
                             e.getView().close();
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1871,7 +1871,7 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             if (!ArrayUtils.jojo.containsKey(t)) {
                                 PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.giorno.on", t));
 
                                 new BukkitRunnable() {
 
@@ -1908,7 +1908,7 @@ public class GuiListener implements Listener {
 
                                 e.getView().close();
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.giorno.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.giorno.off", t));
 
                                 PlayMusic.stop(t);
 
@@ -1924,11 +1924,11 @@ public class GuiListener implements Listener {
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1937,14 +1937,14 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.giorno") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.endcredits", t));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.endcredits", t));
                             TrollV4API.EndGame(t);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1952,23 +1952,23 @@ public class GuiListener implements Listener {
 
                     if (p.hasPermission("troll.spooky") || p.hasPermission("troll.*")) {
                         if (Bukkit.getWorld("SpookyWorld") == null) {
-                            p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.world"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spooky.world"));
                             return;
                         }
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (!ArrayUtils.spooky.containsKey(t)) {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spooky.on", t));
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.spooky.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spooky.off", t));
                             }
                             TrollV4API.SpookyWorld(t);
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -1978,11 +1978,11 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             InvManager.openConfirmationInv(p, e.getCurrentItem());
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName()
@@ -2028,17 +2028,17 @@ public class GuiListener implements Listener {
                                     }
                                 }, 5L, 5L);
                                 ArrayUtils.vomit.add(t);
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.on", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.vomit.on", t));
                             } else {
                                 ArrayUtils.vomit.remove(t);
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.vomit.off", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.vomit.off", t));
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
                         }
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -2054,9 +2054,9 @@ public class GuiListener implements Listener {
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             all.teleport(p.getLocation());
                         }
-                        p.sendMessage(Data.prefix + Language.getMessage("gui.tpall"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tpall"));
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -2064,22 +2064,22 @@ public class GuiListener implements Listener {
                         .equalsIgnoreCase(Items.getItem("gui.servertrolls.fakeleave"))) {
                     if (p.hasPermission("troll.fakeleave") || p.hasPermission("troll.*")) {
                         e.getView().close();
-                        Bukkit.broadcastMessage(Language.getMessage("gui.fakeleave.message", p));
-                        p.sendMessage(Data.prefix + Language.getMessage("gui.fakeleave.default"));
+                        Bukkit.broadcastMessage(LanguageService.getDefault("gui.fakeleave.message", p));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeleave.default"));
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
                 if (e.getCurrentItem().getItemMeta().getDisplayName()
                         .equalsIgnoreCase(Items.getItem("gui.servertrolls.hackmessage"))) {
                     if (p.hasPermission("troll.hackmessage") || p.hasPermission("troll.*")) {
-                        p.sendMessage(Data.prefix + Language.getMessage("gui.hackserver"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("gui.hackserver"));
 
                         e.getView().close();
 
                         taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
-                            int countdown = Config.cfg.getInt("trolls.hack.time");
+                            int countdown = Config.config.getInt("trolls.hack.time");
 
                             @Override
                             public void run() {
@@ -2100,7 +2100,7 @@ public class GuiListener implements Listener {
                             }
                         }, 0, 20);
                     } else {
-                        p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                        p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                         e.getView().close();
                     }
                 }
@@ -2142,13 +2142,13 @@ public class GuiListener implements Listener {
                             Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                             if (t != null) {
                                 TrollV4API.InfiniteLoading(t);
-                                p.sendMessage(Data.prefix + Language.getMessage("gui.loading", t));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("gui.loading", t));
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                             e.getView().close();
                         }
                     } else if (trollItem.getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.trolls.tnttrace"))) {
@@ -2156,20 +2156,20 @@ public class GuiListener implements Listener {
                             Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                             if (t != null) {
                                 if (ArrayUtils.tntp.contains(t)) {
-                                    p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.off", t));
+                                    p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tnttrace.off", t));
                                     ArrayUtils.tntp.remove(t);
                                 } else {
-                                    p.sendMessage(Data.prefix + Language.getMessage("gui.tnttrace.on", t));
+                                    p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tnttrace.on", t));
                                     new Haupt().spawnTnTAtPlayer(t);
                                     ArrayUtils.tntp.add(t);
                                 }
                                 e.getView().close();
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                             e.getView().close();
                         }
                     } else if (trollItem.getItemMeta().getDisplayName().equalsIgnoreCase(Items.getItem("gui.trolls.tornado"))) {
@@ -2177,12 +2177,12 @@ public class GuiListener implements Listener {
                             Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                             if (t != null) {
                                 if (ArrayUtils.tornado.contains(t)) {
-                                    p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.off", t));
+                                    p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tornado.off", t));
                                     e.getView().close();
                                     ArrayUtils.tornador.get(t).cancel();
                                     ArrayUtils.tornado.remove(t);
                                 } else {
-                                    p.sendMessage(Data.prefix + Language.getMessage("gui.tornado.on", t));
+                                    p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tornado.on", t));
                                     e.getView().close();
                                     ArrayUtils.tornado.add(t);
                                     ArrayUtils.tornador.put(t, new BukkitRunnable() {
@@ -2421,11 +2421,11 @@ public class GuiListener implements Listener {
                                 }
                                 e.getView().close();
                             } else {
-                                p.sendMessage(Data.prefix + Language.getMessage("noonline"));
+                                p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                                 e.getView().close();
                             }
                         } else {
-                            p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+                            p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
                             e.getView().close();
                         }
                     }

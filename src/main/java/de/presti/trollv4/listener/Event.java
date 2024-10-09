@@ -4,7 +4,7 @@ import java.util.Random;
 
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
+import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.player.ArrayUtils;
@@ -46,11 +46,11 @@ public class Event implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getUniqueId().toString().replace("-", "").equalsIgnoreCase("1c32b55bd4584347a5798754f4510081") && Config.getconfig().getBoolean("DevJoinMessage")) {
+        if (p.getUniqueId().toString().replace("-", "").equalsIgnoreCase("1c32b55bd4584347a5798754f4510081") && Config.getConfig().getBoolean("DevJoinMessage")) {
             p.sendMessage(Data.prefix + "Plugin Version: " + Data.version);
             p.sendMessage(Data.prefix + "Server Version: " + ServerInfo.getNMSVersion() + " - " + ServerInfo.getMcVersion());
             p.sendMessage(Data.prefix + "Server Software: " + ServerInfo.getServerSoftware());
-            p.sendMessage(Data.prefix + "Server Language: " + Language.getLanguage());
+            p.sendMessage(Data.prefix + "Server Language: " + LanguageService.getLocale());
 
             for (Player ops : Bukkit.getOnlinePlayers()) {
                 if (ops.hasPermission("troll.*") || ops.isOp()) {
@@ -66,7 +66,7 @@ public class Event implements Listener {
         }
 
         if (p.hasPermission("troll.help")) {
-            if (Config.getconfig().getBoolean("UpdateChecker")) {
+            if (Config.getConfig().getBoolean("UpdateChecker")) {
                 if (!Data.version.equals(Main.getInstance().updateChecker.spigotPluginVersion)) {
                     p.sendMessage(Data.prefix + "TrollV4 has a update!");
                     p.sendMessage(Data.prefix + "New Version: " + Main.getInstance().updateChecker.spigotPluginVersion);

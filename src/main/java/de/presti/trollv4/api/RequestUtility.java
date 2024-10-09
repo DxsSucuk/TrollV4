@@ -10,6 +10,8 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class RequestUtility {
 
@@ -57,5 +59,45 @@ public class RequestUtility {
         }
 
         return new byte[0];
+    }
+
+    public static boolean download(String url, String fileName) {
+        if (url == null || fileName == null) {
+            return false;
+        }
+
+        if (url.toLowerCase().startsWith("https://github.com")) {
+            return downloadGithub(url, fileName);
+        } else {
+            return downloadDirect(url, fileName);
+        }
+    }
+
+    public static boolean downloadGithub(String url, String fileName) {
+        String cleaned = url.replaceAll("https://github.com/", "")
+                .replace("releases/tag/", "releases/tags/");
+
+        JsonObject jsonObject = RequestUtility.getJSON("https://api.github.com/repos/" + cleaned).getAsJsonObject();
+        if (jsonObject.has("assets")) {
+            JsonArray assets = jsonObject.getAsJsonArray("assets");
+            for (JsonElement jsonElement : assets) {
+                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+
+                if (jsonObject1.has("name") && jsonObject1.get("name").getAsString().endsWith(".jar")) {
+                    return downloadDirect(assets.get(0).getAsJsonObject().get("browser_download_url").getAsString(), fileName);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean downloadDirect(String url, String fileName) {
+        try {
+            Files.write(Paths.get(fileName), RequestUtility.getBytes(url));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

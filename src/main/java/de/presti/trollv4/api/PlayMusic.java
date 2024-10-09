@@ -3,7 +3,6 @@ package de.presti.trollv4.api;
 import java.io.File;
 
 import de.presti.trollv4.logging.Logger;
-import de.presti.trollv4.main.Main;
 import org.bukkit.entity.Player;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
@@ -34,7 +33,7 @@ public class PlayMusic {
 		} else {
 			if (!new File("plugins/TrollV4/rick.nbs").exists()) {
 				Logger.info("Downloading Rick.nbs!");
-				Main.download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
+				RequestUtility.download("https://cdn.azura.best/download/trollv4/uni/rick.nbs", "plugins/TrollV4/rick.nbs");
 				if (new File("plugins/TrollV4/rick.nbs").exists()) {
 					Logger.info("Downloaded Rick.nbs!");
 				} else {
@@ -42,7 +41,7 @@ public class PlayMusic {
 				}
 			} else if (!new File("plugins/TrollV4/giorno.nbs").exists()) {
 				Logger.info("Downloading Giorno.nbs!");
-				Main.download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+				RequestUtility.download("https://cdn.azura.best/download/trollv4/uni/giorno.nbs", "plugins/TrollV4/giorno.nbs");
 				if (new File("plugins/TrollV4/giorno.nbs").exists()) {
 					Logger.info("Downloaded Giorno.nbs!");
 				} else {

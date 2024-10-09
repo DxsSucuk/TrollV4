@@ -1,8 +1,5 @@
 package de.presti.trollv4.main;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.mysql.jdbc.exceptions.MySQLDataException;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
@@ -10,7 +7,7 @@ import de.presti.trollv4.cmd.Haupt;
 import de.presti.trollv4.cmd.TabCompleter;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
+import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.listener.ControlListener;
 import de.presti.trollv4.listener.Event;
 import de.presti.trollv4.listener.GuiListener;
@@ -47,7 +44,6 @@ public class Main extends JavaPlugin {
     private static Main instance;
     public UpdateChecker updateChecker;
     public Controls control;
-    public Config config;
 
     public void onEnable() {
         instance = this;
@@ -92,26 +88,23 @@ public class Main extends JavaPlugin {
             }
         }
 
-        Language.loadAll();
+        Config.init();
+        LanguageService.initializeLanguages();
         Items.loadAll();
-        config = new Config();
-        config.init();
 
         try {
             Metrics metrics = new Metrics(this, 4690);
-            metrics.addCustomChart(new Metrics.SimplePie("used_language", () -> Config.cfg.getString("Language")));
+            metrics.addCustomChart(new Metrics.SimplePie("used_language", LanguageService::getLocale));
         } catch (Exception e) {
             Sentry.captureException(e);
             Logger.error("Error Main Metrics Custom Chart: " + e.getMessage());
         }
 
-        Language.clearAll();
         Items.clearAll();
-        Language.loadAll();
         Items.loadAll();
-        config.updateConfig();
+        Config.updateConfig();
 
-        if (Config.getconfig().getBoolean("UpdateChecker")) {
+        if (Config.getConfig().getBoolean("UpdateChecker")) {
             updateChecker = new UpdateChecker(this);
             updateChecker.checkForUpdate();
         }
@@ -120,20 +113,15 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        Language.clearAll();
+        LanguageService.clear();
         Items.clearAll();
     }
 
     public static void reloadConfigurations() {
-        Language.clearAll();
+        LanguageService.clear();
         Items.clearAll();
-        Language.loadAll();
-        Items.loadAll();
-        getInstance().config = new Config();
-        getInstance().config.init();
-        Language.clearAll();
-        Items.clearAll();
-        Language.loadAll();
+        Config.init();
+        LanguageService.initializeLanguages();
         Items.loadAll();
     }
 
@@ -167,7 +155,7 @@ public class Main extends JavaPlugin {
         registerListeners();
         registerCommands();
 
-        if (Config.getconfig().getBoolean("Community-surprise")) {
+        if (Config.getConfig().getBoolean("Community-surprise")) {
             Logger.info("Community Surprise is enabled!\n" +
                     "This means your Server address will be shared with us!\n" +
                     "If you do not want this, please disable it in the config!");
@@ -199,8 +187,8 @@ public class Main extends JavaPlugin {
             Logger.info("Community Surprise is disabled!");
         }
 
-        String spookyWorldName = Config.getconfig().getString("trolls.spookyWorld.name");
-        if (Config.getconfig().getBoolean("trolls.spookyWorld.generate") && Bukkit.getWorld(spookyWorldName) == null) {
+        String spookyWorldName = Config.getConfig().getString("trolls.spookyWorld.name");
+        if (Config.getConfig().getBoolean("trolls.spookyWorld.generate") && Bukkit.getWorld(spookyWorldName) == null) {
             WorldCreator.createWorld(spookyWorldName);
         }
     }
@@ -223,35 +211,35 @@ public class Main extends JavaPlugin {
 
         if (!Files.exists(Paths.get("plugins/TrollV4/rick.nbs"))) {
             Logger.info("Downloading rick.nbs!");
-            download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/rick.nbs", "plugins/TrollV4/rick.nbs");
+            RequestUtility.download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/rick.nbs", "plugins/TrollV4/rick.nbs");
         }
 
         if (!Files.exists(Paths.get("plugins/TrollV4/giorno.nbs"))) {
             Logger.info("Downloading giorno.nbs!");
-            download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/giorno.nbs", "plugins/TrollV4/giorno.nbs");
+            RequestUtility.download("https://raw.githubusercontent.com/DxsSucuk/TrollV4/master/files/giorno.nbs", "plugins/TrollV4/giorno.nbs");
         }
 
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null && Config.getconfig().getBoolean("downloader.protocollib")) {
+        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null && Config.getConfig().getBoolean("downloader.protocollib")) {
             Logger.info("Downloading ProtocolLib!");
             if (ServerInfo.aboveOrEqual(20)) {
-                download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
+                RequestUtility.download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
             } else {
-                download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
+                RequestUtility.download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
             }
         }
 
-        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getconfig().getBoolean("downloader.noteblockapi")) {
+        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getConfig().getBoolean("downloader.noteblockapi")) {
             Logger.info("Downloading NoteBlockAPI!");
-            download("https://github.com/koca2000/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
+            RequestUtility.download("https://github.com/koca2000/NoteBlockAPI/releases/latest", "plugins/NoteBlockAPI.jar");
         }
 
-        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null && Config.getconfig().getBoolean("downloader.libsdisguises")) {
+        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null && Config.getConfig().getBoolean("downloader.libsdisguises")) {
             Logger.info("Downloading LibsDisguises!");
             if (ServerInfo.is(8)) {
                 // TODO:: why dont they have this on their fucking Github WHY!
-                download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
+                RequestUtility.download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
             } else {
-                download("https://github.com/libraryaddict/LibsDisguises/releases/latest", "plugins/LibsDisguises.jar");
+                RequestUtility.download("https://github.com/libraryaddict/LibsDisguises/releases/latest", "plugins/LibsDisguises.jar");
             }
         }
 
@@ -292,43 +280,5 @@ public class Main extends JavaPlugin {
         }
     }
 
-    public static boolean download(String url, String fileName) {
-        if (url == null || fileName == null) {
-            return false;
-        }
 
-        if (url.toLowerCase().startsWith("https://github.com")) {
-            return downloadGithub(url, fileName);
-        } else {
-            return downloadDirect(url, fileName);
-        }
-    }
-
-    public static boolean downloadGithub(String url, String fileName) {
-        String cleaned = url.replaceAll("https://github.com/", "")
-                .replace("releases/tag/", "releases/tags/");
-
-        JsonObject jsonObject = RequestUtility.getJSON("https://api.github.com/repos/" + cleaned).getAsJsonObject();
-        if (jsonObject.has("assets")) {
-            JsonArray assets = jsonObject.getAsJsonArray("assets");
-            for (JsonElement jsonElement : assets) {
-                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-
-                if (jsonObject1.has("name") && jsonObject1.get("name").getAsString().endsWith(".jar")) {
-                    return downloadDirect(assets.get(0).getAsJsonObject().get("browser_download_url").getAsString(), fileName);
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean downloadDirect(String url, String fileName) {
-        try {
-            Files.write(Paths.get(fileName), RequestUtility.getBytes(url));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }

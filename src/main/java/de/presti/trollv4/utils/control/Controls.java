@@ -1,6 +1,6 @@
 package de.presti.trollv4.utils.control;
 
-import de.presti.trollv4.config.Language;
+import de.presti.trollv4.config.language.LanguageService;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -40,7 +40,7 @@ public class Controls {
 		ArrayUtils.armor.remove(c.getName());
 
 		v.teleport(c);
-		c.sendMessage(Data.prefix + Language.getMessage("gui.stopcontrol.stop", v));
+		c.sendMessage(Data.prefix + LanguageService.getDefault("gui.stopcontrol.stop", v));
 	}
 
 	public void startControlling(Player v, Player c) {
@@ -65,7 +65,7 @@ public class Controls {
 		// Start a handling task
 		CheckVictim check = new CheckVictim(v, c);
 		check.runTaskTimer(Main.getInstance(), 0L, 20L);
-		c.sendMessage(Data.prefix + Language.getMessage("gui.startcontrol.start", v));
+		c.sendMessage(Data.prefix + LanguageService.getDefault("gui.startcontrol.start", v));
 	}
 
 }

@@ -59,7 +59,7 @@ public class Items {
 	}
 
 	public static String getItemLang() {
-		return Config.cfg.getBoolean("Custom-Item-Name") ? "custome" : "default";
+		return Config.config.getBoolean("Custom-Item-Name") ? "custome" : "default";
 	}
 
 	public static void loadAll() {
@@ -134,10 +134,10 @@ public class Items {
 	}
 
 	private static void loadCustome() {
-		if (Config.getFile3().exists()) {
+		if (Config.getItemFile().exists()) {
 			for (String paths : path) {
-				if (Config.getconfig3().get(paths) != null) {
-					addItem("custome", paths, Config.getconfig3().getString(paths));
+				if (Config.getItemFileConfig().get(paths) != null) {
+					addItem("custome", paths, Config.getItemFileConfig().getString(paths));
 				} else {
 					addItem("custome", paths, "Couldnt find " + paths + " in the items.yml!");
 				}

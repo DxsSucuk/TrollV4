@@ -3,6 +3,7 @@ package de.presti.trollv4.utils.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.presti.trollv4.config.language.LanguageService;
 import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,7 +20,6 @@ import org.bukkit.metadata.FixedMetadataValue;
 import com.cryptomorin.xseries.XMaterial;
 
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.config.Language;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
 
@@ -82,10 +82,10 @@ public class CommandGUI implements Listener {
 								Player victim = Bukkit.getPlayer(p.getMetadata("C_H").get(0).asString());
 								Main.stopControlling(victim, p);
 							} else {
-								p.sendMessage(Data.prefix + Language.getMessage("gui.stopcontrol.nocontrol"));
+								p.sendMessage(Data.prefix + LanguageService.getDefault("gui.stopcontrol.nocontrol"));
 							}
 						} else {
-							p.sendMessage(Data.prefix + Language.getMessage("nopermission"));
+							p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
 							e.getView().close();
 						}
 					}

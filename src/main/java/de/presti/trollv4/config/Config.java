@@ -11,138 +11,109 @@ import de.presti.trollv4.main.Data;
 
 public class Config {
 
-	public static FileConfiguration cfg;
-	public static FileConfiguration cfg2;
-	public static FileConfiguration cfg3;
+	public static FileConfiguration config;
+	public static FileConfiguration itemFileConfig;
 	
-	public void init() {
-		cfg = getconfig();
+	public static void init() {
+		config = getConfig();
 		if(!getFile().exists()) {
-			cfg.options().copyDefaults(true);
-			cfg.options().copyHeader(true);
-			cfg.options().header("###############################\n" + 
+			config.options().copyDefaults(true);
+			config.options().copyHeader(true);
+			config.options().header("###############################\n" +
 					"#                             #\n" + 
 					"# TrollV4 by Presti           #\n" + 
 					"# Configuration File " + Data.version + "    #\n" + 
 					"#                             #\n" + 
 					"###############################");
-			cfg.addDefault("Plugin-Version", Data.version);
-			cfg.addDefault("Language", "US");
-			cfg.addDefault("Custom-Item-Name", false);
-			cfg.addDefault("UpdateChecker", true);
-			cfg.addDefault("AutoUpdate", false);
-			cfg.addDefault("Animations", false);
-			cfg.addDefault("ASync", false);
-			cfg.addDefault("Community-surprise", false);
-			cfg.addDefault("DevJoinMessage", true);
-			cfg.addDefault("downloader.protocollib", true);
-			cfg.addDefault("downloader.libsdisguises", true);
-			cfg.addDefault("downloader.noteblockapi", true);
-			cfg.addDefault("trolls.hack.time", 15);
-			cfg.addDefault("trolls.fakeinv.time", 5);
-			cfg.addDefault("trolls.slipperyhands.time", 1);
-			cfg.addDefault("trolls.tnttrace.spawndelay", 2);
-			cfg.addDefault("trolls.spookyWorld.generate", false);
-			cfg.addDefault("trolls.spookyWorld.name", "SpookyWorld");
+			config.addDefault("Plugin-Version", Data.version);
+			config.addDefault("Language", "US");
+			config.addDefault("Custom-Item-Name", false);
+			config.addDefault("UpdateChecker", true);
+			config.addDefault("AutoUpdate", false);
+			config.addDefault("Animations", false);
+			config.addDefault("ASync", false);
+			config.addDefault("Community-surprise", false);
+			config.addDefault("DevJoinMessage", true);
+			config.addDefault("downloader.protocollib", true);
+			config.addDefault("downloader.libsdisguises", true);
+			config.addDefault("downloader.noteblockapi", true);
+			config.addDefault("trolls.hack.time", 15);
+			config.addDefault("trolls.fakeinv.time", 5);
+			config.addDefault("trolls.slipperyhands.time", 1);
+			config.addDefault("trolls.tnttrace.spawndelay", 2);
+			config.addDefault("trolls.spookyWorld.generate", false);
+			config.addDefault("trolls.spookyWorld.name", "SpookyWorld");
 
 			try {
-                cfg.save(getFile());
+                config.save(getFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
 
-			init2();
-			init3();
+			generateItemFile();
 		}
 	}
 
 	// TODO:: awful code create a migration system instead.
 	public static void createFirstConfigWithValue(String lang, boolean cin, boolean uc, boolean au, boolean anim, boolean async, boolean cs, int th, int tf, int ts, int tt) {
-		cfg = getconfig();
+		config = getConfig();
 		if(!getFile().exists()) {
-			cfg.options().copyDefaults(true);
-			cfg.options().copyHeader(true);
-			cfg.options().header("###############################\n" + 
+			config.options().copyDefaults(true);
+			config.options().copyHeader(true);
+			config.options().header("###############################\n" +
 					"#                             #\n" + 
 					"# TrollV4 by Presti           #\n" + 
 					"# Configuration File " + Data.version + "    #\n" + 
 					"#                             #\n" + 
 					"###############################");
 			
-			cfg.addDefault("Plugin-Version", Data.version);
-			cfg.addDefault("Language", lang);
-			cfg.addDefault("Custom-Item-Name", cin);
-			cfg.addDefault("UpdateChecker", uc);
-			cfg.addDefault("AutoUpdate", au);
-			cfg.addDefault("Animations", anim);
-			cfg.addDefault("ASync", async);
-			cfg.addDefault("Community-surprise", cs);
-			cfg.addDefault("trolls.hack.time", th);
-			cfg.addDefault("trolls.fakeinv.time", tf);
-			cfg.addDefault("trolls.slipperyhands.time", ts);
-			cfg.addDefault("trolls.tnttrace.spawndelay", tt);
-			cfg.addDefault("trolls.spookyWorld.generate", false);
-			cfg.addDefault("trolls.spookyWorld.name", "SpookyWorld");
-			cfg.addDefault("downloader.protocollib", false);
-			cfg.addDefault("downloader.libsdisguises", false);
-			cfg.addDefault("downloader.noteblockapi", true);
+			config.addDefault("Plugin-Version", Data.version);
+			config.addDefault("Language", lang);
+			config.addDefault("Custom-Item-Name", cin);
+			config.addDefault("UpdateChecker", uc);
+			config.addDefault("AutoUpdate", au);
+			config.addDefault("Animations", anim);
+			config.addDefault("ASync", async);
+			config.addDefault("Community-surprise", cs);
+			config.addDefault("trolls.hack.time", th);
+			config.addDefault("trolls.fakeinv.time", tf);
+			config.addDefault("trolls.slipperyhands.time", ts);
+			config.addDefault("trolls.tnttrace.spawndelay", tt);
+			config.addDefault("trolls.spookyWorld.generate", false);
+			config.addDefault("trolls.spookyWorld.name", "SpookyWorld");
+			config.addDefault("downloader.protocollib", false);
+			config.addDefault("downloader.libsdisguises", false);
+			config.addDefault("downloader.noteblockapi", true);
 
 			try {
-                cfg.save(getFile());
+                config.save(getFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
 		}
 			
-	}
-
-	// TODO:: Why creating all the languages?
-	public void init2() {
-		cfg2 = getconfig2();
-		if(!getFile2().exists()) {
-			cfg2.options().copyDefaults(true);
-			cfg2.options().copyHeader(true);
-			cfg2.options().header(
-					"###############################\n" + 
-					"#                             #\n" + 
-					"# TrollV" + Data.version + " by Presti       #\n" + 
-					"# Custome Message File        #\n" + 
-					"#                             #\n" + 
-					"###############################");
-			
-			for(String s : Language.lang) {
-				cfg2.addDefault(s, Language.getMessageFromLanguageRaw("us", s));
-			}
-			
-			try {
-				cfg2.save(getFile2());
-            } catch (IOException e) {
-			    e.printStackTrace();
-            }
-			
-		}
 	}
 
 	//TODO:: why not include in the language file? Its basically just a localization string?
-	public void init3() {
-		cfg3 = getconfig3();
-		if(!getFile3().exists()) {
-			cfg3.options().copyDefaults(true);
-			cfg3.options().copyHeader(true);
-			cfg3.options().header(
+	public static void generateItemFile() {
+		itemFileConfig = getItemFileConfig();
+		if(!getItemFile().exists()) {
+			itemFileConfig.options().copyDefaults(true);
+			itemFileConfig.options().copyHeader(true);
+			itemFileConfig.options().header(
 					"###############################\n" + 
 					"#                             #\n" + 
 					"# TrollV" + Data.version + " by Presti       #\n" + 
-					"# Custome ItemName File       #\n" + 
+					"# Custom ItemName File        #\n" +
 					"#                             #\n" + 
 					"###############################");
 			
 			for(String s : Items.path) {
-				cfg3.addDefault(s, Items.getItemFromChoiceRaw("default", s));
+				itemFileConfig.addDefault(s, Items.getItemFromChoiceRaw("default", s));
 			}
 			
 			try {
-				cfg3.save(getFile3());
+				itemFileConfig.save(getItemFile());
             } catch (IOException e) {
 			    e.printStackTrace();
             }
@@ -151,17 +122,18 @@ public class Config {
 	}
 
 	// TODO:: use this to migrate the config instead of recreating it with input values? Also please fix my grammar shit I was 14 or 15 when I made this code.
-	public void updateConfig() {
-		if (Config.cfg.getString("Plugin-Version") == null) {
+	// TODO:: this code is horrendous please kill my 14 year old self.
+	public static void updateConfig() {
+		if (Config.config.getString("Plugin-Version") == null) {
 			Config.getFile().delete();
-			new Config().init();
+			init();
 
 			Logger.info("Config broken recreating!");
 		} else {
 
-			if (!Config.cfg.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
+			if (!Config.config.getString("Plugin-Version").equalsIgnoreCase(Data.version)) {
 
-				double confv = Double.parseDouble((Config.cfg.getString("Plugin-Version").replace("4.", "")));
+				double confv = Double.parseDouble((Config.config.getString("Plugin-Version").replace("4.", "")));
 
 				double pluginv = Double.parseDouble((Data.version.replace("4.", "")));
 
@@ -171,53 +143,47 @@ public class Config {
 
 					Logger.info("Updating Config!");
 
-					Language.getLanguage();
-					String l = Language.getLanguage();
-					boolean cin = (Config.getconfig().get("Custom-Item-Name") != null && Config.getconfig().getBoolean("Custom-Item-Name"));
-					boolean uc = (Config.getconfig().get("AutoUpdate") != null && Config.getconfig().getBoolean("AutoUpdate"));
-					boolean autoup = (Config.getconfig().get("UpdateChecker") == null || Config.getconfig().getBoolean("UpdateChecker"));
-					boolean anim = (Config.getconfig().get("Animations") != null && Config.getconfig().getBoolean("Animations"));
-					boolean async = (Config.getconfig().get("ASync") != null && Config.getconfig().getBoolean("ASync"));
-					boolean cs = (Config.getconfig().get("Community-surprise") != null && Config.getconfig().getBoolean("Community-surprise"));
-					int hack = (Config.getconfig().get("trolls.hack.time") != null ? Config.getconfig().getInt("trolls.hack.time") : 15);
-					int fakeinv = (Config.getconfig().get("trolls.fakeinv.time") != null ? Config.getconfig().getInt("trolls.fakeinv.time") : 5);
-					int hands = (Config.getconfig().get("trolls.slipperyhands.time") != null ? Config.getconfig().getInt("trolls.slipperyhands.time") : 1);
+					String l = getConfig().get("Language") != null ? getConfig().getString("Language") : "en_us";
+					boolean cin = (Config.getConfig().get("Custom-Item-Name") != null && Config.getConfig().getBoolean("Custom-Item-Name"));
+					boolean uc = (Config.getConfig().get("AutoUpdate") != null && Config.getConfig().getBoolean("AutoUpdate"));
+					boolean autoup = (Config.getConfig().get("UpdateChecker") == null || Config.getConfig().getBoolean("UpdateChecker"));
+					boolean anim = (Config.getConfig().get("Animations") != null && Config.getConfig().getBoolean("Animations"));
+					boolean async = (Config.getConfig().get("ASync") != null && Config.getConfig().getBoolean("ASync"));
+					boolean cs = (Config.getConfig().get("Community-surprise") != null && Config.getConfig().getBoolean("Community-surprise"));
+					int hack = (Config.getConfig().get("trolls.hack.time") != null ? Config.getConfig().getInt("trolls.hack.time") : 15);
+					int fakeinv = (Config.getConfig().get("trolls.fakeinv.time") != null ? Config.getConfig().getInt("trolls.fakeinv.time") : 5);
+					int hands = (Config.getConfig().get("trolls.slipperyhands.time") != null ? Config.getConfig().getInt("trolls.slipperyhands.time") : 1);
 
-					int tnttrace = (Config.getconfig().get("trolls.tnttrace.spawndelay") != null ? Config.getconfig().getInt("trolls.tnttrace.spawndelay") : 2);
+					int tnttrace = (Config.getConfig().get("trolls.tnttrace.spawndelay") != null ? Config.getConfig().getInt("trolls.tnttrace.spawndelay") : 2);
 
-					if (Config.cfg.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
+					if (Config.config.getString("Plugin-Version").equalsIgnoreCase("4.3.8")) {
 						cs = true;
 					}
 
 					Config.getFile().delete();
 
-					Config.createFirstConfigWithValue((l.toUpperCase()), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
+					Config.createFirstConfigWithValue(l.toLowerCase(), cin, uc, autoup, anim, async, cs, hack, fakeinv, hands, tnttrace);
 					Logger.info("Config updated!");
 				}
 			}
 		}
 	}
 
-	public static FileConfiguration getconfig() {
+	public static FileConfiguration getConfig() {
+		if (config != null) return config;
 		return YamlConfiguration.loadConfiguration(getFile());
 	}
-	
-	public static FileConfiguration getconfig2() {
-		return YamlConfiguration.loadConfiguration(getFile2());
-	}
-	public static FileConfiguration getconfig3() {
-		return YamlConfiguration.loadConfiguration(getFile3());
+
+	public static FileConfiguration getItemFileConfig() {
+		if (itemFileConfig != null) return itemFileConfig;
+		return YamlConfiguration.loadConfiguration(getItemFile());
 	}
 	
 	public static File getFile() {
 		return new File("plugins/TrollV4", "config.yml");
 	}
 	
-	public static File getFile2() {
-		return new File("plugins/TrollV4", "messages.yml");
-	}
-	
-	public static File getFile3() {
+	public static File getItemFile() {
 		return new File("plugins/TrollV4", "items.yml");
 	}
 }
