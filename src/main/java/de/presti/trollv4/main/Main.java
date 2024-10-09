@@ -89,7 +89,7 @@ public class Main extends JavaPlugin {
         }
 
         Config.init();
-        LanguageService.initializeLanguages();
+        LanguageService.downloadLanguages();
         Items.loadAll();
 
         try {
