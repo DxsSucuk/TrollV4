@@ -84,7 +84,7 @@
         <dependency>
             <groupId>io.github.juliarn</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta7</version>
+            <version>3.0.0-beta9</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -162,6 +162,10 @@
                         <relocation>
                             <pattern>org.apache.commons.io</pattern>
                             <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.github.juliarn.npclib</pattern>
+                            <shadedPattern>de.presti.trollv4.shaded.com.github.juliarn.npclib</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>

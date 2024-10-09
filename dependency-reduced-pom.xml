@@ -4,7 +4,7 @@
   <groupId>de.presti</groupId>
   <artifactId>trollv4</artifactId>
   <name>TrollV4</name>
-  <version>4.5.25</version>
+  <version>4.5.27</version>
   <build>
     <resources>
       <resource>
@@ -59,6 +59,10 @@
             <relocation>
               <pattern>org.apache.commons.io</pattern>
               <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
+            </relocation>
+            <relocation>
+              <pattern>com.github.juliarn.npclib</pattern>
+              <shadedPattern>de.presti.trollv4.shaded.com.github.juliarn.npclib</shadedPattern>
             </relocation>
           </relocations>
           <filters>
