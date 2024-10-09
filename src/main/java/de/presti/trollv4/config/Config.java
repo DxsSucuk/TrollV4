@@ -144,6 +144,11 @@ public class Config {
 					Logger.info("Updating Config!");
 
 					String l = getConfig().get("Language") != null ? getConfig().getString("Language") : "en_us";
+					if (l.equalsIgnoreCase("us")) l = "en_us";
+					if (l.equalsIgnoreCase("de")) l = "de_de";
+					if (l.equalsIgnoreCase("es")) l = "es_es";
+					if (l.equalsIgnoreCase("ru")) l = "ru_ru";
+					if (l.equalsIgnoreCase("indo")) l = "id_id";
 					boolean cin = (Config.getConfig().get("Custom-Item-Name") != null && Config.getConfig().getBoolean("Custom-Item-Name"));
 					boolean uc = (Config.getConfig().get("AutoUpdate") != null && Config.getConfig().getBoolean("AutoUpdate"));
 					boolean autoup = (Config.getConfig().get("UpdateChecker") == null || Config.getConfig().getBoolean("UpdateChecker"));

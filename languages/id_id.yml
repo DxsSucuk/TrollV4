@@ -1,0 +1,149 @@
+language:
+  version: 4.5.25
+  locale: id_id
+  name: Indonesian
+  author: Mureyipo
+gui:
+  demo: player &c[PLAYER] &2sekarang lagi melihat layar demo!
+  tntworld:
+    default: The User &c[PLAYER] &2hanya melihat tnt di world!
+  fakeinv:
+    cancel: The User &c[PLAYER] &2dapat inventory nya kembali!
+    default: The User &c[PLAYER] &2kehilangan inventory nya untuk 5 detik!
+  spooky:
+    'on': Pemain &c[PLAYER] &2sekarang ada di Alam Bayangan!
+    'off': Pemain &c[PLAYER] &2tidak lagi berada di alam Bayangan!
+    world: Tidak ada dunia yang disebut "SpookyWorld"!
+  stopcontrol:
+    stop: kamu berhenti mengontol &c[PLAYER]&2!
+    nocontrol: kamu tidak mengontrol siapa siapa!
+  arrest: player &c[PLAYER] &2tertangkap!
+  crash:
+    default: kamu membuat &c[PLAYER] &2Crash!
+    message: 'java.net.ConnectException: Connection timed out: No further information'
+  tnttrace:
+    'on': dibelakang &c[PLAYER] &2sudah muncul banyak tnt!
+    'off': dibelakang &c[PLAYER] &2tnt nya sudah tidak muncul lagi!
+  anvils:
+    'on': Landasan sekarang jatuh pada pemain &c[PLAYER]&2!
+    'off': Landasan tidak lagi jatuh pada pemain &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna sekarang pergi &c[PLAYER] &2sendirian!
+    'on': Giorno Giovanna sekarang menyerang &c[PLAYER]&2!
+  hackserver: proses hack di mulai!
+  noinv:
+    'on': The User &c[PLAYER] &2tidak bisa buka inventory lagi!
+    'off': The User &c[PLAYER] &2sudah bisa buka inventory!
+  startcontrol:
+    cantcontrol: Kamu tidak bisa mengendalikan dia!
+    start: kamu telah mengendalikan &c[PLAYER]&2!
+    yourself: kamu tidak bisa mengontrol diri sendiri!
+    iscontroled: player ini sudah di control!
+    alreadyc: kamu sudah mengontrol orang lain!
+  freeze:
+    'on': kamu membekukan &c[PLAYER]&2!
+    'off': kamu mencairkan &c[PLAYER]&2!
+  rotate:
+    'on': player &c[PLAYER] &2berputar!
+    'off': player &c[PLAYER] &2berhenti berputar!
+  confused:
+    'on': The User &c[PLAYER] &2sekarang pusing!
+    'off': The User &c[PLAYER] &2sudah tidak pusing!
+  tornado:
+    'off': The User &c[PLAYER] &2sudah tidak di kejar tornado!
+    'on': The User &c[PLAYER] &2di kejar tornado!
+  explode: kamu membuat &c[PLAYER] &2meledak!
+  fakeop:
+    default: kamu fake op kan &c[PLAYER]&2!
+    opm: '&7&o[Server: Opped [PLAYER]]'
+  slipperyhands:
+    'off': The User &c[PLAYER] &2tangan nya sudah di bersihkan!
+    'on': The User &c[PLAYER] &2tangan nya di oleskan mentega!
+  endcredits: Pemain &c[PLAYER] &2sekarang melihat kredit akhir!
+  rndmtp:
+    'on': player &c[PLAYER] &2mulai berpindah!
+    'off': player &c[PLAYER] &2sudah berhenti berpindah!
+  mlg: kamu membuat &c[PLAYER] &2melakukan &cMLG&2!
+  deaf:
+    'off': The User &c[PLAYER] &2sudah bisa mendengar!
+    'on': The User &c[PLAYER] &2tidak bisa mendengar apa apa lagi!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Stop &cHacking(SPEED) &7[&1VL&7/&620&7]'
+    default: anticheat sudah di nyalakan &c[PLAYER]&2!
+  fakehack:
+    'off': kamu memaksa &c[PLAYER] &2untuk berhenti!
+    'on': kamu membuat &c[PLAYER] &2hack!
+  arrowspam:
+    'off': The User &c[PLAYER] &2sudah tidak di spam anak panah lagi!
+    'on': The User &c[PLAYER] &2telah di spam anak panah!
+  dontstopjumping:
+    'off': The User &c[PLAYER] &2berhenti lompat!
+    'on': The User &c[PLAYER] &2tidak bisa berhenti melompat!
+  rickroll:
+    ishearing: The User &c[PLAYER] &2sudah mendengar sebuah lagu!
+    default: The User &c[PLAYER] &2mendengar sebuah lagu!
+  rocket: kamu membuat &c[PLAYER] &2terbang seperti rocket!
+  vomit:
+    'on': Pemain &c[PLAYER] &2tidak bisa berhenti muntah!
+    'off': Pemain &c[PLAYER] &2berhenti muntah!
+  lag:
+    'on': player &c[PLAYER] &2sekarang lagging!
+    'off': player &c[PLAYER] &2berhenti lagging!
+  hackuser: proses hack sedang dimulai!
+  spam: kamu telah spam &c[PLAYER]&2!
+  loading: Pemain &c[PLAYER] &2 sekarang melihat layar pemuatan hingga mereka memulai
+    ulang!
+  strike: kamu memukul &c[PLAYER] &2dengan petir!
+  fakeleave:
+    message: '&6[PLAYER] left the Game.'
+    default: fake message sudah di jabarkan di chat!
+  lsd: player &c[PLAYER] &2sekarang melihat dunia lebih berbeda!
+  herobrine:
+    'on': The User &c[PLAYER] &2sekarang jadi herobrine!
+    'off': The User &c[PLAYER] &2tidak jadi herobrine lagi!
+  cows: Sapi agresif sekarang menyerang &c[PLAYER]&2!
+  tpall: semua player teleport ke kamu!
+  wtf: Player &c[PLAYER] &2menjadi gila!
+  webtrap: player &c[PLAYER] &2sekarang stuck di cobweb!
+  guardian: player &c[PLAYER] &2sekarang mempunyai efek guardian!
+command:
+  troll:
+    gm: Anda sekarang berada di Gamemode 1!
+    fly:
+      'off': Kamu sudah tidak bisa terbang lagi!
+      'on': Kamu bisa terbang sekarang!
+    vanish:
+      'off': kamu tidak vanish lagi!
+      'on': sekarang kamu lagi vanish!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 by
+        '3': Semua Perintah /troll help
+        '6': '&8>'
+        '5': Presti
+    default: Menu Troll telah dibuka!
+    server: Server Troll Inventory dibuka!
+    wrongargs: Argumen yang tidak diketahui, harap gunakan /troll help
+    help:
+      line:
+        '8': '&4Troll Vanish &8- &c/troll v'
+        '7': '&4Item Troll GUI &8- &c/troll items'
+        '6': '&4Server Troll GUI &8- &c/troll server'
+        '5': '&4Player Troll GUI &8- &c/troll'
+        '9': '&4Gamemode &8- &c/troll gm'
+        '4': '&4Commands:'
+        '3': Troll Vanish &aActive!
+        '2': Troll Mode &aActive!
+        '1': TrollV4 by Presti
+        '11': '&4Changelog &8- &c/troll changelog'
+        '10': '&4Fly &8- &c/troll fly'
+        '12': '&4Credits &8- &c/troll credits'
+    items: Item Troll Inventory dibuka!
+    noplayer: Anda bukan seorang Player!
+noonline: Pemain ini tidak online!
+control:
+  world: '&4Mengganti dunia'
+  distance: '&4TERLALU JAUH'
+nopermission: Anda tidak memiliki izin untuk perintah ini!

@@ -1,0 +1,148 @@
+language:
+  version: 4.5.25
+  locale: en_us
+  name: English
+  author: Presti
+gui:
+  demo: The Player &c[PLAYER] &2is now seeing a Demo screen!
+  tntworld:
+    default: The User &c[PLAYER] &2now sees only TnT in his World!
+  fakeinv:
+    cancel: The User &c[PLAYER] &2got his Inventory back!
+    default: The User &c[PLAYER] &2lost his Inventory for 5 Seconds!
+  spooky:
+    'on': The player &c[PLAYER] &2is now in the Shadow Realm!
+    'off': The player &c[PLAYER] &2is no longer in the Shadow realm!
+    world: There is no world called "SpookyWorld"!
+  stopcontrol:
+    stop: You stopped Controlling &c[PLAYER]&2!
+    nocontrol: You control nobody!
+  arrest: The User &c[PLAYER] &2is Arrested!
+  crash:
+    default: You let the Player &c[PLAYER] &2Crash!
+    message: 'java.net.ConnectException: Connection timed out: No further information'
+  tnttrace:
+    'on': Behind the User &c[PLAYER] &2now a trace of TnT spawned!
+    'off': Behind the User &c[PLAYER] &2no trace of TnT is spawned anymore!
+  anvils:
+    'on': Anvils now fall on player &c[PLAYER]&2!
+    'off': Anvils no longer fall on the player &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna now leaves &c[PLAYER] &2alone!
+    'on': Giorno Giovanna now attacks &c[PLAYER]&2!
+  hackserver: The hacking process starts!
+  noinv:
+    'on': The User &c[PLAYER] &2cant open any Inventory anymore!
+    'off': The User &c[PLAYER] &2can open any Inventory again!
+  startcontrol:
+    cantcontrol: You cant control this Player!
+    start: Youre Controlling &c[PLAYER]&2!
+    yourself: You cant control yourself!
+    iscontroled: The player is already controlled!
+    alreadyc: You already control someone else!
+  freeze:
+    'on': You freezed the Player &c[PLAYER]&2!
+    'off': You unfreezed the Player &c[PLAYER]&2!
+  rotate:
+    'on': The User &c[PLAYER] &2started rotating!
+    'off': The User &c[PLAYER] &2stopped rotating!
+  confused:
+    'on': The User &c[PLAYER] &2is now confused!
+    'off': The User &c[PLAYER] &2got some milk!
+  tornado:
+    'off': The User &c[PLAYER] &2is no longer pursued by a tornado!
+    'on': The User &c[PLAYER] &2is now getting chased by a tornado!
+  explode: You made the Player &c[PLAYER] &2explode!
+  fakeop:
+    default: You Fakeopped &c[PLAYER]&2!
+    opm: '&7&o[Server: Opped [PLAYER]]'
+  slipperyhands:
+    'off': The User &c[PLAYER] &2cleaned his hands!
+    'on': The User &c[PLAYER] &2played with some butter!
+  endcredits: The player &c[PLAYER] &2now sees the end credits!
+  rndmtp:
+    'on': The User &c[PLAYER] &2starts to be teleported through the air!
+    'off': The User &c[PLAYER] &2stops to be teleported through the air!
+  mlg: You let the Player &c[PLAYER] &2do an &cMLG&2!
+  deaf:
+    'off': The User &c[PLAYER] &2can hear something again!
+    'on': The User &c[PLAYER] &2cant hear anything anymore!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Stop &cHacking(SPEED) &7[&1VL&7/&620&7]'
+    default: The Anticheat started detecting &c[PLAYER]&2!
+  fakehack:
+    'off': You forced the Player &c[PLAYER] &2to stop!
+    'on': You made the Player &c[PLAYER] &2hack!
+  arrowspam:
+    'off': The User &c[PLAYER] &2is now not getting spammend by Arrows anymore!
+    'on': The User &c[PLAYER] &2is now getting spammend by Arrows!
+  dontstopjumping:
+    'off': The User &c[PLAYER] &2has stopped jumping!
+    'on': The User &c[PLAYER] &2cant stop jumping!
+  rickroll:
+    ishearing: The User &c[PLAYER] &2is already getting rickrolled!
+    default: The User &c[PLAYER] &2is getting rickrolled!
+  rocket: You made the Player &c[PLAYER] &2fly like a rocket!
+  vomit:
+    'on': The player &c[PLAYER] &2can't stop vomiting!
+    'off': The player &c[PLAYER] &2stopped vomiting!
+  lag:
+    'on': The User &c[PLAYER] &2is now lagging!
+    'off': The User &c[PLAYER] &2stopped lagging
+  hackuser: The hacking process starts!
+  spam: You've completely blundered the Player &c[PLAYER]&2!
+  loading: The player &c[PLAYER] &2is now seeing the loading screen till they restart!
+  strike: You hit the Player &c[PLAYER] &2with a lightning bolt!
+  fakeleave:
+    message: '&6[PLAYER] left the Game.'
+    default: A Fake Message has been Posted in the Chat!
+  lsd: The User &c[PLAYER] &2is now seeing the World in another Perspectiv!
+  herobrine:
+    'on': The User &c[PLAYER] &2is now Herobrine!
+    'off': The User &c[PLAYER] &2isnt anymore Herobrine!
+  cows: Aggressive cows are now attacking &c[PLAYER]&2!
+  tpall: All players were teleported to you!
+  wtf: The User &c[PLAYER] &2is going crazy!
+  webtrap: The User &c[PLAYER] &2is now stucked in Cobweb!
+  guardian: The User &c[PLAYER] &2now has the Guardian effect!
+command:
+  troll:
+    gm: Youre now in Gamemode 1!
+    fly:
+      'off': You cant fly anymore!
+      'on': You can fly now!
+    vanish:
+      'off': Youre not longer in Vanish!
+      'on': Youre now in Vanish!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 by
+        '3': All Commands /troll help
+        '6': '&8>'
+        '5': Presti
+    default: Troll Menu has been opened!
+    server: Server Troll Inv was opened!
+    wrongargs: Unknown arguments please use /troll help
+    help:
+      line:
+        '8': '&4Troll Vanish &8- &c/troll v'
+        '7': '&4Item Troll GUI &8- &c/troll items'
+        '6': '&4Server Troll GUI &8- &c/troll server'
+        '5': '&4Player Troll GUI &8- &c/troll'
+        '9': '&4Gamemode &8- &c/troll gm'
+        '4': '&4Commands:'
+        '3': Troll Vanish &aActive!
+        '2': Troll Mode &aActive!
+        '1': TrollV4 by Presti
+        '11': '&4Changelog &8- &c/troll changelog'
+        '10': '&4Fly &8- &c/troll fly'
+        '12': '&4Credits &8- &c/troll credits'
+    items: Item Troll Inv was opened!
+    noplayer: Youre not a Player!
+noonline: This Player is not online!
+control:
+  world: '&4SWITCHED WORLDS'
+  distance: '&4TOO FAR AWAY'
+nopermission: You do not have the permission for this command!

@@ -1,0 +1,149 @@
+language:
+  version: 4.5.25
+  locale: ru_ru
+  name: Russian
+  author: MobyD
+gui:
+  demo: Игрок &c[PLAYER] &2теперь видит экран демонстрации!
+  tntworld:
+    default: Игрок &c[PLAYER] &2теперь видит только TNT в радиусе 75 блоков!
+  fakeinv:
+    cancel: Игрок &c[PLAYER] &2вернулся в свой инвентарь!
+    default: Игрок &c[PLAYER] &2потерял инвентарь на 5 секунд!
+  spooky:
+    'on': Игрок &c[PLAYER] &2теперь находится в царстве теней!
+    'off': Игрок &c[PLAYER] &2больше не находится в царстве теней!
+    world: Не существует мира под названием "SpookyWorld"!
+  stopcontrol:
+    stop: Теперь вы больше не контролируете &c[PLAYER]&2!
+    nocontrol: Вы никого не контролируете!
+  arrest: Игрок &c[PLAYER] &2в ловушке!
+  crash:
+    default: Вы привели к сбою игрока &c[PLAYER]&2!
+    message: 'java.net.ConnectException: Connection timed out: No further information'
+  tnttrace:
+    'on': TnT теперь появляется за игроком &c[PLAYER]&2!
+    'off': TnT больше не появляется за игроком &c[PLAYER]&2!
+  anvils:
+    'on': Наковальни теперь будут падать на игрока &c[PLAYER]&2!
+    'off': Больше нет наковальни, падающей на игрока &c[PLAYER]&2!
+  giorno:
+    'off': Джорно Джованна теперь оставляет игрока &c[PLAYER] &2в покое!
+    'on': Джорно Джованна теперь атакует &c[PLAYER]&2!
+  hackserver: Начинается чит-процесс!
+  noinv:
+    'on': Игрок &c[PLAYER] &2больше не может открывать инвентарь!
+    'off': Игрок &c[PLAYER] &2теперь снова может открывать инвентарь!
+  startcontrol:
+    cantcontrol: Вы не можете управлять этим игроком!
+    start: Теперь вы контролируете &c[PLAYER]&2!
+    yourself: Ты не можешь себя контролировать!
+    iscontroled: Игрок уже находится под контролем!
+    alreadyc: Вы уже контролируете кого-то другого!
+  freeze:
+    'on': Вы заморозили &c[PLAYER]&2!
+    'off': Вы разморозили &c[PLAYER]&2!
+  rotate:
+    'on': Игрок &c[PLAYER] &2теперь вращается!
+    'off': Игрок &c[PLAYER] &2больше не поворачивается!
+  confused:
+    'on': Игрок &c[PLAYER] &2сбит с толку!
+    'off': Игрок &c[PLAYER] &2снова в здравом уме!
+  tornado:
+    'off': Игрок &c[PLAYER] &2больше не преследуется торнадо!
+    'on': Игрок &c[PLAYER] &2теперь преследуется торнадо!
+  explode: Вы заставили игрока &c[PLAYER] &2взорваться!
+  fakeop:
+    default: У вас есть &c[PLAYER]&2Fakeoped!
+    opm: '&7&o[Server: [PLAYER] теперь оператор]'
+  slipperyhands:
+    'off': Игрок &c[PLAYER] &2запил масло!
+    'on': У игрока &c[PLAYER] &2руки покрыты маслом!
+  endcredits: Игрок &c[PLAYER] &2теперь может видеть кредиты!
+  rndmtp:
+    'on': Игрок &c[PLAYER] &2телепортируется по воздуху!
+    'off': Игрок &c[PLAYER] &2больше не телепортируется по воздуху!
+  mlg: Вы позволяете игроку &c[PLAYER] &2выполнить &cMLG&2!
+  deaf:
+    'off': Игрок &c[PLAYER] &2снова что-то слышит!
+    'on': Игрок &c[PLAYER] &2больше ничего не слышит!
+  anticheat:
+    detected: '&7 [&cPrestige&7-&cAntiCheat&7] &2 прекратить прослушивание &ccheaten
+      (SPEED) &7 [&1VL&7 / &620&7]'
+    default: Античит начинает замечать &c[PLAYER]&2!
+  fakehack:
+    'off': Вы заставили игрока &c[PLAYER]&2 покинуть игру!
+    'on': У вас есть &c[PLAYER]&2, чтобы обмануть!
+  arrowspam:
+    'off': Игрок &c[PLAYER] &2больше не преследуется стрелами!
+    'on': Игрок &c[PLAYER] &2теперь преследуется стрелами!
+  dontstopjumping:
+    'off': Игрок &c[PLAYER] &2теперь перестает прыгать!
+    'on': Игрок &c[PLAYER] &2уже бросает броски!
+  rickroll:
+    ishearing: Der Spieler &c[PLAYER] &2wird schon gerickrolled!
+    default: Игрок &c[PLAYER] &2теперь катился по ролику!
+  rocket: Вы позволяете игроку &c[PLAYER] &2летать, как ракета!
+  vomit:
+    'on': Игрок &c[PLAYER] &2 не может остановить рвоту!
+    'off': Игрок &c[PLAYER] &2остановил рвоту!
+  lag:
+    'on': Игрок &c[PLAYER] &2начинает отставать!
+    'off': Игрок &c[PLAYER] &2перестает отставать!
+  hackuser: Начинается чит-процесс!
+  spam: Вы полностью заспамили игрока &c[PLAYER]&2!
+  loading: Игрок &c[PLAYER] &2 теперь видит экран загрузки до перезапуска!
+  strike: Вы поразили игрока &c[PLAYER] &2молнией!
+  fakeleave:
+    message: '&6[PLAYER] left the Game.'
+    default: В чат отправлено сообщение FakeLeave!
+  lsd: Игрок &c[PLAYER] &2видит мир по-другому!
+  herobrine:
+    'on': Игрок &c[PLAYER] &2теперь Херобрин!
+    'off': Игрок &c[PLAYER] &2больше не Herobrine!
+  cows: Агрессивные коровы теперь атакуют &c[PLAYER]&2!
+  tpall: Все игроки были телепортированы к вам!
+  wtf: Игрок &c[PLAYER] &2сходит с ума!
+  webtrap: Игрок &c[PLAYER] &2теперь заперт в паутине!
+  guardian: Игрок &c[PLAYER] &2теперь имеет эффект Стража!
+command:
+  troll:
+    gm: Вы сейчас в игровом режиме 1!
+    fly:
+      'off': Ты больше не можешь летать!
+      'on': Теперь ты можешь летать!
+    vanish:
+      'off': Вы покинули Исчезновение!
+      'on': Вы сейчас в Исчезновении!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 от
+        '3': Все команды /troll help
+        '6': '&8>'
+        '5': Presti
+    default: Открылось меню троллей!
+    server: Инвентаризация серверных троллей открыта!
+    wrongargs: Пожалуйста, используйте неизвестные аргументы /troll help
+    help:
+      line:
+        '8': '&4Troll Vanish &8- &c/troll v'
+        '7': '&4Item Troll GUI &8- &c/troll items'
+        '6': '&4Server Troll GUI &8- &c/troll server'
+        '5': '&4Player Troll GUI &8- &c/troll'
+        '9': '&4Игровой режим &8- &c/troll gm'
+        '4': '&4Команды:'
+        '3': Исчезновение троллей &aВключено!
+        '2': Режим тролля &aАктивирован!
+        '1': TrollV4 от Presti
+        '11': '&4Журнал изменений &8- &c/troll changelog'
+        '10': '&4Летать &8- &c/troll fly'
+        '12': '&4Кредиты &8- &c/troll credits'
+    items: Инвентарь тролля предметов открыт!
+    noplayer: Ты не геймер!
+noonline: Этот игрок не в сети!
+control:
+  world: '&cМир изменился!'
+  distance: '&cСлишком далеко!'
+nopermission: У вас нет прав на эту команду!

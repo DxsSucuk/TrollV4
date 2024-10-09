@@ -1,0 +1,149 @@
+language:
+  version: 4.5.25
+  locale: es_es
+  name: Spanish
+  author: LaFamilyGreen
+gui:
+  demo: ¡El jugador &c[PLAYER] &2está viendo una pantalla de demostración!
+  tntworld:
+    default: ¡El usuario &c[PLAYER] &2ahora solo ve TnT en su mundo!
+  fakeinv:
+    cancel: ¡El usuario &c[PLAYER] &2recuperó su inventario!
+    default: ¡El usuario &c[PLAYER] &2perdió su inventario durante 5 segundos!
+  spooky:
+    'on': ¡El jugador &c[PLAYER] &2está ahora en el Reino Sombría!
+    'off': ¡El jugador &c[PLAYER] &2ya no está en el reino Sombría!
+    world: No hay ningún mundo llamado "SpookyWorld"!
+  stopcontrol:
+    stop: ¡Has dejado de controlar &c[PLAYER]&2!
+    nocontrol: ¡No controlas nada!
+  arrest: El usuario &c[PLAYER] &2está detenido!
+  crash:
+    default: ¡Deja que el jugador &c[PLAYER] &2bloquee!
+    message: 'java.net.ConnectException: Conexión agotada: No hay más información'
+  tnttrace:
+    'on': ¡Entra al usuario &c[PLAYER] &2ahora un rastro de TnT aparecido!
+    'off': ¡Contra el usuario &c[PLAYER] &2no se ha generado ningún rastro de TnT!
+  anvils:
+    'on': ¡Los yunques ahora caen en jugador &c[PLAYER]&2!
+    'off': ¡Los yunques ya no caen en el jugador &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna ahora deja &c[PLAYER] &2solo!
+    'on': Giorno Giovanna ahora ataca &c[PLAYER]&2!
+  hackserver: ¡El proceso de piratería comienza ahora!
+  noinv:
+    'on': ¡El usuario &c[PLAYER] &2¡Ya no puedo abrir ningún Inventario!
+    'off': ¡El usuario &c[PLAYER] &2puede volver a abrir cualquier inventario!
+  startcontrol:
+    cantcontrol: ¡No puedes controlar a este jugador!
+    start: Controlar su &c[PLAYER]&2!
+    yourself: ¡No puedes controlarte a ti mismo!
+    iscontroled: ¡El jugador ya está controlado!
+    alreadyc: ¡Ya controlas a otra persona!
+  freeze:
+    'on': Has congelado al jugador &c[PLAYER]&2!
+    'off': Has descongelado al jugador &c[PLAYER]&2!
+  rotate:
+    'on': ¡El usuario &c[PLAYER] &2ha empezado a girar!
+    'off': ¡El usuario &c[PLAYER] &2ha dejado de girar!
+  tornado:
+    'off': El usuario &c[PLAYER] &2ya no es perseguido por un tornado!
+    'on': ¡El usuario &c[PLAYER] &2está siendo perseguido por un tornado!
+  explode: Has hecho al jugador &c[PLAYER] &2explode!
+  fakeop:
+    default: ¡Usted falsificó &c[PLAYER]&2!
+    opm: '&7&o[Servidor: Apareció [PLAYER]]'
+  slipperyhands:
+    'off': ¡El usuario &c[PLAYER] &2limpió sus manos!
+    'on': ¡El usuario &c[PLAYER] &2jugó con algo de mantequilla!
+  endcredits: ¡El jugador &c[PLAYER] &2ahora ve los créditos finales!
+  confesed:
+    'on': ¡El usuario &c[PLAYER] &2está ahora confundido!
+    'off': ¡El usuario &c[PLAYER] &2obtuvo algo de leche!
+  rndmtp:
+    'on': ¡El usuario &c[PLAYER] &2empieza a ser teletransportado por el aire!
+    'off': ¡El usuario &c[PLAYER] &2para ser teletransportado por el aire!
+  mlg: ¡Deja al jugador &c[PLAYER] &2hacer un &cMLG&2!!
+  deaf:
+    'off': ¡El usuario &c[PLAYER] &2puede escuchar algo de nuevo!
+    'on': ¡El usuario &c[PLAYER] &2ya no puedo oír nada!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Detectar &cHacking(SPEED) &7[&1VL&7/&620&7]'
+    default: ¡El Anticheat ha empezado a detectar &c[PLAYER]&2!
+  fakehack:
+    'off': ¡Has forzado al jugador &c[PLAYER] &2a parar!
+    'on': Has hecho al jugador &c[PLAYER] &2hack!
+  arrowspam:
+    'off': ¡El usuario &c[PLAYER] &2ya no está recibiendo spammend por Flechas!
+    'on': ¡El usuario &c[PLAYER] &2ahora está recibiendo spammend por flechas!
+  dontstopjumping:
+    'off': ¡El usuario &c[PLAYER] &2ha dejado de saltar!
+    'on': ¡El usuario &c[PLAYER] &2no puedo dejar de saltar!
+  rickroll:
+    ishearing: ¡El usuario &c[PLAYER] &2ya se está rickrollando!
+    default: ¡El usuario &c[PLAYER] &2se está haciendo rickrolling!
+  rocket: Hiciste al jugador &c[PLAYER] &2volar como un bolsillo!
+  vomit:
+    'on': El jugador &c[PLAYER] &2¡no puede parar de vomitar!
+    'off': ¡El jugador &c[PLAYER] &2dejó de vomitar!
+  lag:
+    'on': ¡El usuario &c[PLAYER] &2se ha retrasado!
+    'off': El usuario &c[PLAYER] &2ha dejado de retrasarse
+  spam: ¡Has golpeado completamente al jugador &c[PLAYER]&2!
+  loading: ¡El jugador &c[PLAYER] &2está viendo ahora la pantalla de carga hasta que
+    reinicie!
+  strike: ¡Has golpeado el jugador &c[PLAYER] &2con un relámpago!
+  fakeleave:
+    message: '&6[PLAYER] ha salido del juego.'
+    default: ¡Se ha publicado un mensaje falso en el chat!
+  lsd: ¡El usuario &c[PLAYER] &2está viendo el mundo en otro perspectivo!
+  herobrine:
+    'on': ¡El usuario &c[PLAYER] &2es ahora Herobrine!
+    'off': ¡El usuario &c[PLAYER] &2ya no es Herobrine!
+  cows: Ahora las vacas agresivas atacan &c[PLAYER]&2!
+  tpall: ¡Todos los jugadores fueron teletransportados a ti!
+  wtf: ¡El usuario &c[PLAYER] &2se está volviendo loco!
+  webtrap: ¡El usuario &c[PLAYER] &2está atascado en Cobweb!
+  guardian: ¡El usuario &c[PLAYER] &2ahora tiene el efecto Guardiano!
+  hackeser: ¡El proceso de piratería comienza ahora!
+command:
+  troll:
+    gm: ¡Ahora en Gamemode 1!
+    fly:
+      'off': ¡No puedes volar más!
+      'on': ¡Ya puedes volar!
+    vanish:
+      'off': ¡Tu ya no está en Vanish!
+      'on': ¡Ya está en Vanish!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 por
+        '3': Todos los comandos /troll help
+        '6': '&8>'
+        '5': Presti
+    default: ¡El Menú Troll ha sido abierto!
+    server: Server Troll Inv fue abierto!
+    wrongargs: Argumentos desconocidos, por favor usa /troll
+    help:
+      line:
+        '8': '&4Troll Vanish &8- &c/troll v'
+        '7': '&4Objeto GUI troll &8- &c/objetos troll'
+        '6': '&4Servidor GUI Troll &8- &c/servidor troll'
+        '5': '&4Jugador Troll GUI &8- &c/troll'
+        '9': '&4Gamemode &8- &c/troll gm'
+        '4': '&4Comandos:'
+        '3': Troll Desaparecer &aActivado!
+        '2': Modo troll &aActivado!!
+        '1': TrollV4 de Presti
+        '11': '&4Registro de cambios &8- &c/troll changelog'
+        '10': '&4Volar &8- &c/vuelo troll'
+        '12': '&4Créditos &8- &c/troll credits'
+    items: ¡Artículo Troll Inv fue abierto!
+    noplayer: No es jugador!
+noonline: ¡Este jugador no está conectado!
+control:
+  world: '&4MUNDO CHED'
+  distance: '&4DEMASIADO LEJOS'
+nopermission: ¡No tienes permiso para este comando!

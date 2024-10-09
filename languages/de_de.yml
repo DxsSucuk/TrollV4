@@ -1,0 +1,149 @@
+language:
+  version: 4.5.25
+  locale: de_de
+  name: German
+  author: Presti
+gui:
+  demo: Der Spieler &c[PLAYER] &2sieht nun den Demoscreen!
+  tntworld:
+    default: Der Spieler &c[PLAYER] &2sieht nun in einem Radius von 75 blöcken nur
+      TNT!
+  fakeinv:
+    cancel: Der Spieler &c[PLAYER] &2hat nun sein Inventar wieder bekommen!
+    default: Der Spieler &c[PLAYER] &2hat nun für 5 Sekunden sein Inventar verloren!
+  spooky:
+    'on': Der Spieler &c[PLAYER] &2ist nun im Schattenreich!
+    'off': Der Spieler &c[PLAYER] &2ist nun nicht mehr im Schattenreich!
+    world: Die Welt "SpookyWorld" existiert nicht!
+  stopcontrol:
+    stop: Du kontrollierst nun &c[PLAYER] &2nicht mehr!
+    nocontrol: Du kontrollierst niemanden!
+  arrest: Der Spieler &c[PLAYER] &2ist nun gefangen!
+  crash:
+    default: Du hast den Spieler &c[PLAYER] &2Crashen lassen!
+    message: 'java.net.ConnectException: Connection timed out: No further information'
+  tnttrace:
+    'on': Hinter dem Spieler &c[PLAYER] &2wird nun TnT gespawnt!
+    'off': Hinter dem Spieler &c[PLAYER] &2wird nun nicht mehr TnT gespawnt!
+  anvils:
+    'on': Es fallen nun Anvils auf den Spieler &c[PLAYER]&2!
+    'off': Es fallen nun keine weiteren Anvils auf den Spieler &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna lässt nun &c[PLAYER] &2in Ruhe!
+    'on': Giorno Giovanna greift nun &c[PLAYER] &2an!
+  hackserver: Der Hackvorgang startet!
+  noinv:
+    'on': Der Spieler &c[PLAYER] &2kann nun keine Inventare mehr öffnen!
+    'off': Der Spieler &c[PLAYER] &2kann nun wieder Inventare öffnen!
+  startcontrol:
+    cantcontrol: Du kannst diesen Spieler nicht kontrollieren!
+    start: Du kontrollierst nun &c[PLAYER]&2!
+    yourself: Du kannst nicht dich selbst kontrollieren!
+    iscontroled: Der Spieler wird schon kontrolliert!
+    alreadyc: Du kontrollierst schon jemanden anderen!
+  freeze:
+    'on': Du hast &c[PLAYER] &2gefreezt!
+    'off': Du hast &c[PLAYER] &2unfreezt!
+  rotate:
+    'on': Der Spieler &c[PLAYER] &2dreht sich nun!
+    'off': Der Spieler &c[PLAYER] &2dreht sich nun nicht mehr!
+  confused:
+    'on': Der Spieler &c[PLAYER] &2ist nun verwirrt!
+    'off': Der Spieler &c[PLAYER] &2ist nun wieder bei Sinnen!
+  tornado:
+    'off': Der Spieler &c[PLAYER] &2wird nun nicht mehr von einem Tornado verfolgt!
+    'on': Der Spieler &c[PLAYER] &2wird nun von einem Tornado verfolgt!
+  explode: Du hast den Spieler &c[PLAYER] &2zum explodieren gebracht!
+  fakeop:
+    default: Du hast &c[PLAYER] &2Fakeoped!
+    opm: '&7&o[Server: [PLAYER] wurde zum Operator ernannt]'
+  slipperyhands:
+    'off': Der Spieler &c[PLAYER] &2hat die Butter runter gewaschen!
+    'on': Der Spieler &c[PLAYER] &2hat seine Hände mit Butter vollgeschmiert!
+  endcredits: Der Spieler &c[PLAYER] &2sieht nun die End Credits!
+  rndmtp:
+    'on': Der Spieler &c[PLAYER] &2wird durch die Luft teleportiert!
+    'off': Der Spieler &c[PLAYER] &2wird nicht mehr durch die Luft teleportiert!
+  mlg: Du hast den Spieler &c[PLAYER] &2einen &cMLG &2machen lassen!
+  deaf:
+    'off': Der Spieler &c[PLAYER] &2hört wieder etwas!
+    'on': Der Spieler &c[PLAYER] &2hört nichts mehr!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Stop &cHacking(SPEED) &7[&1VL&7/&620&7]'
+    default: Das Anticheat fängt nun an &c[PLAYER] &2zu bemerken!
+  fakehack:
+    'off': Du hast den Spieler &c[PLAYER] &2gezwungen aufzuhören!
+    'on': Du hast &c[PLAYER] &2zum hacken gebracht!
+  arrowspam:
+    'off': Der Spieler &c[PLAYER] &2wird nun nicht mehr von Pfeilen gejagt!
+    'on': Der Spieler &c[PLAYER] &2wird nun von Pfeilen gejagt!
+  dontstopjumping:
+    'off': Der Spieler &c[PLAYER] &2hört nun auf zu springen!
+    'on': Der Spieler &c[PLAYER] &2kann nicht aufhören zu springen!
+  rickroll:
+    ishearing: Der Spieler &c[PLAYER] &2wird schon gerickrolled!
+    default: Der Spieler &c[PLAYER] &2wurde nun gerickrolled!
+  rocket: Du hast den Spieler &c[PLAYER] &2wie eine Rakete Fliegen lassen!
+  vomit:
+    'on': Der Spieler &c[PLAYER] &2kann nicht mehr aufhören zu kotzen!
+    'off': Der Spieler &c[PLAYER] &2kann hat aufgehört zu kotzen!
+  lag:
+    'on': Der Spieler &c[PLAYER] &2fängt an zu laggen!
+    'off': Der Spieler &c[PLAYER] &2hört auf zu laggen!
+  hackuser: Der Hackvorgang startet!
+  spam: Du hast den Spieler &c[PLAYER] &2voll gespamt!
+  loading: Der Spieler &c[PLAYER] &2sieht nun den Ladebildschirm bis er neu startet!
+  strike: Du hast den Spieler &c[PLAYER] &2mit einem Blitz getroffen!
+  fakeleave:
+    message: '&6[PLAYER] left the Game.'
+    default: Eine FakeLeave Message wurde in den Chat geschickt!
+  lsd: Der Spieler &c[PLAYER] &2sieht nun die Welt anders!
+  herobrine:
+    'on': Der Spieler &c[PLAYER] &2ist nun Herobrine!
+    'off': Der Spieler &c[PLAYER] &2ist nun nicht mehr Herobrine!
+  cows: Aggressive Kühe greifen nun &c[PLAYER] &2an!
+  tpall: Alle Spieler wurden zu dir teleportiert
+  wtf: Der Spieler &c[PLAYER] &2wird verrückt!
+  webtrap: Der Spieler &c[PLAYER] &2ist nun in Cobweb gefangen!
+  guardian: Der Spieler &c[PLAYER] &2hat nun den Guardian effekt!
+command:
+  troll:
+    gm: Du bist nun im Gamemode 1!
+    fly:
+      'off': Du kannst nun nicht mehr Fliegen!
+      'on': Du kannst nun Fliegen!
+    vanish:
+      'off': Du hast den Vanish verlassen!
+      'on': Du bist nun im Vanish!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 von
+        '3': Alle Commands /troll help
+        '6': '&8>'
+        '5': Presti
+    default: Troll Menu wurde geoeffnet!
+    server: Server Troll Inv wurde geoeffnet!
+    wrongargs: Unbekannte Argumente bitte benutze /troll help
+    help:
+      line:
+        '8': '&4Troll Vanish &8- &c/troll v'
+        '7': '&4Item Troll GUI &8- &c/troll items'
+        '6': '&4Server Troll GUI &8- &c/troll server'
+        '5': '&4Player Troll GUI &8- &c/troll'
+        '9': '&4Gamemode &8- &c/troll gm'
+        '4': '&4Commands:'
+        '3': Troll Vanish &aAktiviert!
+        '2': Troll Modus &aAktiviert!
+        '1': TrollV4 by Presti
+        '11': '&4Changelog &8- &c/troll changelog'
+        '10': '&4Fly &8- &c/troll fly'
+        '12': '&4Credits &8- &c/troll credits'
+    items: Item Troll Inv wurde geoeffnet!
+    noplayer: Du bist kein Spieler!
+noonline: Dieser Spieler ist nicht online!
+control:
+  world: '&cWelt wurde geweschelt!'
+  distance: '&cZuweit entfernt'
+nopermission: Du hast keine Rechte für diesen Command!

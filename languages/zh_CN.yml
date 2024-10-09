@@ -1,0 +1,148 @@
+language:
+  version: 4.5.25
+  locale: zh_CN
+  name: Simplified Chinese
+  author: ItsDApples
+gui:
+  demo: 玩家 &c[PLAYER] &2现在正在观赏试玩界面!
+  tntworld:
+    default: 玩家 &c[PLAYER] &2现在的世界中只剩下了TNT!
+  fakeinv:
+    cancel: 玩家 &c[PLAYER] &2的物品回来啦!
+    default: 玩家 &c[PLAYER] &2在这5秒内失去了所有的物品!
+  spooky:
+    'on': 玩家 &c[PLAYER] &2现在在光影的世界!
+    'off': 玩家 &c[PLAYER] &2离开了光影的世界!
+    world: 没有叫做 "SpookyWorld" 的世界!
+  stopcontrol:
+    stop: 你停止了对 &c[PLAYER]&2 的控制!
+    nocontrol: 你没有控制任何人!
+  arrest: 玩家 &c[PLAYER] &2被逮捕了!
+  crash:
+    default: 你令玩家 &c[PLAYER] &2崩溃了!
+    message: 'java.net.ConnectException: Connection timed out: No further information'
+  tnttrace:
+    'on': =玩家 &c[PLAYER] &2所在的地方将生成TNT!
+    'off': 玩家 &c[PLAYER] &2所在的未知将不会生成TNT!
+  anvils:
+    'on': 铁砧雨在 &c[PLAYER]&2 的头上落下!
+    'off': '&c[PLAYER]&2 身边的铁砧雨停下了!'
+  giorno:
+    'off': Giorno Giovanna 离开了 &c[PLAYER] &2!
+    'on': Giorno Giovanna 正在攻击 &c[PLAYER]&2!
+  hackserver: 黑客程序启动!
+  noinv:
+    'on': 玩家 &c[PLAYER] &2将无法打开任何容器!
+    'off': 玩家 &c[PLAYER] &2现在又可以打开容器啦!
+  startcontrol:
+    cantcontrol: 你无法控制这个玩家!
+    start: 你开始控制 &c[PLAYER]&2!
+    yourself: 你不能控制你自己!
+    iscontroled: 玩家已经被控制了!
+    alreadyc: 你已经在控制其他人了!
+  freeze:
+    'on': 你冻结了 &c[PLAYER]&2!
+    'off': 你解除了 &c[PLAYER]&2 的冻结!
+  rotate:
+    'on': 玩家 &c[PLAYER] &2开始旋转!
+    'off': 玩家 &c[PLAYER] &2停止了旋转!
+  confused:
+    'on': 玩家 &c[PLAYER] &2变得很混乱!
+    'off': 玩家 &c[PLAYER] &2获得了一些牛奶!
+  tornado:
+    'off': 玩家 &c[PLAYER] &2身边的龙卷风渐渐平息!
+    'on': 玩家 &c[PLAYER] &2正在被龙卷风追赶!
+  explode: 你令玩家 &c[PLAYER] &2爆炸了!
+  fakeop:
+    default: 你给与了 &c[PLAYER]&2 虚假的管理员权限!
+    opm: '&7&o[Server: Opped [PLAYER]]'
+  slipperyhands:
+    'off': 玩家 &c[PLAYER] &2丢弃了手中的物品!
+    'on': 玩家 &c[PLAYER] &2觉得手中很烫!
+  endcredits: 玩家 &c[PLAYER] &2正在查看终末之诗!
+  rndmtp:
+    'on': 玩家 &c[PLAYER] &2开始随机传送!
+    'off': 玩家 &c[PLAYER] &2停止了随机传送!
+  mlg: 你整蛊了玩家 &c[PLAYER] &2整蛊内容 &cMLG&2!
+  deaf:
+    'off': 玩家 &c[PLAYER] &2的耳朵恢复了声音!
+    'on': 玩家 &c[PLAYER] &2听不见了!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Stop &cHacking(SPEED) &7[&1VL&7/&620&7]'
+    default: 反作弊程序开始监测 &c[PLAYER]&2!
+  fakehack:
+    'off': 你停止了 &c[PLAYER] &2的外挂!
+    'on': 你为 &c[PLAYER] &2开启了外挂!
+  arrowspam:
+    'off': 玩家 &c[PLAYER] &2身边的箭雨停止了袭击!
+    'on': 玩家 &c[PLAYER] &2被箭雨袭击了!
+  dontstopjumping:
+    'off': 玩家 &c[PLAYER] &2的脚恢复了控制!
+    'on': 玩家 &c[PLAYER] &的脚不受控制的起跳!
+  rickroll:
+    ishearing: 玩家 &c[PLAYER] &2已经在被骗了!
+    default: 玩家 &c[PLAYER] &2被骗了!
+  rocket: 你令玩家 &c[PLAYER] &2使用烟花飞了起来!
+  vomit:
+    'on': 玩家 &c[PLAYER] &2呕吐不止!
+    'off': 玩家 &c[PLAYER] &2停止了呕吐!
+  lag:
+    'on': 玩家 &c[PLAYER] &2开始卡了!
+    'off': 玩家 &c[PLAYER] &2突然不卡了
+  hackuser: 黑客程序启动!
+  spam: 你完全令 &c[PLAYER]&2 糊涂了!
+  loading: 玩家 &c[PLAYER] &2被卡在了加载界面，此界面将会持续到他的游戏重启!
+  strike: 玩家 &c[PLAYER] &2遭雷劈了!
+  fakeleave:
+    message: '&6[PLAYER] 悄悄离开了.'
+    default: 一个假的离开消息被发送在了公屏上!
+  lsd: 玩家 &c[PLAYER] &2正在从另一个角度看世界!
+  herobrine:
+    'on': 玩家 &c[PLAYER] &2身边出现了Him!
+    'off': 玩家 &c[PLAYER] &2身边空荡荡的!
+  cows: 疯狂的奶牛正在攻击 &c[PLAYER]&2!
+  tpall: 所有玩家被传送到了你的身边!
+  wtf: 玩家 &c[PLAYER] &2要疯掉啦!
+  webtrap: 玩家 &c[PLAYER] &2被困在了蜘蛛网中!
+  guardian: 玩家 &c[PLAYER] &2拥有了守卫者的效果!
+command:
+  troll:
+    gm: 你现在是创造模式了!
+    fly:
+      'off': 你不能再飞行了!
+      'on': 你现在可以飞行了!
+    vanish:
+      'off': 你不再隐身了!
+      'on': 你隐身了!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 的作者为
+        '3': 查询所有指令 /troll help
+        '6': '&8>'
+        '5': Presti
+    default: 已打开整蛊菜单!
+    server: 全服整蛊菜单已开启!
+    wrongargs: 未知指令，请使用 /troll help
+    help:
+      line:
+        '8': '&4隐身整蛊 &8- &c/troll v'
+        '7': '&4整蛊物品 &8- &c/troll items'
+        '6': '&4服务器整蛊 &8- &c/troll server'
+        '5': '&4玩家整蛊 &8- &c/troll'
+        '9': '&4创造模式 &8- &c/troll gm'
+        '4': '&4指令:'
+        '3': 隐身整蛊 &a已开启!
+        '2': 整蛊模式 &a已开启!
+        '1': TrollV4 的作者是 Presti
+        '11': '&4更新记录 &8- &c/troll changelog'
+        '10': '&4飞行 &8- &c/troll fly'
+        '12': '&4整蛊点数 &8- &c/troll credits'
+    items: 已开启整蛊物品菜单!
+    noplayer: 你并不是玩家!
+noonline: 该玩家不在线!
+control:
+  world: '&4切换世界'
+  distance: '&4太远啦'
+nopermission: 你没有权限执行此指令!
