@@ -3,7 +3,6 @@ language:
   locale: it_it
   name: Italian
   author: JamesTheFlash22
-
 gui:
   demo: Il giocatore &c[PLAYER] &2sta ora vedendo una schermata demo!
   tntworld:
@@ -106,7 +105,6 @@ gui:
   wtf: L'utente &c[PLAYER] &2sta impazzendo!
   webtrap: L'utente &c[PLAYER] &2è ora intrappolato nella ragnatela!
   guardian: L'utente &c[PLAYER] &2ha ora l'effetto Guardian!
-
 command:
   troll:
     gm: Sei ora in modalità creativa!
