@@ -6,7 +6,7 @@
 
     <groupId>de.presti</groupId>
     <artifactId>trollv4</artifactId>
-    <version>4.5.24</version>
+    <version>4.5.25</version>
     <packaging>jar</packaging>
 
     <name>TrollV4</name>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>11.2.0.1</version>
+            <version>11.3.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -164,6 +164,14 @@
                             <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
                         </relocation>
                     </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>com/cryptomorin/xseries/NoteBlockMusic*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                     <createDependencyReducedPom>true</createDependencyReducedPom>
                 </configuration>
                 <executions>
