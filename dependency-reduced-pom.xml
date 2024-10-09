@@ -4,7 +4,7 @@
   <groupId>de.presti</groupId>
   <artifactId>trollv4</artifactId>
   <name>TrollV4</name>
-  <version>4.5.19</version>
+  <version>4.5.25</version>
   <build>
     <resources>
       <resource>
@@ -61,6 +61,14 @@
               <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
             </relocation>
           </relocations>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>com/cryptomorin/xseries/NoteBlockMusic*</exclude>
+              </excludes>
+            </filter>
+          </filters>
           <createDependencyReducedPom>true</createDependencyReducedPom>
         </configuration>
       </plugin>
@@ -73,7 +81,7 @@
     </repository>
     <repository>
       <id>dmulloy2-repo</id>
-      <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
+      <url>https://repo.dmulloy2.net/repository/public/</url>
     </repository>
     <repository>
       <id>CodeMC</id>
@@ -87,12 +95,23 @@
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
+    <repository>
+      <id>minecraft-libraries</id>
+      <name>Minecraft Libraries</name>
+      <url>https://libraries.minecraft.net/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>com.github.libraryaddict</groupId>
       <artifactId>LibsDisguises</artifactId>
       <version>v10.0.19</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.mojang</groupId>
+      <artifactId>authlib</artifactId>
+      <version>6.0.54</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -104,7 +123,7 @@
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib</artifactId>
-      <version>5.0.0</version>
+      <version>5.2.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
