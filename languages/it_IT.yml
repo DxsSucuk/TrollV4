@@ -1,0 +1,240 @@
+language:
+  version: 4.5.25
+  locale: it_IT
+  name: Italian
+  author: JamesTheFlash22
+
+gui:
+  demo: Il giocatore &c[PLAYER] &2sta ora vedendo una schermata demo!
+  tntworld:
+    default: L'utente &c[PLAYER] &2ora vede solo TnT nel suo mondo!
+  fakeinv:
+    cancel: L'utente &c[PLAYER] &2ha riottenuto il suo inventario!
+    default: L'utente &c[PLAYER] &2ha perso il suo inventario per 5 secondi!
+  spooky:
+    'on': Il giocatore &c[PLAYER] &2è ora nel Regno delle Ombre!
+    'off': Il giocatore &c[PLAYER] &2non è più nel Regno delle Ombre!
+    world: Non esiste un mondo chiamato "SpookyWorld"!
+  stopcontrol:
+    stop: Hai smesso di controllare &c[PLAYER]&2!
+    nocontrol: Non controlli nessuno!
+  arrest: L'utente &c[PLAYER] &2è Arrestato!
+  crash:
+    default: Hai fatto crashare il giocatore &c[PLAYER] &2!
+    message: 'java.net.ConnectException: Tempo di connessione esaurito: Nessuna ulteriore informazione'
+  tnttrace:
+    'on': Dietro l'utente &c[PLAYER] &2ora appare una traccia di TnT!
+    'off': Dietro l'utente &c[PLAYER] &2non appare più una traccia di TnT!
+  anvils:
+    'on': Le incudini ora cadono sul giocatore &c[PLAYER]&2!
+    'off': Le incudini non cadono più sul giocatore &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna ora lascia in pace &c[PLAYER] &2!
+    'on': Giorno Giovanna ora attacca &c[PLAYER]&2!
+  hackserver: Il processo di hacking inizia!
+  noinv:
+    'on': L'utente &c[PLAYER] &2non può più aprire nessun inventario!
+    'off': L'utente &c[PLAYER] &2può aprire nuovamente qualsiasi inventario!
+  startcontrol:
+    cantcontrol: Non puoi controllare questo giocatore!
+    start: Stai controllando &c[PLAYER]&2!
+    yourself: Non puoi controllare te stesso!
+    iscontroled: Il giocatore è già controllato!
+    alreadyc: Controlli già qualcun altro!
+  freeze:
+    'on': Hai congelato il giocatore &c[PLAYER]&2!
+    'off': Hai scongelato il giocatore &c[PLAYER]&2!
+  rotate:
+    'on': L'utente &c[PLAYER] &2ha iniziato a ruotare!
+    'off': L'utente &c[PLAYER] &2ha smesso di ruotare!
+  confused:
+    'on': L'utente &c[PLAYER] &2è ora confuso!
+    'off': L'utente &c[PLAYER] &2ha bevuto del latte!
+  tornado:
+    'off': L'utente &c[PLAYER] &2non è più inseguito da un tornado!
+    'on': L'utente &c[PLAYER] &2è ora inseguito da un tornado!
+  explode: Hai fatto esplodere il giocatore &c[PLAYER] &2!
+  fakeop:
+    default: Hai finto di opped &c[PLAYER]&2!
+    opm: '&7&o[Server: Opped [PLAYER]]'
+  slipperyhands:
+    'off': L'utente &c[PLAYER] &2ha pulito le mani!
+    'on': L'utente &c[PLAYER] &2ha giocato con del burro!
+  endcredits: Il giocatore &c[PLAYER] &2ora vede i titoli di coda!
+  rndmtp:
+    'on': L'utente &c[PLAYER] &2inizia ad essere teletrasportato per aria!
+    'off': L'utente &c[PLAYER] &2smette di essere teletrasportato per aria!
+  mlg: Hai fatto fare un &cMLG&2 al giocatore &c[PLAYER] &2!
+  deaf:
+    'off': L'utente &c[PLAYER] &2può sentire di nuovo qualcosa!
+    'on': L'utente &c[PLAYER] &2non può più sentire nulla!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Smetti di &cHackerare(SPEED) &7[&1VL&7/&620&7]'
+    default: L'Anticheat ha iniziato a rilevare &c[PLAYER]&2!
+  fakehack:
+    'off': Hai costretto il giocatore &c[PLAYER] &2a fermarsi!
+    'on': Hai fatto hackerare il giocatore &c[PLAYER] &2!
+  arrowspam:
+    'off': L'utente &c[PLAYER] &2non viene più spammato da frecce!
+    'on': L'utente &c[PLAYER] &2viene ora spammato da frecce!
+  dontstopjumping:
+    'off': L'utente &c[PLAYER] &2ha smesso di saltare!
+    'on': L'utente &c[PLAYER] &2non può smettere di saltare!
+  rickroll:
+    ishearing: L'utente &c[PLAYER] &2sta già ascoltando un rickroll!
+    default: L'utente &c[PLAYER] &2sta ascoltando un rickroll!
+  rocket: Hai fatto volare il giocatore &c[PLAYER] &2come un razzo!
+  vomit:
+    'on': Il giocatore &c[PLAYER] &2non può smettere di vomitare!
+    'off': Il giocatore &c[PLAYER] &2ha smesso di vomitare!
+  lag:
+    'on': L'utente &c[PLAYER] &2ora ha lag!
+    'off': L'utente &c[PLAYER] &2ha smesso di laggare!
+  hackuser: Il processo di hacking inizia!
+  spam: Hai completamente infastidito il giocatore &c[PLAYER]&2!
+  loading: Il giocatore &c[PLAYER] &2sta ora vedendo la schermata di caricamento fino al riavvio!
+  strike: Hai colpito il giocatore &c[PLAYER] &2con un fulmine!
+  fakeleave:
+    message: '&6[PLAYER] ha lasciato il gioco.'
+    default: Un messaggio finto è stato postato nella chat!
+  lsd: L'utente &c[PLAYER] &2sta ora vedendo il mondo da un'altra prospettiva!
+  herobrine:
+    'on': L'utente &c[PLAYER] &2è ora Herobrine!
+    'off': L'utente &c[PLAYER] &2non è più Herobrine!
+  cows: Mucche aggressive stanno ora attaccando &c[PLAYER]&2!
+  tpall: Tutti i giocatori sono stati teletrasportati a te!
+  wtf: L'utente &c[PLAYER] &2sta impazzendo!
+  webtrap: L'utente &c[PLAYER] &2è ora intrappolato nella ragnatela!
+  guardian: L'utente &c[PLAYER] &2ha ora l'effetto Guardian!
+
+command:
+  troll:
+    gm: Sei ora in modalità creativa!
+    fly:
+      'off': Non puoi più volare!
+      'on': Ora puoi volare!
+    vanish:
+      'off': Non sei più invisibile!
+      'on': Sei ora invisibile!
+    notfound:
+      line:
+        '2': Troll V4 [VERSION]
+        '1': '&8>'
+        '4': TrollV4 di
+        '3': Tutti i comandi /troll help
+        '6': '&8>'
+        '5': Presti
+    default: Il menu Troll è stato aperto!
+    server: Il menu Server Troll è stato aperto!
+    wrongargs: Argomenti sconosciuti, per favore usa /troll help
+    help:
+      line:
+        '8': '&4Troll Invisiibilità &8- &c/troll v'
+        '7': '&4Menu Item Troll &8- &c/troll items'
+        '6': '&4Menu Server Troll &8- &c/troll server'
+        '5': '&4Menu Player Troll &8- &c/troll'
+        '9': '&4Modalità di gioco &8- &c/troll gm'
+        '4': '&4Comandi:'
+        '3': Troll Invisibilità &aAttiva!
+        '2': Troll Mode &aAttiva!
+        '1': TrollV4 di Presti
+        '11': '&4Changelog &8- &c/troll changelog'
+        '10': '&4Vola &8- &c/troll fly'
+        '12': '&4Crediti &8- &c/troll credits'
+    items: Il menu Item Troll è stato aperto!
+    noplayer: Non sei un giocatore!
+
+noonline:
+[9/10, 17:41] Microsoft Copilot: language:
+  version: 4.5.25
+  locale: en_us
+  name: Inglese
+  author: Presti
+
+gui:
+  demo: Il giocatore &c[PLAYER] &2sta ora vedendo una schermata demo!
+  tntworld:
+    default: L'utente &c[PLAYER] &2ora vede solo TnT nel suo mondo!
+  fakeinv:
+    cancel: L'utente &c[PLAYER] &2ha riottenuto il suo inventario!
+    default: L'utente &c[PLAYER] &2ha perso il suo inventario per 5 secondi!
+  spooky:
+    'on': Il giocatore &c[PLAYER] &2è ora nel Regno delle Ombre!
+    'off': Il giocatore &c[PLAYER] &2non è più nel Regno delle Ombre!
+    world: Non esiste un mondo chiamato "SpookyWorld"!
+  stopcontrol:
+    stop: Hai smesso di controllare &c[PLAYER]&2!
+    nocontrol: Non controlli nessuno!
+  arrest: L'utente &c[PLAYER] &2è Arrestato!
+  crash:
+    default: Hai fatto crashare il giocatore &c[PLAYER] &2!
+    message: 'java.net.ConnectException: Tempo di connessione esaurito: Nessuna ulteriore informazione'
+  tnttrace:
+    'on': Dietro l'utente &c[PLAYER] &2ora appare una traccia di TnT!
+    'off': Dietro l'utente &c[PLAYER] &2non appare più una traccia di TnT!
+  anvils:
+    'on': Le incudini ora cadono sul giocatore &c[PLAYER]&2!
+    'off': Le incudini non cadono più sul giocatore &c[PLAYER]&2!
+  giorno:
+    'off': Giorno Giovanna ora lascia in pace &c[PLAYER] &2!
+    'on': Giorno Giovanna ora attacca &c[PLAYER]&2!
+  hackserver: Il processo di hacking inizia!
+  noinv:
+    'on': L'utente &c[PLAYER] &2non può più aprire nessun inventario!
+    'off': L'utente &c[PLAYER] &2può aprire nuovamente qualsiasi inventario!
+  startcontrol:
+    cantcontrol: Non puoi controllare questo giocatore!
+    start: Stai controllando &c[PLAYER]&2!
+    yourself: Non puoi controllare te stesso!
+    iscontroled: Il giocatore è già controllato!
+    alreadyc: Controlli già qualcun altro!
+  freeze:
+    'on': Hai congelato il giocatore &c[PLAYER]&2!
+    'off': Hai scongelato il giocatore &c[PLAYER]&2!
+  rotate:
+    'on': L'utente &c[PLAYER] &2ha iniziato a ruotare!
+    'off': L'utente &c[PLAYER] &2ha smesso di ruotare!
+  confused:
+    'on': L'utente &c[PLAYER] &2è ora confuso!
+    'off': L'utente &c[PLAYER] &2ha bevuto del latte!
+  tornado:
+    'off': L'utente &c[PLAYER] &2non è più inseguito da un tornado!
+    'on': L'utente &c[PLAYER] &2è ora inseguito da un tornado!
+  explode: Hai fatto esplodere il giocatore &c[PLAYER] &2!
+  fakeop:
+    default: Hai finto di opped &c[PLAYER]&2!
+    opm: '&7&o[Server: Opped [PLAYER]]'
+  slipperyhands:
+    'off': L'utente &c[PLAYER] &2ha pulito le mani!
+    'on': L'utente &c[PLAYER] &2ha giocato con del burro!
+  endcredits: Il giocatore &c[PLAYER] &2ora vede i titoli di coda!
+  rndmtp:
+    'on': L'utente &c[PLAYER] &2inizia ad essere teletrasportato per aria!
+    'off': L'utente &c[PLAYER] &2smette di essere teletrasportato per aria!
+  mlg: Hai fatto fare un &cMLG&2 al giocatore &c[PLAYER] &2!
+  deaf:
+    'off': L'utente &c[PLAYER] &2può sentire di nuovo qualcosa!
+    'on': L'utente &c[PLAYER] &2non può più sentire nulla!
+  anticheat:
+    detected: '&7[&cPrestige&7-&cAntiCheat&7] &2Smetti di &cHackerare(SPEED) &7[&1VL&7/&620&7]'
+    default: L'Anticheat ha iniziato a rilevare &c[PLAYER]&2!
+  fakehack:
+    'off': Hai costretto il giocatore &c[PLAYER] &2a fermarsi!
+    'on': Hai fatto hackerare il giocatore &c[PLAYER] &2!
+  arrowspam:
+    'off': L'utente &c[PLAYER] &2non viene più spammato da frecce!
+    'on': L'utente &c[PLAYER] &2viene ora spammato da frecce!
+  dontstopjumping:
+    'off': L'utente &c[PLAYER] &2ha smesso di saltare!
+    'on': L'utente &c[PLAYER] &2non può smettere di saltare!
+  rickroll:
+    ishearing: L'utente &c[PLAYER] &2sta già ascoltando un rickroll!
+    default: L'utente &c[PLAYER] &2sta ascoltando un rickroll!
+  rocket: Hai fatto volare il giocatore &c[PLAYER] &2come un razzo!
+  vomit:
+    'on': Il giocatore &c[PLAYER] &2non può smettere di vomitare!
+    'off': Il giocatore &c[PLAYER] &2ha smesso di vomitare!
+  lag:
+    'on': L'utente &c[PLAYER] &2ora ha lag!
+    'off': L'utente &c[PLAYER] &2ha smesso di laggare!
+  hackuser: Il processo di hacking inizia!
