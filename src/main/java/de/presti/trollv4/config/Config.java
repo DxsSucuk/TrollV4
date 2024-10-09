@@ -26,7 +26,7 @@ public class Config {
 					"#                             #\n" + 
 					"###############################");
 			config.addDefault("Plugin-Version", Data.version);
-			config.addDefault("Language", "US");
+			config.addDefault("Language", "en_us");
 			config.addDefault("Custom-Item-Name", false);
 			config.addDefault("UpdateChecker", true);
 			config.addDefault("AutoUpdate", false);
