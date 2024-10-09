@@ -17,9 +17,10 @@ public class ServerInfo {
     public static void checkForServerSoftware() {
 
         String version = Bukkit.getVersion().split("\\(MC")[0].toLowerCase();
-
+        String serverName = Bukkit.getServer().getName().toLowerCase();
         for (ServerSoftware sv : ServerSoftware.values()) {
-            if (version.contains(sv.name().toLowerCase())) {
+            String name = sv.name().toLowerCase();
+            if (version.contains(sv.name().toLowerCase()) || serverName.contains(name)) {
                 serverSoftware = sv;
                 break;
             }

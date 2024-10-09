@@ -199,7 +199,7 @@ public class LanguageService {
      * @return The String.
      */
     public static @NonNull String getByLocale(@NonNull String locale, @NonNull String key, @Nullable Player player, @Nullable Object... parameters) {
-        if (!languageResources.containsKey(locale) && !locale.equalsIgnoreCase("en_us")) return getDefault(locale, key, parameters);
+        if (!languageResources.containsKey(locale) && !locale.equalsIgnoreCase("en_us")) return getByLocale("en_us", key, player, parameters);
 
         Language language = languageResources.get(locale);
 
@@ -208,7 +208,7 @@ public class LanguageService {
         if (language == null) return resource;
         if (player == null) return language.getResource(key, parameters);
 
-        return language.getResource(resource, player, parameters);
+        return language.getResource(key, player, parameters);
     }
 
     /**
