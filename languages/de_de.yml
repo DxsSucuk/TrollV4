@@ -6,8 +6,7 @@ language:
 gui:
   demo: Der Spieler &c[PLAYER] &2sieht nun den Demoscreen!
   tntworld:
-    default: Der Spieler &c[PLAYER] &2sieht nun in einem Radius von 75 blöcken nur
-      TNT!
+    default: Der Spieler &c[PLAYER] &2sieht nun in einem Radius von 75 blöcken nur TNT!
   fakeinv:
     cancel: Der Spieler &c[PLAYER] &2hat nun sein Inventar wieder bekommen!
     default: Der Spieler &c[PLAYER] &2hat nun für 5 Sekunden sein Inventar verloren!
