@@ -1,6 +1,5 @@
 package de.presti.trollv4.main;
 
-import com.mysql.jdbc.exceptions.MySQLDataException;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
 import de.presti.trollv4.cmd.Haupt;
@@ -23,17 +22,14 @@ import io.sentry.Sentry;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -48,15 +44,16 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Sentry.init(options -> {
+        // Sentry in this case is more annoying than helpful.
+        /*Sentry.init(options -> {
             options.setDsn("https://5eca0917287f22faf8b2726f07f4d460@o4503927742529536.ingest.us.sentry.io/4506083039969280");
             options.setRelease(Data.version);
             options.addInAppInclude("de.presti.trollv4");
             options.addIgnoredExceptionForType(SQLException.class);
-            options.addIgnoredExceptionForType(MySQLDataException.class);
+            ////options.addIgnoredExceptionForType(MySQLDataException.class);
             options.addIgnoredExceptionForType(IllegalPluginAccessException.class);
             options.addIgnoredExceptionForType(SocketException.class);
-        });
+        });*/
 
         ArrayUtils.armor = new HashMap<>();
         ArrayUtils.inventory = new HashMap<>();
@@ -221,7 +218,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null && Config.getConfig().getBoolean("downloader.protocollib")) {
             Logger.info("Downloading ProtocolLib!");
-            if (ServerInfo.aboveOrEqual(20)) {
+            if (ServerInfo.aboveOrEqual(21)) {
                 RequestUtility.download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
             } else {
                 RequestUtility.download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
