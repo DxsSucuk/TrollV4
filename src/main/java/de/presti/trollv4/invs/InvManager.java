@@ -3,6 +3,7 @@ package de.presti.trollv4.invs;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.main.Main;
@@ -15,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
@@ -144,7 +144,7 @@ public class InvManager {
         ArrayList<ItemStack> items = new ArrayList<>();
         Inventory inv = Bukkit.createInventory(null, 9 * 6, "§2Player Troll Menu");
         if (Config.getConfig().getBoolean("Animations")) {
-            ArrayUtils.anim.put(p, new BukkitRunnable() {
+            WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 int countdown = 15;
 
                 @Override
@@ -153,29 +153,17 @@ public class InvManager {
                     if (countdown == 0) {
                         inv.clear();
                         p.playSound(p.getLocation(), XSound.ENTITY_ZOMBIE_INFECT.parseSound(), 1F, 1F);
-                        new BukkitRunnable() {
-
-                            @Override
-                            public void run() {
-                                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-
-                                new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-
-                                        inv.setItem(0, items.get(0));
-
-                                    }
-                                }.runTask(Main.getInstance());
-
-                            }
-                        }.runTaskAsynchronously(Main.getInstance());
+                        Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                            items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+                            Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                                inv.setItem(0, items.get(0));
+                            });
+                        });
 
                         setPageOneTrolls(inv);
 
-                        Bukkit.getScheduler().cancelTask(ArrayUtils.anim.get(p).getTaskId());
+                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
                         return;
                     }
 
@@ -316,36 +304,24 @@ public class InvManager {
                         p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1F, 1F);
                     }
                     if (countdown <= 0) {
-                        Bukkit.getScheduler().cancelTask(ArrayUtils.anim.get(p).getTaskId());
+                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
                     }
                     countdown--;
                 }
-            });
-            ArrayUtils.anim.get(p).runTaskTimer(Main.getInstance(), 0L, 20L);
+            }, 0L, 20L);
+            ArrayUtils.anim.put(p, task);
 
         } else {
-            new BukkitRunnable() {
+            Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-                @Override
-                public void run() {
-                    items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                            "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-
-                    new BukkitRunnable() {
-
-                        @Override
-                        public void run() {
-
-                            inv.setItem(0, items.get(0));
-
-                        }
-                    }.runTask(Main.getInstance());
-
-                }
-            }.runTaskAsynchronously(Main.getInstance());
+                Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                    inv.setItem(0, items.get(0));
+                });
+            });
 
             setPageOneTrolls(inv);
-
         }
 
         p.openInventory(inv);
@@ -398,25 +374,14 @@ public class InvManager {
 
         inv.clear();
 
-        new BukkitRunnable() {
+        Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+            items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-            @Override
-            public void run() {
-                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-
-                new BukkitRunnable() {
-
-                    @Override
-                    public void run() {
-
-                        inv.setItem(0, items.get(0));
-
-                    }
-                }.runTask(Main.getInstance());
-
-            }
-        }.runTaskAsynchronously(Main.getInstance());
+            Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                inv.setItem(0, items.get(0));
+            });
+        });
 
         inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
         inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "§cCant be stopped!"));
@@ -458,38 +423,29 @@ public class InvManager {
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         Inventory cpinv = Bukkit.createInventory(null, 9 * 6, "§2Player Choice Menu");
         if (Data.async) {
-            new BukkitRunnable() {
-
-                @Override
-                public void run() {
-                    int i = 0;
-                    for (Player all : Bukkit.getOnlinePlayers()) {
-                        if (i != 45) {
-                            try {
-                                items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
-                            } catch (Exception e) {
-                                Sentry.captureException(e);
-                                e.printStackTrace();
-                            }
-                            i++;
+            Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                int i = 0;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (i != 45) {
+                        try {
+                            items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
+                        } catch (Exception e) {
+                            Sentry.captureException(e);
+                            e.printStackTrace();
                         }
+                        i++;
                     }
-
-                    new BukkitRunnable() {
-
-                        @Override
-                        public void run() {
-
-                            for (ItemStack it : items) {
-                                cpinv.addItem(it);
-                            }
-
-                        }
-                    }.runTask(Main.getInstance());
                 }
-            }.runTaskAsynchronously(Main.getInstance());
-        } else {
+                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
+                Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                    for (ItemStack it : items) {
+                        cpinv.addItem(it);
+                    }
+                });
+            });
+        } else {
             int i = 0;
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (i != 45) {

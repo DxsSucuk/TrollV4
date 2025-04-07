@@ -8,9 +8,9 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.github.juliarn.npclib.api.Npc;
 import com.github.juliarn.npclib.api.Position;
 import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.language.LanguageService;
-import de.presti.trollv4.logging.Logger;
 import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
@@ -20,23 +20,24 @@ import de.presti.trollv4.utils.plugin.RandomUtility;
 import de.presti.trollv4.utils.server.NPCUserContainer;
 import de.presti.trollv4.utils.server.NPCUtil;
 import de.presti.trollv4.utils.server.ServerInfo;
+import de.presti.trollv4.utils.server.versions.ServerSoftware;
 import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XPotion;
 import com.cryptomorin.xseries.XSound;
 
-import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.cmd.TrollCommand;
 
 public class TrollV4API {
 
@@ -102,60 +103,29 @@ public class TrollV4API {
             ArrayUtils.userbowspam.remove(victim);
         } else {
             ArrayUtils.userbowspam.add(victim);
-            ArrayUtils.arrowspam.put(victim, new BukkitRunnable() {
-
+            WrappedTask wrappedTask = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 @Override
                 public void run() {
+                    Location playerLocation = victim.getLocation().clone();
 
-                    Location loc = victim.getLocation().clone();
+                    for (int i = 0; i < 5; i++) {
+                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                            Arrow arrow = victim.getWorld()
+                                    .spawn(playerLocation.clone().add(Main.getInstance().getRandom(-10, 10),
+                                                    Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
+                                            Arrow.class);
 
-                    Arrow arrow = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
-                                    Arrow.class);
-                    Location aloc = arrow.getLocation();
-                    Vector angle = new Vector(loc.getX() - aloc.getX(), loc.getY() - aloc.getBlockY(),
-                            loc.getZ() - aloc.getBlockZ());
-                    arrow.setVelocity(angle.normalize().multiply(2.0D));
-
-                    Arrow arrow2 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
-                                    Arrow.class);
-                    Location aloc2 = arrow2.getLocation();
-                    Vector angle2 = new Vector(loc.getX() - aloc2.getX(), loc.getY() - aloc2.getBlockY(),
-                            loc.getZ() - aloc2.getBlockZ());
-                    arrow2.setVelocity(angle2.normalize().multiply(2.0D));
-
-                    Arrow arrow3 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
-                                    Arrow.class);
-                    Location aloc3 = arrow3.getLocation();
-                    Vector angle3 = new Vector(loc.getX() - aloc3.getX(), loc.getY() - aloc3.getBlockY(),
-                            loc.getZ() - aloc3.getBlockZ());
-                    arrow3.setVelocity(angle3.normalize().multiply(2.0D));
-
-                    Arrow arrow4 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
-                                    Arrow.class);
-                    Location aloc4 = arrow4.getLocation();
-                    Vector angle4 = new Vector(loc.getX() - aloc4.getX(), loc.getY() - aloc4.getBlockY(),
-                            loc.getZ() - aloc4.getBlockZ());
-                    arrow4.setVelocity(angle4.normalize().multiply(2.0D));
-
-                    Arrow arrow5 = (Arrow) victim.getWorld()
-                            .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                            Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
-                                    Arrow.class);
-                    Location aloc5 = arrow5.getLocation();
-                    Vector angle5 = new Vector(loc.getX() - aloc5.getX(), loc.getY() - aloc5.getBlockY(),
-                            loc.getZ() - aloc5.getBlockZ());
-                    arrow5.setVelocity(angle5.normalize().multiply(2.0D));
-
+                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(arrow, y -> {
+                                Location arrowLocation = arrow.getLocation();
+                                Vector angle = new Vector(playerLocation.getX() - arrowLocation.getX(), playerLocation.getY() - arrowLocation.getBlockY(),
+                                        playerLocation.getZ() - arrowLocation.getBlockZ());
+                                arrow.setVelocity(angle.normalize().multiply(2.0D));
+                            });
+                        });
+                    }
                 }
-            }).runTaskTimer(Main.getInstance(), 0, 10);
+            }, 0, 10);
+            ArrayUtils.arrowspam.put(victim, wrappedTask);
         }
     }
 
@@ -329,7 +299,7 @@ public class TrollV4API {
     }
 
     /**
-     * Teleport the Player to the same position he is and that simulates a SetBack
+     * Teleport the Player to the same position he is and that simulates a SetBack,
      * and it sends a "AntiCheat Detection" Message.
      *
      * @param victim that should get fake detected.
@@ -338,7 +308,7 @@ public class TrollV4API {
     public static void AntiCheat(Player victim) {
         if (victim != null) {
             victim.sendMessage(LanguageService.getDefault("gui.anticheat.detected"));
-            victim.teleport(new Location(victim.getWorld(), victim.getLocation().getX(),
+            Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, new Location(victim.getWorld(), victim.getLocation().getX(),
                     victim.getLocation().getY() + 2, victim.getLocation().getZ()));
         } else {
             Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
@@ -366,41 +336,43 @@ public class TrollV4API {
 
     /**
      * Spawn a Bedrock Jail around the Player
-     * and dont let him escape.
+     * and don't let him escape.
      *
      * @param victim that should be arrested.
      * @since 4.4.4
      */
     public static void Arrest(Player victim) {
         if (victim != null) {
-            victim.teleport(victim.getLocation());
-            // Y
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                            victim.getLocation().getY() - 1, victim.getLocation().getZ()))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                            victim.getLocation().getY() + 2, victim.getLocation().getZ()))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
-            // X
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                            victim.getLocation().getY(), victim.getLocation().getZ()))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                            victim.getLocation().getY(), victim.getLocation().getZ()))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
-            // Z
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                            victim.getLocation().getY(), victim.getLocation().getZ() + 1))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
-            victim.getWorld()
-                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                            victim.getLocation().getY(), victim.getLocation().getZ() - 1))
-                    .setType(XMaterial.BEDROCK.parseMaterial());
+            Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
+            Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                // Y
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                victim.getLocation().getY() - 1, victim.getLocation().getZ()))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                victim.getLocation().getY() + 2, victim.getLocation().getZ()))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+                // X
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                victim.getLocation().getY(), victim.getLocation().getZ()))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                victim.getLocation().getY(), victim.getLocation().getZ()))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+                // Z
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                victim.getLocation().getY(), victim.getLocation().getZ() + 1))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+                victim.getWorld()
+                        .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                victim.getLocation().getY(), victim.getLocation().getZ() - 1))
+                        .setType(XMaterial.BEDROCK.parseMaterial());
+            });
 
         } else {
             Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
@@ -408,7 +380,7 @@ public class TrollV4API {
     }
 
     /**
-     * Permantly Rotate a Player
+     * Permanently Rotate a Player
      * rotation seems legit.
      *
      * @param victim that should rotate.
@@ -419,7 +391,7 @@ public class TrollV4API {
             if (ArrayUtils.rotateplayer.contains(victim)) {
                 ArrayUtils.rotateplayer.remove(victim);
             } else {
-                new Haupt().rop(victim);
+                new TrollCommand().rop(victim);
                 ArrayUtils.rotateplayer.add(victim);
             }
         } else {
@@ -439,7 +411,7 @@ public class TrollV4API {
             if (ArrayUtils.randomtp.contains(victim)) {
                 ArrayUtils.randomtp.remove(victim);
             } else {
-                new Haupt().rtp(victim);
+                new TrollCommand().rtp(victim);
                 ArrayUtils.randomtp.add(victim);
             }
         } else {
@@ -459,7 +431,7 @@ public class TrollV4API {
             if (ArrayUtils.tntp.contains(victim)) {
                 ArrayUtils.tntp.remove(victim);
             } else {
-                new Haupt().spawnTnTAtPlayer(victim);
+                new TrollCommand().spawnTnTAtPlayer(victim);
                 ArrayUtils.tntp.add(victim);
             }
         } else {
@@ -481,178 +453,188 @@ public class TrollV4API {
             victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 2));
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, true));
 
-            ArrayUtils.wtf.put(victim, new BukkitRunnable() {
+            WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 int countdown = 4;
 
                 @Override
                 public void run() {
-
                     if (countdown == 0) {
-                        victim.teleport(victim.getLocation());
+                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
                         victim.getWorld()
                                 .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
                                         victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
                                 .setType(XMaterial.GLASS.parseMaterial());
-                        victim.chat("Help me pls Im stuck ;-; I dont know where Im pls help!!!");
-                        Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(victim).getTaskId());
+                        Main.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x -> {
+                            victim.chat("Help me pls Im stuck ;-; I dont know where Im pls help!!!");
+                        });
+                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
                         return;
                     }
 
+                    if (countdown > 0) {
+                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
+                    }
+
                     if (countdown == 4) {
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.teleport(victim.getLocation());
+                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() - 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                        });
                     }
 
                     if (countdown == 3) {
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY(), victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY(), victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY(), victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ()))
-                                .setType(XMaterial.GLASS.parseMaterial());
-                        victim.teleport(victim.getLocation());
+                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY(), victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY(), victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY(), victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ()))
+                                    .setType(XMaterial.GLASS.parseMaterial());
+                        });
                     }
 
                     if (countdown == 2) {
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.GLASS.parseMaterial());
-                        victim.teleport(victim.getLocation());
+                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.GLASS.parseMaterial());
+                        });
                     }
 
                     if (countdown == 1) {
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ()))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
-                                .setType(XMaterial.BEDROCK.parseMaterial());
-                        victim.getWorld()
-                                .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
-                                        victim.getLocation().getY() + 1, victim.getLocation().getZ()))
-                                .setType(XMaterial.GLASS.parseMaterial());
-                        victim.teleport(victim.getLocation());
+                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ()))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() + 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 2, victim.getLocation().getZ() - 1))
+                                    .setType(XMaterial.BEDROCK.parseMaterial());
+                            victim.getWorld()
+                                    .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
+                                            victim.getLocation().getY() + 1, victim.getLocation().getZ()))
+                                    .setType(XMaterial.GLASS.parseMaterial());
+                        });
                     }
 
                     if (countdown <= 0) {
-                        Bukkit.getScheduler().cancelTask(ArrayUtils.wtf.get(victim).getTaskId());
+                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
                     }
                     countdown--;
                 }
-            });
-            ArrayUtils.wtf.get(victim).runTaskTimer(Main.getInstance(), 0L, 20L);
+            }, 0, 20);
+
+            ArrayUtils.wtf.put(victim, task);
         } else {
             Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
@@ -906,6 +888,7 @@ public class TrollV4API {
 
     /**
      * Lets the player see an infinite loading screen.
+     *
      * @param victim that should see the loading screen.
      */
     public static void InfiniteLoading(Player victim) {
@@ -932,14 +915,13 @@ public class TrollV4API {
      */
     public static void sendGameStateChange(Player victim, int type, float state, boolean forceProtocolLib) {
         try {
-            if (!ServerInfo.supportOldPackets() && !forceProtocolLib) {
+            if (forceProtocolLib || !ServerInfo.supportOldPackets() || (ServerInfo.aboveOrEqual(21) && ServerInfo.getServerSoftwareEnum() == ServerSoftware.PAPER)) {
                 final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
                 packet.getModifier().write(0,
                         PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
                 packet.getFloat().write(0, state);
                 ProtocolLibrary.getProtocolManager().sendServerPacket(victim, packet);
             } else {
-
                 Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
                 Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 
@@ -957,7 +939,7 @@ public class TrollV4API {
     }
 
     /**
-     * Creates an Empty World with Random Creppy NPCs and Noises. If the world exist
+     * Creates an Empty World with Random Creepy NPCs and Noises. If the world exist
      * the player is going to be teleported.
      *
      * @param victim the player that should be scared.
@@ -972,58 +954,58 @@ public class TrollV4API {
                 ArrayUtils.spookylast.put(victim, victim.getLocation());
             }
 
-            new BukkitRunnable() {
-
+            Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(victim, new Runnable() {
                 @Override
                 public void run() {
                     String spookyWorldName = Config.getConfig().getString("trolls.spookyWorld.name");
-                    if (Bukkit.getWorld(spookyWorldName) != null) {
-                        victim.teleport(Bukkit.getWorld(spookyWorldName).getSpawnLocation());
+                    World world = Bukkit.getWorld(spookyWorldName);
+                    if (world != null) {
+                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, Bukkit.getWorld(spookyWorldName).getSpawnLocation());
 
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             victim.hidePlayer(all);
                         }
 
-                        Bukkit.getWorld(spookyWorldName).setTime(15000);
-                        Bukkit.getWorld(spookyWorldName).setThundering(true);
-                        Bukkit.getWorld(spookyWorldName).setThunderDuration((60 * 10) * 20);
+                        Main.getInstance().getFoliaLib().getScheduler().runNextTick(consumer -> {
+                            world.setTime(15000);
+                            world.setThundering(true);
+                            world.setThunderDuration((60 * 10) * 20);
 
-                        NPCUserContainer container = new NPCUserContainer(victim);
+                            NPCUserContainer container = new NPCUserContainer(victim);
 
-                        for (int x = 0; x < 30; x++) {
-                            Npc npc = NPCUtil.createNPC(getRandomSkinName(), LocationUtil.getLocFromRad(victim.getLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
-                                    victim.getLocation(), null, victim);
+                            for (int x = 0; x < 30; x++) {
+                                Npc npc = NPCUtil.createNPC(getRandomSkinName(), LocationUtil.getLocFromRad(world.getSpawnLocation(), 20, 5, 20, ((new Random().nextInt(1)) == 0), false, ((new Random().nextInt(1)) == 0)),
+                                        world.getSpawnLocation(), null, victim);
 
-                            container.addNPC(npc);
-
-                            new BukkitRunnable() {
-
-                                @Override
-                                public void run() {
-                                    if (ArrayUtils.spooky.containsKey(victim)) {
-                                        Position position = npc.position();
-                                        float angle = victim.getEyeLocation().getDirection()
-                                                .angle(new Vector(position.x(), position.y(), position.z())
-                                                        .subtract(victim.getEyeLocation().toVector()));
-                                        if (angle > 0.5F) {
-                                            npc.lookAt(BukkitPlatformUtil.positionFromBukkitLegacy(victim.getLocation()));
+                                container.addNPC(npc);
+                                Runnable runnable;
+                                WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(victim, runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (ArrayUtils.spooky.containsKey(victim)) {
+                                            Position position = npc.position();
+                                            float angle = victim.getEyeLocation().getDirection()
+                                                    .angle(new Vector(position.x(), position.y(), position.z())
+                                                            .subtract(victim.getEyeLocation().toVector()));
+                                            if (angle > 0.5F) {
+                                                npc.lookAt(BukkitPlatformUtil.positionFromBukkitLegacy(victim.getLocation()));
+                                            }
+                                        } else {
+                                            Main.getInstance().getFoliaLib().getScheduler().cancelTask(container.tasks.get(this));
                                         }
-                                    } else {
-                                        cancel();
                                     }
-                                }
-                            }.runTaskTimer(Main.getInstance(), 20, 20);
+                                }, 20, 20);
 
-                        }
+                                container.tasks.put(runnable, task);
+                            }
 
-                        ArrayUtils.spooky.put(victim, container);
-                        victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
-                        victim.addPotionEffect(XPotion.SLOWNESS.buildPotionEffect(1000000, 3));
-                    } else {
-                        Logger.info(LanguageService.getDefault("gui.spooky.world"));
+                            ArrayUtils.spooky.put(victim, container);
+                            victim.addPotionEffect(XPotion.BLINDNESS.buildPotionEffect(1000000, 3));
+                            victim.addPotionEffect(XPotion.SLOWNESS.buildPotionEffect(1000000, 3));
+                        });
                     }
                 }
-            }.runTaskLater(Main.getInstance(), 40L);
+            }, 40);
         } else {
 
             for (Npc npc : ArrayUtils.spooky.get(victim).getNPCs()) {
@@ -1038,7 +1020,7 @@ public class TrollV4API {
             }
 
             if (ArrayUtils.spookylast.containsKey(victim)) {
-                victim.teleport(ArrayUtils.spookylast.get(victim));
+                Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, ArrayUtils.spookylast.get(victim));
                 ArrayUtils.spookylast.remove(victim);
             }
 
@@ -1048,7 +1030,7 @@ public class TrollV4API {
     }
 
     /**
-     * Get a Random Creppy Skin ID
+     * Get a Random Creepy Skin ID
      * by random users.
      *
      * @return int it returns a SkinID from MineSkin.

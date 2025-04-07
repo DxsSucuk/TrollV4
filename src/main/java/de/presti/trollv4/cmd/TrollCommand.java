@@ -1,12 +1,11 @@
 package de.presti.trollv4.cmd;
 
-import de.presti.trollv4.config.Config;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.invs.InvManager;
 import de.presti.trollv4.main.Changelog;
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
-import de.presti.trollv4.utils.server.ServerInfo;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import org.bukkit.Bukkit;
@@ -17,87 +16,69 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.cryptomorin.xseries.XSound;
 
-public class Haupt implements CommandExecutor {
+import java.util.HashMap;
 
-    @SuppressWarnings("deprecation")
+// TODO:: Clean this entire mess up.
+
+public class TrollCommand implements CommandExecutor {
+
+    HashMap<Player, WrappedTask> ropTasks = new HashMap<>();
+    HashMap<Player, WrappedTask> rtpTasks = new HashMap<>();
+    HashMap<Player, WrappedTask> tntSpawnTasks = new HashMap<>();
+
     public void rop(final Player p) {
-        if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.rotateplayer.contains(p)) {
-                        p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
-                    } else {
-                        cancel();
-                    }
+        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+            @Override
+            public void run() {
+                if (ArrayUtils.rotateplayer.contains(p)) {
+                    Main.getInstance().getFoliaLib().getScheduler()
+                            .teleportAsync(p, new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
+                } else {
+                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(ropTasks.get(p));
                 }
-            }, 0L, 2L);
-        } else {
-            new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.rotateplayer.contains(p)) {
-                        p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
-                    } else {
-                        cancel();
-                    }
-                }
-            }.runTaskTimer(Main.getInstance(), 0L, 2L);
-        }
+            }
+        }, 0L, 2L);
+
+        ropTasks.put(p, task);
     }
 
-    @SuppressWarnings("deprecation")
     public void rtp(final Player p) {
-        if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.randomtp.contains(p)) {
-                        p.teleport(LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
-                    } else {
-                        cancel();
-                    }
+        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+            @Override
+            public void run() {
+                if (ArrayUtils.randomtp.contains(p)) {
+                    Main.getInstance().getFoliaLib().getScheduler()
+                            .teleportAsync(p, LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
+                } else {
+                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(rtpTasks.get(p));
                 }
-            }, 0L, 5L);
-        } else {
-            new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.randomtp.contains(p)) {
-                        p.teleport(LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
-                    } else {
-                        cancel();
-                    }
-                }
-            }.runTaskTimer(Main.getInstance(), 0L, 5L);
-        }
+            }
+        }, 0L, 2L);
+
+        rtpTasks.put(p, task);
     }
 
-    @SuppressWarnings("deprecation")
     public void spawnTnTAtPlayer(final Player p) {
-        if (ServerInfo.supportOldPackets()) {
-            Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.tntp.contains(p)) {
+        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+            @Override
+            public void run() {
+                if (ArrayUtils.tntp.contains(p)) {
+                    Main.getInstance().getFoliaLib().getScheduler()
+                            .teleportAsync(p, LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
+                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(p.getLocation(), x -> {
                         TNTPrimed tnt = p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
                         tnt.setCustomName("§cExplode");
-                    } else {
-                        cancel();
-                    }
+                    });
+                } else {
+                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(tntSpawnTasks.get(p));
                 }
-            }, 0L, (long) (Config.config.getInt("trolls.tnttrace.spawndelay")));
-        } else {
-            new BukkitRunnable() {
-                public void run() {
-                    if (ArrayUtils.tntp.contains(p)) {
-                        TNTPrimed tnt = p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
-                        tnt.setCustomName("§cExplode");
-                    } else {
-                        cancel();
-                    }
-                }
-            }.runTaskTimer(Main.getInstance(), 0L, (long) (Config.config.getInt("trolls.tnttrace.spawndelay")));
-        }
+            }
+        }, 0L, 2L);
+
+        tntSpawnTasks.put(p, task);
     }
 
     @SuppressWarnings("deprecation")

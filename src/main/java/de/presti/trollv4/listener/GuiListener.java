@@ -6,7 +6,7 @@ import java.util.Random;
 
 import de.presti.trollv4.api.PlayMusic;
 import de.presti.trollv4.api.TrollV4API;
-import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.cmd.TrollCommand;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.language.LanguageService;
@@ -35,7 +35,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.cryptomorin.xseries.*;
@@ -940,7 +939,7 @@ public class GuiListener implements Listener {
                                 ArrayUtils.rotateplayer.remove(t);
                             } else {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rotate.on", t));
-                                new Haupt().rop(t);
+                                new TrollCommand().rop(t);
                                 ArrayUtils.rotateplayer.add(t);
                             }
                             e.getView().close();
@@ -963,7 +962,7 @@ public class GuiListener implements Listener {
                             } else {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.rndmtp.on", t));
                                 ArrayUtils.randomtp.add(t);
-                                new Haupt().rtp(t);
+                                new TrollCommand().rtp(t);
                             }
                             e.getView().close();
                         } else {
@@ -2160,7 +2159,7 @@ public class GuiListener implements Listener {
                                     ArrayUtils.tntp.remove(t);
                                 } else {
                                     p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tnttrace.on", t));
-                                    new Haupt().spawnTnTAtPlayer(t);
+                                    new TrollCommand().spawnTnTAtPlayer(t);
                                     ArrayUtils.tntp.add(t);
                                 }
                                 e.getView().close();

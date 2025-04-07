@@ -1,10 +1,10 @@
 package de.presti.trollv4.utils.plugin;
 
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.logging.Logger;
 import io.sentry.Sentry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.main.Data;
 import de.presti.trollv4.main.Main;
@@ -25,6 +25,7 @@ public class UpdateChecker {
     public static final int ID = 67318;
     public static String ERR_MSG = "&cUpdate checker failed!";
     public static final long CHECK_INTERVAL = 12_000; // In ticks.
+    public WrappedTask checkTask;
 
     public UpdateChecker(final JavaPlugin javaPlugin) {
         this.javaPlugin = javaPlugin;
@@ -34,37 +35,34 @@ public class UpdateChecker {
     }
 
     public void checkForUpdate() {
-        new BukkitRunnable() {
-            @SuppressWarnings("static-access")
+        checkTask = Main.getInstance().getFoliaLib().getScheduler().runTimerAsync(new Runnable() {
             @Override
             public void run() {
-                Bukkit.getScheduler().runTaskAsynchronously(javaPlugin, () -> {
-                    try {
-                        final HttpsURLConnection connection = (HttpsURLConnection) new URL(
-                                "https://api.spigotmc.org/legacy/update.php?resource=" + ID).openConnection();
-                        connection.setRequestMethod("GET");
-                        spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream()))
-                                .readLine();
-                    } catch (final IOException e) {
-                        Logger.error(ERR_MSG);
-                        Sentry.captureException(e);
-                        e.printStackTrace();
-                        cancel();
-                        return;
-                    }
+                try {
+                    final HttpsURLConnection connection = (HttpsURLConnection) new URL(
+                            "https://api.spigotmc.org/legacy/update.php?resource=" + ID).openConnection();
+                    connection.setRequestMethod("GET");
+                    spigotPluginVersion = new BufferedReader(new InputStreamReader(connection.getInputStream()))
+                            .readLine();
+                } catch (final IOException e) {
+                    Logger.error(ERR_MSG);
+                    Sentry.captureException(e);
+                    e.printStackTrace();
+                    checkTask.cancel();
+                    return;
+                }
 
-                    if (compareVersion(localPluginVersion, spigotPluginVersion)) {
-                        Logger.warning("TrollV4 has a update!");
-                        Logger.warning("New Version: " + spigotPluginVersion);
-                        Logger.warning("Your Version: " + localPluginVersion);
-                        Logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
-                    } else {
-                        Logger.info("TrollV4 has no update");
-                    }
-                    cancel(); // Cancel the runnable as an update has been found.
-                });
+                if (compareVersion(localPluginVersion, spigotPluginVersion)) {
+                    Logger.warning("TrollV4 has a update!");
+                    Logger.warning("New Version: " + spigotPluginVersion);
+                    Logger.warning("Your Version: " + localPluginVersion);
+                    Logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
+                    checkTask.cancel();
+                } else {
+                    Logger.info("TrollV4 has no update");
+                }
             }
-        }.runTaskTimer(javaPlugin, 20, CHECK_INTERVAL);
+        }, 20, CHECK_INTERVAL);
     }
 
     // TODO:: make a utility class for this PLEASE FOR THE LOVE OF GOD.

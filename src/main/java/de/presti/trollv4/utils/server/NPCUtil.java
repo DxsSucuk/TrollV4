@@ -12,16 +12,14 @@ import com.github.juliarn.npclib.bukkit.BukkitWorldAccessor;
 import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
 import com.github.juliarn.npclib.common.CommonNpcTracker;
 import com.github.juliarn.npclib.common.npc.CommonNpcBuilder;
-import com.github.juliarn.npclib.common.settings.CommonNpcSettingsBuilder;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.logging.Logger;
 import io.sentry.Sentry;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.cryptomorin.xseries.particles.XParticle;
 
@@ -119,7 +117,10 @@ public class NPCUtil {
         Npc giorno = createNPC(profile, loc, lookat, item, list);
         giorno.forceTrackPlayer(t);
 
-        ArrayUtils.jojo.put(p, new Npc[]{giorno, null});
+        NPCUserContainer container = new NPCUserContainer(p);
+        container.addNPC(giorno);
+
+        ArrayUtils.jojo.put(p, container);
     }
 
     public static void createGoldenWind(Player p, Player t, Location loc, Location lookat, ItemStack item) {
@@ -137,65 +138,60 @@ public class NPCUtil {
         list.add(t);
 
         Npc npc = createNPC(profile, loc, lookat, item, list);
+        if (npc == null) return;
+
         npc.forceTrackPlayer(t);
 
-        Npc[] npcs = ArrayUtils.jojo.get(p);
-        npcs[1] = npc;
+        NPCUserContainer container = ArrayUtils.jojo.get(p);
+        container.npcs.set(1, npc);
 
-        ArrayUtils.jojo.put(t, npcs);
-
-        new BukkitRunnable() {
-
+        Runnable runnable;
+        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable = new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.jojo.containsKey(t)) {
-                    if (npc != null) {
+                    if (ServerInfo.above(8)) {
+                        npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
+                        t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
+                    }
 
-                        if (ServerInfo.above(8)) {
-                            npc.playAnimation(EntityAnimation.SWING_OFF_HAND).scheduleForTracked();
-                            t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
-                        }
-
-                        if (!t.isDead()) {
-                            t.damage(0.1D);
-                        }
-
+                    if (!t.isDead()) {
+                        t.damage(0.1D);
                     }
                 } else {
-                    cancel();
+                    container.tasks.get(this).cancel();
                     npc.unlink();
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 20L, 10L);
+        }, 20, 10);
 
-        new BukkitRunnable() {
-
+        Runnable runnable2;
+        WrappedTask task2 = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable2 = new Runnable() {
             @Override
             public void run() {
-                if (ArrayUtils.jojo.containsKey(p)) {
-                    if (npc != null) {
+                if (ArrayUtils.jojo.containsKey(t)) {
+                    npc.playAnimation(EntityAnimation.SWING_MAIN_ARM).scheduleForTracked();
 
-                        npc.playAnimation(EntityAnimation.SWING_MAIN_ARM).scheduleForTracked();
-
-                        if (t != null) {
-                            if (!t.isDead()) {
-                                t.damage(0.1D);
-                                t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
-                            }
-                        }
-
+                    if (t.isOnline() && !t.isDead()) {
+                        t.damage(0.1D);
+                        t.spawnParticle(XParticle.CRIT.get(), t.getLocation(), 3);
                     }
                 } else {
-                    cancel();
+                    container.tasks.get(this).cancel();
                     npc.unlink();
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 25L, 10L);
+        }, 25, 10);
+
+        container.tasks.put(runnable, task);
+        container.tasks.put(runnable2, task2);
+
+        ArrayUtils.jojo.put(t, container);
     }
 
     public static void destroyNPCsFromPlayer(Player p) {
         if (ArrayUtils.jojo.containsKey(p)) {
-            for (Npc npc : ArrayUtils.jojo.get(p)) {
+            for (Npc npc : ArrayUtils.jojo.get(p).npcs) {
                 npc.unlink();
             }
             ArrayUtils.jojo.remove(p);

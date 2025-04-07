@@ -1,8 +1,9 @@
 package de.presti.trollv4.main;
 
+import com.tcoded.folialib.FoliaLib;
 import de.presti.trollv4.api.PlayerInfo;
 import de.presti.trollv4.api.RequestUtility;
-import de.presti.trollv4.cmd.Haupt;
+import de.presti.trollv4.cmd.TrollCommand;
 import de.presti.trollv4.cmd.TabCompleter;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
@@ -41,19 +42,13 @@ public class Main extends JavaPlugin {
     public UpdateChecker updateChecker;
     public Controls control;
 
+    @Getter
+    public FoliaLib foliaLib;
+
     public void onEnable() {
         instance = this;
 
-        // Sentry in this case is more annoying than helpful.
-        /*Sentry.init(options -> {
-            options.setDsn("https://5eca0917287f22faf8b2726f07f4d460@o4503927742529536.ingest.us.sentry.io/4506083039969280");
-            options.setRelease(Data.version);
-            options.addInAppInclude("de.presti.trollv4");
-            options.addIgnoredExceptionForType(SQLException.class);
-            ////options.addIgnoredExceptionForType(MySQLDataException.class);
-            options.addIgnoredExceptionForType(IllegalPluginAccessException.class);
-            options.addIgnoredExceptionForType(SocketException.class);
-        });*/
+        foliaLib = new FoliaLib(this);
 
         ArrayUtils.armor = new HashMap<>();
         ArrayUtils.inventory = new HashMap<>();
@@ -123,9 +118,8 @@ public class Main extends JavaPlugin {
     }
 
     public static void registerCommands() {
-        instance.getCommand("troll").setExecutor(new Haupt());
+        instance.getCommand("troll").setExecutor(new TrollCommand());
         instance.getCommand("troll").setTabCompleter(new TabCompleter());
-        // instance.getCommand("trollv4test").setExecutor(new TestCommand());
     }
 
     public static void registerListeners() {
@@ -138,8 +132,7 @@ public class Main extends JavaPlugin {
         Logger.info("-----------------------------------");
         Logger.info("TrollV" + Data.version + " by Presti");
         Logger.info("In case of errors please report:");
-        Logger.info("Email: presti@presti.me");
-        Logger.info("YouTube: Not Memerinoto");
+        Logger.info("Email: spigotmc@presti.me");;
         Logger.info("Otherwise have fun!");
         Logger.info("------------------------------------");
         Logger.info("Plugin Version: " + Data.version);
@@ -218,11 +211,7 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null && Config.getConfig().getBoolean("downloader.protocollib")) {
             Logger.info("Downloading ProtocolLib!");
-            if (ServerInfo.aboveOrEqual(21)) {
-                RequestUtility.download("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
-            } else {
-                RequestUtility.download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
-            }
+            RequestUtility.download("https://github.com/dmulloy2/ProtocolLib/releases/latest", "plugins/ProtocolLib.jar");
         }
 
         if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getConfig().getBoolean("downloader.noteblockapi")) {
@@ -234,6 +223,7 @@ public class Main extends JavaPlugin {
             Logger.info("Downloading LibsDisguises!");
             if (ServerInfo.is(8)) {
                 // TODO:: why dont they have this on their fucking Github WHY!
+                // This wont even work since the Azura CDN is long dead.
                 RequestUtility.download("https://cdn.azura.best/download/trollv4/1-8/LibsDisguises.jar", "plugins/LibsDisguises.jar");
             } else {
                 RequestUtility.download("https://github.com/libraryaddict/LibsDisguises/releases/latest", "plugins/LibsDisguises.jar");

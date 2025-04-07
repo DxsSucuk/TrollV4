@@ -64,7 +64,7 @@ public class Controls {
 
 		// Start a handling task
 		CheckVictim check = new CheckVictim(v, c);
-		check.runTaskTimer(Main.getInstance(), 0L, 20L);
+		Main.getInstance().getFoliaLib().getScheduler().wrapTask(check.runTaskTimer(Main.getInstance(), 0L, 20L));
 		c.sendMessage(Data.prefix + LanguageService.getDefault("gui.startcontrol.start", v));
 	}
 

@@ -17,16 +17,20 @@
 
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
             <id>dmulloy2-repo</id>
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
         <repository>
+            <id>PaperLib</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>DerKlaro</id>
+            <url>https://repository.derklaro.dev/releases/</url>
+        </repository>
+        <repository>
             <id>CodeMC</id>
-            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>ossrh</id>
@@ -35,6 +39,10 @@
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>minecraft-libraries</id>
@@ -58,7 +66,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>11.3.0</version>
+            <version>13.2.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -84,7 +92,7 @@
         <dependency>
             <groupId>io.github.juliarn</groupId>
             <artifactId>npc-lib-bukkit</artifactId>
-            <version>3.0.0-beta9</version>
+            <version>3.0.0-beta11</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -117,6 +125,12 @@
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.technicallycoded</groupId>
+            <artifactId>FoliaLib</artifactId>
+            <version>main-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -153,19 +167,43 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>de.presti.trollv4.shaded.org.bstats</shadedPattern>
+                            <shadedPattern>de.presti.trollv4.lib.bstats</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>com.cryptomorin</pattern>
-                            <shadedPattern>de.presti.trollv4.shaded.com.cryptomorin</shadedPattern>
+                            <shadedPattern>de.presti.trollv4.lib.cryptomorin</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>org.apache.commons.io</pattern>
-                            <shadedPattern>de.presti.trollv4.shaded.org.apache.commons.io</shadedPattern>
+                            <shadedPattern>de.presti.trollv4.lib.commons.io</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>com.github.juliarn.npclib</pattern>
-                            <shadedPattern>de.presti.trollv4.shaded.com.github.juliarn.npclib</shadedPattern>
+                            <shadedPattern>de.presti.trollv4.lib.npclib</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>io.papermc.lib</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.papermc</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>net.kyori</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.kyori</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>io.leangen.geantyref</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.leangen.geantyref</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>io.github.retrooper</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.retrooper.io</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.github.retrooper</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.retrooper.com</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.tcoded.folialib</pattern>
+                            <shadedPattern>de.presti.trollv4.lib.folialib</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
@@ -187,28 +225,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
-                <groupId>io.sentry</groupId>
-                <artifactId>sentry-maven-plugin</artifactId>
-                <version>0.0.4</version>
-                <configuration>
-                    <debugSentryCli>true</debugSentryCli>
-
-                    <org>ree6</org>
-
-                    <project>trollv4</project>
-
-                    <authToken>${env.SENTRY_AUTH_TOKEN}</authToken>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>uploadSourceBundle</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
         <resources>
             <resource>

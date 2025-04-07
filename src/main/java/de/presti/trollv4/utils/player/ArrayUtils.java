@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.github.juliarn.npclib.api.Npc;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.utils.server.NPCUserContainer;
 import de.presti.trollv4.utils.server.NPCUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import de.presti.trollv4.invs.InvSaver;
 
@@ -37,16 +36,16 @@ public class ArrayUtils {
 
 	// HashMaps
 	public static HashMap<String, String> trolling = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> anim = new HashMap<>();
+	public static HashMap<Player, WrappedTask> anim = new HashMap<>();
 	public static HashMap<Player, Location> arrest = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> wtf = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> hackuser = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> arrowspam = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> tornador = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> anvils = new HashMap<>();
-	public static HashMap<Player, BukkitRunnable> jumping = new HashMap<>();
+	public static HashMap<Player, WrappedTask> wtf = new HashMap<>();
+	public static HashMap<Player, WrappedTask> hackuser = new HashMap<>();
+	public static HashMap<Player, WrappedTask> arrowspam = new HashMap<>();
+	public static HashMap<Player, WrappedTask> tornador = new HashMap<>();
+	public static HashMap<Player, WrappedTask> anvils = new HashMap<>();
+	public static HashMap<Player, WrappedTask> jumping = new HashMap<>();
 	public static HashMap<Player, InvSaver> fakeinv = new HashMap<>();
-	public static HashMap<Player, Npc[]> jojo = new HashMap<>();
+	public static HashMap<Player, NPCUserContainer> jojo = new HashMap<>();
 	public static HashMap<Player, NPCUserContainer> spooky = new HashMap<>();
 	public static HashMap<Player, Location> spookylast = new HashMap<>();
 
