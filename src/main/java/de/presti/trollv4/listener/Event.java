@@ -6,7 +6,7 @@ import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import de.presti.trollv4.utils.plugin.UpdateChecker;
@@ -67,9 +67,9 @@ public class Event implements Listener {
 
         if (p.hasPermission("troll.help")) {
             if (Config.getConfig().getBoolean("UpdateChecker")) {
-                if (!Data.version.equals(Main.getInstance().updateChecker.spigotPluginVersion)) {
+                if (!Data.version.equals(TrollV4.getInstance().updateChecker.spigotPluginVersion)) {
                     p.sendMessage(Data.prefix + "TrollV4 has a update!");
-                    p.sendMessage(Data.prefix + "New Version: " + Main.getInstance().updateChecker.spigotPluginVersion);
+                    p.sendMessage(Data.prefix + "New Version: " + TrollV4.getInstance().updateChecker.spigotPluginVersion);
                     p.sendMessage(Data.prefix + "Your Version: " + Data.version);
                     p.sendMessage(Data.prefix + "Download here: https://www.spigotmc.org/resources/" + UpdateChecker.ID
                             + "/updates");
@@ -134,7 +134,7 @@ public class Event implements Listener {
             Material material = e.getBlockPlaced().getType();
             Location location = e.getBlockPlaced().getLocation();
             location.getWorld().getBlockAt(location).setType(XMaterial.AIR.parseMaterial());
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
+            Bukkit.getScheduler().runTaskLater(TrollV4.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     location.getWorld().getBlockAt(location).setType(material);
@@ -151,7 +151,7 @@ public class Event implements Listener {
         if (ArrayUtils.lagging.contains(player)) {
             Material drops = e.getBlock().getType();
             e.setCancelled(true);
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(TrollV4.getInstance(), () -> {
                 if (e.getBlock().getType() != XMaterial.AIR.parseMaterial()) {
                     e.getBlock().getLocation().getWorld().getBlockAt(e.getBlock().getLocation())
                             .setType(XMaterial.AIR.parseMaterial());
@@ -329,7 +329,7 @@ public class Event implements Listener {
             }
         } catch (Exception e1) {
             Sentry.captureException(e1);
-            Main.getInstance().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
+            TrollV4.getInstance().getLogger().severe("Couldn't Spawn! Please report: " + e1.getMessage());
         }
     }
 }

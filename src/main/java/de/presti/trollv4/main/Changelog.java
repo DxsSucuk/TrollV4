@@ -37,154 +37,120 @@ public class Changelog {
             }
         }
 
-        inv.setItem(10, SetItems.buildItem("§2Version » §c4.4.0", XMaterial.PAPER,
-                new String[]{Data.changelogAdd + "Russian Language", Data.changelogChange + "Rickroll Error fix"}));
+        // 10-16 19-25 28-34 37-43
 
-        inv.setItem(11, SetItems.buildItem("§2Version » §c4.4.1", XMaterial.PAPER,
-                new String[]{Data.changelogChange + "Fix for Cracked Server in GUI"}));
+        inv.setItem(10, SetItems.buildItem("§2Version » §c4.4.0 §a- §c4.4.9 (1/3)", XMaterial.PAPER,
+                new String[]{
+                        Data.changelogAdd + "New Changelog Menu!",
+                        Data.changelogAdd + "Added ServerSoftware Detection!",
+                        Data.changelogAdd + "Added Demoscreen 1.16 Support!",
+                        Data.changelogAdd + "Spooky World!",
+                        Data.changelogAdd + "Added Language Singapore (by the Community)",
+                        Data.changelogAdd + "Russian Language",
+                        Data.changelogAdd + "AutoUpdater",
+                        Data.changelogAdd + "Added an TabCompleter",
+                        Data.changelogAdd + "Config GUI",
+                        Data.changelogAdd + "Added Async Heads",
+                }));
 
-        inv.setItem(12,
-                SetItems.buildItem("§2Version » §c4.4.2", XMaterial.PAPER, new String[]{Data.changelogChange + "Hotfix!"}));
+        inv.setItem(11, SetItems.buildItem("§2Version » §c4.4.0 §a- §c4.4.9 (2/3)", XMaterial.PAPER,
+                new String[]{
+                        Data.changelogAdd + "TnT World is now ASync!",
+                        Data.changelogAdd + "Notification when the creator joins the server",
+                        Data.changelogAdd + "Added an Warning to some Trolls",
+                        Data.changelogAdd + "TnTTrace tnt spawn delay can be changed",
+                        Data.changelogAdd + "API Doc Finished!",
+                        Data.changelogAdd + "Giorno Giovani Troll!",
+                        Data.changelogAdd + "Raining Anvil!",
+                        Data.changelogAdd + "Minecraft EndCredits!",
+                        Data.changelogAdd + "Hostile Cow!",
+
+                }));
+
+        inv.setItem(12, SetItems.buildItem("§2Version » §c4.4.0 §a- §c4.4.9 (3/3)", XMaterial.PAPER,
+                new String[]{
+                        Data.changelogChange + "API fully documented",
+                        Data.changelogChange + "Rickroll Error fix",
+                        Data.changelogChange + "Fix for Cracked Server in GUI",
+                        Data.changelogChange + "A lot of bug fixes!",
+                        Data.changelogRemove + "Removed Changelog < 4.4.0"
+                }));
 
         inv.setItem(13,
-                SetItems.buildItem("§2Version » §c4.4.3", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "Added Async Heads", Data.changelogAdd + "Notification if i join the Server",
-                                Data.changelogAdd + "Added an Warning to some Trolls",
-                                Data.changelogAdd + "TnTTrace tnt spawn delay can be changed"}));
+                SetItems.buildItem("§2Version » §c4.5.0 §a- §c4.5.8 (1/2)", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added 1.17, 1.18, and 1.19 support!",
+                                Data.changelogAdd + "Added Spanish!",
+                                Data.changelogAdd + "Added new CreditsGUI",
+                                Data.changelogAdd + "Added PurpurClip detection",
+                                Data.changelogAdd + "Added /troll [Player]",
+                                Data.changelogChange + "Using official downloads instead of own mirror!",
+                        }));
 
         inv.setItem(14,
-                SetItems.buildItem("§2Version » §c4.4.4", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "AutoUpdater", Data.changelogAdd + "Added an TabCompleter",
-                                Data.changelogAdd + "Config GUI", Data.changelogChange + "Some API Trolls got an Documentation"}));
-
-        inv.setItem(15,
-                SetItems.buildItem("§2Version » §c4.4.5", XMaterial.PAPER, new String[]{Data.changelogChange + "Hotfix!"}));
-
-        inv.setItem(16, SetItems.buildItem("§2Version » §c4.4.6", XMaterial.PAPER,
-                new String[]{Data.changelogChange + "Big Error Fix!"}));
-
-        inv.setItem(19,
-                SetItems.buildItem("§2Version » §c4.4.7", XMaterial.PAPER, new String[]{
-                        Data.changelogAdd + "Added Language Singapore (by the Community)", Data.changelogAdd + "TnT World is now ASync!",
-                        Data.changelogChange + "Fixed Performance Problems with AutoUpdate", Data.changelogChange + "Added more Warnings!"}));
-
-        inv.setItem(20,
-                SetItems.buildItem("§2Version » §c4.4.8", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "New Changelog Menu!", Data.changelogAdd + "Added ServerSoftware Detection!",
-                                Data.changelogAdd + "Added Demoscreen 1.16 Support!", Data.changelogAdd + "Spooky World!",
-                                Data.changelogAdd + "API Doc Finished!", Data.changelogAdd + "Giorno Giovani Troll!",
-                                Data.changelogAdd + "Raining Anvil!", Data.changelogAdd + "Minecraft EndCredits!", Data.changelogAdd + "Hostile Cow!",
-                                Data.changelogRemove + "Removed Changelog < 4.4.0"}));
-        inv.setItem(21,
-                SetItems.buildItem("§2Version » §c4.4.9", XMaterial.PAPER, new String[]{Data.changelogChange + "Hotfix!"}));
-
-        inv.setItem(22,
-                SetItems.buildItem("§2Version » §c4.5.0", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "Added Spanish!", "Added new CreditsGUI",
-                                Data.changelogChange + "Fixed LanguageManager", Data.changelogChange + "Fixed a Random Error",
-                                Data.changelogRemove + "BigUpdate delayed to 4.5.5 or 4.6.0"}));
-
-        inv.setItem(23,
-                SetItems.buildItem("§2Version » §c4.5.1", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "Added PurpurClip detection", Data.changelogAdd + "Added /troll [Player]"}));
-
-        inv.setItem(24,
-                SetItems.buildItem("§2Version » §c4.5.2", XMaterial.PAPER,
-                        new String[]{Data.changelogChange + "Fixed /troll error!"}));
-
-        inv.setItem(25,
-                SetItems.buildItem("§2Version » §c4.5.3", XMaterial.PAPER,
-                        new String[]{Data.changelogChange + "Fixed many disconnecting Problems with the Trolls!"}));
-
-        inv.setItem(28,
-                SetItems.buildItem("§2Version » §c4.5.4", XMaterial.PAPER,
-                        new String[]{Data.changelogAdd + "Added 1.17 and 1.18 support!"}));
-
-        inv.setItem(29,
-                SetItems.buildItem("§2Version » §c4.5.5", XMaterial.PAPER,
-                        new String[]{Data.changelogChange + "Fixed Titles!", Data.changelogChange + "Fixed Changelog!", Data.changelogChange + "Fixed Credits!"}));
-
-        inv.setItem(30,
-                SetItems.buildItem("§2Version » §c4.5.6", XMaterial.PAPER,
+                SetItems.buildItem("§2Version » §c4.5.0 §a- §c4.5.8 (2/2)", XMaterial.PAPER,
                         new String[]{
+                                Data.changelogChange + "Reworked internal code",
+                                Data.changelogRemove + "Sadly broke NPCs and waiting for NPC-Lib to document their code.",
                                 Data.changelogChange + "Fixed World creation Issues with PaperMC!",
                                 Data.changelogChange + "Fixed Startup Errors, when LibsDisguises is not present or loaded!",
-                                Data.changelogChange + "Fixed Credits!"
-                        }
-                ));
+                                Data.changelogChange + "Fixed even more errors!",
+                                Data.changelogChange + "Fixed many disconnecting Problems with the Trolls!"
+                        }));
 
-        inv.setItem(31,
-                SetItems.buildItem("§2Version » §c4.5.7", XMaterial.PAPER,
+        inv.setItem(15,
+                SetItems.buildItem("§2Version » §c4.5.9 §a- §c4.5.13", XMaterial.PAPER,
                         new String[]{
-                                Data.changelogChange + "Fixed JAR!"
-                        }
-                ));
-
-        inv.setItem(32,
-                SetItems.buildItem("§2Version » §c4.5.8", XMaterial.PAPER,
-                        new String[]{
-                                Data.changelogAdd + "Full 1.19 support (Soon NPCs aswell!)",
-                                Data.changelogChange + "Using official downloads instead of own mirror!",
-                                Data.changelogChange + "Reworked internal code",
-                                Data.changelogRemove + "Sadly broke NPCs and waiting for NPC-Lib to document their code."
-                        }
-                ));
-
-        inv.setItem(34,
-                SetItems.buildItem("§2Version » §c4.5.9", XMaterial.PAPER,
-                        new String[]{
+                                Data.changelogAdd + "Adding a config value for the spooky world generation.",
+                                Data.changelogAdd + "Added a warning if the whitelist is on while having community-surprise active.",
+                                Data.changelogAdd + "Option for custom spookyworld name.",
+                                Data.changelogChange + "Spooky world will now ONLY be created on start.",
+                                Data.changelogChange + "NPC based trolls should work on every version now.",
                                 Data.changelogRemove + "Fixed a bug related to the Selection GUI."
                         }
                 ));
 
-        inv.setItem(37,
-                SetItems.buildItem("§2Version » §c4.5.10", XMaterial.PAPER,
-                        new String[]{
-                                Data.changelogAdd + "Adding a config value for the spooky world generation."
-                        }
-                ));
-
-        inv.setItem(38,
-                SetItems.buildItem("§2Version » §c4.5.11", XMaterial.PAPER,
-                        new String[]{
-                                Data.changelogChange + "NPC based trolls should work on every version now."
-                        }
-                ));
-
-        inv.setItem(40,
-                SetItems.buildItem("§2Version » §c4.5.12 §a+ §c4.5.13", XMaterial.PAPER,
-                        new String[]{
-                                Data.changelogAdd + "Added a warning if the whitelist is on while having community-surprise active.",
-                                Data.changelogAdd + "Option for custom spookyworld name.",
-                                Data.changelogChange + "Spooky world will now ONLY be created on start."
-                        }
-                ));
-
-        inv.setItem(41,
-                SetItems.buildItem("§2Version » §c4.5.14", XMaterial.PAPER,
-                        new String[]{
-                                Data.changelogAdd + "Added confirmation menu for desturctiv trolls.",
-                                Data.changelogAdd + "Added vomit troll.",
-                                Data.changelogAdd + "Added infinite loading screen troll."
-                        }
-                ));
-
-        inv.setItem(42,
-                SetItems.buildItem("§2Version » §c4.5.15", XMaterial.PAPER,
+        inv.setItem(16,
+                SetItems.buildItem("§2Version » §c4.5.14 §a- §c4.5.16", XMaterial.PAPER,
                         new String[]{
                                 Data.changelogAdd + "1.20 Support.",
-                                Data.changelogChange + "A lot of code cleanup and dependency fixing."
+                                Data.changelogAdd + "Added confirmation menu for destructive trolls.",
+                                Data.changelogAdd + "Added vomit troll.",
+                                Data.changelogAdd + "Added infinite loading screen troll.",
+                                Data.changelogChange + "A lot of code cleanup and dependency fixing.",
+                                Data.changelogChange + "Bug fixing for cracked servers."
                         }
                 ));
 
-        inv.setItem(43,
-                SetItems.buildItem("§2Version » §c4.5.16", XMaterial.PAPER,
+        inv.setItem(19,
+                SetItems.buildItem("§2Version » §c4.5.17 §a- §c4.5.25", XMaterial.PAPER,
                         new String[]{
-                                Data.changelogChange + "Bug fixing for cracked servers.",
-                                Data.changelogChange + "Reducing console spamming."
+                                Data.changelogAdd + "1.20 and 1.21 Support.",
+                                Data.changelogAdd + "Added Simplified Chinese (by the Community)",
+                                Data.changelogAdd + "Cleanup Language System",
+                                Data.changelogAdd + "Customization options for AutoUpdater.",
+                                Data.changelogChange + "Fixed support for 1.8x-1.13.x",
+                                Data.changelogChange + "A lot of bug fixes."
                         }
                 ));
 
+        inv.setItem(20,
+                SetItems.buildItem("§2Version » §c4.5.26 §a- §c4.5.29", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added Italian (by the Community)",
+                                Data.changelogChange + "Fixed OutOfMemory Loop",
+                                Data.changelogChange + "Fix Language System."
+                        }
+                ));
+
+        inv.setItem(21,
+                SetItems.buildItem("§2Version » §c4.5.30", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added basic Folia support",
+                                Data.changelogAdd + "Added 1.21.5 support",
+                                Data.changelogChange + "A lot of internal cleanup"
+                        }
+                ));
 
         inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
@@ -269,7 +235,7 @@ public class Changelog {
 
         HashMap<Integer, ItemStack> items = new HashMap<>();
 
-        Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+        TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
             ItemStack skull = SkullUtil.getSkull(UUID.fromString(PlayerInfo.getUUID("1c32b55bd4584347a5798754f4510081")));
             SkullMeta skullm = (SkullMeta) skull.getItemMeta();
             skullm.setDisplayName("§bPresti §8(§2" + PlayerInfo.getName("1c32b55bd4584347a5798754f4510081") + "§8)");
@@ -340,7 +306,7 @@ public class Changelog {
 
             items.put(51, skull);
 
-            Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                 for (Map.Entry<Integer, ItemStack> it : items.entrySet()) {
                     inv.setItem(it.getKey(), it.getValue());
                 }

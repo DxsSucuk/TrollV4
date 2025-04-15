@@ -11,7 +11,7 @@ import com.github.juliarn.npclib.bukkit.util.BukkitPlatformUtil;
 import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.language.LanguageService;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
 import de.presti.trollv4.utils.player.ArrayUtils;
@@ -52,7 +52,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void startControl(Player user, Player victim) {
-        Main.startControlling(user, victim);
+        TrollV4.startControlling(user, victim);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TrollV4API {
      * @since 4.4.4
      */
     public static void stopControl(Player user, Player victim) {
-        Main.stopControlling(user, victim);
+        TrollV4.stopControlling(user, victim);
     }
 
     /**
@@ -103,19 +103,19 @@ public class TrollV4API {
             ArrayUtils.userbowspam.remove(victim);
         } else {
             ArrayUtils.userbowspam.add(victim);
-            WrappedTask wrappedTask = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
+            WrappedTask wrappedTask = TrollV4.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 @Override
                 public void run() {
                     Location playerLocation = victim.getLocation().clone();
 
                     for (int i = 0; i < 5; i++) {
-                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                             Arrow arrow = victim.getWorld()
-                                    .spawn(playerLocation.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                    Main.getInstance().getRandom(5, 10), Main.getInstance().getRandom(-10, 10)),
+                                    .spawn(playerLocation.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                    TrollV4.getInstance().getRandom(5, 10), TrollV4.getInstance().getRandom(-10, 10)),
                                             Arrow.class);
 
-                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(arrow, y -> {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(arrow, y -> {
                                 Location arrowLocation = arrow.getLocation();
                                 Vector angle = new Vector(playerLocation.getX() - arrowLocation.getX(), playerLocation.getY() - arrowLocation.getBlockY(),
                                         playerLocation.getZ() - arrowLocation.getBlockZ());
@@ -137,7 +137,7 @@ public class TrollV4API {
      */
     public static void Hack(Player victim) {
         if (victim != null) {
-            taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+            taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(TrollV4.getInstance(), new Runnable() {
                 int countdown = 15;
 
                 @Override
@@ -157,7 +157,7 @@ public class TrollV4API {
                 }
             }, 0, 20);
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -173,7 +173,7 @@ public class TrollV4API {
             victim.getWorld().createExplosion(victim.getLocation(), 3.0F);
             victim.setHealth(0.0D);
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -195,7 +195,7 @@ public class TrollV4API {
 
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -209,7 +209,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.getLocation().getWorld().strikeLightning(victim.getLocation());
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -227,7 +227,7 @@ public class TrollV4API {
             victim.playSound(victim.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 100.0F, 25.0F);
             victim.setAllowFlight(false);
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -243,7 +243,7 @@ public class TrollV4API {
                 victim.sendMessage("§cDont Cheat!");
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -257,7 +257,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.sendMessage(LanguageService.getDefault("gui.fakeop.opm", victim));
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -271,7 +271,7 @@ public class TrollV4API {
         if (victim != null) {
             victim.kickPlayer(LanguageService.getDefault("gui.crash.message"));
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -294,7 +294,7 @@ public class TrollV4API {
                 ArrayUtils.freeze.add(victim);
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -308,10 +308,10 @@ public class TrollV4API {
     public static void AntiCheat(Player victim) {
         if (victim != null) {
             victim.sendMessage(LanguageService.getDefault("gui.anticheat.detected"));
-            Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, new Location(victim.getWorld(), victim.getLocation().getX(),
+            TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, new Location(victim.getWorld(), victim.getLocation().getX(),
                     victim.getLocation().getY() + 2, victim.getLocation().getZ()));
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -330,7 +330,7 @@ public class TrollV4API {
                 ArrayUtils.lagging.remove(victim);
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -343,8 +343,8 @@ public class TrollV4API {
      */
     public static void Arrest(Player victim) {
         if (victim != null) {
-            Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
-            Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+            TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
+            TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                 // Y
                 victim.getWorld()
                         .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
@@ -375,7 +375,7 @@ public class TrollV4API {
             });
 
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -395,7 +395,7 @@ public class TrollV4API {
                 ArrayUtils.rotateplayer.add(victim);
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -415,7 +415,7 @@ public class TrollV4API {
                 ArrayUtils.randomtp.add(victim);
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -435,7 +435,7 @@ public class TrollV4API {
                 ArrayUtils.tntp.add(victim);
             }
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -453,30 +453,30 @@ public class TrollV4API {
             victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 2));
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, true));
 
-            WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
+            WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 int countdown = 4;
 
                 @Override
                 public void run() {
                     if (countdown == 0) {
-                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
+                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
                         victim.getWorld()
                                 .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
                                         victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
                                 .setType(XMaterial.GLASS.parseMaterial());
-                        Main.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x -> {
                             victim.chat("Help me pls Im stuck ;-; I dont know where Im pls help!!!");
                         });
-                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
+                        TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
                         return;
                     }
 
                     if (countdown > 0) {
-                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
+                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, victim.getLocation());
                     }
 
                     if (countdown == 4) {
-                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                             victim.getWorld()
                                     .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
                                             victim.getLocation().getY() - 1, victim.getLocation().getZ()))
@@ -517,7 +517,7 @@ public class TrollV4API {
                     }
 
                     if (countdown == 3) {
-                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                             victim.getWorld()
                                     .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() - 1,
                                             victim.getLocation().getY(), victim.getLocation().getZ()))
@@ -558,7 +558,7 @@ public class TrollV4API {
                     }
 
                     if (countdown == 2) {
-                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                             victim.getWorld()
                                     .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX() + 1,
                                             victim.getLocation().getY() + 1, victim.getLocation().getZ() + 1))
@@ -583,7 +583,7 @@ public class TrollV4API {
                     }
 
                     if (countdown == 1) {
-                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(victim.getLocation(), x -> {
                             victim.getWorld()
                                     .getBlockAt(new Location(victim.getWorld(), victim.getLocation().getX(),
                                             victim.getLocation().getY() + 2, victim.getLocation().getZ()))
@@ -628,7 +628,7 @@ public class TrollV4API {
                     }
 
                     if (countdown <= 0) {
-                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
+                        TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.wtf.get(victim));
                     }
                     countdown--;
                 }
@@ -636,7 +636,7 @@ public class TrollV4API {
 
             ArrayUtils.wtf.put(victim, task);
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -771,7 +771,7 @@ public class TrollV4API {
                     .setType(XMaterial.COBWEB.parseMaterial());
 
         } else {
-            Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+            TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
         }
     }
 
@@ -798,7 +798,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+                TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("lava")) {
             if (victim != null) {
@@ -814,7 +814,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+                TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("cobweb")) {
             if (victim != null) {
@@ -830,7 +830,7 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+                TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
             }
         } else if (mlg.equalsIgnoreCase("water")) {
             if (victim != null) {
@@ -846,11 +846,11 @@ public class TrollV4API {
                 Titles.send(victim, 1, 10, 1, "§2MAKE A §cMLG", "");
                 victim.setAllowFlight(false);
             } else {
-                Main.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
+                TrollV4.getInstance().getLogger().info(LanguageService.getDefault("noonline"));
             }
         } else {
-            Main.getInstance().getLogger().info(mlg + " does not exist!");
-            Main.getInstance().getLogger().info("Existing: Lava, Water, Cobweb, Slime");
+            TrollV4.getInstance().getLogger().info(mlg + " does not exist!");
+            TrollV4.getInstance().getLogger().info("Existing: Lava, Water, Cobweb, Slime");
         }
     }
 
@@ -933,8 +933,8 @@ public class TrollV4API {
             }
         } catch (Exception e) {
             Sentry.captureException(e);
-            Main.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (PacketPlayOutGameStateChange)");
-            Main.getInstance().getLogger().warning("Return Exception: " + e.getMessage());
+            TrollV4.getInstance().getLogger().warning("Your Server isn't supporting this Packet! (PacketPlayOutGameStateChange)");
+            TrollV4.getInstance().getLogger().warning("Return Exception: " + e.getMessage());
         }
     }
 
@@ -954,19 +954,19 @@ public class TrollV4API {
                 ArrayUtils.spookylast.put(victim, victim.getLocation());
             }
 
-            Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(victim, new Runnable() {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityLater(victim, new Runnable() {
                 @Override
                 public void run() {
                     String spookyWorldName = Config.getConfig().getString("trolls.spookyWorld.name");
                     World world = Bukkit.getWorld(spookyWorldName);
                     if (world != null) {
-                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, Bukkit.getWorld(spookyWorldName).getSpawnLocation());
+                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, Bukkit.getWorld(spookyWorldName).getSpawnLocation());
 
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             victim.hidePlayer(all);
                         }
 
-                        Main.getInstance().getFoliaLib().getScheduler().runNextTick(consumer -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(consumer -> {
                             world.setTime(15000);
                             world.setThundering(true);
                             world.setThunderDuration((60 * 10) * 20);
@@ -979,7 +979,7 @@ public class TrollV4API {
 
                                 container.addNPC(npc);
                                 Runnable runnable;
-                                WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(victim, runnable = new Runnable() {
+                                WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(victim, runnable = new Runnable() {
                                     @Override
                                     public void run() {
                                         if (ArrayUtils.spooky.containsKey(victim)) {
@@ -991,7 +991,7 @@ public class TrollV4API {
                                                 npc.lookAt(BukkitPlatformUtil.positionFromBukkitLegacy(victim.getLocation()));
                                             }
                                         } else {
-                                            Main.getInstance().getFoliaLib().getScheduler().cancelTask(container.tasks.get(this));
+                                            TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(container.tasks.get(this));
                                         }
                                     }
                                 }, 20, 20);
@@ -1020,7 +1020,7 @@ public class TrollV4API {
             }
 
             if (ArrayUtils.spookylast.containsKey(victim)) {
-                Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, ArrayUtils.spookylast.get(victim));
+                TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, ArrayUtils.spookylast.get(victim));
                 ArrayUtils.spookylast.remove(victim);
             }
 

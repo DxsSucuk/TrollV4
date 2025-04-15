@@ -5,7 +5,7 @@ import de.presti.trollv4.config.language.LanguageService;
 import de.presti.trollv4.invs.InvManager;
 import de.presti.trollv4.main.Changelog;
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.player.LocationUtil;
 import org.bukkit.Bukkit;
@@ -30,14 +30,14 @@ public class TrollCommand implements CommandExecutor {
     HashMap<Player, WrappedTask> tntSpawnTasks = new HashMap<>();
 
     public void rop(final Player p) {
-        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+        WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.rotateplayer.contains(p)) {
-                    Main.getInstance().getFoliaLib().getScheduler()
+                    TrollV4.getInstance().getFoliaLib().getScheduler()
                             .teleportAsync(p, new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw() + 2.0F, p.getLocation().getPitch()));
                 } else {
-                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(ropTasks.get(p));
+                    TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ropTasks.get(p));
                 }
             }
         }, 0L, 2L);
@@ -46,14 +46,14 @@ public class TrollCommand implements CommandExecutor {
     }
 
     public void rtp(final Player p) {
-        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+        WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.randomtp.contains(p)) {
-                    Main.getInstance().getFoliaLib().getScheduler()
+                    TrollV4.getInstance().getFoliaLib().getScheduler()
                             .teleportAsync(p, LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
                 } else {
-                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(rtpTasks.get(p));
+                    TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(rtpTasks.get(p));
                 }
             }
         }, 0L, 2L);
@@ -62,18 +62,18 @@ public class TrollCommand implements CommandExecutor {
     }
 
     public void spawnTnTAtPlayer(final Player p) {
-        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
+        WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(p, new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.tntp.contains(p)) {
-                    Main.getInstance().getFoliaLib().getScheduler()
+                    TrollV4.getInstance().getFoliaLib().getScheduler()
                             .teleportAsync(p, LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
-                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(p.getLocation(), x -> {
+                    TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(p.getLocation(), x -> {
                         TNTPrimed tnt = p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
                         tnt.setCustomName("§cExplode");
                     });
                 } else {
-                    Main.getInstance().getFoliaLib().getScheduler().cancelTask(tntSpawnTasks.get(p));
+                    TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(tntSpawnTasks.get(p));
                 }
             }
         }, 0L, 2L);

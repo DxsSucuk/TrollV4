@@ -1,6 +1,6 @@
 name: TrollV4
 version: '${project.version}'
-main: de.presti.trollv4.main.Main
+main: de.presti.trollv4.main.TrollV4
 author: Presti
 softdepend:
    - ProtocolLib

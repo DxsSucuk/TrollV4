@@ -15,7 +15,7 @@ import de.presti.trollv4.invs.InvSaver;
 import de.presti.trollv4.invs.SetItems;
 import de.presti.trollv4.main.Changelog;
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.crossversion.DemoScreen;
 import de.presti.trollv4.utils.crossversion.HS;
 import de.presti.trollv4.utils.crossversion.Titles;
@@ -240,7 +240,7 @@ public class GuiListener implements Listener {
                             e.getInventory().setItem(45, pagei);
 
                             if (Data.async) {
-                                Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
                                     int i = 0;
                                     for (Player all : Bukkit.getOnlinePlayers()) {
                                         if (i > (45 * page)) {
@@ -249,7 +249,7 @@ public class GuiListener implements Listener {
                                         i++;
                                     }
 
-                                    Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                                    TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                                         for (ItemStack is : items) {
                                             e.getInventory().addItem(is);
                                         }
@@ -301,7 +301,7 @@ public class GuiListener implements Listener {
                 } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cReload Config")) {
                     if (p.hasPermission("troll.player") || p.hasPermission("troll.*")) {
                         e.getView().close();
-                        Main.reloadConfigurations();
+                        TrollV4.reloadConfigurations();
                         p.sendMessage(Data.prefix + "§cReloaded!");
                     } else {
                         p.sendMessage(Data.prefix + LanguageService.getDefault("nopermission"));
@@ -627,7 +627,7 @@ public class GuiListener implements Listener {
                                 ArrayUtils.hackuser.remove(t);
                             }
 
-                            ArrayUtils.hackuser.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, new Runnable() {
+                            ArrayUtils.hackuser.put(t, TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, new Runnable() {
                                 int countdown = Config.config.getInt("trolls.hack.time");
                                 @Override
                                 public void run() {
@@ -690,7 +690,7 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spam", t));
                             e.getView().close();
-                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(t, x -> {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(t, x -> {
                                 for (int i = 0; i < 1000; i++) {
                                     t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
                                 }
@@ -718,7 +718,7 @@ public class GuiListener implements Listener {
                                 if (!t.hasMetadata("C_P")) {
                                     if (t != p) {
                                         if (!(t.hasPermission("troll.control"))) {
-                                            Main.startControlling(t, p);
+                                            TrollV4.startControlling(t, p);
                                         } else {
                                             p.sendMessage(Data.prefix
                                                     + LanguageService.getDefault("gui.startcontrol.cantcontrol", t));
@@ -961,14 +961,14 @@ public class GuiListener implements Listener {
                             t.addPotionEffect(
                                     new PotionEffect(XPotion.SLOWNESS.getPotionEffectType(), 200, 10, true));
 
-                            ArrayUtils.wtf.put(p, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, new Runnable() {
+                            ArrayUtils.wtf.put(p, TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, new Runnable() {
                                 int countdown = 4;
 
                                 @Override
                                 public void run() {
 
                                     if (countdown == 0) {
-                                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
                                         t.getWorld()
                                                 .getBlockAt(new Location(t.getWorld(), t.getLocation().getX(),
                                                         t.getLocation().getY() + 1, t.getLocation().getZ() + 1))
@@ -979,7 +979,7 @@ public class GuiListener implements Listener {
                                     }
 
                                     if (countdown == 4) {
-                                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
                                             t.getWorld()
                                                     .getBlockAt(new Location(t.getWorld(), t.getLocation().getX(),
                                                             t.getLocation().getY() - 1, t.getLocation().getZ()))
@@ -1017,11 +1017,11 @@ public class GuiListener implements Listener {
                                                             t.getLocation().getY() - 1, t.getLocation().getZ() - 1))
                                                     .setType(XMaterial.BEDROCK.parseMaterial());
                                         });
-                                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
                                     }
 
                                     if (countdown == 3) {
-                                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
                                             t.getWorld()
                                                     .getBlockAt(new Location(t.getWorld(), t.getLocation().getX() - 1,
                                                             t.getLocation().getY(), t.getLocation().getZ()))
@@ -1059,11 +1059,11 @@ public class GuiListener implements Listener {
                                                             t.getLocation().getY() + 1, t.getLocation().getZ()))
                                                     .setType(XMaterial.GLASS.parseMaterial());
                                         });
-                                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
                                     }
 
                                     if (countdown == 2) {
-                                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
                                             t.getWorld()
                                                     .getBlockAt(new Location(t.getWorld(), t.getLocation().getX() + 1,
                                                             t.getLocation().getY() + 1, t.getLocation().getZ() + 1))
@@ -1085,11 +1085,11 @@ public class GuiListener implements Listener {
                                                             t.getLocation().getY() + 1, t.getLocation().getZ() - 1))
                                                     .setType(XMaterial.GLASS.parseMaterial());
                                         });
-                                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
                                     }
 
                                     if (countdown == 1) {
-                                        Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), x -> {
                                             t.getWorld()
                                                     .getBlockAt(new Location(t.getWorld(), t.getLocation().getX(),
                                                             t.getLocation().getY() + 2, t.getLocation().getZ()))
@@ -1131,7 +1131,7 @@ public class GuiListener implements Listener {
                                                             t.getLocation().getY() + 1, t.getLocation().getZ()))
                                                     .setType(XMaterial.GLASS.parseMaterial());
                                         });
-                                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(t, t.getLocation());
                                     }
 
                                     if (countdown <= 0) {
@@ -1357,50 +1357,50 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.arrowspam.on", t));
                                 e.getView().close();
                                 ArrayUtils.userbowspam.add(t);
-                                ArrayUtils.arrowspam.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
-                                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> {
+                                ArrayUtils.arrowspam.put(t, TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                    TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> {
                                         Location loc = t.getLocation().clone();
 
                                         Arrow arrow = (Arrow) t.getWorld()
-                                                .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                        Main.getInstance().getRandom(5, 10),
-                                                        Main.getInstance().getRandom(-10, 10)), Arrow.class);
+                                                .spawn(loc.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                        TrollV4.getInstance().getRandom(5, 10),
+                                                        TrollV4.getInstance().getRandom(-10, 10)), Arrow.class);
                                         Location aloc = arrow.getLocation();
                                         Vector angle = new Vector(loc.getX() - aloc.getX(),
                                                 loc.getY() - aloc.getBlockY(), loc.getZ() - aloc.getBlockZ());
                                         arrow.setVelocity(angle.normalize().multiply(2.0D));
 
                                         Arrow arrow2 = (Arrow) t.getWorld()
-                                                .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                        Main.getInstance().getRandom(5, 10),
-                                                        Main.getInstance().getRandom(-10, 10)), Arrow.class);
+                                                .spawn(loc.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                        TrollV4.getInstance().getRandom(5, 10),
+                                                        TrollV4.getInstance().getRandom(-10, 10)), Arrow.class);
                                         Location aloc2 = arrow2.getLocation();
                                         Vector angle2 = new Vector(loc.getX() - aloc2.getX(),
                                                 loc.getY() - aloc2.getBlockY(), loc.getZ() - aloc2.getBlockZ());
                                         arrow2.setVelocity(angle2.normalize().multiply(2.0D));
 
                                         Arrow arrow3 = (Arrow) t.getWorld()
-                                                .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                        Main.getInstance().getRandom(5, 10),
-                                                        Main.getInstance().getRandom(-10, 10)), Arrow.class);
+                                                .spawn(loc.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                        TrollV4.getInstance().getRandom(5, 10),
+                                                        TrollV4.getInstance().getRandom(-10, 10)), Arrow.class);
                                         Location aloc3 = arrow3.getLocation();
                                         Vector angle3 = new Vector(loc.getX() - aloc3.getX(),
                                                 loc.getY() - aloc3.getBlockY(), loc.getZ() - aloc3.getBlockZ());
                                         arrow3.setVelocity(angle3.normalize().multiply(2.0D));
 
                                         Arrow arrow4 = (Arrow) t.getWorld()
-                                                .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                        Main.getInstance().getRandom(5, 10),
-                                                        Main.getInstance().getRandom(-10, 10)), Arrow.class);
+                                                .spawn(loc.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                        TrollV4.getInstance().getRandom(5, 10),
+                                                        TrollV4.getInstance().getRandom(-10, 10)), Arrow.class);
                                         Location aloc4 = arrow4.getLocation();
                                         Vector angle4 = new Vector(loc.getX() - aloc4.getX(),
                                                 loc.getY() - aloc4.getBlockY(), loc.getZ() - aloc4.getBlockZ());
                                         arrow4.setVelocity(angle4.normalize().multiply(2.0D));
 
                                         Arrow arrow5 = (Arrow) t.getWorld()
-                                                .spawn(loc.clone().add(Main.getInstance().getRandom(-10, 10),
-                                                        Main.getInstance().getRandom(5, 10),
-                                                        Main.getInstance().getRandom(-10, 10)), Arrow.class);
+                                                .spawn(loc.clone().add(TrollV4.getInstance().getRandom(-10, 10),
+                                                        TrollV4.getInstance().getRandom(5, 10),
+                                                        TrollV4.getInstance().getRandom(-10, 10)), Arrow.class);
                                         Location aloc5 = arrow5.getLocation();
                                         Vector angle5 = new Vector(loc.getX() - aloc5.getX(),
                                                 loc.getY() - aloc5.getBlockY(), loc.getZ() - aloc5.getBlockZ());
@@ -1466,7 +1466,7 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeinv.default", t));
                                 e.getView().close();
 
-                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> {
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> {
 
                                     if (ArrayUtils.fakeinv.containsKey(t)) {
                                         InvSaver invSaver = ArrayUtils.fakeinv.get(t);
@@ -1538,12 +1538,12 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.slipperyhands.on", t));
                                 e.getView().close();
 
-                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, x -> {
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, x -> {
 
                                     if (ArrayUtils.noitem.contains(t)) {
                                         if (t.getItemInHand() != null && t.getItemInHand()
                                                 .getType() != XMaterial.AIR.parseMaterial()) {
-                                            Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> t.getWorld().dropItemNaturally(t.getLocation(),
+                                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> t.getWorld().dropItemNaturally(t.getLocation(),
                                                     t.getItemInHand()).setPickupDelay(20));
                                             t.getInventory()
                                                     .setItem(t.getInventory().getHeldItemSlot(), null);
@@ -1570,7 +1570,7 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.tntworld") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(t, task -> {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(t, task -> {
                                 Location oldl = t.getLocation();
                                 for (int x = 0; x < 200; x++) {
                                     for (int y = 0; y < 30; y++) {
@@ -1635,7 +1635,7 @@ public class GuiListener implements Listener {
 
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.dontstopjumping.on", t));
 
-                                ArrayUtils.jumping.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                ArrayUtils.jumping.put(t, TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
                                     if (t.isOnGround()) {
                                         t.setVelocity(new Vector(0.0, 0.45, 0.0));
                                     }
@@ -1720,11 +1720,11 @@ public class GuiListener implements Listener {
 
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.anvils.on", t));
 
-                                ArrayUtils.anvils.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                ArrayUtils.anvils.put(t, TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
                                     Location oldl = t.getLocation().add(0, 10, 0);
                                     Location randoml = LocationUtil.getLocFromRad(oldl, 5, 5);
 
-                                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(randoml, y -> randoml.getWorld().spawnFallingBlock(randoml,
+                                    TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(randoml, y -> randoml.getWorld().spawnFallingBlock(randoml,
                                             XMaterial.DAMAGED_ANVIL.parseMaterial(), (byte) 0));
                                 }, 20L,(Config.config.getInt("trolls.anvils.time") * 20L)));
 
@@ -1802,19 +1802,19 @@ public class GuiListener implements Listener {
                                 PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.giorno.on", t));
 
-                                Main.getInstance().getFoliaLib().getScheduler().runAtLocationLater(t.getLocation(), x -> {
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocationLater(t.getLocation(), x -> {
                                     Location front = t.getLocation()
                                             .add(t.getLocation().getDirection().multiply(3));
                                     Location front2 = t.getLocation()
                                             .add(t.getLocation().getDirection().multiply(2));
 
-                                    Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, y -> {
+                                    TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, y -> {
                                         NPCUtil.createGiorno(p, t, front, t.getLocation(),
                                                 new ItemStack(XMaterial.ARROW.parseMaterial()));
 
                                         t.sendMessage("§6I Giorno Giovanna have a Dream!");
 
-                                        Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, z -> NPCUtil.createGoldenWind(p, t, front2, t.getLocation(), null), 60L);
+                                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, z -> NPCUtil.createGoldenWind(p, t, front2, t.getLocation(), null), 60L);
                                     }, 20L);
                                 }, 10L);
 
@@ -1824,7 +1824,7 @@ public class GuiListener implements Listener {
 
                                 PlayMusic.stop(t);
 
-                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> NPCUtil.destroyNPCsFromPlayer(t), 20L);
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> NPCUtil.destroyNPCsFromPlayer(t), 20L);
 
                                 e.getView().close();
                             }
@@ -1896,7 +1896,7 @@ public class GuiListener implements Listener {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
                             if (!ArrayUtils.vomit.contains(t)) {
-                                Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+                                Bukkit.getScheduler().scheduleSyncRepeatingTask(TrollV4.getInstance(), new Runnable() {
 
                                     List<Item> toBeDelete = new ArrayList<>();
 
@@ -1983,7 +1983,7 @@ public class GuiListener implements Listener {
 
                         e.getView().close();
 
-                        taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+                        taskID2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(TrollV4.getInstance(), new Runnable() {
                             int countdown = Config.config.getInt("trolls.hack.time");
 
                             @Override
@@ -2090,7 +2090,7 @@ public class GuiListener implements Listener {
                                     p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tornado.on", t));
                                     e.getView().close();
                                     ArrayUtils.tornado.add(t);
-                                    ArrayUtils.tornador.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtLocationTimer(t.getLocation(), new Runnable() {
+                                    ArrayUtils.tornador.put(t, TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocationTimer(t.getLocation(), new Runnable() {
 
                                         Random r = new Random();
 

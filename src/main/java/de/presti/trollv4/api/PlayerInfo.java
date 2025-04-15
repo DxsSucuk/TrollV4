@@ -1,7 +1,6 @@
 package de.presti.trollv4.api;
 
 import com.google.gson.JsonObject;
-import de.presti.trollv4.main.Main;
 import io.sentry.Sentry;
 
 public class PlayerInfo {

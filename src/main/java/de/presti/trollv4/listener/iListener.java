@@ -1,7 +1,7 @@
 package de.presti.trollv4.listener;
 
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.control.CommandGUI;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -23,9 +23,9 @@ import me.libraryaddict.disguise.DisguiseAPI;
 @SuppressWarnings("deprecation")
 public class iListener implements Listener {
 
-	Main plugin;
+	TrollV4 plugin;
 
-	public iListener(Main c) {
+	public iListener(TrollV4 c) {
 		plugin = c;
 	}
 

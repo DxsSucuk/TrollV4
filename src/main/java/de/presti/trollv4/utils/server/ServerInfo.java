@@ -2,7 +2,6 @@ package de.presti.trollv4.utils.server;
 
 import org.bukkit.Bukkit;
 
-import de.presti.trollv4.main.Main;
 import de.presti.trollv4.utils.server.versions.ServerSoftware;
 
 public class ServerInfo {

@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
@@ -16,17 +16,17 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 public class Controls {
 
 	public Controls() {
-		Main.getInstance().control = this;
+		TrollV4.getInstance().control = this;
 	}
 
 	public void stopControlling(Player v, Player c) {
 		// Call ONLY when both players are online
 		c.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
 
-		v.removeMetadata("C_P", Main.getInstance());
+		v.removeMetadata("C_P", TrollV4.getInstance());
 		v.setGameMode(GameMode.SURVIVAL);
 
-		c.removeMetadata("C_H", Main.getInstance());
+		c.removeMetadata("C_H", TrollV4.getInstance());
 		DisguiseAPI.undisguiseToAll(c);
 
 		// Give victim their "new" inventory
@@ -44,8 +44,8 @@ public class Controls {
 	}
 
 	public void startControlling(Player v, Player c) {
-		v.setMetadata("C_P", new FixedMetadataValue(Main.getInstance(), c.getName()));
-		c.setMetadata("C_H", new FixedMetadataValue(Main.getInstance(), v.getName()));
+		v.setMetadata("C_P", new FixedMetadataValue(TrollV4.getInstance(), c.getName()));
+		c.setMetadata("C_H", new FixedMetadataValue(TrollV4.getInstance(), v.getName()));
 
 		ArrayUtils.inventory.put(c.getName(), c.getInventory().getContents());
 		ArrayUtils.armor.put(c.getName(), c.getInventory().getArmorContents());
@@ -64,7 +64,7 @@ public class Controls {
 
 		// Start a handling task
 		CheckVictim check = new CheckVictim(v, c);
-		Main.getInstance().getFoliaLib().getScheduler().wrapTask(check.runTaskTimer(Main.getInstance(), 0L, 20L));
+		TrollV4.getInstance().getFoliaLib().getScheduler().wrapTask(check.runTaskTimer(TrollV4.getInstance(), 0L, 20L));
 		c.sendMessage(Data.prefix + LanguageService.getDefault("gui.startcontrol.start", v));
 	}
 

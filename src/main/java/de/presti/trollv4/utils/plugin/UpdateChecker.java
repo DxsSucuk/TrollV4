@@ -3,11 +3,10 @@ package de.presti.trollv4.utils.plugin;
 import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.logging.Logger;
 import io.sentry.Sentry;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -30,12 +29,12 @@ public class UpdateChecker {
     public UpdateChecker(final JavaPlugin javaPlugin) {
         this.javaPlugin = javaPlugin;
         this.localPluginVersion = Data.version;
-        Main.getInstance().updateChecker = this;
+        TrollV4.getInstance().updateChecker = this;
         ERR_MSG = "Update checker failed!";
     }
 
     public void checkForUpdate() {
-        checkTask = Main.getInstance().getFoliaLib().getScheduler().runTimerAsync(new Runnable() {
+        checkTask = TrollV4.getInstance().getFoliaLib().getScheduler().runTimerAsync(new Runnable() {
             @Override
             public void run() {
                 try {

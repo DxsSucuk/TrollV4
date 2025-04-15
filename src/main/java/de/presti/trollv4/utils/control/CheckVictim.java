@@ -1,7 +1,7 @@
 package de.presti.trollv4.utils.control;
 
 import de.presti.trollv4.config.language.LanguageService;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.crossversion.Titles;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -23,14 +23,14 @@ public class CheckVictim extends BukkitRunnable {
                 if (controller.hasMetadata("C_H")) {
                     if (victim.getWorld().getName().equalsIgnoreCase(controller.getWorld().getName())) {
                         if (victim.getLocation().distance(controller.getLocation()) > 15) {
-                            Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, controller.getLocation());
-                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x-> {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, controller.getLocation());
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x-> {
                                 Titles.send(victim, 20, 20, 60, LanguageService.getDefault("control.distance"), "");
                             });
                         }
                     } else {
-                        Main.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, controller.getLocation());
-                        Main.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x-> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().teleportAsync(victim, controller.getLocation());
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntity(victim, x-> {
                             victim.setGameMode(GameMode.SPECTATOR);
                             Titles.send(victim, 20, 20, 60, LanguageService.getDefault("control.world"), "");
                         });

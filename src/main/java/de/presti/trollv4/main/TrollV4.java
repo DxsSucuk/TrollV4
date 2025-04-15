@@ -35,10 +35,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Main extends JavaPlugin {
+public class TrollV4 extends JavaPlugin {
 
     @Getter
-    private static Main instance;
+    private static TrollV4 instance;
     public UpdateChecker updateChecker;
     public Controls control;
 

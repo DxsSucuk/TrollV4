@@ -2,7 +2,7 @@ package de.presti.trollv4.api;
 
 import com.google.gson.*;
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import io.sentry.Sentry;
 import org.apache.commons.io.IOUtils;
 
@@ -29,7 +29,7 @@ public class RequestUtility {
             }
         } catch (Exception exception) {
             Sentry.captureException(exception);
-            Main.getInstance().getLogger().warning("Error while sending GET request to " + url + "\nException: " + exception.getMessage());
+            TrollV4.getInstance().getLogger().warning("Error while sending GET request to " + url + "\nException: " + exception.getMessage());
         }
 
         return null;
@@ -41,7 +41,7 @@ public class RequestUtility {
             return new JsonParser().parse(new InputStreamReader(inputStream));
         } catch (Exception exception) {
             Sentry.captureException(exception);
-            Main.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
+            TrollV4.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
         }
 
         return new JsonObject();
@@ -55,7 +55,7 @@ public class RequestUtility {
             return IOUtils.toByteArray(inputStream);
         } catch (Exception exception) {
             Sentry.captureException(exception);
-            Main.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
+            TrollV4.getInstance().getLogger().warning("Error while getting JSON from " + url + "\nException: " + exception.getMessage());
         }
 
         return new byte[0];

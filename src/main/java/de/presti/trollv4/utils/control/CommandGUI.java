@@ -21,16 +21,16 @@ import com.cryptomorin.xseries.XMaterial;
 
 import de.presti.trollv4.config.Items;
 import de.presti.trollv4.main.Data;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 
 public class CommandGUI implements Listener {
 	String cmd;
 	Player c;
 	Player v;
 	public Inventory gui;
-	Main plugin;
+	TrollV4 plugin;
 
-	public CommandGUI(String command, Player cont, Player vict, Main cl) {
+	public CommandGUI(String command, Player cont, Player vict, TrollV4 cl) {
 		cmd = command;
 		c = cont;
 		v = vict;
@@ -80,7 +80,7 @@ public class CommandGUI implements Listener {
 						if (p.hasPermission("troll.control") || p.hasPermission("troll.*")) {
 							if (p.hasMetadata("C_H")) {
 								Player victim = Bukkit.getPlayer(p.getMetadata("C_H").get(0).asString());
-								Main.stopControlling(victim, p);
+								TrollV4.stopControlling(victim, p);
 							} else {
 								p.sendMessage(Data.prefix + LanguageService.getDefault("gui.stopcontrol.nocontrol"));
 							}

@@ -6,7 +6,7 @@ import java.util.List;
 import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.config.Config;
 import de.presti.trollv4.config.Items;
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.player.ArrayUtils;
 import de.presti.trollv4.utils.server.ServerInfo;
 import io.sentry.Sentry;
@@ -144,7 +144,7 @@ public class InvManager {
         ArrayList<ItemStack> items = new ArrayList<>();
         Inventory inv = Bukkit.createInventory(null, 9 * 6, "§2Player Troll Menu");
         if (Config.getConfig().getBoolean("Animations")) {
-            WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
+            WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runTimer(new Runnable() {
                 int countdown = 15;
 
                 @Override
@@ -153,17 +153,17 @@ public class InvManager {
                     if (countdown == 0) {
                         inv.clear();
                         p.playSound(p.getLocation(), XSound.ENTITY_ZOMBIE_INFECT.parseSound(), 1F, 1F);
-                        Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
                             items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
                                     "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-                            Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                                 inv.setItem(0, items.get(0));
                             });
                         });
 
                         setPageOneTrolls(inv);
 
-                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
+                        TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
                         return;
                     }
 
@@ -304,7 +304,7 @@ public class InvManager {
                         p.playSound(p.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1F, 1F);
                     }
                     if (countdown <= 0) {
-                        Main.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
+                        TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
                     }
                     countdown--;
                 }
@@ -312,11 +312,11 @@ public class InvManager {
             ArrayUtils.anim.put(p, task);
 
         } else {
-            Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
                 items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
                         "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-                Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                     inv.setItem(0, items.get(0));
                 });
             });
@@ -374,11 +374,11 @@ public class InvManager {
 
         inv.clear();
 
-        Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+        TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
             items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
                     "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-            Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                 inv.setItem(0, items.get(0));
             });
         });
@@ -423,7 +423,7 @@ public class InvManager {
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         Inventory cpinv = Bukkit.createInventory(null, 9 * 6, "§2Player Choice Menu");
         if (Data.async) {
-            Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
                 int i = 0;
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (i != 45) {
@@ -439,7 +439,7 @@ public class InvManager {
                 items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
                         "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-                Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
                     for (ItemStack it : items) {
                         cpinv.addItem(it);
                     }

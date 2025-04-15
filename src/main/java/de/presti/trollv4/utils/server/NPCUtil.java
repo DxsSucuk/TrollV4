@@ -23,7 +23,7 @@ import org.bukkit.plugin.Plugin;
 
 import com.cryptomorin.xseries.particles.XParticle;
 
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.player.ArrayUtils;
 
 import java.util.*;
@@ -31,7 +31,7 @@ import java.util.*;
 public class NPCUtil {
 
     public static Platform<World, Player, ItemStack, Plugin> platform = BukkitPlatform.bukkitNpcPlatformBuilder()
-            .extension(Main.getInstance())
+            .extension(TrollV4.getInstance())
             .debug(true)
             .worldAccessor(BukkitWorldAccessor.nameBasedAccessor())
             .npcTracker(CommonNpcTracker.newNpcTracker())
@@ -93,7 +93,7 @@ public class NPCUtil {
             return npc;
         } catch (Exception exception) {
             Sentry.captureException(exception);
-            Main.getInstance().getLogger().warning("Received an error in NPCUtil: " + exception.getMessage());
+            TrollV4.getInstance().getLogger().warning("Received an error in NPCUtil: " + exception.getMessage());
         }
 
         return null;
@@ -146,7 +146,7 @@ public class NPCUtil {
         container.npcs.set(1, npc);
 
         Runnable runnable;
-        WrappedTask task = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable = new Runnable() {
+        WrappedTask task = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable = new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.jojo.containsKey(t)) {
@@ -166,7 +166,7 @@ public class NPCUtil {
         }, 20, 10);
 
         Runnable runnable2;
-        WrappedTask task2 = Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable2 = new Runnable() {
+        WrappedTask task2 = TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, runnable2 = new Runnable() {
             @Override
             public void run() {
                 if (ArrayUtils.jojo.containsKey(t)) {

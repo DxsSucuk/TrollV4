@@ -1,6 +1,6 @@
 package de.presti.trollv4.logging;
 
-import de.presti.trollv4.main.Main;
+import de.presti.trollv4.main.TrollV4;
 
 public class Logger {
 
@@ -15,14 +15,14 @@ public class Logger {
 	}
 	
 	public static void info(String msg) {
-		Main.getInstance().getLogger().info(msg);
+		TrollV4.getInstance().getLogger().info(msg);
 	}
 	
 	public static void warning(String msg) {
-		Main.getInstance().getLogger().warning(msg);
+		TrollV4.getInstance().getLogger().warning(msg);
 	}
 	
 	public static void error(String msg) {
-		Main.getInstance().getLogger().severe(msg);
+		TrollV4.getInstance().getLogger().severe(msg);
 	}
 }
