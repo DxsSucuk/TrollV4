@@ -1350,11 +1350,8 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.arrowspam.on", t));
                                 e.getView().close();
                                 ArrayUtils.userbowspam.add(t);
-                                ArrayUtils.arrowspam.put(t, new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-
+                                ArrayUtils.arrowspam.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> {
                                         Location loc = t.getLocation().clone();
 
                                         Arrow arrow = (Arrow) t.getWorld()
@@ -1401,10 +1398,8 @@ public class GuiListener implements Listener {
                                         Vector angle5 = new Vector(loc.getX() - aloc5.getX(),
                                                 loc.getY() - aloc5.getBlockY(), loc.getZ() - aloc5.getBlockZ());
                                         arrow5.setVelocity(angle5.normalize().multiply(2.0D));
-
-                                    }
-                                });
-                                ArrayUtils.arrowspam.get(t).runTaskTimer(Main.getInstance(), 0L, 10L);
+                                    });
+                                }, 0, 10));
                             }
                             e.getView().close();
                         } else {
@@ -1464,22 +1459,19 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.fakeinv.default", t));
                                 e.getView().close();
 
-                                new BukkitRunnable() {
+                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> {
 
-                                    @Override
-                                    public void run() {
-                                        if (ArrayUtils.fakeinv.containsKey(t)) {
-                                            InvSaver is = ArrayUtils.fakeinv.get(t);
-                                            t.getInventory().setArmorContents(is.getArmor());
-                                            if (ServerInfo.above(8)) {
-                                                t.getInventory().setExtraContents(is.getExtracont());
-                                            }
-                                            t.getInventory().setContents(is.getContent());
-                                            ArrayUtils.fakeinv.remove(t);
+                                    if (ArrayUtils.fakeinv.containsKey(t)) {
+                                        InvSaver invSaver = ArrayUtils.fakeinv.get(t);
+                                        t.getInventory().setArmorContents(invSaver.getArmor());
+                                        if (ServerInfo.above(8)) {
+                                            t.getInventory().setExtraContents(invSaver.getExtracont());
                                         }
-                                        cancel();
+                                        t.getInventory().setContents(invSaver.getContent());
+                                        ArrayUtils.fakeinv.remove(t);
                                     }
-                                }.runTaskLater(Main.getInstance(), (Config.config.getInt("trolls.fakeinv.time") * 20L));
+
+                                }, (Config.config.getInt("trolls.fakeinv.time") * 20L));
 
                             }
                         } else {
@@ -1539,32 +1531,21 @@ public class GuiListener implements Listener {
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.slipperyhands.on", t));
                                 e.getView().close();
 
-                                if (t.getItemInHand() != null
-                                        && t.getItemInHand().getType() != XMaterial.AIR.parseMaterial()) {
-                                    t.getWorld().dropItemNaturally(t.getLocation(), t.getItemInHand())
-                                            .setPickupDelay(20);
-                                }
-                                t.getInventory().setItem(t.getInventory().getHeldItemSlot(), null);
+                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, x -> {
 
-                                new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-                                        Player sheesh = t;
-                                        if (ArrayUtils.noitem.contains(sheesh)) {
-                                            if (sheesh.getItemInHand() != null && sheesh.getItemInHand()
-                                                    .getType() != XMaterial.AIR.parseMaterial()) {
-                                                sheesh.getWorld().dropItemNaturally(sheesh.getLocation(),
-                                                        sheesh.getItemInHand()).setPickupDelay(20);
-                                                sheesh.getInventory()
-                                                        .setItem(sheesh.getInventory().getHeldItemSlot(), null);
-                                            }
-                                        } else {
-                                            cancel();
+                                    if (ArrayUtils.noitem.contains(t)) {
+                                        if (t.getItemInHand() != null && t.getItemInHand()
+                                                .getType() != XMaterial.AIR.parseMaterial()) {
+                                            Main.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> t.getWorld().dropItemNaturally(t.getLocation(),
+                                                    t.getItemInHand()).setPickupDelay(20));
+                                            t.getInventory()
+                                                    .setItem(t.getInventory().getHeldItemSlot(), null);
                                         }
+                                    } else {
+                                        x.cancel();
                                     }
-                                }.runTaskTimer(Main.getInstance(), 0L,
-                                        (Config.config.getInt("trolls.slipperyhands.time") * 20L));
+
+                                }, 0L, (Config.config.getInt("trolls.slipperyhands.time") * 20L));
 
                                 ArrayUtils.noitem.add(t);
                             }
@@ -1582,28 +1563,24 @@ public class GuiListener implements Listener {
                     if (p.hasPermission("troll.tntworld") || p.hasPermission("troll.*")) {
                         Player t = Bukkit.getPlayer(ArrayUtils.trolling.get(p.getName()));
                         if (t != null) {
-                            new BukkitRunnable() {
-
-                                @Override
-                                public void run() {
-                                    Location oldl = t.getLocation();
-                                    for (int x = 0; x < 200; x++) {
-                                        for (int y = 0; y < 30; y++) {
-                                            for (int z = 0; z < 200; z++) {
-                                                if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
-                                                        oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z)
-                                                        .getBlock()
-                                                        .getType() != XMaterial.AIR.parseMaterial()) {
-                                                    Location l = new Location(oldl.getWorld(),
-                                                            oldl.getBlockX() - 100 + x, oldl.getBlockY() - 7 + y,
-                                                            oldl.getBlockZ() - 100 + z);
-                                                    t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
-                                                }
+                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(t, task -> {
+                                Location oldl = t.getLocation();
+                                for (int x = 0; x < 200; x++) {
+                                    for (int y = 0; y < 30; y++) {
+                                        for (int z = 0; z < 200; z++) {
+                                            if (new Location(oldl.getWorld(), oldl.getBlockX() - 100 + x,
+                                                    oldl.getBlockY() - 7 + y, oldl.getBlockZ() - 100 + z)
+                                                    .getBlock()
+                                                    .getType() != XMaterial.AIR.parseMaterial()) {
+                                                Location l = new Location(oldl.getWorld(),
+                                                        oldl.getBlockX() - 100 + x, oldl.getBlockY() - 7 + y,
+                                                        oldl.getBlockZ() - 100 + z);
+                                                t.sendBlockChange(l, XMaterial.TNT.parseMaterial(), (byte) 0);
                                             }
                                         }
                                     }
                                 }
-                            }.runTaskAsynchronously(Main.getInstance());
+                            });
                             p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tntworld.default", t));
                             e.getView().close();
                         } else {
