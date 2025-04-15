@@ -69,6 +69,7 @@
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
             <version>10.0.40-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
