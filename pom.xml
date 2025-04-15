@@ -21,6 +21,10 @@
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
         <repository>
+            <id>md_5-public</id>
+            <url>https://repo.md-5.net/content/groups/public/</url>
+        </repository>
+        <repository>
             <id>PaperLib</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
@@ -29,8 +33,12 @@
             <url>https://repository.derklaro.dev/releases/</url>
         </repository>
         <repository>
-            <id>CodeMC</id>
-            <url>https://repo.codemc.io/repository/maven-public/</url>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
         </repository>
         <repository>
             <id>ossrh</id>
@@ -55,13 +63,12 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry</artifactId>
-            <version>7.9.0</version>
+            <version>8.8.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.libraryaddict</groupId>
+            <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>v10.0.19</version>
-            <scope>provided</scope>
+            <version>10.0.40-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
@@ -98,7 +105,7 @@
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>5.2.0-SNAPSHOT</version>
+            <version>5.3.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

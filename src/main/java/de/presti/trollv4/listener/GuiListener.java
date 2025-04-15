@@ -240,31 +240,21 @@ public class GuiListener implements Listener {
                             e.getInventory().setItem(45, pagei);
 
                             if (Data.async) {
-                                new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-                                        int i = 0;
-                                        for (Player all : Bukkit.getOnlinePlayers()) {
-                                            if (i > (45 * page)) {
-                                                items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
-                                            }
-                                            i++;
+                                Main.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                                    int i = 0;
+                                    for (Player all : Bukkit.getOnlinePlayers()) {
+                                        if (i > (45 * page)) {
+                                            items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
                                         }
-
-                                        new BukkitRunnable() {
-
-                                            @Override
-                                            public void run() {
-
-                                                for (ItemStack is : items) {
-                                                    e.getInventory().addItem(is);
-                                                }
-
-                                            }
-                                        }.runTask(Main.getInstance());
+                                        i++;
                                     }
-                                }.runTaskAsynchronously(Main.getInstance());
+
+                                    Main.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                                        for (ItemStack is : items) {
+                                            e.getInventory().addItem(is);
+                                        }
+                                    });
+                                });
                             } else {
                                 int i = 0;
                                 for (Player all : Bukkit.getOnlinePlayers()) {
@@ -635,51 +625,26 @@ public class GuiListener implements Listener {
                             if (ArrayUtils.hackuser.containsKey(t)) {
                                 ArrayUtils.hackuser.get(t).cancel();
                                 ArrayUtils.hackuser.remove(t);
-                                ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-                                    int countdown = Config.config.getInt("trolls.hack.time");
-
-                                    @Override
-                                    public void run() {
-                                        if (countdown <= 0) {
-                                            HS.Hack(t);
-                                            Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
-                                            ArrayUtils.hackuser.get(t).cancel();
-
-                                            return;
-                                        }
-                                        HS.Hack2(t);
-                                        Titles.send(t, 1, 20, 1, "§cHacking in " + countdown,
-                                                "§4" + RandomUtility.getRandomID());
-                                        t.damage(0.1D);
-                                        countdown--;
-                                    }
-
-                                });
-                                ArrayUtils.hackuser.get(t).runTaskTimer(Main.getInstance(), 0, 20);
-
-                            } else {
-                                ArrayUtils.hackuser.put(t, new BukkitRunnable() {
-                                    int countdown = Config.config.getInt("trolls.hack.time");
-
-                                    @Override
-                                    public void run() {
-                                        if (countdown <= 0) {
-                                            HS.Hack(t);
-                                            Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
-                                            ArrayUtils.hackuser.get(t).cancel();
-
-                                            return;
-                                        }
-                                        HS.Hack2(t);
-                                        Titles.send(t, 1, 20, 1, "§cHacking in " + countdown,
-                                                "§4" + RandomUtility.getRandomID());
-                                        t.damage(0.1D);
-                                        countdown--;
-                                    }
-
-                                });
-                                ArrayUtils.hackuser.get(t).runTaskTimer(Main.getInstance(), 0, 20);
                             }
+
+                            ArrayUtils.hackuser.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, new Runnable() {
+                                int countdown = Config.config.getInt("trolls.hack.time");
+                                @Override
+                                public void run() {
+                                    if (countdown <= 0) {
+                                        HS.Hack(t);
+                                        Titles.send(t, 1, 20, 1, "§cHACKED", "§4" + RandomUtility.getRandomID());
+                                        ArrayUtils.hackuser.get(t).cancel();
+
+                                        return;
+                                    }
+                                    HS.Hack2(t);
+                                    Titles.send(t, 1, 20, 1, "§cHacking in " + countdown,
+                                            "§4" + RandomUtility.getRandomID());
+                                    t.damage(0.1D);
+                                    countdown--;
+                                }
+                            }, 0, 20));
                         } else {
                             p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
@@ -725,15 +690,11 @@ public class GuiListener implements Listener {
                         if (t != null) {
                             p.sendMessage(Data.prefix + LanguageService.getDefault("gui.spam", t));
                             e.getView().close();
-                            new BukkitRunnable() {
-
-                                @Override
-                                public void run() {
-                                    for (int i = 0; i < 1000; i++) {
-                                        t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
-                                    }
+                            Main.getInstance().getFoliaLib().getScheduler().runAtEntity(t, x -> {
+                                for (int i = 0; i < 1000; i++) {
+                                    t.sendMessage("§cREEEEEEEEEEEEEEEEEEEEEEE!");
                                 }
-                            }.runTaskAsynchronously(Main.getInstance());
+                            });
                         } else {
                             p.sendMessage(Data.prefix + LanguageService.getDefault("noonline"));
                             e.getView().close();
@@ -1690,21 +1651,12 @@ public class GuiListener implements Listener {
 
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.dontstopjumping.on", t));
 
-                                ArrayUtils.jumping.put(t, new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-
-                                        Player jumper = t;
-
-                                        if (jumper.isOnGround()) {
-                                            jumper.setVelocity(new Vector(0.0, 0.45, 0.0));
-                                        }
-
+                                ArrayUtils.jumping.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                    if (t.isOnGround()) {
+                                        t.setVelocity(new Vector(0.0, 0.45, 0.0));
                                     }
-                                });
+                                }, 0, 20));
 
-                                ArrayUtils.jumping.get(t).runTaskTimer(Main.getInstance(), 0L, 12L);
                                 e.getView().close();
 
                             }
@@ -1784,20 +1736,14 @@ public class GuiListener implements Listener {
 
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.anvils.on", t));
 
-                                ArrayUtils.anvils.put(t, new BukkitRunnable() {
+                                ArrayUtils.anvils.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, () -> {
+                                    Location oldl = t.getLocation().add(0, 10, 0);
+                                    Location randoml = LocationUtil.getLocFromRad(oldl, 5, 5);
 
-                                    @Override
-                                    public void run() {
-                                        Location oldl = t.getLocation().add(0, 10, 0);
-                                        Location randoml = LocationUtil.getLocFromRad(oldl, 5, 5);
+                                    Main.getInstance().getFoliaLib().getScheduler().runAtLocation(randoml, y -> randoml.getWorld().spawnFallingBlock(randoml,
+                                            XMaterial.DAMAGED_ANVIL.parseMaterial(), (byte) 0));
+                                }, 20L,(Config.config.getInt("trolls.anvils.time") * 20L)));
 
-                                        randoml.getWorld().spawnFallingBlock(randoml,
-                                                XMaterial.DAMAGED_ANVIL.parseMaterial(), (byte) 0);
-                                    }
-                                });
-
-                                ArrayUtils.anvils.get(t).runTaskTimer(Main.getInstance(), 20L,
-                                        (Config.config.getInt("trolls.anvils.time") * 20L));
 
                                 e.getView().close();
                             }
@@ -1872,38 +1818,21 @@ public class GuiListener implements Listener {
                                 PlayMusic.play(t, "plugins/TrollV4/giorno.nbs");
                                 p.sendMessage(Data.prefix + LanguageService.getDefault("gui.giorno.on", t));
 
-                                new BukkitRunnable() {
+                                Main.getInstance().getFoliaLib().getScheduler().runAtLocationLater(t.getLocation(), x -> {
+                                    Location front = t.getLocation()
+                                            .add(t.getLocation().getDirection().multiply(3));
+                                    Location front2 = t.getLocation()
+                                            .add(t.getLocation().getDirection().multiply(2));
 
-                                    @Override
-                                    public void run() {
-                                        Location front = t.getLocation()
-                                                .add(t.getLocation().getDirection().multiply(3));
-                                        Location front2 = t.getLocation()
-                                                .add(t.getLocation().getDirection().multiply(2));
+                                    Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, y -> {
+                                        NPCUtil.createGiorno(p, t, front, t.getLocation(),
+                                                new ItemStack(XMaterial.ARROW.parseMaterial()));
 
-                                        new BukkitRunnable() {
+                                        t.sendMessage("§6I Giorno Giovanna have a Dream!");
 
-                                            @Override
-                                            public void run() {
-
-                                                NPCUtil.createGiorno(p, t, front, t.getLocation(),
-                                                        new ItemStack(XMaterial.ARROW.parseMaterial()));
-
-                                                t.sendMessage("§6I Giorno Giovanna have a Dream!");
-
-                                                new BukkitRunnable() {
-
-                                                    @Override
-                                                    public void run() {
-
-                                                        NPCUtil.createGoldenWind(p, t, front2,
-                                                                t.getLocation(), null);
-                                                    }
-                                                }.runTaskLater(Main.getInstance(), 60L);
-                                            }
-                                        }.runTaskLater(Main.getInstance(), 20L);
-                                    }
-                                }.runTaskLater(Main.getInstance(), 10L);
+                                        Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, z -> NPCUtil.createGoldenWind(p, t, front2, t.getLocation(), null), 60L);
+                                    }, 20L);
+                                }, 10L);
 
                                 e.getView().close();
                             } else {
@@ -1911,14 +1840,7 @@ public class GuiListener implements Listener {
 
                                 PlayMusic.stop(t);
 
-                                new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-                                        NPCUtil.destroyNPCsFromPlayer(t);
-                                    }
-
-                                }.runTaskLater(Main.getInstance(), 20L);
+                                Main.getInstance().getFoliaLib().getScheduler().runAtEntityLater(t, x -> NPCUtil.destroyNPCsFromPlayer(t), 20L);
 
                                 e.getView().close();
                             }
@@ -2184,7 +2106,7 @@ public class GuiListener implements Listener {
                                     p.sendMessage(Data.prefix + LanguageService.getDefault("gui.tornado.on", t));
                                     e.getView().close();
                                     ArrayUtils.tornado.add(t);
-                                    ArrayUtils.tornador.put(t, new BukkitRunnable() {
+                                    ArrayUtils.tornador.put(t, Main.getInstance().getFoliaLib().getScheduler().runAtLocationTimer(t.getLocation(), new Runnable() {
 
                                         Random r = new Random();
 
@@ -2415,8 +2337,7 @@ public class GuiListener implements Listener {
                                             t.teleport(location2);
 
                                         }
-                                    });
-                                    ArrayUtils.tornador.get(t).runTaskTimer(Main.getInstance(), 0, 8);
+                                    }, 0, 8));
                                 }
                                 e.getView().close();
                             } else {

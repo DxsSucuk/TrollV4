@@ -8,6 +8,7 @@ softdepend:
    - NoteBlockAPI
 website: https://presti.me
 api-version: 1.13
+folia: true
 commands:
    troll:
       description: The Troll command.
