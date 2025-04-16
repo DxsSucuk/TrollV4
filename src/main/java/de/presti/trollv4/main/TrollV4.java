@@ -230,7 +230,7 @@ public class TrollV4 extends JavaPlugin {
             }
         }
 
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
+        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null  && Config.getConfig().getBoolean("downloader.protocollib")) {
             if (new File("plugins/ProtocolLib.jar").exists()) {
                 Logger.info("Trying to load ProtocolLib!");
                 try {
@@ -242,7 +242,7 @@ public class TrollV4 extends JavaPlugin {
             }
         }
 
-        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null) {
+        if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null && Config.getConfig().getBoolean("downloader.libsdisguises")) {
             if (new File("plugins/LibsDisguises.jar").exists()) {
                 Logger.info("Trying to load LibsDisguises!");
                 try {
@@ -254,7 +254,7 @@ public class TrollV4 extends JavaPlugin {
             }
         }
 
-        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null) {
+        if (Bukkit.getPluginManager().getPlugin("NoteBlockAPI") == null && Config.getConfig().getBoolean("downloader.noteblockapi")) {
             if (new File("plugins/NoteBlockAPI.jar").exists()) {
                 Logger.info("Trying to load NoteBlockAPI!");
                 try {

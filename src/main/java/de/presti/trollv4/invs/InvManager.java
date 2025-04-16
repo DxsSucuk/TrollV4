@@ -150,20 +150,37 @@ public class InvManager {
                 @Override
                 public void run() {
 
+                    if (!ArrayUtils.anim.containsKey(p)) {
+                        return;
+                    }
+
+                    if (inv.getViewers().isEmpty()) {
+                        TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
+                        ArrayUtils.anim.remove(p);
+                        TrollV4.getInstance().getLogger().info("Closing Animation since no one is watching.");
+                        return;
+                    }
+
                     if (countdown == 0) {
                         inv.clear();
                         p.playSound(p.getLocation(), XSound.ENTITY_ZOMBIE_INFECT.parseSound(), 1F, 1F);
-                        TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
-                            items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-                            TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
-                                inv.setItem(0, items.get(0));
+                        if (Data.async) {
+                            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+                                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                                    inv.setItem(0, items.get(0));
+                                });
                             });
-                        });
+                        } else {
+                            inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+                        }
 
                         setPageOneTrolls(inv);
 
                         TrollV4.getInstance().getFoliaLib().getScheduler().cancelTask(ArrayUtils.anim.get(p));
+                        ArrayUtils.anim.remove(p);
                         return;
                     }
 
@@ -312,15 +329,18 @@ public class InvManager {
             ArrayUtils.anim.put(p, task);
 
         } else {
-            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
-                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-
-                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
-                    inv.setItem(0, items.get(0));
+            if (Data.async) {
+                TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                    items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                            "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+                    TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                        inv.setItem(0, items.get(0));
+                    });
                 });
-            });
-
+            } else {
+                inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+            }
             setPageOneTrolls(inv);
         }
 
@@ -374,14 +394,18 @@ public class InvManager {
 
         inv.clear();
 
-        TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
-            items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
-
-            TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
-                inv.setItem(0, items.get(0));
+        if (Data.async) {
+            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                    inv.setItem(0, items.get(0));
+                });
             });
-        });
+        } else {
+            inv.setItem(0, SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
+                    "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
+        }
 
         inv.setItem(10, SetItems.buildItem(Items.getItem("gui.trolls.tntworld"), XMaterial.TNT.parseMaterial()));
         inv.setItem(11, SetItems.buildItem(Items.getItem("gui.trolls.rickroll"), XMaterial.BRICK.parseMaterial(), "§cCant be stopped!"));
@@ -428,7 +452,7 @@ public class InvManager {
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (i != 45) {
                         try {
-                            items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
+                            items.add(SetItems.buildSkull(all, "§2" + all.getName()));
                         } catch (Exception e) {
                             Sentry.captureException(e);
                             e.printStackTrace();
@@ -450,7 +474,7 @@ public class InvManager {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (i != 45) {
                     try {
-                        cpinv.addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
+                        cpinv.addItem(SetItems.buildSkull(all, "§2" + all.getName()));
 
                     } catch (Exception e) {
                         Sentry.captureException(e);

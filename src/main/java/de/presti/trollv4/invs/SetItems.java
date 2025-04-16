@@ -3,6 +3,7 @@ package de.presti.trollv4.invs;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import de.presti.trollv4.main.TrollV4;
 import de.presti.trollv4.utils.plugin.SkullUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,9 +16,7 @@ import de.presti.trollv4.api.PlayerInfo;
 
 public class SetItems {
 
-    public static ItemStack buildSkull(String p, String name, boolean forceOnlineLookup) {
-        ArrayList<String> lore = new ArrayList<String>();
-
+    public static ItemStack buildSkull(String p, String displayName, boolean forceOnlineLookup) {
         UUID uuid = null;
 
         Player player = Bukkit.getPlayer(p);
@@ -35,21 +34,35 @@ public class SetItems {
             }
         }
 
+        return buildSkull(uuid, displayName);
+    }
+
+    public static ItemStack buildSkull(Player p, String displayName) {
+        return buildSkull(p.getUniqueId(), displayName);
+    }
+
+    public static ItemStack buildSkull(UUID uuid, String name) {
+        ArrayList<String> lore = new ArrayList<>();
+
         ItemStack skull = uuid == null ? new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial())
                 : SkullUtil.getSkull(uuid);
 
         ItemMeta skullm = skull.getItemMeta();
 
-        if (player != null) {
-            if (player.isOp()) {
-                lore.add("§cThis User has OP!");
-            }
+        if (uuid != null) {
+            Player player = Bukkit.getPlayer(uuid);
 
-            if (player.hasPermission("troll.player")) {
-                lore.add("§cThis User can acces the Troll Gui!");
-            }
+            if (player != null) {
+                if (player.isOp()) {
+                    lore.add("§cThis User has OP!");
+                }
 
-            skullm.setLore(lore);
+                if (player.hasPermission("troll.player")) {
+                    lore.add("§cThis User can acces the Troll Gui!");
+                }
+
+                skullm.setLore(lore);
+            }
         }
 
         skullm.setDisplayName(name);

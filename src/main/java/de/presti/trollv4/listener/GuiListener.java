@@ -244,7 +244,7 @@ public class GuiListener implements Listener {
                                     int i = 0;
                                     for (Player all : Bukkit.getOnlinePlayers()) {
                                         if (i > (45 * page)) {
-                                            items.add(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
+                                            items.add(SetItems.buildSkull(all, "§2" + all.getName()));
                                         }
                                         i++;
                                     }
@@ -260,7 +260,7 @@ public class GuiListener implements Listener {
                                 for (Player all : Bukkit.getOnlinePlayers()) {
                                     if (i > (45 * page)) {
                                         e.getInventory()
-                                                .addItem(SetItems.buildSkull(all.getName(), "§2" + all.getName(), false));
+                                                .addItem(SetItems.buildSkull(all, "§2" + all.getName()));
                                     }
                                     i++;
                                 }

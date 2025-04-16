@@ -916,11 +916,15 @@ public class TrollV4API {
     public static void sendGameStateChange(Player victim, int type, float state, boolean forceProtocolLib) {
         try {
             if (forceProtocolLib || !ServerInfo.supportOldPackets() || (ServerInfo.aboveOrEqual(21) && ServerInfo.getServerSoftwareEnum() == ServerSoftware.PAPER)) {
-                final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
-                packet.getModifier().write(0,
-                        PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
-                packet.getFloat().write(0, state);
-                ProtocolLibrary.getProtocolManager().sendServerPacket(victim, packet);
+                if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
+                    final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
+                    packet.getModifier().write(0,
+                            PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredFields()[type].get(null));
+                    packet.getFloat().write(0, state);
+                    ProtocolLibrary.getProtocolManager().sendServerPacket(victim, packet);
+                } else {
+                    TrollV4.getInstance().getLogger().warning("ProtocolLib is not enabled, so this Troll will not work!");
+                }
             } else {
                 Object entityPlayer = victim.getClass().getMethod("getHandle").invoke(victim);
                 Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);

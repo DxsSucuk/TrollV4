@@ -66,8 +66,6 @@ public class TrollCommand implements CommandExecutor {
             @Override
             public void run() {
                 if (ArrayUtils.tntp.contains(p)) {
-                    TrollV4.getInstance().getFoliaLib().getScheduler()
-                            .teleportAsync(p, LocationUtil.getLocFromRad(p.getLocation(), 10, 5, 10));
                     TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(p.getLocation(), x -> {
                         TNTPrimed tnt = p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
                         tnt.setCustomName("§cExplode");
