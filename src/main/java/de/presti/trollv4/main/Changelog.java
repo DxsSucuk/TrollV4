@@ -148,6 +148,7 @@ public class Changelog {
                         new String[]{
                                 Data.changelogAdd + "Added basic Folia support",
                                 Data.changelogAdd + "Added 1.21.5 support",
+                                Data.changelogChange + "Fix TNT Trace teleporting you around",
                                 Data.changelogChange + "A lot of internal cleanup"
                         }
                 ));
@@ -285,19 +286,6 @@ public class Changelog {
 
             items.put(33, skull);
 
-            skull = SkullUtil.getSkull(UUID.fromString(PlayerInfo.getUUID("4be8a4181bc341368119a6cbb64aa2ad")));
-            skullm = (SkullMeta) skull.getItemMeta();
-            skullm.setDisplayName("§2" + PlayerInfo.getName("4be8a4181bc341368119a6cbb64aa2ad") + " §8(§c<3§8)");
-            skull.setItemMeta(skullm);
-
-            items.put(48, skull);
-
-            skull = SkullUtil.getSkull(UUID.fromString(PlayerInfo.getUUID("4414a12b4a3e4914834647389dc00a24")));
-            skullm = (SkullMeta) skull.getItemMeta();
-            skullm.setDisplayName("§2" + PlayerInfo.getName("4414a12b4a3e4914834647389dc00a24") + " §8(§c<3§8)");
-            skull.setItemMeta(skullm);
-
-            items.put(49, skull);
             skull = XMaterial.PLAYER_HEAD.parseItem();
             skullm = (SkullMeta) skull.getItemMeta();
             skullm.setDisplayName("§2" + p.getName() + " §8(§c<3§8)");
