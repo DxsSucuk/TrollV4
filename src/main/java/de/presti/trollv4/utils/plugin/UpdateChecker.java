@@ -62,7 +62,7 @@ public class UpdateChecker {
                 } else {
                     if (!hasSendUpdateConsole) {
                         Logger.info("TrollV4 has no update");
-                        hasSendUpdateConsole = true
+                        hasSendUpdateConsole = true;
                     }
                 }
             }
