@@ -21,6 +21,8 @@ public class UpdateChecker {
     public final String localPluginVersion;
     public String spigotPluginVersion;
 
+    private boolean hasSendUpdateConsole = false;
+    
     public static final int ID = 67318;
     public static String ERR_MSG = "&cUpdate checker failed!";
     public static final long CHECK_INTERVAL = 12_000; // In ticks.
@@ -58,7 +60,10 @@ public class UpdateChecker {
                     Logger.warning("Download here: https://www.spigotmc.org/resources/" + ID + "/updates");
                     checkTask.cancel();
                 } else {
-                    Logger.info("TrollV4 has no update");
+                    if (!hasSendUpdateConsole) {
+                        Logger.info("TrollV4 has no update");
+                        hasSendUpdateConsole = true
+                    }
                 }
             }
         }, 20, CHECK_INTERVAL);
