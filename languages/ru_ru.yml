@@ -125,7 +125,7 @@ command:
         '5': Presti
     default: Открылось меню троллей!
     server: Инвентаризация серверных троллей открыта!
-    wrongargs: Пожалуйста, используйте неизвестные аргументы /troll help
+    wrongargs: Неверные аргументы! Для помощи по командам используйте: /troll help
     help:
       line:
         '8': '&4Troll Vanish &8- &c/troll v'
