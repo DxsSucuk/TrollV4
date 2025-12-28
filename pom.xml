@@ -22,8 +22,8 @@
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
         <repository>
-            <id>md_5-public</id>
-            <url>https://repo.md-5.net/content/groups/public/</url>
+            <id>libsdisguises-public</id>
+            <url>https://mvn.lib.co.nz/public/</url>
         </repository>
         <repository>
             <id>PaperLib</id>
@@ -58,6 +58,10 @@
             <name>Minecraft Libraries</name>
             <url>https://libraries.minecraft.net/</url>
         </repository>
+        <repository>
+            <id>tcoded-releases</id>
+            <url>https://repo.tcoded.com/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -67,15 +71,15 @@
             <version>8.8.0</version>
         </dependency>
         <dependency>
-            <groupId>LibsDisguises</groupId>
-            <artifactId>LibsDisguises</artifactId>
-            <version>10.0.40-SNAPSHOT</version>
+            <groupId>me.libraryaddict.disguises</groupId>
+            <artifactId>libsdisguises</artifactId>
+            <version>11.0.13</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>13.2.0</version>
+            <version>13.6.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -136,10 +140,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.technicallycoded</groupId>
+            <groupId>com.tcoded</groupId>
             <artifactId>FoliaLib</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.5.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.retrooper</groupId>
+            <artifactId>packetevents-spigot</artifactId>
+            <version>2.11.1</version>
         </dependency>
     </dependencies>
 

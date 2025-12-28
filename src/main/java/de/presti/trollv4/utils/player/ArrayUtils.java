@@ -3,6 +3,7 @@ package de.presti.trollv4.utils.player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.tcoded.folialib.wrapper.task.WrappedTask;
 import de.presti.trollv4.utils.server.NPCUserContainer;
@@ -35,7 +36,7 @@ public class ArrayUtils {
 	public static ArrayList<Player> vomit = new ArrayList<>();
 
 	// HashMaps
-	public static HashMap<String, String> trolling = new HashMap<>();
+	public static ConcurrentHashMap<String, String> trolling = new ConcurrentHashMap<>();
 	public static HashMap<Player, WrappedTask> anim = new HashMap<>();
 	public static HashMap<Player, Location> arrest = new HashMap<>();
 	public static HashMap<Player, WrappedTask> wtf = new HashMap<>();

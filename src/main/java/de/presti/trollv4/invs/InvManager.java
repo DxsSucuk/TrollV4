@@ -446,13 +446,37 @@ public class InvManager {
     public static void choicePlayer(Player p) {
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         Inventory cpinv = Bukkit.createInventory(null, 9 * 6, "§2Player Choice Menu");
-        if (Data.async) {
-            TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+        TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick( w -> {
+
+            ArrayList<Player> players_snapshot = new ArrayList<>(Bukkit.getOnlinePlayers());
+            if (Data.async) {
+                TrollV4.getInstance().getFoliaLib().getScheduler().runAsync(x -> {
+                    int i = 0;
+                    for (Player all : players_snapshot) {
+                        if (i != 45) {
+                            try {
+                                items.add(SetItems.buildSkull(all, "§2" + all.getName()));
+                            } catch (Exception e) {
+                                Sentry.captureException(e);
+                                e.printStackTrace();
+                            }
+                            i++;
+                        }
+                    }
+
+                    TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
+                        for (ItemStack it : items) {
+                            cpinv.addItem(it);
+                        }
+                    });
+                });
+            } else {
                 int i = 0;
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (i != 45) {
                         try {
-                            items.add(SetItems.buildSkull(all, "§2" + all.getName()));
+                            cpinv.addItem(SetItems.buildSkull(all, "§2" + all.getName()));
+
                         } catch (Exception e) {
                             Sentry.captureException(e);
                             e.printStackTrace();
@@ -460,72 +484,52 @@ public class InvManager {
                         i++;
                     }
                 }
-                items.add(SetItems.buildSkull(ArrayUtils.trolling.get(p.getName()),
-                        "§2You're Trolling §c" + ArrayUtils.trolling.get(p.getName()), false));
 
-                TrollV4.getInstance().getFoliaLib().getScheduler().runNextTick(y -> {
-                    for (ItemStack it : items) {
-                        cpinv.addItem(it);
-                    }
-                });
-            });
-        } else {
-            int i = 0;
-            for (Player all : Bukkit.getOnlinePlayers()) {
-                if (i != 45) {
-                    try {
-                        cpinv.addItem(SetItems.buildSkull(all, "§2" + all.getName()));
-
-                    } catch (Exception e) {
-                        Sentry.captureException(e);
-                        e.printStackTrace();
-                    }
-                    i++;
-                }
             }
 
-        }
+            ItemStack page = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
+            ItemMeta pagem = page.getItemMeta();
+            pagem.setDisplayName("§cPage: 1");
+            page.setItemMeta(pagem);
 
-        ItemStack page = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
-        ItemMeta pagem = page.getItemMeta();
-        pagem.setDisplayName("§cPage: 1");
-        page.setItemMeta(pagem);
+            ItemStack config = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
+            ItemMeta configm = config.getItemMeta();
+            configm.setDisplayName("§cConfiguration");
+            config.setItemMeta(configm);
 
-        ItemStack config = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
-        ItemMeta configm = config.getItemMeta();
-        configm.setDisplayName("§cConfiguration");
-        config.setItemMeta(configm);
+            ItemStack pagep = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
+            ItemMeta pagepm = pagep.getItemMeta();
+            pagepm.setDisplayName("§bPrevious Page");
+            pagep.setItemMeta(pagepm);
 
-        ItemStack pagep = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
-        ItemMeta pagepm = pagep.getItemMeta();
-        pagepm.setDisplayName("§bPrevious Page");
-        pagep.setItemMeta(pagepm);
+            ItemStack pagen = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
+            ItemMeta pagenm = pagen.getItemMeta();
+            if (Bukkit.getOnlinePlayers().size() < 45) {
+                pagenm.setDisplayName("§cNo Next Page");
+            } else {
+                pagenm.setDisplayName("§bNext Page");
+            }
+            pagen.setItemMeta(pagenm);
 
-        ItemStack pagen = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
-        ItemMeta pagenm = pagen.getItemMeta();
-        if (Bukkit.getOnlinePlayers().size() < 45) {
-            pagenm.setDisplayName("§cNo Next Page");
-        } else {
-            pagenm.setDisplayName("§bNext Page");
-        }
-        pagen.setItemMeta(pagenm);
+            ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
+            ItemMeta glm = gl.getItemMeta();
+            glm.setDisplayName("§7");
+            gl.setItemMeta(glm);
 
-        ItemStack gl = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
-        ItemMeta glm = gl.getItemMeta();
-        glm.setDisplayName("§7");
-        gl.setItemMeta(glm);
+            cpinv.setItem(45, page);
+            cpinv.setItem(46, gl);
+            cpinv.setItem(47, gl);
+            cpinv.setItem(48, gl);
+            cpinv.setItem(49, gl);
+            cpinv.setItem(50, pagen);
+            cpinv.setItem(51, gl);
+            cpinv.setItem(52, gl);
+            cpinv.setItem(53, config);
 
-        cpinv.setItem(45, page);
-        cpinv.setItem(46, gl);
-        cpinv.setItem(47, gl);
-        cpinv.setItem(48, gl);
-        cpinv.setItem(49, gl);
-        cpinv.setItem(50, pagen);
-        cpinv.setItem(51, gl);
-        cpinv.setItem(52, gl);
-        cpinv.setItem(53, config);
+            p.openInventory(cpinv);
 
-        p.openInventory(cpinv);
+
+        });
     }
 
     public static void openServerInv(Player p) {
