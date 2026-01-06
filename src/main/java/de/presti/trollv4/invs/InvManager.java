@@ -472,7 +472,7 @@ public class InvManager {
                 });
             } else {
                 int i = 0;
-                for (Player all : Bukkit.getOnlinePlayers()) {
+                for (Player all : players_snapshot) {
                     if (i != 45) {
                         try {
                             cpinv.addItem(SetItems.buildSkull(all, "§2" + all.getName()));
@@ -504,7 +504,7 @@ public class InvManager {
 
             ItemStack pagen = XMaterial.BLUE_STAINED_GLASS_PANE.parseItem();
             ItemMeta pagenm = pagen.getItemMeta();
-            if (Bukkit.getOnlinePlayers().size() < 45) {
+            if (players_snapshot.size() < 45) {
                 pagenm.setDisplayName("§cNo Next Page");
             } else {
                 pagenm.setDisplayName("§bNext Page");
