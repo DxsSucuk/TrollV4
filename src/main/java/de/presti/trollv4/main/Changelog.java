@@ -153,6 +153,15 @@ public class Changelog {
                         }
                 ));
 
+        inv.setItem(22,
+                SetItems.buildItem("§2Version » §c4.5.31", XMaterial.PAPER,
+                        new String[]{
+                                Data.changelogAdd + "Added 1.21.6-11 support",
+                                Data.changelogChange + "Fixed GUI error",
+                                Data.changelogChange + "Prevent console update spam"
+                        }
+                ));
+
         inv.setItem(53, SetItems.buildItem("§3Credits", XMaterial.WRITABLE_BOOK));
 
         p.openInventory(inv);
