@@ -476,7 +476,6 @@ public class InvManager {
                     if (i != 45) {
                         try {
                             cpinv.addItem(SetItems.buildSkull(all, "§2" + all.getName()));
-
                         } catch (Exception e) {
                             Sentry.captureException(e);
                             e.printStackTrace();
