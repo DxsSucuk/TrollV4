@@ -1541,12 +1541,11 @@ public class GuiListener implements Listener {
                                 TrollV4.getInstance().getFoliaLib().getScheduler().runAtEntityTimer(t, x -> {
 
                                     if (ArrayUtils.noitem.contains(t)) {
-                                        if (t.getItemInHand() != null && t.getItemInHand()
-                                                .getType() != XMaterial.AIR.parseMaterial()) {
-                                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> t.getWorld().dropItemNaturally(t.getLocation(),
-                                                    t.getItemInHand()).setPickupDelay(20));
-                                            t.getInventory()
-                                                    .setItem(t.getInventory().getHeldItemSlot(), null);
+                                        ItemStack itemInHand = t.getItemInHand();
+                                        if (itemInHand != null && itemInHand.getType() != XMaterial.AIR.parseMaterial()) {
+                                            ItemStack dropItem = itemInHand.clone();
+                                            t.getInventory().setItem(t.getInventory().getHeldItemSlot(), null);
+                                            TrollV4.getInstance().getFoliaLib().getScheduler().runAtLocation(t.getLocation(), y -> t.getWorld().dropItemNaturally(t.getLocation(), dropItem).setPickupDelay(20));
                                         }
                                     } else {
                                         x.cancel();
