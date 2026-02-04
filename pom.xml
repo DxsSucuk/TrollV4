@@ -14,6 +14,7 @@
     <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.38</lombok.version>
     </properties>
 
     <repositories>
@@ -24,11 +25,6 @@
         <repository>
             <id>dmulloy2-repo</id>
             <url>https://repo.dmulloy2.net/repository/public/</url>
-        </repository>
-        <repository>
-            <!-- Delete after 1.16.1 maven import works again -->
-            <id>Lumine</id>
-            <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>libraryaddict-public</id>
@@ -77,9 +73,16 @@
             <version>8.8.0</version>
         </dependency>
         <dependency>
-            <groupId>LibsDisguises</groupId>
-            <artifactId>LibsDisguises</artifactId>
-            <version>10.0.40</version>
+            <groupId>me.libraryaddict.disguises</groupId>
+            <artifactId>libsdisguises</artifactId>
+            <version>11.0.14</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- PacketEvents is needed for libsdisguises -->
+        <dependency>
+            <groupId>com.github.retrooper</groupId>
+            <artifactId>packetevents-spigot</artifactId>
+            <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -115,6 +118,7 @@
             <scope>compile</scope>
         </dependency>
         <!-- Using Maven Central instead -->
+        <!-- On a personal level I hate devs removing old release from their maven. -->
         <dependency>
             <groupId>com.github.dmulloy2</groupId>
             <artifactId>protocollib</artifactId>
@@ -143,7 +147,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.38</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -164,20 +168,14 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.20.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>delombok</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
